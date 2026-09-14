@@ -2,11 +2,16 @@
 
 Sanitize -> reject if injection emptied it -> synonym fast-path -> LLM rewrite
 (gpt-4o-mini). Returns {"query": str|None, "source": "rejected"|"original"|"synonym"|"llm"}.
+
+Both the synonym list and the knowledge-base summary in the LLM prompt belong to the
+programme being asked about, so `program_id` is threaded through from the pipeline.
 """
 from __future__ import annotations
 
 import re
 import time
+
+from programs import DEFAULT_PROGRAM_ID
 
 from ..business import find_synonym_match, remove_stop_words, sanitize_query
 from ..prompts import build_rewrite_system_prompt
@@ -16,11 +21,11 @@ from .logs import log_duration
 _LANG_TAG_RE = re.compile(r"\[LANG:\w+\]", re.IGNORECASE)
 
 
-async def rewrite_query_with_source_async(client, query):
-    """Rewrite one query without blocking the ASGI event loop.
+async def rewrite_query_with_source_async(client, query, program_id=DEFAULT_PROGRAM_ID):
+    """Rewrite one query for one programme without blocking the ASGI event loop.
 
-    Example: a configured synonym for ``"fees"`` returns the original query
-    plus that synonym with ``source="synonym"``.
+    Example: a configured ES synonym for ``"qualifier fee"`` returns the original
+    query plus that expansion with ``source="synonym"`` when program_id is "es".
     """
     original_query = query
     query = sanitize_query(query)
@@ -29,7 +34,7 @@ async def rewrite_query_with_source_async(client, query):
     if not query:
         return {"query": "", "source": "original", "tokens": None}
     synonym_start_time = time.monotonic()
-    synonym_match = find_synonym_match(query)
+    synonym_match = find_synonym_match(query, program_id)
     if synonym_match:
         log_duration(
             "query_rewrite_synonym",
@@ -40,7 +45,7 @@ async def rewrite_query_with_source_async(client, query):
         response = await chat_completion_async(
             client,
             [
-                {"role": "system", "content": build_rewrite_system_prompt()},
+                {"role": "system", "content": build_rewrite_system_prompt(program_id)},
                 {"role": "user", "content": remove_stop_words(query)},
             ],
             model="gpt-4o-mini",

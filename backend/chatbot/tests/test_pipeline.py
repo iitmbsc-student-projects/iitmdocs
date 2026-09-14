@@ -106,6 +106,7 @@ class AsyncAnswerEventsTests(SimpleTestCase):
         )
 
         self.assertIs(rewrite.call_args.args[0], mock.sentinel.openai_client)
+        self.assertEqual(rewrite.call_args.args[2], "ds")
         self.assertIs(generate_answer.call_args.args[0], mock.sentinel.openai_client)
         self.assertIs(document_search.call_args.args[0], mock.sentinel.service_client)
         self.assertIs(faq_search.call_args.args[0], mock.sentinel.service_client)

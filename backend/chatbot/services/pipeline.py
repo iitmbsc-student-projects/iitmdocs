@@ -109,7 +109,7 @@ async def answer_events_async(service_client, openai_client, question, num_docs,
 
     try:
         with duration_context(conversation_id):
-            rewrite = await rewrite_query_with_source_async(openai_client, question)
+            rewrite = await rewrite_query_with_source_async(openai_client, question, program_id)
         search_query = rewrite["query"]
         query_source = rewrite["source"]
         log_ctx["rewritten_query"] = search_query

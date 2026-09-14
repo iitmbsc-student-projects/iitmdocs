@@ -28,12 +28,17 @@ class SanitizeQueryTests(SimpleTestCase):
 class SynonymTests(SimpleTestCase):
     def test_matches_canonical(self):
         self.assertEqual(
-            business.find_synonym_match("what is the grading policy"),
+            business.find_synonym_match("what is the grading policy", "ds"),
             "grading formula score calculation GAA quiz end term OPPE weightage",
         )
 
     def test_no_match_returns_none(self):
-        self.assertIsNone(business.find_synonym_match("what colour is the sky"))
+        self.assertIsNone(business.find_synonym_match("what colour is the sky", "ds"))
+
+    def test_only_the_programmes_own_list_is_searched(self):
+        """A DS trigger must not expand an ES query (issue #179)."""
+        self.assertIsNotNone(business.find_synonym_match("pdsa grading", "ds"))
+        self.assertIsNone(business.find_synonym_match("pdsa grading", "es"))
 
 
 class RemoveStopWordsTests(SimpleTestCase):
