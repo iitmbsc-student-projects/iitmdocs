@@ -62,7 +62,7 @@ class AsgiBoundaryTests(IsolatedAsyncioTestCase):
         self.assertEqual(headers[b"x-content-type-options"], b"nosniff")
 
     async def test_async_data_routes_keep_contract_through_asgi(self):
-        """The real router and middleware must preserve all three API shapes."""
+        """The real router and middleware must preserve both async API shapes."""
         async def answer_events():
             yield 'data: {"documents":[{"filename":"fees.md"}]}\n\n'
             yield 'data: {"choices":[{"delta":{"content":"answer"}}]}\n\n'
@@ -81,11 +81,6 @@ class AsgiBoundaryTests(IsolatedAsyncioTestCase):
                 return_value=answer_events(),
             ),
             mock.patch(
-                "chatbot.views.faq.search_async",
-                new_callable=mock.AsyncMock,
-                return_value=[faq_row],
-            ),
-            mock.patch(
                 "chatbot.views.faq.get_faq_async",
                 new_callable=mock.AsyncMock,
                 return_value=faq_row,
@@ -97,7 +92,7 @@ class AsgiBoundaryTests(IsolatedAsyncioTestCase):
                 headers=[(b"content-type", b"application/json")],
                 body=json.dumps({"q": "fees"}).encode(),
             )
-            search_status, _search_headers, search_body = await request_asgi(
+            search_status, _search_headers, _search_body = await request_asgi(
                 "/search",
                 method="POST",
                 headers=[(b"content-type", b"application/json")],
@@ -112,8 +107,8 @@ class AsgiBoundaryTests(IsolatedAsyncioTestCase):
             b'data: {"documents":[{"filename":"fees.md"}]}\n\n'
             b'data: {"choices":[{"delta":{"content":"answer"}}]}\n\n',
         )
-        self.assertEqual(search_status, 200)
-        self.assertEqual(json.loads(search_body), {"results": [faq_row]})
+        # /search was removed: the static layer now rejects it like any other POST.
+        self.assertEqual(search_status, 405)
         self.assertEqual(faq_status, 200)
         self.assertEqual(json.loads(faq_body), faq_row)
 

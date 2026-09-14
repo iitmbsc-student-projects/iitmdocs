@@ -43,7 +43,6 @@ STATIC_FILES = _load_static_files(_repo_root / "static")
 _DJANGO_PATHS = {
     "/answer",
     "/feedback",
-    "/search",
     "/faq",
     "/health",
     "/github-config",

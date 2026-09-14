@@ -141,7 +141,6 @@ class AsyncDataViewTests(IsolatedAsyncioTestCase):
     def test_data_heavy_view_methods_are_native_coroutines(self):
         """A sync view would make Django use its ASGI thread-sensitive bridge."""
         self.assertTrue(inspect.iscoroutinefunction(views.AnswerView.post))
-        self.assertTrue(inspect.iscoroutinefunction(views.SearchView.post))
         self.assertTrue(inspect.iscoroutinefunction(views.FaqDetailView.get))
 
     async def test_answer_uses_async_pipeline_and_keeps_sse_bytes(self):
@@ -167,80 +166,6 @@ class AsyncDataViewTests(IsolatedAsyncioTestCase):
             first_chunk,
             b'data: {"choices":[{"delta":{"content":"answer"}}]}\n\ndata: [DONE]\n\n',
         )
-
-    @mock.patch("chatbot.views.faq.search_async", new_callable=mock.AsyncMock)
-    @mock.patch("chatbot.views.get_async_http_client", return_value=object())
-    async def test_search_keeps_json_contract(self, _client, search):
-        search.return_value = [
-            {"id": 7, "question": "What are the fees?", "answer": "Rs 32000", "cosine_similarity": 0.9}
-        ]
-
-        request = AsyncRequestFactory().post(
-            "/search",
-            data=json.dumps({"q": "fees", "k": 5}),
-            content_type="application/json",
-        )
-        response = await views.SearchView.as_view()(request)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(json.loads(response.content), {"results": search.return_value})
-
-    @mock.patch("chatbot.views.faq.search_async", new_callable=mock.AsyncMock)
-    async def test_search_keeps_drf_json_parser_errors(self, search):
-        """Malformed JSON and unsupported media types keep their old statuses."""
-        malformed = AsyncRequestFactory().post(
-            "/search",
-            data="{",
-            content_type="application/json",
-        )
-        malformed_response = await views.SearchView.as_view()(malformed)
-
-        wrong_type = AsyncRequestFactory().post(
-            "/search",
-            data=json.dumps({"q": "fees"}),
-            content_type="text/plain",
-        )
-        wrong_type_response = await views.SearchView.as_view()(wrong_type)
-
-        self.assertEqual(malformed_response.status_code, 400)
-        self.assertEqual(
-            json.loads(malformed_response.content),
-            {
-                "detail": (
-                    "JSON parse error - Expecting property name enclosed in double "
-                    "quotes: line 1 column 2 (char 1)"
-                )
-            },
-        )
-        self.assertEqual(wrong_type_response.status_code, 415)
-        self.assertEqual(
-            json.loads(wrong_type_response.content),
-            {"detail": 'Unsupported media type "text/plain" in request.'},
-        )
-        search.assert_not_awaited()
-
-    @mock.patch("chatbot.views.faq.search_async", new_callable=mock.AsyncMock)
-    @mock.patch("chatbot.views.get_async_http_client", return_value=object())
-    async def test_search_keeps_embedding_and_database_error_statuses(self, _client, search):
-        request = AsyncRequestFactory().post(
-            "/search",
-            data=json.dumps({"q": "fees", "k": 5}),
-            content_type="application/json",
-        )
-        search.side_effect = faq.FaqEmbeddingError("hidden details")
-        response = await views.SearchView.as_view()(request)
-        self.assertEqual(response.status_code, 502)
-        self.assertEqual(json.loads(response.content), {"detail": "Embedding service failed"})
-
-        request = AsyncRequestFactory().post(
-            "/search",
-            data=json.dumps({"q": "fees", "k": 5}),
-            content_type="application/json",
-        )
-        search.side_effect = faq.FaqDatabaseError("hidden details")
-        response = await views.SearchView.as_view()(request)
-        self.assertEqual(response.status_code, 500)
-        self.assertEqual(json.loads(response.content), {"detail": "Internal error"})
 
     @mock.patch("chatbot.views.faq.get_faq_async", new_callable=mock.AsyncMock)
     async def test_faq_detail_keeps_json_contract(self, get_faq):

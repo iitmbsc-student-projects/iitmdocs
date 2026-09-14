@@ -3,7 +3,7 @@
 FLOW
 ----
 A browser opens `/qa?program_id=es`. `static/qa.js` puts that id in the body of every
-`/answer`, `/feedback` and `/search` request. Django validates it here, then uses it
+`/answer` and `/feedback` request. Django validates it here, then uses it
 twice:
 
     request program_id="es"

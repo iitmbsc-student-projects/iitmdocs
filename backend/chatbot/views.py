@@ -1,20 +1,16 @@
 """HTTP views.
 
-/answer, /search, /faq/<id> — native async Django views for data-heavy work.
+/answer, /faq/<id> — native async Django views for data-heavy work.
 /feedback, /health, /github-config — existing synchronous DRF JSON views.
 """
 from __future__ import annotations
 
 import json
-from io import BytesIO
 
-from django.conf import settings
 from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.exceptions import ParseError, UnsupportedMediaType
-from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -55,30 +51,6 @@ def _json_body(request) -> dict:
     except Exception:
         return {}
     return data if isinstance(data, dict) else {}
-
-
-def _search_json_body(request):
-    """Parse `/search` JSON with the same errors as its former DRF view.
-
-    Example: malformed JSON returns a `400` response, while a non-empty
-    `text/plain` body returns `415` before FAQ retrieval starts.
-    """
-    if not request.body:
-        return {}, None
-
-    content_type = request.content_type or None
-    if content_type != JSONParser.media_type:
-        error = UnsupportedMediaType(content_type)
-        return {}, JsonResponse({"detail": str(error.detail)}, status=error.status_code)
-
-    try:
-        data = JSONParser().parse(
-            BytesIO(request.body),
-            parser_context={"encoding": request.encoding or settings.DEFAULT_CHARSET},
-        )
-    except ParseError as error:
-        return {}, JsonResponse({"detail": str(error.detail)}, status=error.status_code)
-    return data if isinstance(data, dict) else {}, None
 
 
 def _valid_question(question) -> bool:
@@ -261,50 +233,6 @@ class FeedbackView(APIView):
             return Response({"success": True}, status=200)
         except Exception:  # noqa: BLE001
             return Response({"error": "Failed to process feedback"}, status=500)
-
-
-@method_decorator(csrf_exempt, name="dispatch")
-class SearchView(View):
-    """Search the FAQ database for questions similar to a user query.
-
-    Flow: read `q` and `k`, validate their values, call the FAQ search
-    service for embeddings and PostgreSQL lookup, map service failures to HTTP
-    status codes, and return matching FAQ rows as JSON. This endpoint preserves
-    the old FastAPI FAQ API contract for callers that need search results
-    directly.
-
-    Example: `POST /search` with `{"q": "grading", "k": 5}` returns up
-    to five FAQ results.
-    """
-
-    async def post(self, request):
-        body, parse_error = _search_json_body(request)
-        if parse_error is not None:
-            return parse_error
-        q = body.get("q")
-        k = body.get("k", 5)
-
-        program_id = _read_program_id(body.get("program_id"))
-        if program_id is None:
-            return JsonResponse({"detail": _INVALID_PROGRAM_MESSAGE}, status=422)
-
-        if not isinstance(q, str) or len(q) < 1:
-            return JsonResponse({"detail": "q must be a non-empty string"}, status=422)
-        try:
-            k = int(k)
-        except (TypeError, ValueError):
-            return JsonResponse({"detail": "k must be an integer"}, status=422)
-        if k < 1 or k > 20:
-            return JsonResponse({"detail": "k must be between 1 and 20"}, status=422)
-
-        try:
-            results = await faq.search_async(get_async_http_client(), q, k, program_id)
-        except faq.FaqEmbeddingError:
-            return JsonResponse({"detail": "Embedding service failed"}, status=502)
-        except faq.FaqDatabaseError:
-            return JsonResponse({"detail": "Internal error"}, status=500)
-
-        return JsonResponse({"results": results}, status=200)
 
 
 class FaqDetailView(View):

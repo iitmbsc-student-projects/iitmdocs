@@ -15,7 +15,7 @@ services:
       - iitm-network
 
   # Django + DRF backend — replaces the Cloudflare Worker AND the FastAPI PG FAQ API.
-  # Serves /answer (SSE), /feedback, /search, /faq/<id>, /health and the static widget.
+  # Serves /answer (SSE), /feedback, /faq/<id>, /health and the static widget.
   django:
     build:
       context: .
