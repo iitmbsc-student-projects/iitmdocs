@@ -1,11 +1,13 @@
 ---
 title: program_overview
-description: Overview of IIT Madras BS programmes, available programme options, delivery mode, academic rigour, exit levels, admission paths, and BS degree credit requirements.
+description: Overview of IIT Madras BS programmes, available programme options, delivery mode, academic rigour, exit levels, admission paths, credit requirements, and completion timeline.
 covers:
   - IIT Madras BS programme aims
   - available BS programmes
   - online learning and in-person exams
   - programme levels and credentials
+  - Foundation, Diploma, and BS credit requirements
+  - eight-year completion limit
   - admission paths
 sample_queries:
   - What is the aim of the IIT Madras BS programmes?
@@ -40,7 +42,8 @@ sample_queries:
 - BS in Electronic systems: Foundation Certificate from IITM CODE, Diploma from IIT Madras, BS Degree from IIT Madras.
 - BS in Management and Data science: Foundation Certificate from IITM CODE, Diploma from IIT Madras, BS Degree from IIT Madras.
 - BS in Aeronautics and space technology: Foundation Certificate from IITM CODE, Diploma from IIT Madras, BS Degree from IIT Madras.
-- Students who complete 92 credits and the required projects will be satisfies the minimum credits completion requirement as per the norms will be eligible for the BS degree and can continue onto the BS level in Management and Data Science program
+- The Management and Data Science programme has 32 credits in the Foundation Level, 92 credits at the Diploma Level, and 142 credits for the BS Degree.
+- Students must complete the BS degree within 8 years.
 
 ## Admission paths
 

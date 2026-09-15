@@ -1,10 +1,11 @@
 ---
 title: qualifier_preparation
-description: Qualifier preparation process, including the 4-week study period, MG subjects, weekly content release, graded assignments, content access, and exam timing.
+description: Qualifier preparation process, including the 4-week study period, MG subjects, weekly content release, live sessions, graded assignments, content access, and exam timing.
 covers:
   - 4-week qualifier process
   - MG qualifier subjects
   - weekly videos tutorials assignments transcripts
+  - live sessions
   - weekly graded assignment submission
   - qualifier exams at week 4 and week 8
 sample_queries:
@@ -21,7 +22,7 @@ sample_queries:
 
 - All regular entry applicants must go through the 4-week Qualifier process to earn admission to the Foundation Level.
 - BS in Management and Data science (MG): On the start date of the Qualifier process Week-1, access to the content for the four Foundation level courses English 1, Maths-1, Statistics-1, and Computational Thinking will be provided.
-- The content that includes videos, tutorials, practice/graded assignments and text transcripts is released week wise.
+- The content that includes videos, tutorials, live sessions, practice/graded assignments and text transcripts is released week wise.
 - Access to the Week-1 content will be provided after successful submission of the form.
 - The content will be made live with an announcement on the portal, and an alert through email.
 

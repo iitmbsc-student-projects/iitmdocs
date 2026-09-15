@@ -1,9 +1,10 @@
 ---
 title: eligibility_requirements
-description: Eligibility requirements for IIT Madras BS programmes, including application limits, class 10 and class 12 requirements, school student eligibility, and score validity for current class 12 students.
+description: Eligibility requirements for IIT Madras BS programmes, including application limits, Class 12 or equivalent requirements, Class 10 Maths and English, school student eligibility, and score validity for current class 12 students.
 covers:
   - simultaneous application restriction
   - class 10 Maths and English requirement
+  - Class 12 or equivalent eligibility
   - class 11 and class 12 eligibility
   - Foundation Level eligibility
   - qualifier score validity for class 12 students
@@ -24,6 +25,7 @@ sample_queries:
 ## Qualifier exam eligibility
 
 - To apply for the Qualifier Exam of BS in Management and Data science (MG), students should fulfill the below conditions: Studied Maths and English in class 10
+- Anyone who has passed Class 12 or an equivalent examination can apply irrespective of age or academic background.
 - School students who have appeared for and passed their Class 11 final exams can apply irrespective of their age/group/stream/board.
 
 ## Class 12 and Foundation Level eligibility

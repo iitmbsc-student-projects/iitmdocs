@@ -60,7 +60,7 @@ sample_queries:
 
 - Students who successfully complete all courses in the Foundation level will be eligible for admission to the Diploma level program.
 - Learners who successfully complete all courses in the Foundation and Diploma programme will be eligible for admission to the degree level, if they satisfy the prescribed/regulatory criteria.
-- Students who complete 92 credits and the required projects will be satisfies the minimum credits completion requirement as per the norms will be eligible for the BS degree and can continue onto the BS level in Management and Data Science program
+- Students who complete 142 credits and satisfy the minimum credits completion requirement as per the norms will be eligible for the BS degree in Management and Data Science.
 - For BS in MG - Students who successfully  complete all the courses and projects in Foundation level and Diploma, they can proceed to the B.S Degree Level.
 
 ## Payments and subsequent term registration
