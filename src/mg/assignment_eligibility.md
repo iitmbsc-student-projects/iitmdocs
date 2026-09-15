@@ -39,11 +39,15 @@ sample_queries:
 - PwD with 40% disability & SC / ST: Minimum Average Assignment Score required in each course 30%
 - OBC-NCL / EWS: Minimum Average Assignment Score required in each course 35%
 
-## Reattempt and fresh attempt assignment rules
+## Reattempt assignment rules
 
 - Eligibility to apply for Reattempting Qualifier exam within the same term: A learner who became eligible for the hall ticket in the qualifier process of a term but was absent for the Qualifier exam
 - Such candidates do not have to repeat the assignments as they have already become eligible.
-- This will be considered like a fresh application and they have to redo the 4 weeks of course work and weekly graded assignments and become eligible to get the hall ticket for the qualifier exam
+
+## Fresh attempt assignment rules
+
+- A candidate who did not become eligible for the Qualifier exam can attempt the qualifier process again in a subsequent term.
+- This is treated like a fresh application. The candidate must pay the full applicable fees, redo the 4 weeks of coursework and weekly graded assignments, and become eligible to receive a hall ticket.
 
 ## Foundation course assignment access
 

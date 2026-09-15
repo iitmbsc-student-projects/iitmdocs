@@ -54,7 +54,6 @@ sample_queries:
 - Students can register for a maximum of 4 courses per term.
 - Students must mandatorily submit assignments from week-1 onwards for the courses registered.
 - Students are required to mandatorily appear for the Quiz 1 examination for all courses registered in the respective term.
-- Qualifier score will not be considered as Quiz 1 score.
 - Note: Course access will be revoked for students who were not eligible for the qualifier exam or did not register for the foundation level in the same term in which they cleared the qualifier.
 
 ## Progression to later levels

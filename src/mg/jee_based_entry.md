@@ -10,7 +10,7 @@ covers:
 sample_queries:
   - What is JEE-based entry into the BS programme?
   - Is there direct entry to Foundation Level through JEE Advanced?
-  - Which JEE qualification years are considered for May 2026?
+  - Which JEE qualification years are considered for Jan 2027, May 2027, and Sep 2026?
   - Do I need to upload proof for JEE Advanced eligibility?
   - What happens if my JEE proof is not valid?
 ---
@@ -25,8 +25,8 @@ sample_queries:
 
 ## Admission cycle examples
 
-- Jan: Example – Jan 2026 term considers 2024 and 2025 JEE qualification years.
-- May: Example – May 2026 term considers 2025, and 2026 JEE qualification years.
+- Jan: Example – Jan 2027 term considers 2025 and 2026 JEE qualification years.
+- May: Example – May 2027 term considers 2026 and 2027 JEE qualification years.
 - Sep: Example – Sep 2026 term considers 2025 and 2026 JEE qualification years.
 
 ## Application and proof validation

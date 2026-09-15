@@ -1,17 +1,17 @@
 ---
 title: score_validity
-description: Qualifier score validity rules, term-based validity examples, invalid score consequences, class 12 validity note, reattempt restrictions after qualifying, and use of qualifier score for registration and Quiz 1.
+description: Qualifier score validity rules, current term-based validity examples, invalid score consequences, class 12 validity note, reattempt restrictions after qualifying, and the different Quiz 1 rules for same-term and later-term registration.
 covers:
   - qualifier score validity period
   - current and subsequent two terms
   - invalid score rules
-  - term examples for 2026 exams
+  - term examples for 2026 and 2027 exams
   - class 12 score validity rule
   - Quiz 1 use of qualifier score
 sample_queries:
   - How long can I use my qualifier exam score?
   - When does the qualifier score become invalid?
-  - Which terms can I apply for with the April 12th 2026 qualifier score?
+  - Which terms can I apply for with the November 15th 2026 qualifier score?
   - Can I reattempt the Qualifier Examination after successfully qualifying?
   - Will my qualifier score count as Quiz 1 score?
 ---
@@ -28,12 +28,14 @@ sample_queries:
 
 ## Validity examples
 
-- Qualifier exam dated Mar 15th 2026 - Can use this score to apply for the Jan2026, May2026, Sep2026 terms.
-- Qualifier exam dated April 12th 2026 - Can use this score to apply for the May2026, Sep2026, Jan2027 terms.
-- Qualifier exam dated May 10th, 2026 - Can use this score to apply for the May2026, Sep2026, Jan2027 terms.
-- Qualifier exam dated Jul 19th 2026 - Can use this score to apply for the Sep2026, Jan2027, May2027 terms
-- Qualifier exam dated Aug 16th 2026 - Can use this score to apply for the Jan2027, May2027, Sep2027 terms
-- Qualifier exam dated Sep 13th, 2026 - Can use this score to apply for the Jan2027, May2027, Sep2027 terms
+- For Sep 2026 term qualifier exams:
+  - Qualifier exam dated November 15, 2026 - Can use this score to apply for the Sep 2026, Jan 2027, and May 2027 terms.
+  - Qualifier exam dated December 5, 2026 - Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms.
+  - Qualifier exam dated January 10, 2027 - Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms.
+- For Jan 2027 term qualifier exams:
+  - Qualifier exam dated March 27, 2027 - Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms.
+  - Qualifier exam dated August 16, 2026 - Can use this score to apply for the May 2027, Sep 2027, and Jan 2028 terms.
+  - Qualifier exam dated May 9, 2027 - Can use this score to apply for the May 2027, Sep 2027, and Jan 2028 terms.
 
 ## Class 12 validity note
 
@@ -41,12 +43,11 @@ sample_queries:
 
 ## Registration and Quiz 1 use
 
-- Their qualifier score will be treated as the Quiz 1 score for calculating the final grade.
+- Candidates who qualify in the first attempt within a term may register for courses in the same term. Their qualifier score will be treated as the Quiz 1 score for calculating the final grade.
 - They may also register in the next two terms, as long as the qualifier score remains valid.
 - Candidates who qualify in the second attempt can register only from the subsequent term, while the qualifier score remains valid.
-- Qualifier score will be considered as Quiz 1 score for the courses you register.
 - Students who wish to register for the Foundation Level in subsequent terms after passing the Qualifier term are requested to verify the validity of their Qualifier score in the Admission Letter, which is available on the Student Dashboard, and proceed with the Foundation Level registration accordingly.
-- Qualifier score will not be considered as Quiz 1 score.
+- Students registering in a subsequent term must appear for the Quiz 1 examination for all registered courses; the qualifier score will not be considered as the Quiz 1 score.
 
 ---
 
