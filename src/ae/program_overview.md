@@ -49,6 +49,8 @@ The AE programme has three levels:
 
 The complete BS Degree requires 142 credits. Learners typically complete the degree in 4–8 years, depending on their preferred pace and performance in assessments. Expected engagement is approximately 15 hours per course per week.
 
+The Foundation Level courses are intended to be completed within a minimum of two terms and a maximum of nine terms, with intermediate milestones.
+
 Students who successfully complete all courses in the Foundation level will be eligible for admission to the Diploma level program.
 
 For BS in AE - Students who successfully complete all the courses and labs in Foundation level and Diploma, they can proceed to the B.S Degree Level.

@@ -27,7 +27,7 @@ To apply for the Qualifier Exam for the BS in Aeronautics and Space Technology (
 
 Passed Class 12 or equivalent with Physics and Mathematics, irrespective of age/group/stream/board
 
-School students who have appeared for and passed their Class 11 final exams can apply irrespective of their age/group/stream/board.
+School students who have appeared for their Class 11 final exams with Physics and Mathematics as their subjects of study can apply, irrespective of age/group/board.
 
 Those who pass the qualifier exams - will be allowed to proceed to the foundation level only after passing their class 12th exams.
 
@@ -42,7 +42,7 @@ After passing the qualifier examinations, an AE applicant must satisfy both cond
 
 ## Score validity eligibility for Class 12 students
 
-For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier.
+For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier. This means that you can use your qualifier score to apply for courses during this validity period, but you must complete your Class 12 exams first to proceed to the Foundation level.
 
 ## JEE-based eligibility
 

@@ -17,17 +17,17 @@ sample_queries:
 
 # Content
 
-## General score validity
+## Score validity for students who have cleared Class 12
 
-The qualifier exam score can be used to apply for 3 terms after the qualifier exam date.
+The qualifier score will remain valid for the current term and the subsequent two terms, after which the learner will be eligible to apply again.
 
 The qualifier score will become invalid for the 4th term onwards after the qualifier exam date.
 
 If the qualifier score becomes invalid, the student will have to go through the entire qualifier process again and re-take the qualifier exam.
 
-For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier.
+## Score validity for students who have not yet cleared Class 12
 
-The qualifier score will remain valid for the current term and the subsequent two terms, after which the learner will be eligible to apply again.
+For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier. This means that you can use your qualifier score to apply for courses during this validity period, but you must complete your Class 12 exams first to proceed to the Foundation level.
 
 ## Reattempt restriction during validity
 

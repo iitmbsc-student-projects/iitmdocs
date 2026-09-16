@@ -22,7 +22,7 @@ sample_queries:
 
 All regular entry applicants must go through the 4-week Qualifier process to earn admission to the Foundation Level.
 
-BS in Aeronautics and space technology (AE): On the start date of the Qualifier process Week-1, access to the content for the four Foundation level courses English 1, Mathematics-1, Electronic Systems Thinking and Circuits, and Introduction to C Programming will be provided.
+BS in Aeronautics and space technology (AE): On the start date of the Qualifier process Week-1, access to the content for the four Foundation level courses English I, Math for Electronics I, Electronic Systems Thinking and Circuits, and Introduction to C Programming will be provided.
 
 The content that includes videos, tutorials, practice/graded assignments and text transcripts is released week wise.
 

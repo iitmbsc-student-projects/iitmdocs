@@ -28,6 +28,8 @@ In the qualifier exam comprising 4 subjects, the learner should obtain marks >= 
 
 The total of all subject marks should be greater than or equal to the total cut-off.
 
+The average qualifier exam score means the average of the scores obtained in all 4 courses in the qualifier exam.
+
 General Learner: Min. Req. Qualifier Exam Score in each course: 40%; Min. Req. Average Qualifier Exam Score: 50%
 
 SC / ST / PwD with 40% disability: Min. Req. Qualifier Exam Score in each course: 30%; Min. Req. Average Qualifier Exam Score: 40%
