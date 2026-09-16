@@ -6,6 +6,7 @@ covers:
   - Online learning with in-person quizzes and exams
   - Programme list and exit credentials
   - Foundation, Diploma, and Degree level progression
+  - AE credit structure and completion time
 sample_queries:
   - What BS programmes are currently offered by IIT Madras?
   - Are IIT Madras BS programme classes online?
@@ -39,6 +40,14 @@ The curriculum, academic rigour, and quality of the programme are on par with re
 The BS programme has multiple levels, which provide flexibility to students to exit at any of these levels. Depending on the courses completed and credits earned, the learner can receive the applicable certificate, diploma, or degree credential.
 
 BS in Aeronautics and space technology: Foundation Certificate from IITM CODE, Diploma from IIT Madras, BS Degree from IIT Madras.
+
+The AE programme has three levels:
+
+- Foundation Level: 32 credits
+- Diploma Level: 52 credits
+- Degree Level: 58 credits
+
+The complete BS Degree requires 142 credits. Learners typically complete the degree in 4–8 years, depending on their preferred pace and performance in assessments. Expected engagement is approximately 15 hours per course per week.
 
 Students who successfully complete all courses in the Foundation level will be eligible for admission to the Diploma level program.
 

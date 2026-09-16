@@ -7,6 +7,7 @@ covers:
   - Videos, tutorials, assignments, and transcripts
   - Weekly graded assignment submission
   - Qualifier exam after four weeks
+  - Online course duration and weekly study materials
 sample_queries:
   - How long is the Qualifier process?
   - Which courses are provided in Week 1 for AE qualifier preparation?
@@ -26,6 +27,8 @@ BS in Aeronautics and space technology (AE): On the start date of the Qualifier 
 The content that includes videos, tutorials, practice/graded assignments and text transcripts is released week wise.
 
 The content will be made live with an announcement on the portal, and an alert through email.
+
+The website describes each regular course as a 12-week course. Each week includes approximately 2–3 hours of videos, practice questions, text transcripts, and graded assignments, delivered online.
 
 Every week the graded assignment must be submitted in each course.
 

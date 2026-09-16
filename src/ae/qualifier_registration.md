@@ -7,6 +7,8 @@ covers:
   - Regular entry qualifier requirement
   - AE qualifier conditions
   - JEE proof submission through qualifier process
+  - Medical certificate after Foundation registration
+  - JEE-based first-term assessment requirement
 sample_queries:
   - Where is the Qualifier Exam registration form available?
   - Do qualifier applicants get Week-1 sample content?
@@ -46,6 +48,12 @@ The application fee for the Qualifier exam must be paid during registration and 
 Apply to the Qualifier process, saying Yes to the question on eligibility to JEE Advanced level. Upload a valid proof for the same.
 
 If the proof of the document submitted is found to be not valid, the student will be moved into the category of non-JEE and will be treated as a regular entry candidate to the foundation level and have to go through the qualifier process.
+
+## Requirements after Foundation registration
+
+The website states that all students enrolled in the IIT Madras BS Degree Program must submit a medical certificate in the prescribed format after registering for the Foundation Level.
+
+For JEE-based entrants, the website states that registration will be cancelled if the student does not appear for Quiz 1 and Quiz 2 in the first term.
 
 ---
 

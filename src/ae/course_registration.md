@@ -6,6 +6,8 @@ covers:
   - Same-term and subsequent-term course registration
   - Quiz 1 and qualifier score rules
   - Course prerequisites and maximum courses per term
+  - Theory-course and lab registration guidance
+  - First-term course recommendations based on qualifier score
   - Exam city selection and registration dates
 sample_queries:
   - Can I apply for Foundation Level after passing the qualifier?
@@ -95,7 +97,13 @@ Learners who successfully complete all courses in the Foundation and Diploma pro
 
 For BS in AE - Students who successfully complete all the courses and labs in Foundation level and Diploma, they can proceed to the B.S Degree Level.
 
-Students can register for a maximum of 4 courses per term.
+Students can register for a maximum of 4 theory courses and corresponding lab courses per term, depending on the time they can dedicate to the program. A learner studying full time is recommended to take 4 courses per term; working professionals and learners pursuing another academic program can take 2 or 3 courses.
+
+For the first term, the website recommends the following course limits based on the average qualifier exam score (M):
+
+- Minimum required <= M < 50%: up to 2 courses
+- 50% <= M < 70%: up to 3 courses
+- M >= 70%: up to 4 courses
 
 ## Fees and pass criteria after registration
 
