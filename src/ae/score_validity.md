@@ -41,6 +41,22 @@ Students who wish to register for the Foundation Level in subsequent terms after
 
 ## 2026 qualifier score validity examples
 
+For Sep 2026 term qualifier exams:
+
+Qualifier exam dated November 15, 2026 - Can use this score to apply for the Sep 2026, Jan 2027, and May 2027 terms.
+
+Qualifier exam dated December 5, 2026 - Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms.
+
+Qualifier exam dated January 10, 2027 - Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms.
+
+For Jan 2027 term qualifier exams:
+
+Qualifier exam dated March 27, 2027 - Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms.
+
+Qualifier exam dated August 16, 2026 - Can use this score to apply for the May 2027, Sep 2027, and Jan 2028 terms.
+
+Qualifier exam dated May 9, 2027 - Can use this score to apply for the May 2027, Sep 2027, and Jan 2028 terms.
+
 Qualifier exam dated Mar 15th 2026 - Can use this score to apply for the Jan2026, May2026, Sep2026 terms.
 
 Qualifier exam dated April 12th 2026 - Can use this score to apply for the May2026, Sep2026, Jan2027 terms.

@@ -20,23 +20,19 @@ sample_queries:
 
 To enter the IIT Madras BS Program, applicants can join in 2 paths
 
-Regular entry: All candidates, irrespective of their backgrounds, can earn admission to the Foundation Level by successfully completing the qualifier process.
+Regular entry: All candidates, irrespective of their backgrounds, can earn admission to the Foundation Level by successfully completing the 4-week qualifier process.
 
-JEE-based entry: Candidates eligible to appear for the most recent JEE Advanced are directly admitted to the Foundation Level.
-
-All regular entry applicants must go through the Qualifier Process to earn admission to the Foundation Level.
-
-All regular entry applicants must go through the 4-week Qualifier process to earn admission to the Foundation Level.
+JEE-based entry: Candidates who have qualified for JEE Advanced, or who are eligible to appear for the most recent JEE Advanced, can be directly admitted to the Foundation Level, subject to the applicable admission cycle.
 
 ## JEE-based direct entry
 
 There is a direct entry into the Foundation level of the program for candidates who have qualified for the JEE Advanced examination.
 
-Such candidates are eligible to join the program in the admission cycles specified by the programme schedule, based on the year in which they qualified for JEE Advanced.
+Such candidates are eligible to join the program in the admission cycles specified by the programme schedule, based on the year in which they qualified for JEE Advanced. The handbook describes the eligible group as JEE Main-qualified candidates who are eligible for JEE Advanced, or JEE Advanced-qualified candidates.
 
-Jan: Example – Jan 2026 term considers 2024 and 2025 JEE qualification years.
+Jan: Example – Jan 2027 term considers 2025 and 2026 JEE qualification years.
 
-May: Example – May 2026 term considers 2025, and 2026 JEE qualification years.
+May: Example – May 2027 term considers 2026 and 2027 JEE qualification years.
 
 Sep: Example – Sep 2026 term considers 2025 and 2026 JEE qualification years.
 

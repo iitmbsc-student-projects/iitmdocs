@@ -36,7 +36,7 @@ The curriculum, academic rigour, and quality of the programme are on par with re
 
 ## Levels and credentials
 
-The BS programme has multiple levels, which provide flexibility to students to exit at any of these levels.
+The BS programme has multiple levels, which provide flexibility to students to exit at any of these levels. Depending on the courses completed and credits earned, the learner can receive the applicable certificate, diploma, or degree credential.
 
 BS in Aeronautics and space technology: Foundation Certificate from IITM CODE, Diploma from IIT Madras, BS Degree from IIT Madras.
 

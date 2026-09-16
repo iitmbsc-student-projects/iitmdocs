@@ -37,6 +37,8 @@ If this score is >= 40/100 (or as per the cutoff for each category of students) 
 
 In every term, qualifier exams are conducted at the end of 4 weeks and at the end of 8 weeks.
 
+Reattempts within the term will be provided suitably.
+
 ## Category-wise assignment cutoffs
 
 General Learner: Minimum Average Assignment Score required in each course: 40%

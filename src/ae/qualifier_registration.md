@@ -31,11 +31,9 @@ To receive access, learners must complete the Qualifier Exam registration form a
 
 Access to the Week-1 content will be provided after successful submission of the form.
 
-## AE qualifier requirements
+## AE qualifier application requirements
 
-To apply for the Qualifier Exam of For the BS in Aeronautics and space technology (AE), students should fulfill the below conditions
-
-School students who have appeared for and passed their Class 11 final exams can apply irrespective of their age/group/stream/board.
+To apply for the Qualifier Exam for the BS in Aeronautics and Space Technology (AE), applicants who have passed Class 12 or an equivalent examination must have studied Physics and Mathematics, irrespective of age, group, stream, or board. School students who have passed their Class 11 final exams can also apply, irrespective of age, group, stream, or board.
 
 If students have passed class 12 without Physics and Mathematics, but have passed Physics and Mathematics separately through NIOS or any other equivalent organization - they will be permitted to apply to the BS in Aeronautics and Space Technology (AE) after committee approval.
 
