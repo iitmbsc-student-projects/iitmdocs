@@ -7,6 +7,7 @@ covers:
   - weekly videos tutorials assignments transcripts
   - live sessions
   - weekly graded assignment submission
+  - 4-hour qualifier exam
   - qualifier exams at week 4 and week 8
 sample_queries:
   - How long is the Qualifier process for regular entry applicants?
@@ -29,7 +30,7 @@ sample_queries:
 ## Assignments and qualifier exam timing
 
 - Every week the graded assignment must be submitted in each course.
-- At the end of the 4 weeks, a qualifier exam will be conducted for eligible candidates based on the content covered in the 4 weeks of study.
+- At the end of the 4 weeks, an in-person 4-hour qualifier exam covering all 4 courses will be conducted for eligible candidates based on the content covered in the 4 weeks of study.
 - In every term, qualifier exams are conducted at the end of 4 weeks and at the end of 8 weeks.
 
 ---

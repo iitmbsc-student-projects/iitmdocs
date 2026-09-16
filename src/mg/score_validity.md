@@ -39,7 +39,8 @@ sample_queries:
 
 ## Class 12 validity note
 
-- NOTE: For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier.
+- For candidates who have already appeared for or cleared class 12 board exams, the Qualifier Exam result is valid for a period of 3 terms from the year of passing class 12th.
+- For candidates who are yet to appear for class 12 board exams, the Qualifier Exam result is valid for a period of 6 terms (or 2 years). The extended validity helps these candidates join the program after passing class 12.
 
 ## Registration and Quiz 1 use
 
@@ -63,9 +64,8 @@ Tags:
 - Admission Letter
 - Student Dashboard
 - Quiz 1 score
-- Jan2026
-- May2026
 - Sep2026
 - Jan2027
 - May2027
 - Sep2027
+- Jan2028

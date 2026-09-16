@@ -34,14 +34,15 @@ sample_queries:
 ## Reattempt and repeat attempts
 
 - This re-attempt application form will open up immediately after the qualifier results are announced.
+- Learners who were eligible to appear for the qualifier exam but did not clear it or were absent can reattempt the qualifier exam in the same term without repeating the assignments.
 - There are no limits on the number of times a candidate can attempt the qualifier process.
 - The candidate can attempt again the subsequent terms.
 
 ## Candidates who did not become eligible
 
-- Candidates who did not become eligible for the Qualifier exam can attempt the qualifier process again in a subsequent term.
-- They have to pay the full fees as per the fee norms applicable for their category. (and additional exam facilitation fee in case of candidates outside India)
-- This will be considered like a fresh application and they have to redo the 4 weeks of course work and weekly graded assignments and become eligible to get the hall ticket for the qualifier exam.
+- Candidates who are not eligible to reattempt or do not clear the reattempt exam can try again by applying for the next term.
+- They must pay the full application fee (₹4000 for General Category applicants, with an additional exam facilitation fee for candidates outside India).
+- This is treated like a fresh application. They must complete the entire qualifier process again, including the 4 weeks of coursework, weekly graded assignments, and qualifier exam.
 
 ## Invalid qualifier score
 
