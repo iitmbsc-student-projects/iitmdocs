@@ -3,7 +3,7 @@ title: About the IIT Madras BS Program
 description: Provides an overview of IIT Madras BS programs including programs offered, learning mode, structure, and available exit points and certifications.
 covers:
   - BS programs offered by IIT Madras
-  - Online learning with in-person exams
+  - Online learning with location-dependent exam modes
   - Program structure and progression levels
   - Exit points and certifications
   - Degree validity and recognition
@@ -34,9 +34,9 @@ Currently, IIT Madras is offering four BS programmes:
 ## Learning Mode
 
 - The content in BS programmes is delivered online
-- Quizzes and exams are conducted in person at exam centres across India and abroad
+- Quizzes and exams are conducted in person at centres in India and in Bahrain, Kuwait, Oman, and UAE; learners based in other countries take remote-proctored exams
 - This allows students to learn from anywhere, irrespective of geographical location
-- The in-person exams ensure academic rigour and fairly assess the quality of training
+- The proctored exams ensure academic rigour and fairly assess the quality of training
 - The curriculum, academic rigour, and quality of the programme are on par with regular degree programmes offered by IIT Madras
 
 ## Programme Levels and Exit Points

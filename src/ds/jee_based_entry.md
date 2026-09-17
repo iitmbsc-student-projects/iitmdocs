@@ -31,17 +31,16 @@ All candidates, irrespective of their backgrounds, can earn admission to the Fou
 
 ## 2. JEE-Based Entry
 
-Candidates eligible to appear for the most recent JEE Advanced are directly admitted to the Foundation Level.
+Candidates who were JEE Main qualified and eligible for JEE Advanced, or who were JEE Advanced qualified, can be directly admitted to the Foundation Level in an eligible admission cycle. See the term-specific qualification-year table below.
 
 - Direct entry without needing to take the qualifier exam
-- Valid for 3 terms following the release of the JEE Advanced Eligibility list
 - Requires uploading valid proof of JEE Advanced eligibility
 
 ## Which Path Should You Choose?
 
 | Criteria | Regular Entry | JEE-Based Entry |
 |----------|---------------|-----------------|
-| Eligibility | Class 12 pass + Math & English in Class 10 | JEE Advanced eligible |
+| Eligibility | Class 12 pass + Math & English in Class 10 | JEE Main qualified and eligible for JEE Advanced, or JEE Advanced qualified |
 | Process | 4-week qualifier process + exam | Direct admission |
 | Fee | Four thousand rupees (General) | Four thousand rupees |
 | Time to Join | After passing qualifier exam | Immediate, after verification |

@@ -7,7 +7,7 @@ covers:
   - Weekly time commitment expectations
   - Flexible online learning structure
   - Pre-recorded and synchronous sessions
-  - In-person exam requirements
+  - Location-dependent exam requirements
   - Breaks and course registration flexibility
 sample_queries:
   - Can I do this program while working full-time?
@@ -39,8 +39,9 @@ Yes, you can pursue the IITM BS program alongside another degree or job. The pro
 - Learn at your own pace
 
 ## Exam Attendance Required
-- Quizzes and exams must be attended in person
-- Select exam cities convenient for you
+- Learners in India must attend quizzes and exams in person at an Indian exam centre
+- Learners in Bahrain, Kuwait, Oman, or UAE must attend at an overseas exam centre; learners based in other countries take remote-proctored exams
+- Select an available exam location convenient for you
 - 2 quiz dates and 1 final exam per term per course
 
 ## Taking Breaks

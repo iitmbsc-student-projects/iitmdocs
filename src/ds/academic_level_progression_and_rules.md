@@ -54,7 +54,7 @@ The website describes six academic levels in the Data Science and Applications d
 
 - Each year has three four-month terms: January, May, and September.
 - Each term has 12 weeks of coursework, including video lectures and assignments.
-- Each course has weekly online assignments, two in-person invigilated quizzes at the ends of Weeks 4 and 8, and an in-person invigilated End Term Exam.
+- Each course has weekly online assignments, two invigilated quizzes at the ends of Weeks 4 and 8, and an invigilated End Term Exam. The exam mode depends on the learner's location.
 - A learner must attend at least one of the two quizzes to be eligible for the End Term Exam.
 - Qualifier marks count as Quiz 1 only for Foundation courses registered in the same term as the Qualifier Exam. For registration in another term, the Qualifier score is not used as Quiz 1.
 
@@ -103,7 +103,7 @@ The BS program has multiple exit points:
 
 ## Learning Mode
 - Content delivered online
-- Quizzes and exams in-person at exam centers
+- Quizzes and exams are in person in India and at overseas centres in Bahrain, Kuwait, Oman, and UAE; learners based in other countries take remote-proctored exams
 - Can learn from anywhere
 
 ## Degree Value

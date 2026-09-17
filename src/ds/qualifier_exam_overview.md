@@ -47,7 +47,7 @@ On the start date of the Qualifier process Week-1, access to the content for the
   - Practice assignments
   - Graded assignments
   - Text transcripts
-- The qualifier coursework may also include live sessions
+- The qualifier coursework includes live sessions
 - Content will be made live with an announcement on the portal and an alert through email
 - Every week the graded assignment must be submitted in each course
 

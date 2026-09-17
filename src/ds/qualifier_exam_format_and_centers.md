@@ -19,7 +19,7 @@ sample_queries:
 
 # Exam Cities for IIT Madras BS Program
 
-Quizzes and exams for the IIT Madras BS Program are conducted in person at exam centres across India and abroad.
+Quizzes and exams for the IIT Madras BS Program are conducted at exam centres in India and selected overseas locations. Learners based in other countries take remote-proctored exams.
 
 ## Selecting Exam Cities
 
@@ -47,7 +47,7 @@ New exam cities were added from the September 2024 term onwards. Please check th
 
 ## Qualifier Exam Format
 - Duration: 4 hours (240 minutes)
-- Mode: In-person at exam center (India) / Online proctored (outside India)
+- Mode: In-person at an Indian exam centre; in-person at overseas centres in Bahrain, Kuwait, Oman, or UAE; remote-proctored in other countries
 - Type: MCQ, MSQ, numerical, and short **Answer** **Question**s
 - Subjects: All 4 subjects tested on same day
 - No negative marking
@@ -64,7 +64,7 @@ All students residing in India or physically present in India on exam day MUST w
 No physical calculator needed. Calculator enabled in exam window.
 
 ## Open Book or Closed Book
-Closed book exam. In-person, proctored, invigilated.
+Closed book exam. The exam is proctored and invigilated; the mode depends on the learner's location.
 
 ## Documents Required at Exam Center
 - Hall ticket (physical copy mandatory)
