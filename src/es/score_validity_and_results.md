@@ -12,7 +12,7 @@ sample_queries:
   - Where will qualifier exam marks be displayed?
   - How long is the qualifier exam score valid?
   - What happens if my qualifier score expires?
-  - Which terms can I apply for with the April 12th 2026 qualifier score?
+  - Which terms can I apply for with the November 15th 2026 qualifier score?
   - Can I reattempt the qualifier after passing it?
 ---
 

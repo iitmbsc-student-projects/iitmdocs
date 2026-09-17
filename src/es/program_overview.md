@@ -8,6 +8,7 @@ covers:
   - programme rigour and exit levels
   - Foundation, Diploma, and Degree progression
   - 142-credit BS degree structure
+  - Foundation, Diploma, and Degree credit breakdown
   - 12-week online courses and in-person assessments
 sample_queries:
   - What is the aim of the IIT Madras BS programmes?
@@ -48,6 +49,8 @@ Learners who successfully complete all courses in the Foundation and Diploma pro
 For BS in ES - Students who successfully complete all the courses and labs in Foundation level and Diploma, they can proceed to the B.S Degree Level.
 
 The BS Degree in Electronic Systems requires 142 credits in total.
+
+The website lists the credit breakdown as: Foundation Level, 43 credits with 9 theory courses and 5 labs; Diploma Level, 43 credits with 8 theory courses, 3 labs, and 2 project courses; and BS Degree Level, 56 credits with 12 courses, 1 lab, and an optional apprenticeship.
 
 ---
 
