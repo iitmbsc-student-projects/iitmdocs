@@ -90,7 +90,18 @@ You CANNOT:
 If you did not complete 10th and 12th grade, you are NOT eligible for the qualifier exam. Class 12 or equivalent is mandatory.
 
 ## Accepted Class 12 Equivalents
-Diplomas and other qualifications may be accepted. Check:
+The website lists these accepted Class 12 equivalents:
+
+1. A diploma recognised by AICTE or a state board of technical education of at least 3 years' duration
+2. A public school, board, or university examination in India or another country recognised as equivalent to the 10+2 system by the Association of Indian Universities (AIU)
+3. The final examination of the two-year Joint Services Wing course of the National Defence Academy
+4. General Certificate Education (GCE) examination at the Advanced (A) level from London, Cambridge, or Sri Lanka
+5. The High School Certificate Examination of Cambridge University or the International Baccalaureate Diploma from the International Baccalaureate Office, Geneva
+6. Higher Secondary Certificate vocational examination
+7. Intermediate or two-year Pre-University examination conducted by a recognised Board or University
+8. Senior Secondary School Examination conducted by the National Institute of Open Schooling with a minimum of five subjects
+
+For the current official list, check:
 https://study.iitm.ac.in/ds/accepted-class-12-equivalents.html
 
 ## Failed Class 12 Earlier

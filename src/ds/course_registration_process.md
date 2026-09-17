@@ -7,6 +7,7 @@ covers:
   - Prerequisite requirements for courses
   - Foundation registration in same and later terms
   - Maximum course load per term
+  - Credit Clearing Capability (CCC) and course-load limits
 sample_queries:
   - How do I register for courses after clearing the qualifier?
   - How many courses can I take in one term?
@@ -19,6 +20,8 @@ sample_queries:
 
 ### Step 1: Select Courses
 - Within the registration window, students will pick the courses they want to take in the coming term
+- In each term, a learner may register for up to 4 courses depending on their CCC (Credit Clearing Capability)
+- Foundation CCC is calculated from performance in the Qualifier Exam or the previous term's End Term Exams; CCC in the Diploma level and thereafter is 4
 
 ### Step 2: Choose Exam Cities
 - Students pick 2 cities among the choices provided for their quizzes and exams for that term

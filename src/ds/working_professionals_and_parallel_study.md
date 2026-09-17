@@ -6,6 +6,7 @@ covers:
   - Parallel study with another degree or job
   - Weekly time commitment expectations
   - Flexible online learning structure
+  - Pre-recorded and synchronous sessions
   - In-person exam requirements
   - Breaks and course registration flexibility
 sample_queries:
@@ -31,7 +32,8 @@ Yes, you can pursue the IITM BS program alongside another degree or job. The pro
 - Can register for 1-4 courses per term based on availability
 
 ## Online Learning Flexibility
-- All video lectures pre-recorded
+- The study mode includes pre-recorded and synchronous sessions
+- Video lectures are pre-recorded
 - Accessible anytime on YouTube
 - Can watch before joining to assess difficulty
 - Learn at your own pace

@@ -8,6 +8,8 @@ covers:
   - U grade and re-registration process
   - Prerequisite and course progression constraints
   - Exit points and degree pathways
+  - Six-level academic structure and term schedule
+  - Assessment and quiz requirements
 sample_queries:
   - How do I progress from Foundation to Diploma level?
   - How many credits are required for BS degree?
@@ -36,6 +38,25 @@ Course access will be revoked for students who:
 
 
 # Program Structure and Levels
+
+The website describes six academic levels in the Data Science and Applications degree program. The levels and their course or project structure are:
+
+| Level | Structure |
+|-------|-----------|
+| Foundation | 32 credits, 8 courses |
+| Diploma (Programming or Data Science) | 27 credits, 6 courses and 2 projects |
+| BSc Degree | 28 credits |
+| BS Degree | 28 credits |
+| PG Diploma | 20 credits, 3 core courses and 2 electives |
+| MTech | 20 credits, MTech project |
+
+## Term and Assessment Structure
+
+- Each year has three four-month terms: January, May, and September.
+- Each term has 12 weeks of coursework, including video lectures and assignments.
+- Each course has weekly online assignments, two in-person invigilated quizzes at the ends of Weeks 4 and 8, and an in-person invigilated End Term Exam.
+- A learner must attend at least one of the two quizzes to be eligible for the End Term Exam.
+- Qualifier marks count as Quiz 1 only for Foundation courses registered in the same term as the Qualifier Exam. For registration in another term, the Qualifier score is not used as Quiz 1.
 
 ## Program Levels
 The BS program has multiple exit points:
@@ -70,6 +91,7 @@ The BS program has multiple exit points:
 
 ## Duration
 - Minimum: 4 years for BS degree
+- The website states that completion can take up to 8 years, depending on the learner's preferred pace and assessment performance.
 - Can take longer based on pace
 - 3 terms per year available
 
