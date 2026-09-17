@@ -20,7 +20,7 @@ sample_queries:
 
 Please note: A student cannot apply for multiple programs simultaneously.
 
-To apply for the Qualifier Exam of For the BS in Electronic Systems (ES) programme students should fulfill the below conditions
+To apply for the Qualifier Exam for the BS in Electronic Systems (ES) programme, students must meet the following conditions:
 
 Passed Class 12 or equivalent with Physics and Mathematics, irrespective of age/group/stream/board
 
@@ -30,21 +30,19 @@ Those who pass the qualifier exams - will be allowed to proceed to the foundatio
 
 If students have passed class 12 without Physics and Mathematics, but have passed Physics and Mathematics separately through NIOS or any other equivalent organization - they will be permitted to apply to the BS in Electronics systems (ES) after committee approval.
 
-Applicants must have studied Physics and Mathematics in Class 12 or equivalent, OR passed Physics and Mathematics through NIOS or any other equivalent organization
-
-Passed class 12 or an equivalent examination regardless of age or academic background
+Applicants must have passed Class 12 or an equivalent examination with Physics and Mathematics, regardless of age, group, stream, or board.
 
 JEE-based entry: Candidates eligible to appear for the most recent JEE Advanced are directly admitted to the Foundation Level.
-
-For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier.
 
 There is a direct entry into the Foundation level of the program for candidates who have qualified for the JEE Advanced examination.
 
 Such candidates are eligible to join the program in the admission cycles specified by the programme schedule, based on the year in which they qualified for JEE Advanced.
 
+For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier.
+
 Upload a valid proof for the same.
 
-If the proof is found to be valid: The candidate will be declared eligible to join the Foundational level courses.
+If the proof is found to be valid, the candidate will be declared eligible to join the Foundation Level courses.
 
 ---
 

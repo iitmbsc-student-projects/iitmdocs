@@ -17,37 +17,31 @@ sample_queries:
 
 # Content
 
-To enter the IIT Madras BS Program, applicants can join in 2 paths
+To enter the IIT Madras BS Program, applicants can join through two paths.
 
 Regular entry: All candidates, irrespective of their backgrounds, can earn admission to the Foundation Level by successfully completing the qualifier process.
-
-All regular entry applicants must go through the Qualifier Process to earn admission to the Foundation Level.
 
 All regular entry applicants must go through the 4-week Qualifier process to earn admission to the Foundation Level.
 
 JEE-based entry: Candidates eligible to appear for the most recent JEE Advanced are directly admitted to the Foundation Level.
 
-There is a direct entry into the Foundation level of the program for candidates who have qualified for the JEE Advanced examination.
-
 Such candidates are eligible to join the program in the admission cycles specified by the programme schedule, based on the year in which they qualified for JEE Advanced.
 
-Jan: Example – Jan 2026 term considers 2024 and 2025 JEE qualification years.
+Jan: The Jan 2027 term considers 2025 and 2026 JEE qualification years.
 
-May: Example – May 2026 term considers 2025, and 2026 JEE qualification years.
+May: The May 2027 term considers 2026 and 2027 JEE qualification years.
 
-Sep: Example – Sep 2026 term considers 2025 and 2026 JEE qualification years.
+Sep: The Sep 2026 term considers 2025 and 2026 JEE qualification years.
 
 Apply to the Qualifier process, saying Yes to the question on eligibility to JEE Advanced level.
 
 Upload a valid proof for the same.
 
-If the proof is found to be valid: The candidate will be declared eligible to join the Foundational level courses.
+If the proof is found to be valid, the candidate will be declared eligible to join the Foundation Level courses and will be issued an admission letter.
 
-If the proof is found to be valid: They will be issued the admission letter.
+Such candidates can directly register for Foundation Level courses with CCC as 4.
 
-If the proof is found to be valid: Such candidates can directly register to courses in the foundation level with CCC as 4.
-
-If the proof of the document submitted is found to be not valid, the student will be moved into the category of non-JEE and will be treated as a regular entry candidate to the foundation level and have to go through the qualifier process.
+If the submitted proof is not valid, the student will be treated as a regular-entry candidate and must complete the qualifier process.
 
 ---
 

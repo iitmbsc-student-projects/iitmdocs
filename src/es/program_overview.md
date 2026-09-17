@@ -21,7 +21,7 @@ IIT Madras offers four-year BS programmes that aim to provide quality education 
 
 The programmes are carefully designed to impart industry-relevant skills through rigorous coursework, hands-on training, and projects.
 
-Currently, IIT Madras is offering four such BS programmes: (1) BS in Data Science and Applications and (2) BS in Electronic Systems. (3) BS in Management and Data science (4) BS in Aeronautics and space technology
+Currently, IIT Madras is offering four such BS programmes: (1) BS in Data Science and Applications, (2) BS in Electronic Systems, (3) BS in Management and Data Science, and (4) BS in Aeronautics and Space Technology.
 
 The content in BS programmes is delivered online, whereas the quizzes and exams are conducted in person at exam centres across India and abroad.
 

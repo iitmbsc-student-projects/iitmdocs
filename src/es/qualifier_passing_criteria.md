@@ -21,7 +21,7 @@ Regular entry: All candidates, irrespective of their backgrounds, can earn admis
 
 In the qualifier exam comprising 4 subjects, the learner should obtain marks >= individual subject cut-off as shown below.
 
-The total of all subject marks should be greater than or equal to the total cut-off.
+The average of all subject marks should be greater than or equal to the total cut-off.
 
 General Learner: Min. Req. Qualifier Exam Score in each course: 40%; Min. Req. Average Qualifier Exam Score: 50%
 
