@@ -40,7 +40,7 @@ sample_queries:
 
 ## Registering for Foundation Level in Same Qualifier Passed Term
 
-- You can continue to study 1/2/3/4 courses from week 5 onwards while waiting for the result. Once the qualifier result is declared, you can register for foundational courses and continue with the program. (Please check the eligibility for foundation level registration in the qualifier eligibility section)
+- You can continue to study 1/2/3/4 courses from week 5 onwards while waiting for the result. Once the qualifier result is declared, you can register for foundational courses and continue with the program. (Please check the eligibility for foundation level registration in the qualifier eligibility section.)
 - Qualifier score will be considered as Quiz 1 score for the courses you register in the same term
 - Students pick 2 cities among the choices provided for their quizzes and exams for that term
   - They have the freedom to choose a different set of cities than the ones they opted for in the previous terms

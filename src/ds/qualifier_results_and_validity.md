@@ -50,15 +50,15 @@ All official communication related to the Qualifier Process including assignment
 
 The qualifier exam score can be used to apply for 3 terms after the qualifier exam date. The qualifier score will become invalid for the 4th term onwards after the qualifier exam date.
 
-### Examples — Jan 2026 Term Qualifier Exams:
-- Qualifier exam dated Mar 15th 2026 — Can use this score to apply for the Jan2026, May2026, Sep2026 terms
-- Qualifier exam dated April 12th 2026 — Can use this score to apply for the May2026, Sep2026, Jan2027 terms
-- Qualifier exam dated May 10th 2026 — Can use this score to apply for the May2026, Sep2026, Jan2027 terms
+### Examples — Sep 2026 Term Qualifier Exams:
+- Qualifier exam dated November 15, 2026 — Can use this score to apply for the Sep 2026, Jan 2027, and May 2027 terms
+- Qualifier exam dated December 5, 2026 — Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms
+- Qualifier exam dated January 10, 2027 — Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms
 
-### Examples — May 2026 Term Qualifier Exams:
-- Qualifier exam dated Jul 19th 2026 — Can use this score to apply for the Sep2026, Jan2027, May2027 terms
-- Qualifier exam dated Aug 16th 2026 — Can use this score to apply for the Jan2027, May2027, Sep2027 terms
-- Qualifier exam dated Sep 13th 2026 — Can use this score to apply for the Jan2027, May2027, Sep2027 terms
+### Examples — Jan 2027 Term Qualifier Exams:
+- Qualifier exam dated March 27, 2027 — Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms
+- Qualifier exam dated August 16, 2026 — Can use this score to apply for the May 2027, Sep 2027, and Jan 2028 terms
+- Qualifier exam dated May 9, 2027 — Can use this score to apply for the May 2027, Sep 2027, and Jan 2028 terms
 
 ## What Happens After Validity Expires?
 

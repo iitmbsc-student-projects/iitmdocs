@@ -52,17 +52,17 @@ Candidates eligible to appear for the most recent JEE Advanced are directly admi
 
 There is a direct entry into the Foundation level of the program for students who have qualified for the JEE Advanced Exams.
 
-## Validity Period
+## Validity Period and Eligible Admission Cycles
 
-The validity of JEE-based entry is for the 3 terms following the release of the JEE Advanced Eligibility list.
+JEE-based entry eligibility is determined by the admission term and the year in which the candidate was JEE Main qualified and eligible for JEE Advanced, or JEE Advanced qualified:
 
-## Examples
+| Term applied for | Eligible JEE qualification years |
+|------------------|-----------------------------------|
+| January | The two preceding qualification years. For example, the January 2027 term considers 2025 and 2026. |
+| May | The current and preceding qualification years. For example, the May 2027 term considers 2026 and 2027. |
+| September | The current and preceding qualification years. For example, the September 2026 term considers 2025 and 2026. |
 
-- Candidates who qualified for JEE Advanced 2024 can directly join the program in:
-  - Sep 2025 Term
-  - Jan 2026 Term
-
-- Candidates who qualified for JEE Advanced 2025 / 2026 can directly join the program in the respective upcoming terms as per the programme schedule
+Apply only in an admission cycle covered by the applicable qualification year rule.
 
 ## Application Process
 
@@ -86,20 +86,9 @@ The validity of JEE-based entry is for the 3 terms following the release of the 
 # JEE-Based Direct Entry - Validity and Process
 
 ## JEE Advanced Eligibility for Direct Entry
-Students who qualified for JEE Advanced can skip the qualifier exam and directly join Foundation level.
+Candidates who were JEE Main qualified and eligible for JEE Advanced, or who were JEE Advanced qualified, can skip the qualifier exam and directly join Foundation level in an eligible admission cycle.
 
-## Validity Period
-JEE scores are valid for 3 terms following JEE Advanced qualification.
-
-### Examples:
-- JEE Advanced 2024 qualified: Valid until Jan 2026 term
-- JEE Advanced 2025 qualified: Valid until Sep 2027 term
-- JEE Advanced 2023 qualified: Scores expired, must take qualifier
-
-## 2024 JEE Mains Students
-If you cleared JEE Mains 2024 and qualified for JEE Advanced 2024, you can apply as JEE-based entrant until:
-- Sep 2025 Term
-- Jan 2026 Term (last valid term)
+The term-specific admission-cycle examples above determine which qualification years are accepted. A qualification year outside the applicable cycle is not eligible for JEE-based entry in that term.
 
 ## Application Process for JEE Entry
 1. Apply during regular application window

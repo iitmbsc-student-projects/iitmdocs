@@ -26,6 +26,7 @@ Students can take any course within a particular level of study but are not allo
 - Learners who successfully complete all courses in the Foundation and Diploma programme will be eligible for admission to the degree level, if they satisfy the prescribed/regulatory criteria
 - Students who complete 114 credits and satisfy the minimum credits completion requirement as per the norms will be eligible for the BSc degree and can continue onto the BS level for the Data Science and Applications program
 - For BS in AE/MG/ES — Students who successfully complete all the courses and labs in Foundation level and Diploma can proceed to the BS Degree Level
+- Learners pay only for the number of credits they register for, using online payment.
 
 ## Important Note
 
