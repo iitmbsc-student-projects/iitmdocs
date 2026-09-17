@@ -54,7 +54,8 @@ New exam cities were added from the September 2024 term onwards. Please check th
 
 ## Exam Mode by Location
 - Students in India: MUST write at exam center (in-person, offline)
-- Students outside India: Remote proctored exam from residence
+- Students outside India who are in Bahrain, Kuwait, Oman, or UAE: In-person exam at an overseas exam centre
+- Students based in other countries: Remote-proctored exam
 
 ## No Online Exam for India Residents
 All students residing in India or physically present in India on exam day MUST write exam at exam center. NO exceptions for medical emergencies.
