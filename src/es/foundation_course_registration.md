@@ -8,6 +8,7 @@ covers:
   - course prerequisites and course limits
   - quiz and exam city selection
   - progression to Diploma and Degree levels
+  - 12-week course structure and assessment modes
 sample_queries:
   - What happens after passing the qualifier examinations?
   - Can first-attempt qualifiers register in the same term?
@@ -53,6 +54,8 @@ Students can register to courses for which the prerequisite is completed.
 e.g. in order to sign up for Math-2, the learner must have cleared Math-1
 
 Students can take any course within a particular level of study but are not allowed to sign up for courses across levels.
+
+Each course runs for 12 weeks. Course content, tutorials, doubt-clearing sessions, and assignments are online; quizzes and exams are in person. Lab courses are conducted in person at the IIT Madras campus.
 
 Students who successfully complete all courses in the Foundation level will be eligible for admission to the Diploma level program.
 

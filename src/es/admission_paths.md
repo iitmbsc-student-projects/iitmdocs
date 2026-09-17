@@ -6,6 +6,7 @@ covers:
   - qualifier process admission
   - JEE-based entry
   - JEE Advanced proof validation
+  - JEE-category Quiz 1 and Quiz 2 requirement
   - admission cycles by JEE qualification year
 sample_queries:
   - How many admission paths are there for the IIT Madras BS Program?
@@ -40,6 +41,8 @@ Upload a valid proof for the same.
 If the proof is found to be valid, the candidate will be declared eligible to join the Foundation Level courses and will be issued an admission letter.
 
 Such candidates can directly register for Foundation Level courses with CCC as 4.
+
+For JEE-based entrants, registration is cancelled if they do not appear for both Quiz 1 and Quiz 2 in the first semester.
 
 If the submitted proof is not valid, the student will be treated as a regular-entry candidate and must complete the qualifier process.
 

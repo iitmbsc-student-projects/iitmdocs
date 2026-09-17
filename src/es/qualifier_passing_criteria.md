@@ -7,6 +7,7 @@ covers:
   - total cut-off
   - category-wise passing criteria
   - qualifier process relaxations
+  - qualifier exam duration
 sample_queries:
   - How many subjects are in the qualifier exam?
   - Is there a total cut-off for the qualifier exam?
@@ -20,6 +21,8 @@ sample_queries:
 Regular entry: All candidates, irrespective of their backgrounds, can earn admission to the Foundation Level by successfully completing the qualifier process.
 
 In the qualifier exam comprising 4 subjects, the learner should obtain marks >= individual subject cut-off as shown below.
+
+The in-person Qualifier Exam at the end of the 4 weeks is 4 hours long and covers all 4 courses.
 
 The average of all subject marks should be greater than or equal to the total cut-off.
 

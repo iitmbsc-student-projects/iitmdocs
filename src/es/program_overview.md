@@ -7,6 +7,8 @@ covers:
   - online content and in-person exams
   - programme rigour and exit levels
   - Foundation, Diploma, and Degree progression
+  - 142-credit BS degree structure
+  - 12-week online courses and in-person assessments
 sample_queries:
   - What is the aim of the IIT Madras BS programmes?
   - Which BS programmes are offered by IIT Madras?
@@ -29,6 +31,8 @@ This allows students to learn from anywhere, irrespective of geographical locati
 
 The in-person exams ensure academic rigour and fairly assess the quality of training.
 
+Each course runs for 12 weeks and provides videos, practice questions, text transcripts, and graded assignments online. Quizzes and exams are conducted in person. Lab sessions are conducted at the IIT Madras campus, online, or with kits depending on the course.
+
 The curriculum, academic rigour, and quality of the programme are on par with regular degree programmes offered by IIT Madras.
 
 The BS programme has multiple levels, which provide flexibility to students to exit at any of these levels.
@@ -42,6 +46,8 @@ Students who successfully complete all courses in the Foundation level will be e
 Learners who successfully complete all courses in the Foundation and Diploma programme will be eligible for admission to the degree level, if they satisfy the prescribed/regulatory criteria.
 
 For BS in ES - Students who successfully complete all the courses and labs in Foundation level and Diploma, they can proceed to the B.S Degree Level.
+
+The BS Degree in Electronic Systems requires 142 credits in total.
 
 ---
 
