@@ -54,14 +54,13 @@ sample_queries:
 - Students can register for a maximum of 4 courses per term.
 - Students must mandatorily submit assignments from week-1 onwards for the courses registered.
 - Students are required to mandatorily appear for the Quiz 1 examination for all courses registered in the respective term.
-- Qualifier score will not be considered as Quiz 1 score.
 - Note: Course access will be revoked for students who were not eligible for the qualifier exam or did not register for the foundation level in the same term in which they cleared the qualifier.
 
 ## Progression to later levels
 
 - Students who successfully complete all courses in the Foundation level will be eligible for admission to the Diploma level program.
 - Learners who successfully complete all courses in the Foundation and Diploma programme will be eligible for admission to the degree level, if they satisfy the prescribed/regulatory criteria.
-- Students who complete 92 credits and the required projects will be satisfies the minimum credits completion requirement as per the norms will be eligible for the BS degree and can continue onto the BS level in Management and Data Science program
+- Students who complete 142 credits and satisfy the minimum credits completion requirement as per the norms will be eligible for the BS degree in Management and Data Science.
 - For BS in MG - Students who successfully  complete all the courses and projects in Foundation level and Diploma, they can proceed to the B.S Degree Level.
 
 ## Payments and subsequent term registration

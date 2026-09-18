@@ -29,6 +29,8 @@ Every week the graded assignment must be submitted in each course.
 
 The content will be made live with an announcement on the portal, and an alert through email.
 
+All applicants registering for the Qualifier Exam receive access to Week-1 sample course content after successfully submitting the Qualifier Exam registration form.
+
 If the proof of the document submitted is found to be not valid, the student will be moved into the category of non-JEE and will be treated as a regular entry candidate to the foundation level and have to go through the qualifier process.
 
 ---

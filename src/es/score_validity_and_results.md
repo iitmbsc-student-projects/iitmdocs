@@ -12,7 +12,7 @@ sample_queries:
   - Where will qualifier exam marks be displayed?
   - How long is the qualifier exam score valid?
   - What happens if my qualifier score expires?
-  - Which terms can I apply for with the April 12th 2026 qualifier score?
+  - Which terms can I apply for with the November 15th 2026 qualifier score?
   - Can I reattempt the qualifier after passing it?
 ---
 
@@ -22,7 +22,7 @@ The qualifier exam marks will be displayed within the login on the portal along 
 
 The qualifier exam score can be used to apply for 3 terms after the qualifier exam date.
 
-The qualifier score will become invalid for the 4th term onwards after the qualifier exam date.
+The qualifier score will become invalid from the 4th term onwards after the qualifier exam date.
 
 If the qualifier score becomes invalid, the student will have to go through the entire qualifier process again and re-take the qualifier exam.
 
@@ -36,7 +36,7 @@ Learners who qualify will be permitted to proceed with further registration, and
 
 Once a learner has successfully qualified, they will not be permitted to reattempt the Qualifier Examination during the validity period of their score.
 
-The qualifier score will remain valid for the current term and the subsequent two terms, after which the learner will be eligible to apply again.
+The qualifier score will remain valid for the current term and the subsequent two terms. After that, the learner may apply again.
 
 This re-attempt application form will open up immediately after the qualifier results are announced.
 
@@ -50,17 +50,17 @@ Students who wish to register for the Foundation Level in subsequent terms after
 
 Qualifier score will not be considered as Quiz 1 score.
 
-Qualifier exam dated Mar 15th 2026 - Can use this score to apply for the Jan2026, May2026, Sep2026 terms.
+For Sep 2026 term qualifier exams:
 
-Qualifier exam dated April 12th 2026 - Can use this score to apply for the May2026, Sep2026, Jan2027 terms.
+- Qualifier exam dated November 15, 2026: usable for Sep 2026, Jan 2027, and May 2027 terms.
+- Qualifier exam dated December 5, 2026: usable for Jan 2027, May 2027, and Sep 2027 terms.
+- Qualifier exam dated January 10, 2027: usable for Jan 2027, May 2027, and Sep 2027 terms.
 
-Qualifier exam dated May 10th, 2026 - Can use this score to apply for the May2026, Sep2026, Jan2027 terms.
+For Jan 2027 term qualifier exams:
 
-Qualifier exam dated Jul 19th 2026 - Can use this score to apply for the Sep2026, Jan2027, May2027 terms
-
-Qualifier exam dated Aug 16th 2026 - Can use this score to apply for the Jan2027, May2027, Sep2027 terms
-
-Qualifier exam dated Sep 13th, 2026 - Can use this score to apply for the Jan2027, May2027, Sep2027 terms
+- Qualifier exam dated March 27, 2027: usable for Jan 2027, May 2027, and Sep 2027 terms.
+- Qualifier exam dated August 16, 2026: usable for May 2027, Sep 2027, and Jan 2028 terms.
+- Qualifier exam dated May 9, 2027: usable for May 2027, Sep 2027, and Jan 2028 terms.
 
 ---
 

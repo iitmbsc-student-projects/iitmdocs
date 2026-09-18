@@ -7,6 +7,7 @@ covers:
   - Category-wise assignment score cutoffs
   - Hall ticket eligibility and release
   - Assignment and Quiz 1 requirements after registration
+  - Website assessment types and in-person assessment requirements
 sample_queries:
   - How do I become eligible for the first qualifier exam attempt?
   - What happens if I do not attempt an assignment?
@@ -37,6 +38,8 @@ If this score is >= 40/100 (or as per the cutoff for each category of students) 
 
 In every term, qualifier exams are conducted at the end of 4 weeks and at the end of 8 weeks.
 
+Reattempts within the term will be provided suitably.
+
 ## Category-wise assignment cutoffs
 
 General Learner: Minimum Average Assignment Score required in each course: 40%
@@ -58,6 +61,8 @@ Such candidates do not have to repeat the assignments as they have already becom
 This will be considered like a fresh application and they have to redo the 4 weeks of course work and weekly graded assignments and become eligible to get the hall ticket for the qualifier exam
 
 ## Registered course requirements
+
+For regular courses, the website describes three assessment types: weekly online assignments, monthly in-person quizzes, and an in-person end-term examination. Depending on the course, assessments may also include programming exams, mini-projects, vivas, or take-home assignments. Learners must travel to an exam centre for the in-person assessments.
 
 Students must mandatorily submit assignments from week-1 onwards for the courses registered.
 

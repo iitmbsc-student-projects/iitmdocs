@@ -67,7 +67,7 @@ Only those who get the minimum required average assignment scores in all four co
 ## Important Notes
 - Relaxations in pass criteria indicated for various categories of learners are applicable ONLY for the qualifier process
 - There will be no relaxations in terms of grades or pass criteria once registered into the program
-- Hall tickets will be released only for candidates eligible to take the in-person proctored Qualifier Exam
+- Hall tickets will be released only for candidates eligible to take the proctored Qualifier Exam; the exam mode depends on the learner's location
 
 # Category-wise Cutoffs and Relaxations
 
@@ -140,13 +140,15 @@ qualifier assignment, qualifier assignment requirements, qualifier exam eligibil
 
 ## Eligibility Criteria for Qualifier Exam
 
-### First Attempt Eligibility
-- If the average of the first 2 weeks' assignment scores is ≥ 40/100 (or as per the cutoff for each category of students) in each of the 4 subjects, the students will be eligible to write the qualifier exam in the first attempt within the term.
+- In each course, the average of the best 2 out of the first 3 assignment scores will be calculated.
+- Only learners who meet the minimum required average assignment score in all four courses will be allowed to appear for the Qualifier Exam.
 
-### Second Attempt Eligibility
-- For students who do not qualify after the week 2 assignments, the average of the best 2 out of the first 3 weeks' assignment scores will be considered.
-- If this score is ≥ 40/100 (or as per the cutoff for each category of students) in each of the 4 subjects, the students will become eligible to write the qualifier exam in the second attempt within the term.
-- Reattempts within the term will be given suitably.
+## Same-Term Reattempt Process
+
+- There are currently two Qualifier Exam attempts in a term: the first at the end of 4 weeks and the second at the end of 8 weeks.
+- A learner who was eligible for the hall ticket but was absent for the first attempt, or who failed the first attempt, may reattempt in the same term.
+- Eligible learners do not have to repeat the assignments for the same-term reattempt.
+- The reattempt application form opens after the first-attempt results are announced.
 
 ---
 

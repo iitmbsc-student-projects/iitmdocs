@@ -17,17 +17,17 @@ sample_queries:
 
 # Content
 
-## General score validity
+## Score validity for students who have cleared Class 12
 
-The qualifier exam score can be used to apply for 3 terms after the qualifier exam date.
+The qualifier score will remain valid for the current term and the subsequent two terms, after which the learner will be eligible to apply again.
 
 The qualifier score will become invalid for the 4th term onwards after the qualifier exam date.
 
 If the qualifier score becomes invalid, the student will have to go through the entire qualifier process again and re-take the qualifier exam.
 
-For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier.
+## Score validity for students who have not yet cleared Class 12
 
-The qualifier score will remain valid for the current term and the subsequent two terms, after which the learner will be eligible to apply again.
+For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier. This means that you can use your qualifier score to apply for courses during this validity period, but you must complete your Class 12 exams first to proceed to the Foundation level.
 
 ## Reattempt restriction during validity
 
@@ -40,6 +40,22 @@ They may also register in the next two terms, as long as the qualifier score rem
 Students who wish to register for the Foundation Level in subsequent terms after passing the Qualifier term are requested to verify the validity of their Qualifier score in the Admission Letter, which is available on the Student Dashboard, and proceed with the Foundation Level registration accordingly.
 
 ## 2026 qualifier score validity examples
+
+For Sep 2026 term qualifier exams:
+
+Qualifier exam dated November 15, 2026 - Can use this score to apply for the Sep 2026, Jan 2027, and May 2027 terms.
+
+Qualifier exam dated December 5, 2026 - Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms.
+
+Qualifier exam dated January 10, 2027 - Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms.
+
+For Jan 2027 term qualifier exams:
+
+Qualifier exam dated March 27, 2027 - Can use this score to apply for the Jan 2027, May 2027, and Sep 2027 terms.
+
+Qualifier exam dated August 16, 2026 - Can use this score to apply for the May 2027, Sep 2027, and Jan 2028 terms.
+
+Qualifier exam dated May 9, 2027 - Can use this score to apply for the May 2027, Sep 2027, and Jan 2028 terms.
 
 Qualifier exam dated Mar 15th 2026 - Can use this score to apply for the Jan2026, May2026, Sep2026 terms.
 

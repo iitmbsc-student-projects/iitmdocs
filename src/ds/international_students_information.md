@@ -3,7 +3,7 @@ title: International Students Information
 description: Provides guidance for international students including eligibility, exam mode, fees, required documents, and support contacts.
 covers:
   - Eligibility for international students
-  - Remote proctored exam mode
+  - Location-dependent exam mode for international students
   - Exam timing in IST
   - Additional exam facilitation fee
   - Required documents for verification
@@ -23,9 +23,9 @@ sample_queries:
 Yes, international students from any country (Bangladesh, Sri Lanka, Nepal, USA, UK, etc.) can enroll in the IIT Madras BS program.
 
 ## Exam Mode for International Students
-- Exams conducted online with live remote proctoring
-- No need to travel to India for exams
-- Exams from your residence
+- Learners in Bahrain, Kuwait, Oman, or UAE take exams in person at an overseas exam centre
+- Learners based in other countries take exams online with live remote proctoring
+- Learners using remote proctoring take exams from their residence
 
 ## Exam Timing
 - 9 AM IST and 2 PM IST slots

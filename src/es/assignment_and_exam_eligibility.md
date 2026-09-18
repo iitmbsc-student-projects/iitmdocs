@@ -26,9 +26,9 @@ Each assignment will be graded out of 100
 
 Any assignment that is not attempted will be marked as 0.
 
-If the average of the first 2 weeks’ assignment scores is >= 40/100 (or as per the cutoff for each category of students) in each of the 4 subjects, the students will be eligible to write the qualifier exam in the first attempt within the term.
+If the average of the first 2 weeks’ assignment scores is >= 40/100 (or the applicable category cutoff) in each of the 4 subjects, students will be eligible to write the qualifier exam in the first attempt within the term.
 
-For those who do not qualify after the week 2 assignments, the average of the best 2 out of the first 3 weeks’ assignment scores will be considered.
+For those who do not qualify after the Week 2 assignments, the average of the best 2 scores out of the first 3 weeks will be considered.
 
 If this score is >= 40/100 (or as per the cutoff for each category of students) in each of the 4 subjects, the students will become eligible to write the qualifier exam in the second attempt within the term.
 
@@ -48,7 +48,7 @@ Hall tickets will be released for only those candidates who become eligible to t
 
 All official communication related to the Qualifier Process including assignment deadlines, examination schedules, hall ticket release, and publication of results will be shared with learners through the following channels: The registered email address of the learner; WhatsApp notifications sent to the registered mobile number; Announcements displayed on the student portal
 
-In every term, qualifier exams are conducted at the end of 4 weeks and at the end of 8 weeks.
+In every term, qualifier exams are conducted at the end of 4 weeks and at the end of 8 weeks. A learner who was hall-ticket eligible but was absent or failed the first attempt does not have to repeat the assignments.
 
 Such candidates do not have to repeat the assignments as they have already become eligible.
 

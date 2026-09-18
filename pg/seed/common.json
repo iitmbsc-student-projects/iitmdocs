@@ -1,4 +1,11 @@
-[
+[   {
+        "Question": "What is the eligiblity to write the End Term Exam for a course?",
+        "Answer": "To be eligible to write the End Term Exam for a course in the foundation level, it is mandatory for the learner to have (i) obtained in the course an Average Assignment Score >= 40/100 AND (ii) appeared for at least one out of the 2 in-person Quizzes. \n\nLearners who are not eligible to write a specific course's End Term Exam will not be issued hall ticket for the same. They will have to repeat the entire course including assignments and quizzes in a later term."
+    },
+    {
+        "Question": "Can international students write the qualifier exam?",
+        "Answer": "Yes, international students can write the Qualifier Exam."
+    },
     {
         "Question": "Why is the qualifier exam required to join the degree program?",
         "Answer": "The Qualifier Exam is required for regular entry applicants to assess their readiness for the program. Applicants must complete a 4-week qualifier process, including assignments and an exam, to be eligible for the Foundation Level."
@@ -662,10 +669,6 @@
     {
         "Question": "Are there any sample video content or assignments?",
         "Answer": "As a sample, Week 1 content videos have been made available for the first four Foundational Level courses for you to try and learn from. We recommend you to check out these lectures and try the sample assignment we have put out for each course. The links to Week 1 Content & Assignment pages can be accessed from the [Foundational Level courses] section in Academics page."
-    },
-    {
-        "Question": "",
-        "Answer": ""
     },
     {
         "Question": "When will the term start? What is the timeline?",

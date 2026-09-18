@@ -6,6 +6,8 @@ covers:
   - Same-term and subsequent-term course registration
   - Quiz 1 and qualifier score rules
   - Course prerequisites and maximum courses per term
+  - Theory-course and lab registration guidance
+  - First-term course recommendations based on qualifier score
   - Exam city selection and registration dates
 sample_queries:
   - Can I apply for Foundation Level after passing the qualifier?
@@ -35,7 +37,7 @@ Once the qualifier result is declared, you can register for foundational courses
 
 Candidates who qualify in the first attempt within a term may register for courses in the same term.
 
-Their qualifier score will be treated as the Quiz 1 score for calculating the final grade.
+For same-term registration after qualifying in the first attempt, the qualifier score will be treated as the Quiz 1 score for calculating the final grade.
 
 They may also register in the next two terms, as long as the qualifier score remains valid.
 
@@ -43,7 +45,7 @@ Candidates who qualify in the second attempt can register only from the subseque
 
 You can continue to study 1/2/3/4 courses from week 5 onwards while waiting for the result.
 
-Qualifier score will be considered as Quiz 1 score for the courses you register.
+For same-term registration, the qualifier score will be considered as the Quiz 1 score for the courses you register.
 
 Students who wish to register for the Foundation Level in subsequent terms after passing the Qualifier term are requested to verify the validity of their Qualifier score in the Admission Letter, which is available on the Student Dashboard, and proceed with the Foundation Level registration accordingly.
 
@@ -53,7 +55,7 @@ Students must mandatorily submit assignments from week-1 onwards for the courses
 
 Students are required to mandatorily appear for the Quiz 1 examination for all courses registered in the respective term.
 
-Qualifier score will not be considered as Quiz 1 score.
+For subsequent-term registration, the qualifier score will not be considered as the Quiz 1 score. Students must appear for the Quiz 1 examination for all courses registered in that term.
 
 ## JEE-based course registration
 
@@ -95,7 +97,13 @@ Learners who successfully complete all courses in the Foundation and Diploma pro
 
 For BS in AE - Students who successfully complete all the courses and labs in Foundation level and Diploma, they can proceed to the B.S Degree Level.
 
-Students can register for a maximum of 4 courses per term.
+Students can register for a maximum of 4 theory courses and corresponding lab courses per term, depending on the time they can dedicate to the program. A learner studying full time is recommended to take 4 courses per term; working professionals and learners pursuing another academic program can take 2 or 3 courses.
+
+For the first term, the website recommends the following course limits based on the average qualifier exam score (M):
+
+- Minimum required <= M < 50%: up to 2 courses
+- 50% <= M < 70%: up to 3 courses
+- M >= 70%: up to 4 courses
 
 ## Fees and pass criteria after registration
 

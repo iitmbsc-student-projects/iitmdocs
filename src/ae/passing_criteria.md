@@ -28,6 +28,8 @@ In the qualifier exam comprising 4 subjects, the learner should obtain marks >= 
 
 The total of all subject marks should be greater than or equal to the total cut-off.
 
+The average qualifier exam score means the average of the scores obtained in all 4 courses in the qualifier exam.
+
 General Learner: Min. Req. Qualifier Exam Score in each course: 40%; Min. Req. Average Qualifier Exam Score: 50%
 
 SC / ST / PwD with 40% disability: Min. Req. Qualifier Exam Score in each course: 30%; Min. Req. Average Qualifier Exam Score: 40%
@@ -42,11 +44,9 @@ After passing the qualifier examinations, students may choose to apply for the F
 
 Candidates who qualify in the first attempt within a term may register for courses in the same term.
 
-Their qualifier score will be treated as the Quiz 1 score for calculating the final grade.
+For same-term registration after qualifying in the first attempt, their qualifier score will be treated as the Quiz 1 score for calculating the final grade.
 
-Qualifier score will be considered as Quiz 1 score for the courses you register.
-
-Qualifier score will not be considered as Quiz 1 score.
+For same-term registration, the qualifier score will be considered as the Quiz 1 score for the courses you register. For subsequent-term registration, the qualifier score will not be considered as the Quiz 1 score, and the learner must appear for Quiz 1.
 
 ---
 

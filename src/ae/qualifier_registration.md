@@ -7,6 +7,8 @@ covers:
   - Regular entry qualifier requirement
   - AE qualifier conditions
   - JEE proof submission through qualifier process
+  - Medical certificate after Foundation registration
+  - JEE-based first-term assessment requirement
 sample_queries:
   - Where is the Qualifier Exam registration form available?
   - Do qualifier applicants get Week-1 sample content?
@@ -31,11 +33,9 @@ To receive access, learners must complete the Qualifier Exam registration form a
 
 Access to the Week-1 content will be provided after successful submission of the form.
 
-## AE qualifier requirements
+## AE qualifier application requirements
 
-To apply for the Qualifier Exam of For the BS in Aeronautics and space technology (AE), students should fulfill the below conditions
-
-School students who have appeared for and passed their Class 11 final exams can apply irrespective of their age/group/stream/board.
+To apply for the Qualifier Exam for the BS in Aeronautics and Space Technology (AE), applicants who have passed Class 12 or an equivalent examination must have studied Physics and Mathematics, irrespective of age, group, stream, or board. School students who have appeared for their Class 11 final exams with Physics and Mathematics as their subjects of study can also apply, irrespective of age/group/board.
 
 If students have passed class 12 without Physics and Mathematics, but have passed Physics and Mathematics separately through NIOS or any other equivalent organization - they will be permitted to apply to the BS in Aeronautics and Space Technology (AE) after committee approval.
 
@@ -48,6 +48,12 @@ The application fee for the Qualifier exam must be paid during registration and 
 Apply to the Qualifier process, saying Yes to the question on eligibility to JEE Advanced level. Upload a valid proof for the same.
 
 If the proof of the document submitted is found to be not valid, the student will be moved into the category of non-JEE and will be treated as a regular entry candidate to the foundation level and have to go through the qualifier process.
+
+## Requirements after Foundation registration
+
+The website states that all students enrolled in the IIT Madras BS Degree Program must submit a medical certificate in the prescribed format after registering for the Foundation Level.
+
+For JEE-based entrants, the website states that registration will be cancelled if the student does not appear for Quiz 1 and Quiz 2 in the first term.
 
 ---
 
