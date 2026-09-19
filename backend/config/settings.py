@@ -99,4 +99,10 @@ LOGGING = {
     "disable_existing_loggers": False,
     "handlers": {"console": {"class": "logging.StreamHandler"}},
     "root": {"handlers": ["console"], "level": os.getenv("LOG_LEVEL", "INFO")},
+    # Keep structured application events and Uvicorn access logs visible, but
+    # avoid one plain-text INFO line for every outbound HTTP request.
+    "loggers": {
+        "httpx": {"handlers": ["console"], "level": "WARNING", "propagate": False},
+        "httpcore": {"handlers": ["console"], "level": "WARNING", "propagate": False},
+    },
 }
