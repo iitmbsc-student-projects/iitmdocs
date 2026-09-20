@@ -46,6 +46,8 @@ For candidates who were absent or failed the first attempt and want to re-attemp
 
 # Program Course Fees and Payment Details
 
+The website notes that the fee structure was revised for students joining the Foundation level from the January 2026 term onwards.
+
 ## Course Fees (Foundation Level onwards)
 - Per course fee: approximately **Rs 6000**
 - Foundation level (8 courses): **Rs 48,000**

@@ -33,7 +33,7 @@ class RewriteMetadataTests(SimpleTestCase):
         )
 
         result = await rewrite.rewrite_query_with_source_async(
-            object(), "Could tuition be explained"
+            object(), "Could tuition be explained", "ds"
         )
 
         self.assertEqual(result["source"], "llm")
@@ -42,12 +42,31 @@ class RewriteMetadataTests(SimpleTestCase):
     @mock.patch("chatbot.services.rewrite.chat_completion_async")
     async def test_synonym_rewrite_has_no_provider_usage(self, completion):
         result = await rewrite.rewrite_query_with_source_async(
-            object(), "What is the grading policy?"
+            object(), "What is the grading policy?", "ds"
         )
 
         self.assertEqual(result["source"], "synonym")
         self.assertIsNone(result["tokens"])
         completion.assert_not_called()
+
+    @mock.patch("chatbot.services.rewrite.chat_completion_async")
+    async def test_ds_synonym_is_a_miss_for_es_and_uses_es_prompt(self, completion):
+        """The same question takes the LLM path for ES, with the ES topic list."""
+        completion.return_value = _Response(
+            {
+                "choices": [{"message": {"content": "grading [LANG:english]"}}],
+                "usage": {"prompt_tokens": 7, "completion_tokens": 2},
+            }
+        )
+
+        result = await rewrite.rewrite_query_with_source_async(
+            object(), "What is the grading policy?", "es"
+        )
+
+        self.assertEqual(result["source"], "llm")
+        system_prompt = completion.call_args.args[1][0]["content"]
+        self.assertIn("Electronic Systems", system_prompt)
+        self.assertNotIn("International Students Information", system_prompt)
 
     @mock.patch("chatbot.services.rewrite.chat_completion_async")
     async def test_malformed_success_keeps_llm_source_and_usage(self, completion):
@@ -62,6 +81,7 @@ class RewriteMetadataTests(SimpleTestCase):
         result = await rewrite.rewrite_query_with_source_async(
             object(),
             "Could tuition be explained",
+            "ds",
         )
 
         self.assertEqual(result["source"], "llm")

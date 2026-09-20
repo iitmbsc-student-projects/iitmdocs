@@ -75,7 +75,7 @@ class FaqResultTests(SimpleTestCase):
         search.return_value = items
 
         self.assertEqual(
-            await faq.search_result_async(object(), "fees", 5),
+            await faq.search_result_async(object(), "fees", 5, "ds"),
             {"items": items, "error": None},
         )
 
@@ -83,7 +83,7 @@ class FaqResultTests(SimpleTestCase):
     async def test_preserves_embedding_failure(self, search):
         search.side_effect = faq.FaqEmbeddingError("failed")
         self.assertEqual(
-            await faq.search_result_async(object(), "fees", 5),
+            await faq.search_result_async(object(), "fees", 5, "ds"),
             {"items": [], "error": "pg_faq_embedding_error"},
         )
 
@@ -92,7 +92,7 @@ class FaqResultTests(SimpleTestCase):
         search.side_effect = faq.FaqDatabaseError("failed")
 
         self.assertEqual(
-            await faq.search_result_async(object(), "fees", 5),
+            await faq.search_result_async(object(), "fees", 5, "ds"),
             {"items": [], "error": "pg_faq_database_error"},
         )
 
@@ -101,7 +101,7 @@ class FaqResultTests(SimpleTestCase):
         search.side_effect = RuntimeError("unexpected")
 
         self.assertEqual(
-            await faq.search_result_async(object(), "fees", 5),
+            await faq.search_result_async(object(), "fees", 5, "ds"),
             {"items": [], "error": "pg_faq_search_error"},
         )
 
@@ -111,7 +111,7 @@ class FaqResultTests(SimpleTestCase):
 
         class Result:
             def all(self):
-                row = SimpleNamespace(id=7, question="What are the fees?", answer="Rs 32000")
+                row = SimpleNamespace(id=7, program_id="ds", question="What are the fees?", answer="Rs 32000")
                 return [(row, 0.91)]
 
         class Session:
@@ -132,13 +132,14 @@ class FaqResultTests(SimpleTestCase):
             ),
             mock.patch("chatbot.services.faq._get_async_session_factory", return_value=Session),
         ):
-            results = await faq.search_async(object(), "fees", 5)
+            results = await faq.search_async(object(), "fees", 5, "ds")
 
         self.assertEqual(
             results,
             [
                 {
                     "id": 7,
+                    "program_id": "ds",
                     "question": "What are the fees?",
                     "answer": "Rs 32000",
                     "cosine_similarity": 0.91,
@@ -154,7 +155,7 @@ class FaqResultTests(SimpleTestCase):
             new=mock.AsyncMock(side_effect=RuntimeError("ollama unavailable")),
         ):
             with self.assertRaises(faq.FaqEmbeddingError):
-                await faq.search_async(object(), "fees", 5)
+                await faq.search_async(object(), "fees", 5, "ds")
 
         class BrokenSession:
             async def __aenter__(self):
@@ -171,7 +172,7 @@ class FaqResultTests(SimpleTestCase):
             mock.patch("chatbot.services.faq._get_async_session_factory", return_value=BrokenSession),
         ):
             with self.assertRaises(faq.FaqDatabaseError):
-                await faq.search_async(object(), "fees", 5)
+                await faq.search_async(object(), "fees", 5, "ds")
 
 
 class EmbeddingValidationTests(SimpleTestCase):
@@ -242,7 +243,7 @@ class WeaviateResultTests(SimpleTestCase):
                 return _Response(payload={"data": {"Get": {"Document": []}}})
 
         client = Client()
-        await weaviate.search_weaviate_async(client, "fees", 2)
+        await weaviate.search_weaviate_async(client, "fees", 2, "ds")
 
         self.assertEqual(client.query.count("{"), client.query.count("}"))
 
@@ -268,7 +269,7 @@ class WeaviateResultTests(SimpleTestCase):
                 return _Response(payload={"data": {"Get": {"Document": []}}})
 
         client = Client()
-        await weaviate.search_weaviate_async(client, "fees", 2)
+        await weaviate.search_weaviate_async(client, "fees", 2, "ds")
 
         self.assertEqual(client.query.count("{"), client.query.count("}"))
 
@@ -291,7 +292,7 @@ class WeaviateResultTests(SimpleTestCase):
                     }
                 )
 
-        result = await weaviate.search_weaviate_async(Client(), "fees", 2)
+        result = await weaviate.search_weaviate_async(Client(), "fees", 2, "ds")
 
         self.assertEqual(result["items"][0]["filename"], "fees.md")
         self.assertEqual(result["error"], "weaviate_graphql_error:optional field failed")
@@ -304,6 +305,7 @@ class WeaviateResultTests(SimpleTestCase):
                 _AsyncClient(_Response(payload={"errors": "upstream unavailable"})),
                 "fees",
                 2,
+                "ds",
             ),
             {"items": [], "error": "weaviate_response_malformed:errors_not_array"},
         )
@@ -316,6 +318,7 @@ class WeaviateResultTests(SimpleTestCase):
                 _AsyncClient(_Response(ok=False, status=503)),
                 "fees",
                 2,
+                "ds",
             ),
             {"items": [], "error": "weaviate_api_error:503"},
         )
@@ -324,13 +327,14 @@ class WeaviateResultTests(SimpleTestCase):
             _AsyncClient(_MalformedResponse()),
             "fees",
             2,
+            "ds",
         )
         self.assertEqual(result["items"], [])
         self.assertTrue(result["error"].startswith("weaviate_response_malformed:"))
 
     @mock.patch("chatbot.services.weaviate.appconfig.deployment_mode", return_value="invalid")
     async def test_reports_unsupported_mode_without_fetching(self, _mode):
-        result = await weaviate.search_weaviate_async(object(), "fees", 2)
+        result = await weaviate.search_weaviate_async(object(), "fees", 2, "ds")
         self.assertEqual(result["items"], [])
         self.assertEqual(result["error"], "weaviate_config_error:unsupported_DEPLOYMENT_MODE_invalid")
 
@@ -338,7 +342,7 @@ class WeaviateResultTests(SimpleTestCase):
     @mock.patch("chatbot.services.weaviate.appconfig.deployment_mode", return_value="gce")
     async def test_reports_missing_gce_weaviate_url(self, _mode, _url):
         self.assertEqual(
-            await weaviate.search_weaviate_async(object(), "fees", 2),
+            await weaviate.search_weaviate_async(object(), "fees", 2, "ds"),
             {"items": [], "error": "weaviate_config_error:missing_GCE_WEAVIATE_URL"},
         )
 
@@ -347,7 +351,7 @@ class WeaviateResultTests(SimpleTestCase):
     @mock.patch("chatbot.services.weaviate.appconfig.deployment_mode", return_value="gce")
     async def test_reports_missing_gce_ollama_url(self, _mode, _weaviate_url, _ollama_url):
         self.assertEqual(
-            await weaviate.search_weaviate_async(object(), "fees", 2),
+            await weaviate.search_weaviate_async(object(), "fees", 2, "ds"),
             {"items": [], "error": "weaviate_config_error:missing_GCE_OLLAMA_URL"},
         )
 
@@ -365,6 +369,70 @@ class WeaviateResultTests(SimpleTestCase):
         get_embedding.side_effect = RuntimeError("Ollama unavailable")
 
         self.assertEqual(
-            await weaviate.search_weaviate_async(object(), "fees", 2),
+            await weaviate.search_weaviate_async(object(), "fees", 2, "ds"),
             {"items": [], "error": "weaviate_embedding_error:Ollama unavailable"},
         )
+
+
+class _CapturingClient:
+    """Records the GraphQL query a search sends, and returns an empty result."""
+
+    graphql = ""
+
+    async def post(self, *_args, **kwargs):
+        self.graphql = kwargs["json"]["query"]
+        return _Response(payload={"data": {"Get": {"Document": []}}})
+
+
+class ProgramScopingTests(SimpleTestCase):
+    """Prove one programme cannot see another programme's FAQs or documents."""
+
+    def test_faq_search_sql_covers_only_the_program_and_common(self):
+        from sqlalchemy import select
+
+        from programs import faq_program_scope
+        from pg.faq_api.orm import Faq
+
+        statement = select(Faq).where(Faq.program_id.in_(faq_program_scope("es")))
+        sql = str(statement.compile(compile_kwargs={"literal_binds": True}))
+        self.assertIn("'es'", sql)
+        self.assertIn("'common'", sql)
+        self.assertNotIn("'ds'", sql)
+
+    async def test_faq_lookup_returns_none_for_another_programs_row(self):
+        """An id belonging to `ds` must read as missing when asked for as `es`."""
+
+        class Session:
+            async def __aenter__(self):
+                return self
+
+            async def __aexit__(self, *_args):
+                return False
+
+            async def execute(self, _statement):
+                return SimpleNamespace(scalar_one_or_none=lambda: None)
+
+        with mock.patch("chatbot.services.faq._get_async_session_factory", return_value=Session):
+            self.assertIsNone(await faq.get_faq_async(7, "es"))
+
+    @mock.patch("chatbot.services.weaviate.appconfig.local_weaviate_url", return_value="http://weaviate")
+    @mock.patch("chatbot.services.weaviate.appconfig.deployment_mode", return_value="local")
+    async def test_local_graphql_filters_on_program_id(self, _mode, _url):
+        client = _CapturingClient()
+        await weaviate.search_weaviate_async(client, "fees", 2, "es")
+        self.assertIn('path:["program_id"]', client.graphql)
+        self.assertIn('valueText:"es"', client.graphql)
+
+    @mock.patch("chatbot.services.weaviate.appconfig.ollama_model", return_value="bge-m3")
+    @mock.patch("chatbot.services.weaviate.appconfig.gce_ollama_url", return_value="http://ollama")
+    @mock.patch("chatbot.services.weaviate.appconfig.gce_weaviate_url", return_value="http://weaviate")
+    @mock.patch("chatbot.services.weaviate.appconfig.deployment_mode", return_value="gce")
+    async def test_gce_graphql_filters_on_program_id(self, _mode, _url, _ollama, _model):
+        client = _CapturingClient()
+        with mock.patch(
+            "chatbot.services.weaviate.get_ollama_embedding_async",
+            new=mock.AsyncMock(return_value=[0.1, 0.2]),
+        ):
+            await weaviate.search_weaviate_async(client, "fees", 2, "mg")
+        self.assertIn('path:["program_id"]', client.graphql)
+        self.assertIn('valueText:"mg"', client.graphql)

@@ -71,7 +71,7 @@ def validate_required_configuration() -> None:
     """Fail startup when required FAQ configuration is missing or invalid.
 
     PostgreSQL connection details and the embedding dimension are required by
-    both ``/search`` and the FAQ part of ``/answer``. Building the database URL
+    the FAQ part of ``/answer``. Building the database URL
     validates the required PG variables and ``PGPORT`` without opening a network
     connection.
 

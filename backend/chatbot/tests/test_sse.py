@@ -27,7 +27,16 @@ class SseContentTests(SimpleTestCase):
 
 class SseDocumentTests(SimpleTestCase):
     def test_document_tool_call_shape(self):
-        out = sse.sse_document_records([{"filename": "fees_and_payments.md", "content": "x", "relevance": 0.73}])
+        out = sse.sse_document_records(
+            [
+                {
+                    "filename": "fees_and_payments.md",
+                    "filepath": "src/ds/fees_and_payments.md",
+                    "content": "x",
+                    "relevance": 0.73,
+                }
+            ]
+        )
         payload = json.loads(out.split("\n\n")[0][len("data: "):])
         self.assertEqual(payload["role"], "assistant")
         fn = payload["choices"][0]["delta"]["tool_calls"][0]["function"]
@@ -35,7 +44,17 @@ class SseDocumentTests(SimpleTestCase):
         args = json.loads(fn["arguments"])  # arguments is a JSON *string*
         self.assertEqual(args["name"], "fees_and_payments")
         self.assertEqual(args["relevance"], 0.73)
-        self.assertEqual(args["link"], "https://github.com/RishavT/iitmdocs/blob/main/src/fees_and_payments.md")
+        self.assertEqual(
+            args["link"],
+            "https://github.com/RishavT/iitmdocs/blob/main/src/ds/fees_and_payments.md",
+        )
+
+    def test_document_without_filepath_falls_back_to_flat_src(self):
+        """Objects embedded before the per-programme folders still produce a link."""
+        out = sse.sse_document_records([{"filename": "fees.md", "content": "x", "relevance": 0.1}])
+        payload = json.loads(out.split("\n\n")[0][len("data: "):])
+        args = json.loads(payload["choices"][0]["delta"]["tool_calls"][0]["function"]["arguments"])
+        self.assertEqual(args["link"], "https://github.com/RishavT/iitmdocs/blob/main/src/fees.md")
 
     def test_multiple_records_concatenated(self):
         out = sse.sse_document_records(

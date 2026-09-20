@@ -1,0 +1,38 @@
+[
+    {
+        "Question": "Is it mandatory to travel to IIT Madras for the Lab courses?",
+        "Answer": "Yes. It is mandatory that students travel to IIT Madras campus to demonstrate the lab experiments specified and complete the lab exams in person at the campus."
+    },
+    {
+        "Question": "During my lab session can I get any accommodation available inside the campus?",
+        "Answer": "No. You have to make your own arrangements for accommodation during lab sessions and any other logistics will not be borne by IIT Madras. The program team will try and see if this is possible but there is no confirmation that accommodation will be provided."
+    },
+    {
+        "Question": "What type of Job will I get after doing this Foundation/Diploma/ Degree Level?",
+        "Answer": "Some of the major career options available to students taking this program may include the following job positions in industries such as Automotive, Semiconductor, Defence and so on:\nElectronic System Designer\nEmbedded System Developer\nElectronic Hardware Specialist\nSystem Testing Engineer"
+    },
+    {
+        "Question": "Can we apply for Diploma in ES alone rather than applying for the degree? Meaning, is there any lateral entry for the Diploma?",
+        "Answer": "No. There is no option to register for diploma alone. However, you have multiple exit options which allows you to exit with diploma"
+    },
+    {
+        "Question": "Will there be any projects also in BS in Electronic Systems program?",
+        "Answer": "For some courses there might be mini projects depending on the course."
+    },
+    {
+        "Question": "Why is there no 3 years exit with a BSC degree in this course similar to Data Science?",
+        "Answer": "In order acquire certain skills and knowledge required to be a graduate in the field of Electronic Systems, certain courses must be studied and it requires 4-years to study them. Hence we do not have 3 year exit."
+    },
+    {
+        "Question": "How are placements done in BS Electronic Systems?",
+        "Answer": "The IIT Madras BS programme (online BSc) does offer placement and internship support through its placement portal once you’re eligible, you must finish at least one diploma level in the programme before you can get placement support"
+    },
+    {
+        "Question": "Can I change program DS to ES and vice versa after qualifier?",
+        "Answer": "No, it is not possible.\nIf the student attempts the qualifier exam for Data Science and clears the qualifier exam, then it is not possible to shift from Data Science to Electronic Systems. \nLikewise, If the student attempt the qualifier exam for Electronic Systems and clears the qualifier exam, then it is not possible to shift from Electronic Systems to Data Science."
+    },
+    {
+        "Question": "Can I change program ES to AE and vice versa after MAY 2026 term qualifier?",
+        "Answer": "Yes, If you have cleared the May 2026 term qualifier and wishes to enroll to the foundation level in the same term then yes, you can change the program from ES to AE and vice versa."
+    }
+]

@@ -28,12 +28,17 @@ class SanitizeQueryTests(SimpleTestCase):
 class SynonymTests(SimpleTestCase):
     def test_matches_canonical(self):
         self.assertEqual(
-            business.find_synonym_match("what is the grading policy"),
+            business.find_synonym_match("what is the grading policy", "ds"),
             "grading formula score calculation GAA quiz end term OPPE weightage",
         )
 
     def test_no_match_returns_none(self):
-        self.assertIsNone(business.find_synonym_match("what colour is the sky"))
+        self.assertIsNone(business.find_synonym_match("what colour is the sky", "ds"))
+
+    def test_only_the_programmes_own_list_is_searched(self):
+        """A DS trigger must not expand an ES query (issue #179)."""
+        self.assertIsNotNone(business.find_synonym_match("pdsa grading", "ds"))
+        self.assertIsNone(business.find_synonym_match("pdsa grading", "es"))
 
 
 class RemoveStopWordsTests(SimpleTestCase):
@@ -53,9 +58,30 @@ class LanguageTests(SimpleTestCase):
         self.assertEqual(business.extract_language(None), "english")
 
     def test_cannot_answer_message_localized(self):
-        self.assertEqual(business.get_cannot_answer_message("hindi"), business.CANNOT_ANSWER_MESSAGES["hindi"])
-        self.assertEqual(business.get_cannot_answer_message("ta"), business.CANNOT_ANSWER_MESSAGES["english"])
-        self.assertEqual(business.get_cannot_answer_message(None), business.CANNOT_ANSWER_MESSAGES["english"])
+        # Compare against the first line of each template, which carries no contacts.
+        def first_line(text):
+            return text.splitlines()[0]
+
+        self.assertEqual(
+            first_line(business.get_cannot_answer_message("hindi")),
+            first_line(business.CANNOT_ANSWER_TEMPLATES["hindi"]),
+        )
+        for unknown in ("ta", None):
+            self.assertEqual(
+                first_line(business.get_cannot_answer_message(unknown)),
+                first_line(business.CANNOT_ANSWER_TEMPLATES["english"]),
+            )
+
+    def test_cannot_answer_message_uses_the_programs_own_contacts(self):
+        message = business.get_cannot_answer_message("english", "es")
+        self.assertIn("support-es@study.iitm.ac.in", message)
+        self.assertIn("+91-9711397993", message)
+        self.assertNotIn("support@study.iitm.ac.in", message)
+
+    def test_cannot_answer_message_defaults_to_ds_contacts(self):
+        message = business.get_cannot_answer_message("english")
+        self.assertIn("support@study.iitm.ac.in", message)
+        self.assertIn("7850999966", message)
 
     @mock.patch.dict(
         "os.environ",
@@ -69,11 +95,7 @@ class LanguageTests(SimpleTestCase):
             "https://example.test/project/blob/review/docs/program-contact-details.md",
             message,
         )
-        self.assertNotIn(business.DEFAULT_PROGRAM_CONTACT_DETAILS_URL, message)
-
-    def test_contact_info(self):
-        self.assertEqual(business.CONTACT_INFO["email"], "support@study.iitm.ac.in")
-        self.assertEqual(business.CONTACT_INFO["phone"], "7850999966")
+        self.assertNotIn(business.DEFAULT_GITHUB_BRANCH_BASE_URL, message)
 
     def test_supported_languages(self):
         self.assertEqual(business.SUPPORTED_LANGUAGES, ["english", "hindi", "tamil", "hinglish"])

@@ -3,6 +3,9 @@
 Supports both DEPLOYMENT_MODE=local (Weaviate does text2vec-ollama vectorization,
 query text passed to hybrid) and =gce (compute an Ollama embedding first, pass the
 vector to hybrid). GraphQL string built identically to the Worker (same escaping).
+
+Results are restricted to one programme's documents. Unlike FAQs there is no shared
+"common" pool here - src/ has a folder per programme and nothing outside them.
 """
 from __future__ import annotations
 
@@ -21,8 +24,12 @@ def _sanitize_graphql(query: str) -> str:
         .replace("\t", " ")
     )
 
-async def search_weaviate_async(client, query, limit):
-    """Search Weaviate asynchronously and return ``items`` plus ``error``."""
+async def search_weaviate_async(client, query, limit, program_id):
+    """Search one programme's documents in Weaviate; return ``items`` plus ``error``.
+
+    Example: search_weaviate_async(client, "fees", 2, "es") only ever returns
+    documents that were embedded from src/es/.
+    """
     mode = appconfig.deployment_mode()
     if mode not in ("local", "gce"):
         return {"items": [], "error": f"weaviate_config_error:unsupported_DEPLOYMENT_MODE_{mode}"}
@@ -30,6 +37,8 @@ async def search_weaviate_async(client, query, limit):
     if not url:
         return {"items": [], "error": "weaviate_config_error:missing_GCE_WEAVIATE_URL"}
     sanitized_query = _sanitize_graphql(query)
+    # program_id is whitelist-validated in the view, so it needs no escaping here.
+    program_filter = f'where: {{path:["program_id"] operator:Equal valueText:"{program_id}"}} '
     if mode == "gce":
         ollama_url = appconfig.gce_ollama_url()
         if not ollama_url:
@@ -47,14 +56,17 @@ async def search_weaviate_async(client, query, limit):
         graphql = (
             "{ Get { Document("
             f'hybrid: {{ query: "{sanitized_query}" vector: {vector} alpha: 0.5 }} '
+            f"{program_filter}"
             f"limit: {limit}) "
-            "{ filename filepath content file_size _additional { score } } } }"
+            "{ program_id filename filepath content file_size _additional { score } } } }"
         )
     else:
         graphql = (
             "{ Get { Document("
-            f'hybrid: {{ query: "{sanitized_query}" alpha: 0.5 }} limit: {limit}) '
-            "{ filename filepath content file_size _additional { score } } } }"
+            f'hybrid: {{ query: "{sanitized_query}" alpha: 0.5 }} '
+            f"{program_filter}"
+            f"limit: {limit}) "
+            "{ program_id filename filepath content file_size _additional { score } } } }"
         )
     try:
         with measure_duration("weaviate_graphql_search"):

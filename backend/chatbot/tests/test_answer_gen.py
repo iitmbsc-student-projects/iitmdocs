@@ -222,3 +222,28 @@ class CheckResponseTests(SimpleTestCase):
         )
         result = await answer_mod.check_response_async(object(), "resp", "ctx", [])
         self.assertEqual(result["tokens"], {"input": 6, "output": 1})
+
+
+class ProgramContactsTests(SimpleTestCase):
+    """A rejected answer must name the asking programme's support contacts."""
+
+    @mock.patch("chatbot.services.answer.chat_completion_async")
+    async def test_fact_check_failure_uses_the_programs_contacts(self, m_chat):
+        m_chat.side_effect = [
+            _FakeResp(payload=_chat("A hallucinated answer")),
+            _FakeResp(payload=_chat('{"approved":"NO","incorrect":["made up"]}')),
+            _FakeResp(payload=_chat('{"approved":"NO","incorrect":["made up"]}')),
+        ]
+        result = await answer_mod.generate_answer_async(
+            object(),
+            "q",
+            [{"filename": "f.md", "content": "c", "relevance": 0.9}],
+            [],
+            [],
+            "english",
+            "es",
+        )
+
+        self.assertFalse(result["fact_check_passed"])
+        self.assertIn("support-es@study.iitm.ac.in", result["final_answer"])
+        self.assertNotIn("us at support@study.iitm.ac.in", result["final_answer"])

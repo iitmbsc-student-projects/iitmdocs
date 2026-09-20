@@ -17,6 +17,8 @@ from ..business import (
     is_cannot_answer_response,
     split_raahat_content,
 )
+from programs import DEFAULT_PROGRAM_ID
+
 from ..prompts import (
     FACTCHECK_SYSTEM_PROMPT,
     build_answer_system_prompt,
@@ -162,6 +164,7 @@ async def generate_answer_async(
     db_faqs,
     history,
     language="english",
+    program_id=DEFAULT_PROGRAM_ID,
 ):
     """Generate and fact-check an answer without blocking an ASGI request."""
     relevant_docs = [d for d in (documents or []) if _relevance(d) > RELEVANCE_THRESHOLD]
@@ -176,7 +179,7 @@ async def generate_answer_async(
     context = "\n\n".join(part for part in [doc_context, faq_context, RAAHAT_INFO] if part)
     validated_history = _validate_history(history)
     messages = [
-        {"role": "system", "content": build_answer_system_prompt(language, _current_date())},
+        {"role": "system", "content": build_answer_system_prompt(language, _current_date(), program_id)},
         {"role": "assistant", "content": context},
         *validated_history,
         {"role": "user", "content": question},
@@ -264,7 +267,7 @@ async def generate_answer_async(
                 rejected_for_history = True
                 rejection_reason = "cannot_answer"
         else:
-            final_answer = get_cannot_answer_message(language)
+            final_answer = get_cannot_answer_message(language, program_id)
             final_answer += format_db_faq_suggestions(db_faqs, language)
             rejected_for_history = True
             rejection_reason = "fact_check_failed"

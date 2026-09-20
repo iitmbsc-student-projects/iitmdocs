@@ -68,13 +68,15 @@ async def retrieve_context_async(query, num_docs, document_search, faq_search):
             faq_search(query, 5),
         )
 
-async def answer_events_async(service_client, openai_client, question, num_docs, history, session_id, message_id, username):
-    """Run the complete answer flow with cancellable async service waits."""
+async def answer_events_async(service_client, openai_client, question, num_docs, history, session_id, message_id, username, program_id):
+    """Run the complete answer flow for one programme, with cancellable async waits."""
     start_time = time.monotonic()
     conversation_id = generate_uuid()
     log_ctx = {
         "session_id": session_id or "anonymous",
         "conversation_id": conversation_id,
+        # Logged so BigQuery/Looker can separate the four bots.
+        "program_id": program_id,
         "message_id": message_id or None,
         "username": username or None,
         "question": question,
@@ -107,7 +109,7 @@ async def answer_events_async(service_client, openai_client, question, num_docs,
 
     try:
         with duration_context(conversation_id):
-            rewrite = await rewrite_query_with_source_async(openai_client, question)
+            rewrite = await rewrite_query_with_source_async(openai_client, question, program_id)
         search_query = rewrite["query"]
         query_source = rewrite["source"]
         log_ctx["rewritten_query"] = search_query
@@ -120,9 +122,9 @@ async def answer_events_async(service_client, openai_client, question, num_docs,
             log_ctx["rejection_reason"] = "prompt_injection"
             log_ctx["detected_language"] = "english"
             log_ctx["fact_check_passed"] = False
-            reject_message = get_cannot_answer_message("english")
+            reject_message = get_cannot_answer_message("english", program_id=program_id)
             with duration_context(conversation_id):
-                faq_result = await faq.search_result_async(service_client, question, 5)
+                faq_result = await faq.search_result_async(service_client, question, 5, program_id)
             db_faqs = faq_result.get("items") or []
             log_ctx["db_faqs"] = [
                 {
@@ -144,10 +146,10 @@ async def answer_events_async(service_client, openai_client, question, num_docs,
         log_ctx["detected_language"] = detected_language
 
         async def document_search(query, count):
-            return await search_weaviate_async(service_client, query, count)
+            return await search_weaviate_async(service_client, query, count, program_id)
 
         async def faq_search(query, count):
-            return await faq.search_result_async(service_client, query, count)
+            return await faq.search_result_async(service_client, query, count, program_id)
 
         with duration_context(conversation_id):
             document_result, faq_result = await retrieve_context_async(
@@ -179,7 +181,7 @@ async def answer_events_async(service_client, openai_client, question, num_docs,
             log_severity = "CRITICAL"
 
         if not documents and not db_faqs:
-            message = get_cannot_answer_message(detected_language)
+            message = get_cannot_answer_message(detected_language, program_id=program_id)
             log_ctx["rejection_reason"] = "no_search_results"
             log_ctx["response"] = message
             log_ctx["error"] = "; ".join(search_issues) or "no_search_results"
@@ -199,6 +201,7 @@ async def answer_events_async(service_client, openai_client, question, num_docs,
                 db_faqs,
                 history,
                 detected_language,
+                program_id,
             )
         log_ctx["response"] = generated["final_answer"]
         log_ctx["fact_check_passed"] = generated["fact_check_passed"]
@@ -256,13 +259,14 @@ async def answer_events_async(service_client, openai_client, question, num_docs,
         log_ctx["latency_ms"] = _elapsed_ms(start_time)
         structured_log(log_severity, "conversation_turn", **log_ctx)
 
-async def direct_faq_events_async(faq_id, question, session_id, message_id, username):
+async def direct_faq_events_async(faq_id, question, session_id, message_id, username, program_id):
     """Run the direct-FAQ shortcut with the existing SSE and log contract."""
     start_time = time.monotonic()
     conversation_id = generate_uuid()
     log_ctx = {
         "session_id": session_id or "anonymous",
         "conversation_id": conversation_id,
+        "program_id": program_id,
         "message_id": message_id or None,
         "username": username or None,
         "question": question,
@@ -278,10 +282,10 @@ async def direct_faq_events_async(faq_id, question, session_id, message_id, user
         "error": None,
         "detected_language": "english",
     }
-    cannot_answer = get_cannot_answer_message("english")
+    cannot_answer = get_cannot_answer_message("english", program_id=program_id)
     try:
         with duration_context(conversation_id), measure_duration("pg_faq_direct_lookup"):
-            row = await faq.get_faq_async(faq_id)
+            row = await faq.get_faq_async(faq_id, program_id)
         if row is None:
             log_ctx["error"] = "PG FAQ lookup failed: 404"
             log_ctx["response"] = cannot_answer

@@ -82,6 +82,7 @@ async function submitFeedback(feedbackData) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       session_id: sessionId,
+      program_id: PROGRAM_ID,
       ...feedbackData,
     }),
   });
@@ -121,6 +122,8 @@ const marked = new Marked();
 const DEFAULT_GITHUB_BRANCH_BASE_URL =
   "https://github.com/iitmbsc-student-projects/iitmdocs/blob/main/";
 let githubBranchBaseUrl = DEFAULT_GITHUB_BRANCH_BASE_URL;
+let runtimePrograms = ["ds", "es", "mg", "ae"];
+let runtimeDefaultProgramId = "ds";
 
 try {
   const configResponse = await fetch("./github-config");
@@ -129,12 +132,27 @@ try {
     if (typeof runtimeConfig.githubBranchBaseUrl === "string") {
       githubBranchBaseUrl = runtimeConfig.githubBranchBaseUrl;
     }
+    if (Array.isArray(runtimeConfig.programs) && runtimeConfig.programs.length) {
+      runtimePrograms = runtimeConfig.programs;
+    }
+    if (typeof runtimeConfig.defaultProgramId === "string") {
+      runtimeDefaultProgramId = runtimeConfig.defaultProgramId;
+    }
   } else {
     console.warn("Runtime config response was not successful; using default URL.");
   }
 } catch (error) {
   console.error("Could not load runtime configuration; using default URL:", error);
 }
+
+// Which of the four programmes this chat window is for. chatbot.js puts it in the
+// iframe URL; opening /qa?program_id=es directly works the same way. The valid ids
+// come from the server (programs.py) so they are not repeated here, and anything
+// unrecognised falls back to the default programme rather than failing to load.
+const PROGRAM_ID = (() => {
+  const requested = (urlParams.get("program_id") || "").trim().toLowerCase();
+  return runtimePrograms.includes(requested) ? requested : runtimeDefaultProgramId;
+})();
 
 githubBranchBaseUrl = githubBranchBaseUrl.replace(/\/?$/, "/");
 const PROGRAM_CONTACT_DETAILS_URL = `${githubBranchBaseUrl}docs/program-contact-details.md`;
@@ -151,7 +169,7 @@ marked.use({
     }
   }
 });
-const HISTORY_KEY = "iitm-chatbot-history";
+const HISTORY_KEY = `iitm-chatbot-history-${PROGRAM_ID}`;
 
 /**
  * Post-processes HTML to make "Did you mean?" FAQ suggestions clickable.
@@ -518,7 +536,7 @@ async function askQuestion(e, faqId = null) {
     let fullContent = "";
     let otherData = {};
 
-    const requestBody = { q, ndocs: 2, history, session_id: sessionId, message_id: messageId, username: usernameInput.value || undefined };
+    const requestBody = { q, ndocs: 2, history, session_id: sessionId, message_id: messageId, program_id: PROGRAM_ID, username: usernameInput.value || undefined };
     if (faqId) {
       requestBody.faq_id = Number(faqId);
     }

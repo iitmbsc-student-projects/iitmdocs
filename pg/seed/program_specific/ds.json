@@ -1,0 +1,22 @@
+[
+    {
+        "Question": "What about Gen AI theory and project?",
+        "Answer": "Gen AI theory  refers to the conceptual foundations of generative artificial intelligence, the ideas and models that make GenAI work. These include:\nWhat Generative AI is and how it differs from other AI/ML, Model Architectures, Fundamentals of Learning, Ethics & Responsible AI\n\nTheory lessons are usually delivered via lectures, readings, and guided discussions in a course. \n\nGen AI Projects is Hands-On Practice, After learning theory, good GenAI courses pair it with practical projects so you can apply what you’ve learned. Typical Gen AI projects include: Build & fine-tune models (e.g., LLMs using frameworks like Hugging Face) ,Create AI-powered tools, Deploy real systems with user interfaces (e.g., using Streamlit or Flask/REST APIs), Capstone Projects.\n\n# Category name: DIFF ANS"
+    },
+    {
+        "Question": "Can I change program DS to ES and vice versa after qualifier?",
+        "Answer": "No, it is not possible.\nIf the student attempts the qualifier exam for Data Science and clears the qualifier exam, then it is not possible to shift from Data Science to Electronic Systems. \nLikewise, If the student attempt the qualifier exam for Electronic Systems and clears the qualifier exam, then it is not possible to shift from Electronic Systems to Data Science."
+    },
+    {
+        "Question": "Can I change program DS to MG and vice versa after MAY 2026 term qualifier?",
+        "Answer": "Yes, If you have cleared the May 2026 term qualifier and wishes to enroll to the foundation level in the same term then yes, you can change the program from DS to MG and vice versa."
+    },
+    {
+        "Question": "Can I switch or transfer from BS Data Science to BS Aeronautics & Space Technology?",
+        "Answer": "If you are already in BS in Data Science and Applications, you need to exit from it, inform us of the exit, apply to the BS in Aeronautics qualifier-pass it and start the program. The qualifier exams and first 4 courses are different for both and hence you cannot do a switch."
+    },
+    {
+        "Question": "If I discontinue BS Data Science, can I apply for Aeronautics?",
+        "Answer": "Yes. You may discontinue and apply as a new applicant. We will float a form. Please fill the form so that we may close your DS email id and profile. If we find your profile in both programs without exiting, we will be rejecting the qualifier application."
+    }
+]

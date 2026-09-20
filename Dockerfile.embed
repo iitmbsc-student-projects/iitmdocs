@@ -5,8 +5,9 @@ WORKDIR /app
 # Install uv for dependency management
 RUN pip install --no-cache-dir uv
 
-# Copy the embed script and source files
+# Copy the embed script, the shared programme registry, and source files
 COPY embed.py ./
+COPY programs.py ./
 COPY src ./src
 
 # Create a requirements file for the dependencies

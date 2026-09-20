@@ -1,0 +1,90 @@
+[
+    {
+        "Question": "Can I pursue BS Aeronautics & Space Technology along with BS Data Science / BS Electronic Systems from IIT Madras?",
+        "Answer": "No. Simultaneous enrollment in two IIT Madras BS degree programs is not permitted. If you are already in BS in Data Science and Applications, you need to exit from it, inform us, apply to the BS in Aeronautics qualifier-pass it and start the program.\nIf you are a student of the BS in Electronic Systems, you still need to choose if you want to continue to pursue this or change to the Aeronautics and Space Technology program, in which case we have to see how many courses you have completed and how the transition will be."
+    },
+    {
+        "Question": "Is this a transfer from Data Science to Aeronautics?",
+        "Answer": "No. This is a completely separate program with a separate admission process."
+    },
+    {
+        "Question": "Can Commerce / Biology background students apply?",
+        "Answer": "Only if they complete Physics and Mathematics at Class 12 level (including via NIOS)."
+    },
+    {
+        "Question": "Are certificates issued by the National Institute of Open Schooling (NIOS) accepted?",
+        "Answer": "Yes. Digital certificates are accepted initially; final verification may require originals later."
+    },
+    {
+        "Question": "Are lab sessions compulsory? Where are labs conducted? Can labs be done at other IITs or remotely?",
+        "Answer": "Yes. All lab components are mandatory. There is one lab course in the Diploma Level and one Lab course in the Degree Level that you have to do at IITM campus only (other IITs not allowed). Excepting this, all other courses can be done remotely from wherever you are."
+    },
+    {
+        "Question": "What if I cannot afford travel to campus for labs?",
+        "Answer": "Labs will be scheduled on multiple dates. you will have to choose one of the dates and definitely travel to IITM to complete it. there is no alternate option for this."
+    },
+    {
+        "Question": "Will hostel accommodation be provided during labs?",
+        "Answer": "Hostel accommodation may be provided subject to availability. There is no guarantee that hostels will be provided. But currently for labs of the ES programs in the last 2 years,w e ahve been able to get hostel rooms for students coming to campus for labs."
+    },
+    {
+        "Question": "How many days will lab sessions last?",
+        "Answer": "Each lab is expected to be about 3-4 days duration. Exact details will be provided as the program progresses."
+    },
+    {
+        "Question": "Can I study fully offline on campus like a regular B.Tech student?",
+        "Answer": "This is a non-campus program in the foundation and diploma levels. You will not have access to the campus also during this time, unless there is a reason to visit the campus like the lab course or some event.\nIn the degree level, a select set of students would be able to pursue the courses on campus, if they satisfy the criteria for the same. Others will still pursue the dual degree courses online even in the degree level."
+    },
+    {
+        "Question": "How close is the curriculum to B.Tech Aerospace?",
+        "Answer": "The curriculum is very similar to how the BTech in Aerospace engineering is structured except that here, we will focus lot more on skills and applications so that you are industry ready even after the Diploma levels."
+    },
+    {
+        "Question": "Will the curriculum evolve and add more labs?",
+        "Answer": "Curriculum may evolve over time based on academic review, feedback from industry and students."
+    },
+    {
+        "Question": "What are the career prospects?",
+        "Answer": "Careers in Aerodynamics / Flight Performance Engineer\n\n\nAerospace / Space Systems Engineer\n\n\nPropulsion & Launch Systems Engineer\n\n\nUAV / Drone Design Engineer\n\n\nSimulation & Analysis Engineer\n\n\nR&D Engineer / Research Associate"
+    },
+    {
+        "Question": "Is placement guaranteed?",
+        "Answer": "No. There is no guarantee given for placing you .The placement team will provide guidance and support during the interview process; however, selection depends on individual performance in interviews and assessments."
+    },
+    {
+        "Question": "Which companies may hire?",
+        "Answer": "Indian Space & Defence: ISRO, DRDO, HAL\n\n\nGlobal Aerospace: Boeing, Airbus, Lockheed Martin\n\n\nSpace Companies: SpaceX, Blue Origin, Northrop Grumman\n\n\nIndian Startups: Skyroot Aerospace, Agnikul, Pixxel\n\n\nAllied Tech: UAV, Robotics, Simulation & Mobility Companies"
+    },
+    {
+        "Question": "Will I be eligible for ISRO/DRDO/HAL/NAL?",
+        "Answer": "This is a valid degree from IIT Madras.\nIf the organisation mandates that they require the degree to be a campus based one for 4 years, this degree wont be valid.\nSo please check the eligibility and criteria set by the respective organization for hiring."
+    },
+    {
+        "Question": "Can I write GATE after this degree?",
+        "Answer": "Yes, you will be eligible to appear for GATE.\n\nThe program covers a significant portion of the GATE syllabus. For detailed information on the curriculum and course structure, please visit:\nhttps://study.iitm.ac.in/ae"
+    },
+    {
+        "Question": "Does the program support research exposure?",
+        "Answer": "Yes, the BS degree program provides multiple avenues for research exposure and project-based learning:\n\nCapstone & Hands-On Projects:\nAt the degree and diploma levels, students engage in real design and analysis projects (for example, aircraft/space vehicle design using tools like FEA) that involve research-oriented problem solving and technical synthesis of concepts learned in coursework.\n\nLab and In-Person Sessions:\nWhile the core coursework is delivered online, lab courses and in-person project work are conducted at the IIT Madras campus on scheduled dates. These labs give exposure to experimental techniques and allow you to apply theoretical knowledge in practical settings.\n\nInternships & Research-Related Activities:\nMany students take internships or research assignments during or after their diploma/degree stage. Students in IITM’s BS programs are often listed as research interns and may work on faculty-mentored research problems or contribute to projects outside regular coursework."
+    },
+    {
+        "Question": "Can application status as current IITM BS student affect eligibility?",
+        "Answer": "You cannot do both the programs simultaneously. You have to officially withdraw from the DS program before enrolling. If you are pursuing the ES program also, you have to exert your option to switch to this explicitly."
+    },
+    {
+        "Question": "Can experienced diploma / industry professionals get fast-track entry?",
+        "Answer": "Fast-track or direct diploma entry is NOT currently available."
+    },
+    {
+        "Question": "Can I change program ES to AE and vice versa after MAY 2026 term qualifier?",
+        "Answer": "Yes, If you have cleared the May 2026 term qualifier and wishes to enroll to the foundation level in the same term then yes, you can change the program from ES to AE and vice versa."
+    },
+    {
+        "Question": "Can I switch or transfer from BS Data Science to BS Aeronautics & Space Technology?",
+        "Answer": "If you are already in BS in Data Science and Applications, you need to exit from it, inform us of the exit, apply to the BS in Aeronautics qualifier-pass it and start the program. The qualifier exams and first 4 courses are different for both and hence you cannot do a switch."
+    },
+    {
+        "Question": "If I discontinue BS Data Science, can I apply for Aeronautics?",
+        "Answer": "Yes. You may discontinue and apply as a new applicant. We will float a form. Please fill the form so that we may close your DS email id and profile. If we find your profile in both programs without exiting, we will be rejecting the qualifier application."
+    }
+]

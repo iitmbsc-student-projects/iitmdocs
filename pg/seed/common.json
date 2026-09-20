@@ -1,0 +1,949 @@
+[   {
+        "Question": "What is the eligiblity to write the End Term Exam for a course?",
+        "Answer": "To be eligible to write the End Term Exam for a course in the foundation level, it is mandatory for the learner to have (i) obtained in the course an Average Assignment Score >= 40/100 AND (ii) appeared for at least one out of the 2 in-person Quizzes. \n\nLearners who are not eligible to write a specific course's End Term Exam will not be issued hall ticket for the same. They will have to repeat the entire course including assignments and quizzes in a later term."
+    },
+    {
+        "Question": "Can international students write the qualifier exam?",
+        "Answer": "Yes, international students can write the Qualifier Exam."
+    },
+    {
+        "Question": "Why is the qualifier exam required to join the degree program?",
+        "Answer": "The Qualifier Exam is required for regular entry applicants to assess their readiness for the program. Applicants must complete a 4-week qualifier process, including assignments and an exam, to be eligible for the Foundation Level."
+    },
+    {
+        "Question": "Is the qualifier exam the same for all programs?",
+        "Answer": "BS in Data Science and Applications (DS) includes:\n\nEnglish 1\nMaths-1\nStatistics-1\nComputational Thinking\n\nBS in Electronic Systems (ES) includes:\n\n English I, Math for Electronics I, Electronic Systems Thinking and Circuits, and Introduction to C Programming\n\nSimilarly, the qualifier examinations for other programs—such as BS in Aeronautics and Space Technology (AE) and BS in Management and Data Science (MG)—include program-specific courses tailored to their respective curricula."
+    },
+    {
+        "Question": "Is clearing the qualifier mandatory to register for Foundation courses?",
+        "Answer": "Yes, clearing the Qualifier Exam is mandatory to register for Foundation courses for regular entry applicants. Only those who successfully complete the Qualifier process will be eligible to join the Foundation Level of the IIT Madras BS programme."
+    },
+    {
+        "Question": "Can I join the program without taking the qualifier exam?",
+        "Answer": "No, regular entry applicants must take and clear the Qualifier Exam to join the program. However, candidates eligible through JEE-based entry may be allowed to directly join the Foundation Level without taking the Qualifier Exam."
+    },
+    {
+        "Question": "Is the qualifier a competitive exam or only qualifying?",
+        "Answer": "The Qualifier Exam is a qualifying exam, not a competitive one. Candidates must meet minimum subject-wise and overall score thresholds to pass and become eligible for the Foundation Level."
+    },
+    {
+        "Question": "Does clearing the qualifier guarantee admission to the program?",
+        "Answer": "Yes, clearing the Qualifier Exam makes you eligible to register for the Foundation Level, provided all required documents are verified successfully."
+    },
+    {
+        "Question": "Is there a cutoff score for the qualifier exam?",
+        "Answer": "Yes, there is a cutoff, and it is applied both per subject and on your overall average.\nYou must score at least around 40% per subject and 50% overall if you are in the general category (with slightly lower thresholds for OBC‑NCL/EWS and SC/ST/PwD categories), and only if you clear both the subject‑wise and overall cutoff are you considered to have passed the qualifier"
+    },
+    {
+        "Question": "Who conducts the qualifier exam?",
+        "Answer": "The qualifier exam is conducted by the IIT Madras BS program administration. They are responsible for organizing the exam, including scheduling, providing the exam content, and managing the evaluation process."
+    },
+    {
+        "Question": "Do working professionals need special approval for qualifier?",
+        "Answer": "No, working professionals do not require special approval. As long as they meet the basic eligibility criteria (such as completing Class 12 or equivalent), they can apply for the Qualifier Exam."
+    },
+    {
+        "Question": "Can I attempt the qualifier while pursuing another degree?",
+        "Answer": "Yes, you can attempt the Qualifier Exam while pursuing another degree. As long as you meet the basic eligibility criteria (having passed Class 12 or an equivalent examination), you are eligible to apply for the Qualifier Exam."
+    },
+    {
+        "Question": "Are assignments compulsory to appear for the qualifier?",
+        "Answer": "Yes, assignements are compulsory to appear for the qualifier.Eligiblity for qulafier \nAny assignment that is not attempted will be marked as 0.\n● If the average of the first 2 weeks’ assignment scores is >= 40/100 (or as per the cutoff\nfor each category of students) in each of the 4 subjects, the students will be eligible to\nwrite the qualifier exam in the first attempt within the term.\n● For those who do not qualify after the week 2 assignments, the average of the best 2 out\nof the first 3 weeks’ assignment scores will be considered. If this score is >= 40/100 (or\nas per the cutoff for each category of students) in each of the 4 subjects, the students\nwill become eligible to write the qualifier exam in the second attempt within the term.\n● Reattempts within the term will be given suitably.\nOnly those who get the minimum required average assignment scores in all four courses\n(as given below) will be allowed to appear for the Qualifier Exam.\n\nMinimum Average Assignment Score\nrequired in each course\n\nGeneral Learner 40%\nSC / ST / PwD with 40% disability 30%\nPwD with 40% disability & SC / ST 30%\nOBC-NCL / EWS 35%\nNote: Relaxations in pass criteria indicated for various categories of learners is applicable ONLY\nfor the qualifier process. There will be no relaxations in terms of grades / pass criteria once\nregistered into the program."
+    },
+    {
+        "Question": "Is assignment eligibility different for reserved categories?",
+        "Answer": "Yes, \nMinimum Average Assignment Score\nrequired in each course\n\nGeneral Learner 40%\nSC / ST / PwD with 40% disability 30%\nPwD with 40% disability & SC / ST 30%\nOBC-NCL / EWS 35%\nNote: Relaxations in pass criteria indicated for various categories of learners is applicable ONLY\nfor the qualifier process. There will be no relaxations in terms of grades / pass criteria once\nregistered into the program."
+    },
+    {
+        "Question": "What happens if I miss qualifier assignments?",
+        "Answer": "If you miss assignments, they will be marked as zero. Failing to meet the minimum required average assignment score will make you ineligible to appear for the Qualifier Exam."
+    },
+    {
+        "Question": "Can I improve assignment scores for qualifier eligibility?",
+        "Answer": "No, assignment scores cannot be improved within the same qualifier attempt. Eligibility is determined based on the assignment scores obtained during the qualifier period."
+    },
+    {
+        "Question": "Are qualifier assignments graded or pass/fail?",
+        "Answer": "The qualifier assignments are graded. Each week during the 4-week Qualifier process, candidates must submit graded assignments for each course. These assignments contribute to the overall evaluation and are part of the requirements to qualify for the exam."
+    },
+    {
+        "Question": "Are assignments proctored during qualifier preparation?",
+        "Answer": "Weekly assignments are not proctored and can be completed from home. However, if you meet the assignment score eligibility, the final Qualifier Exam is strictly proctored and conducted in person at an exam center."
+    },
+    {
+        "Question": "Where can I check my assignment eligibility status?",
+        "Answer": "The eligibility status and other relevant information regarding your assignments and qualifier exam will be displayed within your account on the portal."
+    },
+    {
+        "Question": "Is the qualifier exam online or offline?",
+        "Answer": "The Qualifier Exam is conducted offline at exam centers for students in India. For students outside India, it may be conducted as a remote proctored exam."
+    },
+    {
+        "Question": "Where is the qualifier exam conducted?",
+        "Answer": "The Qualifier Exam is conducted at designated exam centers for students in India. For students outside India, it may be conducted online with remote proctoring depending on availability."
+    },
+    {
+        "Question": "How long is the qualifier exam duration?",
+        "Answer": "The qualifier exam is 4 hours (240 minutes)."
+    },
+    {
+        "Question": "Is there negative marking in the qualifier exam?",
+        "Answer": "No, there is no negative marking for the qualifier exam."
+    },
+    {
+        "Question": "Can I carry a calculator to the qualifier exam?",
+        "Answer": "A virtual calculator will be provided during the exam. You are not required to carry a physical calculator. Students are advised to become familiar with the virtual calculator in their course portals, as a similar virtual calculator will be used during qualifiers also."
+    },
+    {
+        "Question": "Is the qualifier exam open book or closed book?",
+        "Answer": "The IIT Madras BS qualifier exam is closed book, as it is an in‑person, proctored, invigilated exam similar to the term quizzes and end‑term exams"
+    },
+    {
+        "Question": "Are all subjects tested on the same day?",
+        "Answer": "Yes, all subjects in the Qualifier Exam are conducted on the same day."
+    },
+    {
+        "Question": "Will there be separate papers for each subject?",
+        "Answer": "The Qualifier Exam consists of a single question paper divided into sections for each subject. Students can attempt questions from the subjects they are enrolled in, and the order of attempting questions is flexible."
+    },
+    {
+        "Question": "How are qualifier exam cities allocated?",
+        "Answer": "Exam cities are allocated based on the preferences selected during the application process and the availability of exam centers. Candidates can check whether their preferred city is available for the Qualifier Exam using the following link: https://docs.google.com/spreadsheets/d/e/2PACX-1vRFM0LWNJWSELYXxXFdpHxu0ghiCDOE6uHneSWH-eIIg-4X91gSyMAy0m05RJDiklK-G0KJ0GasGywp/pubhtml?gid=0&single=true"
+    },
+    {
+        "Question": "Can I choose my qualifier exam city?",
+        "Answer": "Yes, you can select the qualifier exam city. The exam city selection option is available during your application process."
+    },
+    {
+        "Question": "Can I change my qualifier exam city after selection?",
+        "Answer": "Yes, you can change your exam city during the designated edit window. The dates for this window will be communicated via email, and changes can be made through the application portal."
+    },
+    {
+        "Question": "Are exam centers available in all states?",
+        "Answer": "Exam centers are available in many cities across India, but not necessarily in every state. You should refer to the official list of exam cities to check availability near your location."
+    },
+    {
+        "Question": "What documents are required at the exam center?",
+        "Answer": "Students must carry an original valid photo ID (such as Aadhaar card, PAN card, passport, or college ID) along with a printed copy of the hall ticket to the exam center."
+    },
+    {
+        "Question": "Is Aadhaar mandatory for qualifier exam entry?",
+        "Answer": "No, Aadhaar is not mandatory. Students can carry any valid original photo ID (such as Aadhaar card, PAN card, passport, or college ID) along with the hall ticket."
+    },
+    {
+        "Question": "What happens if I forget my hall ticket?",
+        "Answer": "You must carry a printed hall ticket to the exam center. Without it, you may not be allowed to appear for the Qualifier Exam."
+    },
+    {
+        "Question": "Can I request special accommodation for the qualifier exam?",
+        "Answer": "Yes, students requiring special accommodation (such as for disabilities) can request it by emailing [support@study.iitm.ac.in](mailto:support@study.iitm.ac.in) at least two weeks before the exam with valid supporting documents."
+    },
+    {
+        "Question": "Is a scribe allowed for qualifier exams?",
+        "Answer": "Yes, students who require a scribe can request this support by contacting the program team in advance. The team will coordinate the necessary arrangements based on the request and provided documentation."
+    },
+    {
+        "Question": "When are qualifier results announced?",
+        "Answer": "Qualifier results are typically announced a few weeks after the exam. For exact dates for each term, please refer to the official admissions page on the respective program's webiste."
+    },
+    {
+        "Question": "Where can I check my qualifier result?",
+        "Answer": "The qualifier exam results will be updated on the student dashboard. You will be notified to your registered student mail id when the results are announced."
+    },
+    {
+        "Question": "What does “qualifier cleared” status mean?",
+        "Answer": "“Qualifier cleared” means that you have successfully passed the Qualifier Exam and are eligible to register for the Foundation Level courses."
+    },
+    {
+        "Question": "How long is the qualifier result valid? How much can I delay joining after qualifying? Does qualifier validity expire automatically?",
+        "Answer": "The Qualifier Exam clearance is valid for 3 terms (approximately 1 year) immediately after passing the Qualifier Exam. You must register for the program within this validity period. If you do not register within this time, the qualifier results become invalid/expired,  and the learner will have to go through the entire qualifier process again, including the 1 month of weekly assignments and retaking the qualifier exam if they wish to join the program.\n\nFor students currently in Class 11, you may apply and complete the Qualifier process. However, you will not be allowed to register for program courses until you clear Class 12 (or equivalent).\n\nFor students who take the Qualifier Exam while in Class 11, the Qualifier Exam result is valid for 6 terms (approximately 2 years) from the date of passing."
+    },
+    {
+        "Question": "Can I use the same qualifier result for future terms?",
+        "Answer": "No, you cannot use the same qualifier result for future terms. The qualifier marks are valid for 3 terms following the exam date. After this period, if you have not registered for the Foundation level, the score will expire, and you will need to go through the entire qualifier process again, including retaking the qualifier exam."
+    },
+    {
+        "Question": "Will I receive a certificate for clearing the qualifier?",
+        "Answer": "Students who clear the Qualifier Exam receive an admission letter indicating their eligibility and the validity period of their qualifier score."
+    },
+    {
+        "Question": "What happens if I fail the qualifier exam?",
+        "Answer": "If you fail the qualifier exam, you have the following options:\n\nReattempt in the Same Term: You can apply for a reattempt within the same term if you meet the eligibility criteria. This applies if you were absent for the exam or if you failed the first attempt.\n\nSubsequent Terms: If you did not achieve the minimum assignment scores and did not become eligible for the qualifier exam, there are no limits on the number of times you can attempt the qualifier process in subsequent terms. You will need to pay the full fees applicable for your category and redo the 4 weeks of course work and weekly graded assignments to become eligible again.\n\nFresh Application: If you attempt the qualifier process again in a subsequent term, it will be considered a fresh application, and you must meet all requirements to qualify for the exam."
+    },
+    {
+        "Question": "Can I reattempt the qualifier exam?",
+        "Answer": "Yes, you can reattempt the qualifier exam under certain conditions:\n\nWithin the Same Term: If you were absent for the qualifier exam or if you failed the first attempt, you can apply for a reattempt within the same term. You do not have to repeat the assignments as you have already become eligible.\n\nSubsequent Terms: If you did not achieve the minimum assignment scores and did not become eligible for the qualifier exam, you can attempt the qualifier process again in subsequent terms. There are no limits on the number of times you can attempt the qualifier process, but you will need to pay the full fees applicable for your category and redo the 4 weeks of course work and weekly graded assignments to become eligible again."
+    },
+    {
+        "Question": "Is there a limit on the number of qualifier attempts?",
+        "Answer": "No, there is no limit on the number of times you can attempt the qualifier process."
+    },
+    {
+        "Question": "Do I need to redo assignments for reattempt?",
+        "Answer": "No. You do not need to redo the assignments, your previously earned assignment scores will be carried forward for the reattempt."
+    },
+    {
+        "Question": "Can I improve only one subject in reattempt?",
+        "Answer": "If you fail the qualifier due to a specific subject, you may be allowed to reattempt only that subject, depending on the reattempt rules for that term. However, improvement after passing is not permitted."
+    },
+    {
+        "Question": "Is reattempt difficulty level the same?",
+        "Answer": "Yes, the difficulty level and syllabus for reattempts remain the same as the original qualifier exam."
+    },
+    {
+        "Question": "Does failing qualifier affect future admissions?",
+        "Answer": "No, failing the qualifier does not affect future admissions. You can reapply and attempt the qualifier again in subsequent terms."
+    },
+    {
+        "Question": "What should I do after clearing the qualifier?",
+        "Answer": "After clearing the qualifier, check your dashboard for results (usually within 1-2 weeks), then complete course registration (select up to 4 Foundation courses based on your score, upload Class 12 docs if needed, choose exam cities, pay fees ~₹6,000/course)"
+    },
+    {
+        "Question": "How soon can I register for Foundation courses?",
+        "Answer": "You can register for Foundation courses as soon as you receive your admission letter after successfully completing the qualifier exam. If you are a JEE-based entry candidate and your proof of eligibility is valid, you can register for the Foundation courses immediately after verification.\n\nFor regular entry candidates, registration for Foundation courses will be available after passing the qualifier exam."
+    },
+    {
+        "Question": "Is course registration automatic after qualifier?",
+        "Answer": "No, course registration is not automatic after clearing the qualifier—you must log in to the portal, access the registration form, select courses (up to 4 based on your score), upload proof of Class 12 completion, and pay the course fees."
+    },
+    {
+        "Question": "Can I delay course registration after clearing qualifier?",
+        "Answer": "Yes, but to a limited period. \nThe qualifier marks will be valid for the 3 terms that come subsequent to the qualifier exam date for the learner to register to the Foundation level. This score will be invalid after this period and the learner will have to go through the entire qualifier process (the 1 month of weekly assignments) and retake the qualifier exam, if they wish to join the programme.\n\nFor students in std XII who take the qualifier exam, the validity is for 3 terms from when they pass std XII."
+    },
+    {
+        "Question": "Will I lose my seat if I delay registration?",
+        "Answer": "No, you will not lose your qualifier status (\"seat\") if you delay registration—the result is valid for 3 terms (about 1 year), allowing you to register later without redoing the exam."
+    },
+    {
+        "Question": "Is qualifier easier or harder than end-term exams?",
+        "Answer": "Students and IITM faculty generally consider the qualifier to be moderately difficult but easier than the regular term (quiz + end‑term) exams, as long as you stay consistent with lectures and assignments"
+    },
+    {
+        "Question": "How much time should I prepare for the qualifier?",
+        "Answer": "The qualifier spans just 4 weeks of coursework (about 10 hours/week expected engagement per course), so dedicate 4-7 hours daily consistently to lectures, assignments, and practice across the 4 subjects to clear it comfortably."
+    },
+    {
+        "Question": "Is coaching required to clear the qualifier?",
+        "Answer": "No, coaching is not required to clear the qualifier—IITM explicitly states you can self‑study the 4 weeks' content without going to any coaching center.\n​Most students clear it through consistent self‑study of lectures, assignments, and PYQs."
+    },
+    {
+        "Question": "Can I skip a subject in the qualifier exam?",
+        "Answer": "No, students cannot skip a subject in the qualifier exam as it is mandatory to attempt all the four subjects for the qualifier examinatin. To pass the exam, students must meet the minimum required percentage in each subject as well as score the necessary average score across all subjects based on their category"
+    },
+    {
+        "Question": "What is the most common reason students fail qualifier?",
+        "Answer": "The following may be few of the common reasons because of which the students do not clear the qualifier exam:\nNot meeting individual and overall cut-off, as a minimum eligibility score in each subject based on the category is mandatory.\nInadequate preparation during the 4-week study period may impact exam performance.\nAbsence from the exam and others.\n\nStudents can improve their chances of clearing the qualifier by thoroughly understanding the course content and completing all assignments during the preparation period."
+    },
+    {
+        "Question": "Will I get recorded lectures?",
+        "Answer": "Yes. All video lectures are pre-recorded and accessible anytime. All videos are on youtube for all the courses. You can go through them even before joining the program to see if they are accessible to you."
+    },
+    {
+        "Question": "I am already pursuing another degree. Can I apply?",
+        "Answer": "Yes. You may pursue this program alongside another degree or job."
+    },
+    {
+        "Question": "If I am unable to write the qualifier exam, will I get a refund?",
+        "Answer": "No, the application fee and reattempt fee for the qualifier exam are non-refundable under any circumstances."
+    },
+    {
+        "Question": "Can I enter as a qualifier applicant and then shift to a JEE based entrant?",
+        "Answer": "No, once you apply through the qualifier route, you cannot switch to JEE-based entry for that term."
+    },
+    {
+        "Question": "Does the degree offer a hostel facility ?",
+        "Answer": "No, since this is an online program, hostel facilities are not provided."
+    },
+    {
+        "Question": "Can a student access to the central library ?",
+        "Answer": "No, students in the online BS program do not have access to campus facilities such as the central library, hostel, sports facilities, or clinic."
+    },
+    {
+        "Question": "I am in Class 12. Am I eligible to apply for the qualifier?",
+        "Answer": "Yes, as a Class 12 student, you are eligible to apply for the Qualifier Exam for the IIT Madras BS Degree programme.\n\nKey points:\n\nYou must have studied Mathematics and English in Class 10 in order to apply for DS and MG program. \nYou must have studied Mathematics and Physics in Class 12 in order to apply for ES and AE program\n\nYou can apply for the Qualifier irrespective of your stream, group, or board.\n\nIf you pass the Qualifier Exam, you can join the programme after completing Class 12.\n\nThe Qualifier score remains valid as per the admission rules mentioned on the website.\n\nWe strongly recommend checking the official website for the latest information on:"
+    },
+    {
+        "Question": "When is the qualifier exam and how does it work?",
+        "Answer": "The Qualifier Exam dates are announced on the official website for each term. After applying, you complete 4 weeks of coursework and assignments, followed by the exam. Clearing the exam allows you to register for Foundation Level courses."
+    },
+    {
+        "Question": "What is paradox event?",
+        "Answer": "Paradox is an annual student festival organized for learners in the IIT Madras BS programs, typically held on campus. For more details, visit: [https://paradox-showcase.web.app/](https://paradox-showcase.web.app/)"
+    },
+    {
+        "Question": "I am an international student. Can I apply for this degree?",
+        "Answer": "Yes, the program is open to learners worldwide. International students can enroll and complete the degree remotely."
+    },
+    {
+        "Question": "Are the exams conducted online or offline?",
+        "Answer": "Exams are typically conducted in person at designated centers within India. For students outside India, exams may be conducted online with remote proctoring depending on availability."
+    },
+    {
+        "Question": "I want to come to IITM campus for exams",
+        "Answer": "Exams are conducted at designated exam centers, not on the IIT Madras campus. Students are required to appear at their assigned exam centers."
+    },
+    {
+        "Question": "As an international student, can I avail fee waivers?",
+        "Answer": "Fee waivers based on categories such as SC/ST/OBC/EWS are generally applicable to Indian students. International students are typically not eligible for these waivers."
+    },
+    {
+        "Question": "How long is each term?",
+        "Answer": "In the IIT Madras BS program, each term typically spans 16–17 weeks, including 12 weeks of coursework, 1 week for end-term preparation, and a 3–4 week term break."
+    },
+    {
+        "Question": "Will I get a student ID card after passing the qualifier?",
+        "Answer": "You will receive a student ID after successfully registering for the Foundation Level, not immediately after clearing the qualifier."
+    },
+    {
+        "Question": "Will exams for international students follow their local time zone?",
+        "Answer": "No, exams for international students are conducted based on Indian Standard Time (IST), even if taken remotely."
+    },
+    {
+        "Question": "Are classes conducted daily? Are they online or offline?",
+        "Answer": "Classes are delivered through pre-recorded online lectures released weekly. There is no requirement for daily live attendance."
+    },
+    {
+        "Question": "Is the degree awarded by IIT Madras valid worldwide?",
+        "Answer": "Yes, the degree is awarded by IIT Madras and is recognized both in India and internationally for employment and higher studies."
+    },
+    {
+        "Question": "Can I write the exam from home and Are exam timings flexible?",
+        "Answer": "Exams are not flexible in timing and must be taken as scheduled. Students in India must appear at designated exam centers, while international students may take exams remotely depending on availability."
+    },
+    {
+        "Question": "Can I come to campus to make the payment?",
+        "Answer": "No, all payments must be made online through the application portal. There is no option to make payments in person on campus."
+    },
+    {
+        "Question": "What if I don't have money to buy laptop?",
+        "Answer": "The program does not provide laptops. Students are expected to have access to a laptop or desktop with internet connectivity to participate in the courses."
+    },
+    {
+        "Question": "Will IITM provide laptop for scholarship students?",
+        "Answer": "IIT Madras BS programme does not provide laptops for students — you are expected to have your own laptop or desktop to study."
+    },
+    {
+        "Question": "What is VPN service? How will it help?",
+        "Answer": "You cannot get automatic VPN access from IIT Madras."
+    },
+    {
+        "Question": "Can I come directly to IITM BS office and submit application?",
+        "Answer": "No, applications must be submitted online through the official portal. In-person submission at the IIT Madras office is not allowed."
+    },
+    {
+        "Question": "Is income certificate in father's name accepted?",
+        "Answer": "Yes, an income certificate in the father’s name is accepted if he is the earning member, provided the certificate is valid and recent."
+    },
+    {
+        "Question": "How can I become a topper in the BS program?",
+        "Answer": "To be among the toppers (students with the highest CGPA, academic distinction, etc.) in the BS Degree you must consistently perform well across the programme’s exams and assignments because the programme recognises and awards top performers like this:\n Highest Scores — students with the highest CGPA at each level\n Certificates of Academic Distinction — CGPA > 9.5\n Certificates of Merit — CGPA > 9.0\nThese recognitions are announced and awarded, for example, at the annual Paradox student fest :-https://study.iitm.ac.in/student-achievements/toppers"
+    },
+    {
+        "Question": "Can I pay the fee in cheque?",
+        "Answer": "No, payments cannot be made by cheque. All fees must be paid online through the available payment modes."
+    },
+    {
+        "Question": "Can I make the payment in installments?",
+        "Answer": "No, the fee for the qualifier application cannot be paid in installments or EMI based. \n\nThe fee details can be checked in the respective program website under application process heading."
+    },
+    {
+        "Question": "External scholarships available for BS students?",
+        "Answer": "No, external scholarships for the BS programme are not regularly provided as a standard benefit."
+    },
+    {
+        "Question": "When will I get student ID and email?",
+        "Answer": "The student email ID is issued after successful registration and document verification at the Foundation Level."
+    },
+    {
+        "Question": "What is the language of instruction for these courses? Are they available in other regional languages like Hindi, or in English only?",
+        "Answer": "All our program courses are taught in English. Hence, we expect a minimum proficiency in English language to participate in the program."
+    },
+    {
+        "Question": "Will the classes be taught live? Will there be any interaction?",
+        "Answer": "No. Pre-recorded lessons and assignments will be made available on our portal on a weekly basis. Learners can learn from the content released each week at their own pace, but will be required to submit the weekly assignments online within stipulated deadlines. \n\nOne or two LIVE sessions per course may be conducted to clear doubts and interact with the course instructor and course support team."
+    },
+    {
+        "Question": "Are there any communication groups on WhatsApp, Telegram etc for the IITM Online Degree Program?",
+        "Answer": "There are NO official WhatsApp or Telegram groups. We currently answer all questions / doubts via support email / calls.\nWe will use whatsapp from our side for communication or reminder purpose only."
+    },
+    {
+        "Question": "Is there an attendance policy for this program?",
+        "Answer": "There is no daily attendance, but once you register for the courses, submission of weekly assignment is taken as an attendance indicator. Minimum required scores in weekly assignments of a course will determine if a learner will be allowed to write the end term exam for that course or not. Instead of physical attendance, completion of assignments, in-person exams, and mandatory lab sessions (if applicable to your chosen program) is required to successfully complete the program."
+    },
+    {
+        "Question": "Can I take my exams from home?",
+        "Answer": "No. Every term will have 3 quizzes and an end term exam for each course. All quizzes and end term exams will be in-person, invigilated exams at designated centres across the country. You need to travel to the exam centre and take these exams. Check [Exam Cities] in Academics Page."
+    },
+    {
+        "Question": "What is a quiz?",
+        "Answer": "A quiz is similar or equivalent to a monthly test in schools and colleges. Marks obtained in quizzes count towards the total score obtained in the course. All quizzes will be in-person, invigilated exams at designated centres across the country."
+    },
+    {
+        "Question": "Are the exam dates flexible?",
+        "Answer": "No, the exam dates are not flexible. The quiz and end term exam dates are fixed for all learners taking the same course in a term. We try our best to schedule all exams during the weekends though it may not be possible for every exam."
+    },
+    {
+        "Question": "Will there be multiple exam centres within an exam city? How many?",
+        "Answer": "Yes, there may be multiple exam centers within a city depending on the number of students and availability of venues."
+    },
+    {
+        "Question": "What is the eligibility criteria to apply for the Degree Program?",
+        "Answer": "Check [Eligibility] section in Admissions page for the latest update of the eligibility criteria."
+    },
+    {
+        "Question": "I had dropped out of degree over two decades ago. Would I be eligible to apply?",
+        "Answer": "Yes, you are eligible to apply if you have completed Class 12 or an equivalent qualification, regardless of when you last studied."
+    },
+    {
+        "Question": "Will everyone who goes through the qualifier process be allowed to write the qualifier exam? What is the passing criteria?",
+        "Answer": "No, only learners who meet the minimum assignment score requirements during the qualifier period are eligible to appear for the Qualifier Exam."
+    },
+    {
+        "Question": "How many times a year will there be admissions? Will it be only once a year?",
+        "Answer": "For now, we are running applications / admissions thrice a year."
+    },
+    {
+        "Question": "What are the documents / files required to apply for the qualifier process of the program?",
+        "Answer": "Applicants typically need identification proof, educational certificates, and category certificates (if applicable). For the complete list, refer to the application process section. Click on the \"required documents\" at the below link: [https://study.iitm.ac.in/ds/admissions.html#AD5](https://study.iitm.ac.in/ds/admissions.html#AD5)"
+    },
+    {
+        "Question": "Can the credits from this online degree program be transferred to learner's college or university (like on the NPTEL platform)?",
+        "Answer": "IITM's BS Degree is a stand alone program. Credits cannot be transferred.\n\nIf you have completed a few courses at the Foundation or Diploma level, but have not completed the entire Diploma, you may be eligible for credit transfer into your college or university program—subject to their policies. The decision regarding credit transfer rests solely with the accepting university, not with us.\n\nPlease note that these courses are part of a structured degree program and are not intended purely for certification or credit transfer, unlike courses offered through NPTEL."
+    },
+    {
+        "Question": "Will IIT Madras provide the course material for the program in hard copy through courier (like IGNOU)?",
+        "Answer": "No, the course content will be provided only in online mode so you can watch them anytime, anywhere. There will be no hard copy provided. Depending on the course, learners may be recommended reference books / material that they may buy separately."
+    },
+    {
+        "Question": "Can I submit an older version of the OBC-NCL / EWS certificate while applying or registering for courses?",
+        "Answer": "You must submit valid and up-to-date certificates. Approved certificates are typically valid for a limited period (such as one year or three terms), after which updated documents may be required."
+    },
+    {
+        "Question": "What is the Fee structure? Should we submit the entire fees at once or in installments?",
+        "Answer": "Fees are paid per term based on the number of courses you register for. You do not need to pay the entire program fee upfront. So, if you register for 2 courses in a semester, you have to pay the fees only for those 2 courses."
+    },
+    {
+        "Question": "What is the mode of payment?",
+        "Answer": "Fees can be paid online using methods such as credit card, net banking, UPI, or wallets. Payment through DD or any other offline payment methods are not accepted."
+    },
+    {
+        "Question": "Will I get any confirmation on successful payment of fee?",
+        "Answer": "Yes. After successful completion of payment, you will receive a confirmation email from Razorpay."
+    },
+    {
+        "Question": "If my payment fails, how many days will it take to the money back in my bank account?",
+        "Answer": "If a payment fails, the refunded amount is typically credited back within 3–4 weeks."
+    },
+    {
+        "Question": "Can I edit my application form after submitting it?",
+        "Answer": "Your application form will be considered as submitted only upon making the application fee payment. Until then, you may edit the contents of your application form. After the application fee has been paid, you will not be allowed to edit the application form.\n\nIn case your uploaded document(s) gets \"returned / rejected\" during verification, you will be given a chance to re-upload a valid document within a stipulated deadline."
+    },
+    {
+        "Question": "My application status says \"Verification Under Process\". How long will it take for my application to be verified?",
+        "Answer": "Document verification may take up to 3 weeks. You will receive updates via email once the process is complete."
+    },
+    {
+        "Question": "How to avoid getting my application \"returned / rejected\"?",
+        "Answer": "Ensure all information is accurate and documents are clear, valid, and in the correct format. Incorrect or unclear submissions may lead to rejection."
+    },
+    {
+        "Question": "Can I select only one city as my Exam City instead of selecting two preferences?",
+        "Answer": "No, you must select two preferred exam cities. The final allocation will be based on availability."
+    },
+    {
+        "Question": "Will I get a scholarship for this programme?",
+        "Answer": "Scholarships may be offered depending on policy updates. Candidates should check official announcements for the latest information."
+    },
+    {
+        "Question": "Is there any fee waiver for SC / ST / OBC-NCL / EWS / PwD candidates or candidates with lower family income?",
+        "Answer": "Only SC / ST / PwD candidates may avail fee waivers in the application stage. After clearing the qualifier process and exam, candidates belonging to any category (General / OBC / EWS / SC / ST / PwD) may avail fee waivers in course fees based on family income. Check [Fee Structure] in Academics page for details."
+    },
+    {
+        "Question": "What does \"family income\" in the fee structure mean?",
+        "Answer": "Family income includes the income of the candidate, parents, spouse, and dependent family members above a certain age, as defined in the fee waiver guidelines. After clearing the Qualifier Exam, all learners who wish to avail fee waivers based on Family Income required to submit Family Income Certificate in the format provided in the [Fee Structure] section. Note that the Family Income Certificates are valid only for one year and will need to be submitted afresh each year to continue availing fee waiver based on Family Income through the program."
+    },
+    {
+        "Question": "I belong to the general category and I want to avail fee waiver since my family income is below 5 lakhs per annum. Why do I need to submit EWS + Family Income Certificate to avail the waiver?",
+        "Answer": "Economically Weaker Section (EWS) in India, as defined by the Govt. of India, is a sub-category of people belonging to the General category with an annual family income less than ₹8 lakhs per annum and who do not belong to any category such as SC/ST/OBC. Course fee waivers from IIT Madras are available for general category learners with family income less than ₹5 lakhs per annum. As per the policy of IIT Madras, and as part of our documentation process to ensure that we give fee waiver benefits to the deserving learners, we require general category learners with family income less than ₹5 lakhs per annum to submit both EWS certificate and Family Income certificate. EWS and Family Income certificates will need to be obtained in the format mentioned in the [Fee Structure] section in Academics page."
+    },
+    {
+        "Question": "Will students who enter the program have internship / recruitment opportunities provided by IIT Madras?",
+        "Answer": "We will try to make internship / recruitment opportunities available to learners; We have an Industry Interaction Cell, which provides recruitment / internship opportunities to the students of BS Degree (depending on the eligibility)."
+    },
+    {
+        "Question": "How does IIT Madras plan to provide placements for lakhs of applicants?",
+        "Answer": "A large number of learners apply and participate in the qualifier process. After clearing the qualifier process, learners will need to clear foundational level courses, diploma level courses and then the degree level courses to finally get a BS degree from IIT M. Total of 142 credits. When a student is able to successfully clear these courses and fulfill all the academic requirements, we are confident that the students will be employable."
+    },
+    {
+        "Question": "What is the registration process for the Foundational Level?",
+        "Answer": "Once you clear the Qualifier Exam, you will be allowed to access the Course Registration Form from your dashboard upon logging in. In the Course Registration Form, you will need to fill the required details, upload necessary documents and pay the course fee to register for the first term of your Foundational Level. You may choose to register for maximum of 4  Foundational Level courses.\nNote that there will be an added Exam Fee applicable for learners opting to write their quizzes and end term exams outside India."
+    },
+    {
+        "Question": "What are the documents / files that are required to be uploaded while registering for the Foundational Level?",
+        "Answer": "It is mandatory any one of these documents while registering for Foundational Level:\n- 12th or equivalent mark sheet OR\n- Degree Certificate OR\n- Certificate of the highest level of education\n- Adhaar Card / PAN Card (identification document)"
+    },
+    {
+        "Question": "What are the documents needed to avail fee waiver at Foundational Level and later?",
+        "Answer": "Please refer to the [Fee Structure] section in the Academics page to see which fee waiver may be applicable to you and the relevant documents / certificates that will need to be submitted."
+    },
+    {
+        "Question": "I have already submitted my category certificate while applying for the Qualifier Process. Do I need to submit them again while registering for the Foundational Level?",
+        "Answer": "You do not need to resubmit category certificates unless they have expired. For example, OBC-NCL and EWS certificates may need to be renewed if they are no longer valid."
+    },
+    {
+        "Question": "I can't afford to pay the entire Foundational Level fees at one shot and I do not come under any fee waiver category too, can I pay the fees in 2 or 3 installments?",
+        "Answer": "Please be informed that you will not be paying the entire Program fee or Foundational Level fee at one stretch. The actual fees you will be paying will be in proportion to the number of courses you register for in every term. So, for e.g. if you register for 2 courses in the a term, you have to pay the course fees only for those 2 courses."
+    },
+    {
+        "Question": "Can I change my email ID in the Foundational Level? Will we get any official student email ID?",
+        "Answer": "The personal email ID you applied for the program with cannot be changed. This email ID is used to access the whole Qualifier Process and the Foundation Level Course registration Form.\n\nOnce all the documents uploaded in the foundation level course registration form are approved, each registered learner will be assigned a roll number and a corresponding student email ID which will can be used for course access and all future communications to the IIT Madras BS degree."
+    },
+    {
+        "Question": "Will I be given a new portal to access courses at Foundational Level?",
+        "Answer": "No, the current portal will be used for all the Levels. You will be given a new official IIT Madras BS degree student email ID to access the portal."
+    },
+    {
+        "Question": "Can I take a break of 1 or 2 year(s) after completing the Foundational Level?",
+        "Answer": "Yes, learners may take a break of one or more terms after starting the Foundational Level. However, learners must meet the intermediate milestone requirements, which is the maximum duration permitted for each level of the program.\n\nPlease note that break terms are included while calculating these intermediate milestones. Learners who do not complete a level within the specified maximum duration will be removed from the program."
+    },
+    {
+        "Question": "I applied for the Qualifer Exam but I didn't obtain the minimum required average assignment scores to take Qualifier Exam, and hence didn't receive any hall ticket for the same. What will be the procedure to re-apply?",
+        "Answer": "If you did not meet the assignment eligibility criteria, you will not receive a hall ticket. You must reapply in a future term and complete the qualifier process again."
+    },
+    {
+        "Question": "I'm eligible to apply 4 courses in the upcoming term, but I have only 2 Foundational Level courses left to complete. Will I be allowed to register for Diploma Level courses along with the Foundational Level courses?",
+        "Answer": "No, you have to complete all the 8 courses in Foundation Level before enrolling to the Diploma Level courses."
+    },
+    {
+        "Question": "Is it mandatory to take the proctored in-person Quizzes?",
+        "Answer": "Yes, it is mandatory to attempt at least one of the proctored in-person quizzes in a Semester to be eligible to appear for the End Semester Exams. The quizzes contribute to the final course score and the course grade and hence it is recommended that students attempt both quizzes and all other assessments in the course."
+    },
+    {
+        "Question": "Will Qualifier phase assignment scores be included while calculating the eligilibity for the End Term?",
+        "Answer": "The Qualifier Exam Score will be counted as Quiz 1 Score for the courses registered in the Foundation level in the same term of the qualifier exam.\nFor courses that you register for in a later term, you will be required to repeat the assignments completed in the Qualifier phase."
+    },
+    {
+        "Question": "Will my Qualifier Exam Score be considered in the subsequent term?",
+        "Answer": "On clearing the qualifier exam, The score can be used to apply for 3 terms after the qualifier exam date. The qualifier score will become invalid for the 4th term onwards after the qualifier exam date. If the qualifier score becomes invalid, the student will have to go through the entire qualifier process again and re-take the qualifier exam.\nNOTE: For students who have not yet passed class 12th (and are currently studying for class 12th), the validity is 3 terms after passing their class 12th exam, OR 6 terms after the qualifier exam date - whichever is earlier."
+    },
+    {
+        "Question": "What will happen if I am absent for an End Term Exam?",
+        "Answer": "Learner has two options:\n\n1. Register for the course in the subsequent term with the option of taking the End Term Exam alone and by paying a reduced fee (marks of assignments and quizzes will be carried over ) \n2. Repeat the entire course (including assignments and quizzes) by paying the full course fee."
+    },
+    {
+        "Question": "What is the procedure to add / drop a course?",
+        "Answer": "You cannot add courses after the registration window closes. You may drop a course within the first four weeks of the term."
+    },
+    {
+        "Question": "Can I get a refund if I drop a course within the first four weeks of the term start?",
+        "Answer": "If you drop a course within the allowed period, part of the fee may be refunded after deducting administrative charges."
+    },
+    {
+        "Question": "Is it possible to repeat a course for improving grades?",
+        "Answer": "You can choose to repeat courses to improve the grade in the course within the same level and not progressed to next level. \n\nFor eg: if a student completes the 8 courses of the foundation level and wishes to improve any course grade, they have to do it in the terms that are available within the maximum permissible terms. The student will not be allowed to take any foundation level improvement course once they start the Diploma Level.\n\nThe highest grade will be recorded in the transcript. \nThe highest score among all attempts of a course will be used for calculating the CGPA. Course fee Repeat for Improvement courses will be double the normal fee."
+    },
+    {
+        "Question": "What is the procedure to change exam city from Outside India to India / India to outside India?",
+        "Answer": "Yes, you can change your exam city through the portal during the allowed window. Additional fees may apply for international centers."
+    },
+    {
+        "Question": "How can I change the exam city within India?",
+        "Answer": "You can change your exam city through the student dashboard before the specified deadline for each exam."
+    },
+    {
+        "Question": "I am interested to know about the other Non - campus program offered by IITM ?",
+        "Answer": "For any queries related to the any program you can visit the respective websites below :\n                                                                                   \n\nBS Degree in Data Science and Applications\nMail to : support@study.iitm.ac.in\nContact : +91-7850999966 \nWebsite : https://study.iitm.ac.in/mg/\n\n\nBS Degree in Management and Data science\nMail to : support-mg@study.iitm.ac.in\nContact : +91-7850999966 \nWebsite : https://study.iitm.ac.in/mg/\n                                                                                   \nBS Degree in Electronic Systems\nMail to : support-es@study.iitm.ac.in\nContact : +91-9711397993\nWebsite : https://study.iitm.ac.in/es/\n\nBS Degree in Aeronautics and Space Technology\nMail to : support-ae@study.iitm.ac.in \nContact : +91-9711397993 \nWebsite : https://study.iitm.ac.in/ae/"
+    },
+    {
+        "Question": "What is the eligibility for the Qualifier Exam?",
+        "Answer": "To be eligible to write the qualifier exam (regular entry), you must first complete the 4‑week qualifier period and score at least the minimum required average in the online assignments in all four courses; only then will you get a hall ticket for the exam.\n​Separately from this, basic program eligibility requires that you have completed Class 12 (or equivalent) with Mathematics and English for DS and MG (or Maths and Physics for the ES and AE program), and school students who have finished Class 11 can do the qualifier but can register for courses only after passing Class 12."
+    },
+    {
+        "Question": "Is there any age restriction for appearing in the qualifier?",
+        "Answer": "There is no age restriction for applying to the program. You must meet the basic eligibility criteria, such as completing Class 12 or equivalent."
+    },
+    {
+        "Question": "What is the minimum assignment score required for qualifier eligibility?",
+        "Answer": "Any assignment that is not attempted will be marked as 0.\n● If the average of the first 2 weeks’ assignment scores is >= 40/100 (or as per the cutoff\nfor each category of students) in each of the 4 subjects, the students will be eligible to\nwrite the qualifier exam in the first attempt within the term.\n● For those who do not qualify after the week 2 assignments, the average of the best 2 out\nof the first 3 weeks’ assignment scores will be considered. If this score is >= 40/100 (or\nas per the cutoff for each category of students) in each of the 4 subjects, the students\nwill become eligible to write the qualifier exam in the second attempt within the term.\n● Reattempts within the term will be given suitably.\nOnly those who get the minimum required average assignment scores in all four courses\n(as given below) will be allowed to appear for the Qualifier Exam.\n\nMinimum Average Assignment Score\nrequired in each course\n\nGeneral Learner 40%\nSC / ST / PwD with 40% disability 30%\nPwD with 40% disability & SC / ST 30%\nOBC-NCL / EWS 35%\nNote: Relaxations in pass criteria indicated for various categories of learners is applicable ONLY\nfor the qualifier process. There will be no relaxations in terms of grades / pass criteria once\nregistered into the program."
+    },
+    {
+        "Question": "How does JEE Advanced exemption work?",
+        "Answer": "JEE Advanced Exemption Process\nCandidates eligible to attempt the most recent JEE Advanced (e.g., qualified JEE Main CRL rank ≤2.5 lakh) are automatically exempt from the qualifier exam.\n\n\nHow to Claim\nApply during the regular application window (₹3,000-4,000 fee), upload JEE Main scorecard/proof of Advanced eligibility for verification, then directly access Foundation course registration (pay ₹6,000 registration fee + course fees"
+    },
+    {
+        "Question": "Do exempted students need to do qualifier assignments?",
+        "Answer": "All the regular based applicants must mandatorily submit the assignments as the qualifier eligibility depends on the assignment scores\n\nEligibility to appear for the qualifier exam\nAt the end of the 4 weeks, a qualifier exam will be conducted for eligible candidates based on\nthe content covered in the 4 weeks of study.\nEach assignment will be graded out of 100\nAny assignment that is not attempted will be marked as 0.\n● If the average of the first 2 weeks’ assignment scores is >= 40/100 (or as per the cutoff\nfor each category of students) in each of the 4 subjects, the students will be eligible to\nwrite the qualifier exam in the first attempt within the term.\n● For those who do not qualify after the week 2 assignments, the average of the best 2 out\nof the first 3 weeks’ assignment scores will be considered. If this score is >= 40/100 (or\nas per the cutoff for each category of students) in each of the 4 subjects, the students\nwill become eligible to write the qualifier exam in the second attempt within the term.\n● Reattempts within the term will be given suitably."
+    },
+    {
+        "Question": "Can JEE based exemption be claimed after applying normally?",
+        "Answer": "No, once you apply through a particular entry route, it cannot be changed for that term."
+    },
+    {
+        "Question": "What proof is required for qualifier exemption?",
+        "Answer": "You must provide valid proof of JEE eligibility, such as a JEE Main scorecard or proof of eligibility for JEE Advanced."
+    },
+    {
+        "Question": "Can exemption be rejected?",
+        "Answer": "Yes, an exemption may be rejected if the required criteria is not met or the relevant documents are not submitted.\n\nThe required criteria can be checked in the admissons page of the respective programs website."
+    },
+    {
+        "Question": "Can JEE based students directly register for courses?",
+        "Answer": "Yes, students eligible for exemption (such as through JEE-based entry) can directly register for Foundation Level courses after verification."
+    },
+    {
+        "Question": "Does qualifier test coding skills?",
+        "Answer": "No, the qualifier exam tests Computational Thinking (basic pseudocode, flowcharts, boolean logic, and simple algorithms) rather than advanced coding skills or programming in a language."
+    },
+    {
+        "Question": "Is English compulsory in the qualifier exam?",
+        "Answer": "yes , english 1 is compulsory."
+    },
+    {
+        "Question": "Who should I contact for qualifier-related issues?",
+        "Answer": "For any issues related to the qualifier process, please mail to support-qualifier@study.iitm.ac.in \nYou can also check the official website for a detailed information."
+    },
+    {
+        "Question": "Is prior coding knowledge required?",
+        "Answer": "No. The program starts from basic concepts. But you have to put in effort and a lot of practice to learn coding if you have never done it before."
+    },
+    {
+        "Question": "Is the academic schedule available anywhere?",
+        "Answer": "The academic schedule for the qualifier exam/ qualifier application can be seen under the important dates under admission tab in the respective program website"
+    },
+    {
+        "Question": "What are the ways to enter the BS program?",
+        "Answer": "There are two entry routes:\nQualifier Exam Route\nDirect Entry via JEE Advanced (eligible years only)\nA student can apply as  a JEE based applicant (Eligible Admission Cycles (JEE Main qualified & eligible for JEE Advanced, or JEE Advanced qualified)) till Sep 2026 if he/she has qualfied JEE mains in the year 2024\n\n\nExample – Jan 2026 term considers 2024 and 2025 JEE qualification years.\nExample – May 2026 term considers 2024, 2025, and 2026 JEE qualification years.\nExample – Sep 2026 term considers 2025 and 2026 JEE qualification years."
+    },
+    {
+        "Question": "What is the fees structure of this course to complete BS degree?",
+        "Answer": "The fee structure depends on the level and number of courses taken. For detailed and updated information, refer to: [https://study.iitm.ac.in/ds/academics.html#AC10](https://study.iitm.ac.in/ds/academics.html#AC10)"
+    },
+    {
+        "Question": "How can I get my doubts clarified?",
+        "Answer": "If you have doubts in your subjects while enrolled in the IIT Madras BS program, here are some ways to get them cleared:\n\nDiscussion Forums: Participate in the course's online discussion forums. Engaging with peers and instructors can help clarify your doubts.\n\nLive sessions : Students who have doubts in the courses can attend the Live interaction online sessions. The dates on which the sessions are conducted can be seen in the student calendar while you log in to the portal.\nStudy Groups: Form or join study groups with fellow students. Collaborating with others can provide different perspectives and solutions to your doubts.\n\nCourse Resources: Utilize any additional resources provided in the course, such as recorded lectures, reading materials, and supplementary exercises.\n\nEmail Support: If your doubts are specific and require detailed explanations, consider emailing your instructor directly for assistance."
+    },
+    {
+        "Question": "What is the fee for JEE-based entry?",
+        "Answer": "The application fee for the JEE-based entry into the IIT Madras BS program is four thousand rupees (₹4000). This fee is applicable to all candidates applying through the JEE Advanced eligibility route.\n\nFor more details please refer to the respective program website link"
+    },
+    {
+        "Question": "What is the Qualifier Exam fee and is there a fee waiver or scholarship?",
+        "Answer": "The application fee for the Qualifier exam must be paid during registration and is non-refundable under any circumstances.\n\nCategory\nApplication Fee (₹)\nGeneral Category / OBC Applicant\n₹4000\nSC / ST Category / PwD (≥ 40% disability) Applicant\n₹2000\nSC / ST Category Applicant who is ALSO PwD (≥ 40% disability)\n₹1000"
+    },
+    {
+        "Question": "When will we have exams in a term?",
+        "Answer": "Exam Schedule in a Term\nExams in a term for the IIT Madras BS program are typically scheduled as follows:\n\nQuizzes:\n\nThere are usually two quizzes per term, with specific dates announced at the beginning of the term.\nEnd Term Exam:\n\nThe end term exam is conducted at the conclusion of the term. The exact date will be provided in the academic calendar for that term.\nFor the most accurate and detailed schedule, including specific dates for quizzes and end term exams, please refer to the official academic calendar or announcements made at the start of each term.\nImportant dates: https://study.iitm.ac.in/ds/admissions.html#AD0\nAcademic calendar : https://study.iitm.ac.in/ds/academic_calendar.html"
+    },
+    {
+        "Question": "If I miss this application, when can I apply again?",
+        "Answer": "If you miss the application for the Qualifier Exam, you can apply again in the next term. Here are the key points regarding reapplication:\n\nUnlimited Attempts: There are no limits on the number of times you can attempt the qualifier process in subsequent terms.\n\nFull Fees: You will need to pay the full fees applicable for your category when you reapply.\n\nCoursework Requirement: You must redo the 4 weeks of coursework and weekly graded assignments to become eligible for the qualifier exam again.\n\nImportant dates: Please refer to admissions page under the respective program website"
+    },
+    {
+        "Question": "In the 4 year program can I do projects in Singapore or do I need to come to India?",
+        "Answer": "Yes, the IIT Madras BS programme is a fully online programme that students anywhere in the world can complete without coming to India."
+    },
+    {
+        "Question": "Process and documentation for 50% fee waiver for family income <= Rs 5 lakh",
+        "Answer": "Please check the official programme website at study.iitm.ac.in for the fee wavier updates \n\nGo to academics tab for further details"
+    },
+    {
+        "Question": "Is OBC-NCL + ITR + PAN sufficient for fee waiver?",
+        "Answer": "Please check the official programme website at study.iitm.ac.in \n\nPlease refer for DS https://study.iitm.ac.in/ds/academics.html#AC1\n\nPlease refer for MG https://study.iitm.ac.in/mg/academics.html#AC1\nPlease refer for ES https://study.iitm.ac.in/es/academics.html#AC1\nPlease refer for AE https://study.iitm.ac.in/ae/academics.html#AC1"
+    },
+    {
+        "Question": "What is the procedure to quit the program?",
+        "Answer": "The flowchart given under the overall strcuture in the website gives you the paths where a student can exit. \n\nPlease refer for DS https://study.iitm.ac.in/ds/academics.html#AC1\n\nPlease refer for MG https://study.iitm.ac.in/mg/academics.html#AC1\nPlease refer for ES https://study.iitm.ac.in/es/academics.html#AC1\nPlease refer for AE https://study.iitm.ac.in/ae/academics.html#AC1"
+    },
+    {
+        "Question": "What are the technological requirements for this program?",
+        "Answer": "Access to good internet connection as well as a laptop / desktop device will be a key requirement to learn effectively from our courses. Familiarity with Google tools would be an advantage."
+    },
+    {
+        "Question": "How much time do I need to spend on a course per day?",
+        "Answer": "The 15 hours per week would typically include:\nWatching the course videos\nMaking your own notes\nReviewing the notes provided (if any)\nAttempting activity questions\nCompleting practice and graded assignments\nAttending or watching the live interaction sessions\n\nHow you distribute these 15 hours depends on your other commitments.\n\nIf you are a full-time student, you are expected to study during the day, similar to attending a regular college.\nIf you are pursuing another degree alongside this program or are a working professional, you may spread your study time across evenings and weekends.\n\nThe learning structure is flexible and can be adapted to your schedule and availability."
+    },
+    {
+        "Question": "How many courses can I complete in a year?",
+        "Answer": "There are 3 terms in a year. Learner may be allowed to register for a maximum of 4 courses in a term depending on their preferred pace of learning. \n\nIf a student is taking a maximum of 4 courses , a student can complete 12 theory courses in a year plus projects which they register. Note that registration for any course requires that the prerequisite courses for this should be completed. Also, you cannot register for Diploma level courses unless you have completed ALL courses fromm foundation level."
+    },
+    {
+        "Question": "Are there any sample video content or assignments?",
+        "Answer": "As a sample, Week 1 content videos have been made available for the first four Foundational Level courses for you to try and learn from. We recommend you to check out these lectures and try the sample assignment we have put out for each course. The links to Week 1 Content & Assignment pages can be accessed from the [Foundational Level courses] section in Academics page."
+    },
+    {
+        "Question": "When will the term start? What is the timeline?",
+        "Answer": "Learners who clear the Qualifier Exam will be expected to register for the program right after their results are announced. In the first term alone, classes start (with week 5) immediately after the completion of week 4 in the qualifier phase with no gap. Please check [Important Dates] in Admissions page to get to know the timeline."
+    },
+    {
+        "Question": "Is the program available to students currently in class 12 or equivalent?",
+        "Answer": "Students currently in class 12 (or equivalent) will be allowed to apply for the program, go through the qualifier phase and write the qualifier exam, but will not be allowed to register for the foundational level of the program until they clear class 12 (or equivalent). Note that a Qualifier Exam result is valid only for 3 terms (about 1 year) right after the exam. So, plan accordingly."
+    },
+    {
+        "Question": "Is validity different for Class 12 students?",
+        "Answer": "The qualifier marks will be valid for the 3 terms that come subsequent to the qualifier exam date\nfor the learner to register to the Foundation level. This score will be invalid after this period and\nthe learner will have to go through the entire qualifier process (the 1 month of weekly\nassignments) and retake the qualifier exam, if they wish to join the programme.\nFor students in std XII who take the qualifier exam, the validity is for 3 terms from when\nthey pass std XII."
+    },
+    {
+        "Question": "Is there a separate fee for qualifier reattempt?",
+        "Answer": "Yes, there is a separate fee for reattempting the qualifier exam within the same term. The reattempt fee varies based on the applicant's category:\n\nCategory        Re-attempt Fee\nGeneral Category / OBC Applicant        Two thousand rupees (Rs. 2000)\nSC / ST Category / PwD (40% or more disability) Applicant        One thousand rupees (Rs. 1000)\nSC / ST Category Applicant who is ALSO PwD (40% or more disability)        Five hundred rupees (Rs. 500)\nThis fee is applicable if you were absent for the exam or if you failed the first attempt and wish to reattempt within the same term."
+    },
+    {
+        "Question": "Can international exams be used for exemption?",
+        "Answer": "No, international exams like AP, SAT, A-Levels, or IB cannot be used for exemptions or credit transfers in the IITM BS program.\n​Only NPTEL/SWAYAM courses (approved ones) qualify for credit transfer at later levels (e.g., BSc/BS), but the qualifier and Foundation require completing IITM's coursework without such exemptions."
+    },
+    {
+        "Question": "Can a qualifier student attend Paradox?",
+        "Answer": "The students who have been provided with a valid iitm BS student id can attend the paradox."
+    },
+    {
+        "Question": "Tell me more about Paradox festival",
+        "Answer": "Paradox is a annual offline event which is hosted by IITM BS degree once a year in the month of May or June\nFor more details please visit https://paradox-showcase.web.app/"
+    },
+    {
+        "Question": "What is SCT and what is expected of me?",
+        "Answer": "SCT is system compatability test. \nSCT is mandatory for the students give remote proctored based exams. \nAll students have to mandatorily attend the system compatibility test and ensure that the system you have conforms to the above requirements and student has to participate in this on the dates mentioned by the Admin team to get this completed. Dates on which SCT will be conducted by informed to the students over mail."
+    },
+    {
+        "Question": "What is meant by Incomplete grade?",
+        "Answer": "Students who receive an Incomplete (I) grade in a course may opt to appear for a Make-Up Examination instead of repeating the course.\nThe Make-Up Examination must be registered for in the immediately subsequent term following the term in which the I grade was awarded.\nIf a student does not register for the Make-Up Examination in the subsequent term, the student will be required to repeat the entire course as a full course in the term in which they next apply."
+    },
+    {
+        "Question": "Is the BS degree equivalent to the BTech degree?",
+        "Answer": "No, the BS degree is not equivalent to a BTech degree, but it is a valid undergraduate degree awarded by IIT Madras."
+    },
+    {
+        "Question": "Will those enrolled to this program have access to IIT Madras campus facilities?",
+        "Answer": "Due to limitations of campus facilities and students being spread out geographically, learners enrolled in the program will not have access to IITM campus facilities."
+    },
+    {
+        "Question": "What is the language of instruction for these courses? Are they available in other regional languages?",
+        "Answer": "All our program courses are taught in English. Hence, we expect a minimum proficiency in English language to participate in the program."
+    },
+    {
+        "Question": "After registering for a course in a term, can I carry over the fees to the next term if I am not able to complete the course?",
+        "Answer": "No. A course registration is valid only for one term. If a learner is not able to clear a course in a term, they will be considered as having failed the course and will need to register for the course again at a later term along with the required fee. \n\nNote that a learner will be allowed to drop off from a course within the first four weeks of the term. In such cases, a part of the course fee will be retained as admin charges and the balance, if any, may be carried over to the next term."
+    },
+    {
+        "Question": "Can I change my exam cities for the qualifier exam after having paid and submitted my application?",
+        "Answer": "You will be allowed to change your exam city for qualifier exam till 4 weeks before the qualifier exam date."
+    },
+    {
+        "Question": "Will the Exam City preferences I select for the Qualifier Exam in the application form be fixed for all the later exams?",
+        "Answer": "No. The Exam city preferences selected in the application form is for the Qualifier Exam only. You will have the option of picking a different set of Exam City options, if you wish, after qualifying for the later invigilated exams."
+    },
+    {
+        "Question": "Is there any concession for SC / ST / OBC-NCL / EWS / PwD candidates in terms of scores?",
+        "Answer": "SC / ST / OBC-NCL / EWS /PwD candidates will have concession in minimum scores required during the qualifier process to enter the program. Check out [Qualifier Process] in Admissions page. Note that there will be no such concessions after entering the program. (OBC candidates not belonging to the OBC-NCL category cannot avail any concession)"
+    },
+    {
+        "Question": "I belong to the general category and I want to avail fee waiver since my family income in below 5 lakhs per annum. Why do I need to submit EWS + Family Income Certificate to avail the waiver?",
+        "Answer": "Economically Weaker Section (EWS) in India, as defined by the Govt. of India, is a sub-category of people belonging to the General category with an annual family income less than ₹8 lakhs per annum and who do not belong to any category such as SC/ST/OBC. Course fee waivers from IIT Madras are available for general category learners with family income less than ₹5 lakhs per annum. As per the policy of IIT Madras, and as part of our documentation process to ensure that we give fee waiver benefits to the deserving learners, we require general category learners with family income less than ₹5 lakhs per annum to submit both EWS certificate and Family Income certificate. EWS and Family Income certificates will need to be obtained in the format mentioned in the [Fee Structure] section in Academics page."
+    },
+    {
+        "Question": "Will students enrolled in the program receive internship and recruitment (placement) opportunities through IIT Madras, and how does IIT Madras plan to facilitate placements for a large number of applicants upon completion of the BS Degree?",
+        "Answer": "We have a dedicated placement team to support students with internship and placement opportunities, along with training to help them prepare for interviews.\n\nFor more details regarding job opportunities, you may also refer to the introductory video."
+    },
+    {
+        "Question": "What is the registration process for the Foundation Level?",
+        "Answer": "After clearing the Qualifier Exam, you will be able to access the Course Registration Form from your dashboard upon logging in. Through this form, you will need to provide the required details, upload the necessary documents, and pay the course fee to register for the first term of the Foundation Level.\n\nYou may choose to register for one or more Foundation Level courses based on the other degree you are enrolled in and/or your working status.\n\nPlease note that an additional exam fee will be applicable for learners who opt to take quizzes and end-term examinations outside India."
+    },
+    {
+        "Question": "What are the documents / files that are required to be uploaded while registering for the Foundation Level?",
+        "Answer": "It is mandatory any one of these documents while registering for Foundation Level:\n- 12th or equivalent mark sheet OR\n- Degree Certificate OR\n- Certificate of the highest level of education"
+    },
+    {
+        "Question": "Is it possible to get an educational loan for this Program?",
+        "Answer": "Banks may offer education loans for this degree program, and we provide the necessary supporting documents to assist with the loan application process.\n\nFor more details, once you enroll in the program, you will receive the handbook, which includes all relevant information regarding the same."
+    },
+    {
+        "Question": "What are the documents needed to avail fee waiver at Foundation Level and later?",
+        "Answer": "Please refer to the [Fee Structure] section in the Academics page to see which fee waiver may be applicable to you and the relevant documents / certificates that will need to be submitted."
+    },
+    {
+        "Question": "I have already submitted my category certificate while applying for the Qualifier Process. Do I need to submit them again while registering for the Foundation Level?",
+        "Answer": "No, not required to submit again. However, the EWS / OBC-NCL certificate need to be submitted again if the previously submitted certificate is not valid until the end of the current financial year."
+    },
+    {
+        "Question": "Can I do 2 BS program in parellel ?",
+        "Answer": "A student cannot pursue two non-campus BS degree programs from IIT Madras simultaneously. Only one such program can be enrolled in at a time."
+    },
+    {
+        "Question": "Will I be given a new portal to access courses at Foundation Level?",
+        "Answer": "No, the current portal will be used for all the Levels. You will be given a new official IIT Madras BS degree student email ID to access the portal."
+    },
+    {
+        "Question": "Will I be issued an ID card?",
+        "Answer": "An ID card in electronic format will be provided, subject to conditions on use of ID card."
+    },
+    {
+        "Question": "Can I take a break of 1 or 2 year(s) after completing the Foundation Level?",
+        "Answer": "Yes, learners may take a break of one or more terms after starting the Foundation Level. However, learners must meet the intermediate milestone requirements, which is the maximum duration permitted for each level of the program.\n\nPlease note that break terms are included while calculating these intermediate milestones. Learners who do not complete a level within the specified maximum duration will be removed from the program."
+    },
+    {
+        "Question": "I am unable to attend the Qualifier Exam but received hall ticket / I didn't clear the Qualifier Exam. What will be the procedure to re-attempt? Do I need to pay application fee again?",
+        "Answer": "You can re-attempt again for the immediate next Qualifier Process within the same term with partial application fee payment. Your previous assignment scores will be considered and you will be directly eligible to write the Qualifier Exam without having to submit assignments again."
+    },
+    {
+        "Question": "I applied for the Qualifer Exam but I didn't obtain the minimum required average assignment scores to take Qualifier Exam/ Missed to reattempt and hence didn't receive any hall ticket for the same. What will be the procedure to re-apply?",
+        "Answer": "You have to re-apply as a new applicant with payment of full application fee."
+    },
+    {
+        "Question": "I'm eligible to apply 4 courses in the upcoming term, but I have only 2 Foundation Level courses left to complete. Will I be allowed to register for Diploma Level courses along with the Foundation Level courses?",
+        "Answer": "No, you have to complete all the 8 courses in Foundation Level before enrolling to the Diploma Level courses."
+    },
+    {
+        "Question": "Will credits (Maths/English/ML) from BS Data Science be transferred?",
+        "Answer": "No. Credits from other IITM BS programs cannot be transferred."
+    },
+    {
+        "Question": "Can I pursue two IITM BS degrees simultaneously if exams don’t clash?",
+        "Answer": "No. Pursuing two IITM BS Degree programs simultaneously is not allowed under any circumstance. You can complete one program and then start the other."
+    },
+    {
+        "Question": "Is there any minimum percentage requirement in Class 12?",
+        "Answer": "There is no fixed percentage required to join the program. Completing std XII is mandatory."
+    },
+    {
+        "Question": "Can Class 11 / AS Level students apply?",
+        "Answer": "School students who have appeared for their Class 11 final exams can apply irrespective of their group/stream/board to the BS degree program. Those who qualify can join the program after passing Class 12. Note that a Qualifier Exam result is valid only for 3 terms (about 1 year) right after the date on which qualifier results are announced."
+    },
+    {
+        "Question": "What documents should AS Level / Class 11 students submit?",
+        "Answer": "A bonafide certificate from the school confirming appearance for Class 11 / AS Level exams."
+    },
+    {
+        "Question": "Is this an online or distance degree?",
+        "Answer": "This is a non-campus BS degree from IIT Madras. We prefer to call it Hybrid as contents are delivered online while all exams are in person at designated centres."
+    },
+    {
+        "Question": "Are exams online?",
+        "Answer": "No. Quizzes and final exams are conducted in person at designated examination centres. However, programming exams (OPPE) will be conducted online."
+    },
+    {
+        "Question": "Are Qualifier exams same across all BS programs?",
+        "Answer": "Yes, the Qualifier Exam process is the same across all BS programs.\n\nHowever, the courses covered during the Qualifier preparation may differ by program."
+    },
+    {
+        "Question": "Can I use the same login as BS Data Science application?",
+        "Answer": "No, you cannot use the same login credentials for both applications.\n\nAdditionally, students are not permitted to pursue both BS programs at the same time."
+    },
+    {
+        "Question": "What is the duration of the program?",
+        "Answer": "The program is flexible, allowing students to progress at their own pace. The minimum duration to complete the degree is 4 years, and the maximum permitted duration is 8 years. Check the handbook once you join the program to know the intermediate milestones."
+    },
+    {
+        "Question": "Will there be placement support?",
+        "Answer": "Yes. The program has a dedicated Placement Cell that provides support for both internships and final placements.\n\nTo learn more about internship and employment opportunities, as well as placement trends, please visit the Placement Portal:\nhttps://placements.study.iitm.ac.in/"
+    },
+    {
+        "Question": "Will this help for higher studies abroad?",
+        "Answer": "Yes, you can use this degree to apply for higher studies abroad. Many students from our other BS degree programs have successfully pursuing higher education at international universities using this degree."
+    },
+    {
+        "Question": "Can I do internships during the program?",
+        "Answer": "Yes. Students may pursue internships during the program, subject to their availability and eligibility. You will be ready to start internships once you complete the Diploma Level."
+    },
+    {
+        "Question": "Is there financial aid apart from fee waiver?",
+        "Answer": "Currently, support is already available through fee waivers depending on your economic and social category. There has been huge CSR support for the DS program and ES program. We hope this will also receive the same. In that case, whatever is received through CSR will be given to support students further, apart from the fee waivers."
+    },
+    {
+        "Question": "Are installment payment options available?",
+        "Answer": "There is no separate installment payment option. Fees are paid on a per-term, per-course basis. Students can choose the number of courses they wish to take in a term (minimum 1 and maximum 4 courses) and pay only for the selected courses. Category-wise fee waivers are available as per institute norms."
+    },
+    {
+        "Question": "Do banks provide education loans?",
+        "Answer": "Yes, banks do provide education loans for this program.\n\nWe will issue a bonafide certificate and any required supporting documents to help you apply for an education loan with your bank."
+    },
+    {
+        "Question": "Will certificates be physical or digital?",
+        "Answer": "Digital certificates will be issued; physical copies may be provided as per institute norms."
+    },
+    {
+        "Question": "Can name-changed students submit Gazette notification?",
+        "Answer": "Yes. Original certificates with Gazette notification are acceptable."
+    },
+    {
+        "Question": "How much time do I need to spend on a course per week?",
+        "Answer": "The expected effort is about 8-10 hours per week per course."
+    },
+    {
+        "Question": "Will IIT Madras provide the course material for the program in hard copy through courier?",
+        "Answer": "No, the course content will be provided only in online mode so you can watch them anytime, anywhere. There will be no hard copy provided. Depending on the course, learners may be recommended reference books / material that they may buy separately."
+    },
+    {
+        "Question": "What OBC-NCL / EWS certificates should we submit while applying or registering for courses?",
+        "Answer": "Student has to submit valid certificates while applying / registering. These will be verified by our team. An approved certificate will be valid for two semester. Certificates that are outdated will not be accepted."
+    },
+    {
+        "Question": "After registering for a course in a semester, can I carry over the fees to the next semester if I am not able to complete the course?",
+        "Answer": "No. A course registration is valid only for one semester. If a learner is not able to clear a course in a semester, they will be considered as having failed the course and will need to register for the course again at a later semester along with the required fee."
+    },
+    {
+        "Question": "I am unable to attend the Qualifier Exam but received hall ticket / I didn't clear the Qualifier Exam. What will be the procedure to re-apply? Do I need to pay application fee again?",
+        "Answer": "You can re-apply again for the immediate next Qualifier exam in the same term at half the original fee paid by you. Your previous assignment scores will be considered and you will be directly eligible to write the Qualifier Exam-attempt 2 without having to submit assignments again."
+    },
+    {
+        "Question": "I applied for the Qualifer process but I didn't obtain the minimum required average assignment scores to be eligible to take the Qualifier Exam, and hence didn't receive any hall ticket for the same. What will be the procedure to re-apply?",
+        "Answer": "You have to re-apply as a new applicant with payment of full application fee."
+    },
+    {
+        "Question": "What is the eligiblity to write the End Semester Exam for a course?",
+        "Answer": "To be eligible to write the End Semester Exam for a course, it is mandatory for the learner to (i) obtain an Average Assignment Score >= 40/100 AND (ii) appear for at least one out of the two proctored in-person Quizzes.\nEvery course might have additional eligibility conditions to write the end-sem exam and obtain the course grade. Please check the grading document for details on this.\n\nLearners who are not eligible to write a specific course's End Semester Exam will not be issued hall ticket for the same. They will have to repeat the entire course including assignments and quizzes in a later Semester."
+    },
+    {
+        "Question": "Will my Qualifier Exam Score be considered in the subsequent Semester?",
+        "Answer": "The Qualifier Exam Score will be counted as Quiz 1 Score for the courses registered in the SAME Semester immediately after the Qualifier exam. They will not be used in any other subsequent semester."
+    },
+    {
+        "Question": "Can I pursue Masters degree after this program?",
+        "Answer": "Yes. You can do Masters degree after successfully completing this BS degree from IITM."
+    },
+    {
+        "Question": "If I have passed the JEE Main, Can I get a direct entry opportunity to the Foundation level without appearing Qualifier?",
+        "Answer": "Candidates who are eligible to attempt JEE Advanced in the current year are deemed to have directly qualified to the BS program and can register for a maximum of four courses in the Foundation level and start the program."
+    },
+    {
+        "Question": "Can I do M.Tech through gate after completion of BS degree ?",
+        "Answer": "You can do M.Tech, however, you will have to check the eligibility criteria mentioned in that University/ Institution you are applying to."
+    },
+    {
+        "Question": "Is this degree valid to appear UPSC and SSC or any other Government Exams?",
+        "Answer": "Every University sets its own requirements. UPSC and other exams such as State exams decide what degrees they recognize. From the side of IIT Madras we are happy to write to these organizations and entities and inform them that this BS degree from IIT Madras is a valid four-year degree that can be considered."
+    },
+    {
+        "Question": "Is this degree UGC recognized?",
+        "Answer": "IITs are institutes created under an Act of Parliament, the IIT Act. This act provides all rights to IITs to confer degrees. IITs do not come under UGC, and no degree of IIT needs additional approval or recognition by UGC. Any degree granted by an IIT is recognized as a legal degree."
+    },
+    {
+        "Question": "Can I do two degrees (1 Offline and 1 Online) simultaneously?",
+        "Answer": "Yes, students can do this BS degree program along with any another degree program. However, you are not allowed to do two BS degree programs simultaneously."
+    },
+    {
+        "Question": "Will we get marksheet for foundation Course/Diploma Courses/BS Degree courses?",
+        "Answer": "Semester wise progress card and Grade card will be provided"
+    },
+    {
+        "Question": "Which mode of Learning (Part Time/Full Time/Online/Distance) will written on Marksheet ?",
+        "Answer": "Mode such as distance, online, etc will not be mentioned in Marksheet."
+    },
+    {
+        "Question": "What is Apprenticeship in Degree Level?",
+        "Answer": "Doing an apprenticeship is optional. The program provides the students in the BS level of the program to pursue an apprenticeship with companies and research projects and earn credits in this level."
+    },
+    {
+        "Question": "Can I do an MBA Degree after taking up this course?",
+        "Answer": "Generally any graduate can apply for an MBA, but you will have to check the eligibility criteria mentioned by the Institution or University in which you are going to apply."
+    },
+    {
+        "Question": "Is the Qualifier Exam like JEE?",
+        "Answer": "No. The Qualifier Exam is not like JEE as a competitive entrance exam. It is primarily a qualifying exam: you simply have to meet the required subject-wise and overall cut-offs based on the 4-week qualifier content to clear the qualifier exam. You are not competing against anyone."
+    },
+    {
+        "Question": "Can a Class 12 student appear for the qualifier?",
+        "Answer": "Yes, a Class 12 student can appear for the Qualifier Exam. In fact, students who have completed their Class 11 final examinations are eligible to apply for the Qualifier Exam, and those who pass it can proceed to the foundation level only after passing their Class 12."
+    },
+    {
+        "Question": "Can I do a PhD after this program?",
+        "Answer": "Yes, you can pursue a PhD after completing this BS degree from IIT Madras. However, you will need to meet the specific eligibility criteria set by the institution or university where you wish to apply for the PhD program."
+    }
+]

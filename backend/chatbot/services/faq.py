@@ -2,13 +2,19 @@
 
 Flow: request an Ollama embedding -> execute the existing pgvector expression
 against the shared FAQ model -> convert rows to the existing JSON shape. The
-synchronous bootstrap and FastAPI paths in ``pg/faq_api`` remain unchanged.
+synchronous bootstrap path in ``pg/faq_api`` remains unchanged.
+
+Every read is scoped to one programme. A request for "es" sees `es` rows plus the
+shared `common` rows and nothing belonging to ds, mg or ae. The scope rule lives in
+programs.py so this async path and the sync bootstrap path cannot drift apart.
 """
 from __future__ import annotations
 
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
+
+from programs import faq_program_scope
 
 from .. import appconfig
 from .logs import measure_duration
@@ -66,8 +72,12 @@ async def request_embedding_async(client, text, ollama_url, model):
     return [float(value) for value in embedding]
 
 
-async def search_async(client, q, k):
-    """Return the closest FAQ rows using async Ollama and PostgreSQL calls."""
+async def search_async(client, q, k, program_id):
+    """Return the closest FAQ rows for one programme, using async Ollama and Postgres.
+
+    Example: search_async(client, "fees", 5, "es") can return `es` and `common` rows,
+    never a `ds` one.
+    """
     from pg.faq_api.orm import Faq
 
     try:
@@ -86,6 +96,7 @@ async def search_async(client, q, k):
         statement = (
             select(Faq, similarity)
             .where(Faq.embedding.is_not(None))
+            .where(Faq.program_id.in_(faq_program_scope(program_id)))
             .order_by(distance)
             .limit(k)
         )
@@ -97,6 +108,7 @@ async def search_async(client, q, k):
     return [
         {
             "id": int(row.id),
+            "program_id": row.program_id,
             "question": row.question,
             "answer": row.answer,
             "cosine_similarity": float(score),
@@ -105,11 +117,11 @@ async def search_async(client, q, k):
     ]
 
 
-async def search_result_async(client, q, k):
+async def search_result_async(client, q, k, program_id):
     """Return async FAQ matches plus the existing pipeline error category."""
     try:
         with measure_duration("pg_faq_search"):
-            items = await search_async(client, q, k)
+            items = await search_async(client, q, k, program_id)
         return {"items": items, "error": None}
     except FaqEmbeddingError:
         return {"items": [], "error": "pg_faq_embedding_error"}
@@ -119,23 +131,29 @@ async def search_result_async(client, q, k):
         return {"items": [], "error": "pg_faq_search_error"}
 
 
-async def get_faq_async(faq_id):
-    """Look up one FAQ through Django's async PostgreSQL read engine.
+async def get_faq_async(faq_id, program_id):
+    """Look up one FAQ by id, restricted to what `program_id` is allowed to read.
 
-    Example: an existing id ``42`` returns its question and answer with a
-    direct-lookup similarity of ``1.0``.
+    Example: get_faq_async(42, "es") returns row 42 only if it belongs to `es` or
+    `common`; otherwise it returns None, which the view turns into a 404. Without
+    the scope, a user of one bot could read another bot's FAQ by guessing an id.
     """
     from pg.faq_api.orm import Faq
 
+    statement = select(Faq).where(
+        Faq.id == faq_id,
+        Faq.program_id.in_(faq_program_scope(program_id)),
+    )
     try:
         async with _get_async_session_factory()() as session:
-            row = await session.get(Faq, faq_id)
+            row = (await session.execute(statement)).scalar_one_or_none()
     except Exception as exc:
         raise FaqDatabaseError("Internal error") from exc
     if row is None:
         return None
     return {
         "id": int(row.id),
+        "program_id": row.program_id,
         "question": row.question,
         "answer": row.answer,
         "cosine_similarity": 1.0,

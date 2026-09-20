@@ -55,12 +55,17 @@ describe("Chatbot Fullscreen Mode", () => {
     it("should include chatbox with iframe", () => {
       expect(testHTML).toContain('class="chatbox"');
       expect(testHTML).toContain("<iframe");
-      expect(testHTML).toContain('src="qa.html"');
+      expect(testHTML).toContain('src="qa.html?program_id=ds"');
     });
 
     it("should include parentOrigin parameter when provided", () => {
       const htmlWithOrigin = getChatbotHTML('https://example.com/', 'https://parent.com');
-      expect(htmlWithOrigin).toContain('src="https://example.com/qa.html?parentOrigin=https%3A%2F%2Fparent.com"');
+      expect(htmlWithOrigin).toContain('src="https://example.com/qa.html?parentOrigin=https%3A%2F%2Fparent.com&program_id=ds"');
+    });
+
+    it("should include program_id parameter when provided", () => {
+      const htmlWithProgram = getChatbotHTML('https://example.com/', 'https://parent.com', 'es');
+      expect(htmlWithProgram).toContain('program_id=es');
     });
   });
 

@@ -1,0 +1,236 @@
+[
+    {
+        "question": "Is a separate fee required after qualifier clearance?",
+        "answers": {
+            "ds": "Yes, after clearing the Qualifier Exam, course registration payment is required based on the number of courses the learner registers for. Fees are paid on a per-term, per-course basis, and students pay only for the selected courses. For further details, please check the official IIT Madras BS programme website https://study.iitm.ac.in/ds/academics.html#AC10",
+            "ae": "Yes, after clearing the Qualifier Exam, course registration payment is required based on the number of courses the learner registers for. Fees are paid on a per-term, per-course basis, and students pay only for the selected courses. For further details, please check the official IIT Madras BS programme website https://study.iitm.ac.in/ae/academics.html#fee-structure",
+            "mg": "Yes, after clearing the Qualifier Exam, course registration payment is required based on the number of courses the learner registers for. The overall programme fees are not paid at one stretch; learners pay in each term in proportion to the number of courses they register for. For further details, please check the official IIT Madras BS programme website https://study.iitm.ac.in/mg/academics.html#AC10",
+            "es": "Yes, after clearing the Qualifier Exam, course registration payment is required based on the number of Foundation level courses the learner registers for. Learners pay only for the number of credits they are signing up for, and payment is online only.For further details, please check the official IIT Madras BS programme website https://study.iitm.ac.in/es/academics.html#AC10"
+        }
+    },
+    {
+        "question": "Can diploma holders directly attempt the qualifier?",
+        "answers": {
+            "ds": "Yes, Diploma holders may be able to attempt the Qualifier Exam. Diploma recognised by AICTE or a state board of technical education of at least 3 year duration is considered equivalent to Class 12. \n\nFor specific eligibility regarding diploma holders, it is advisable to check the official IIT Madras BS programme website https://study.iitm.ac.in/ds/admissions.html#AD4",
+            "ae": "Yes. A student with a 3-year diploma can join as long as they have studied Physics and Maths in the 3-year diploma.",
+            "mg": "Yes, Diploma holders may be able to attempt the Qualifier Exam. Diploma recognised by AICTE or a state board of technical education of at least 3 year duration is considered equivalent to Class 12. \n\nFor specific eligibility regarding diploma holders, it is advisable to check the official IIT Madras BS programme website https://study.iitm.ac.in/mg/admissions.html#AD4",
+            "es": "Yes. A student with a 3-year diploma can join as long as they have studied Physics and Maths in the 3-year diploma."
+        }
+    },
+    {
+        "question": "Is Mathematics compulsory to attempt the qualifier?",
+        "answers": {
+            "ds": "While the IITM BS team prefers candidates to have a foundation in Mathematics, Students should have Studied Maths and English in class 10. The program is designed to be inclusive of students from all academic backgrounds (Arts, Commerce, and Science).\n\nHow the Qualifier Works\nThe Qualifier Exam is not based on your prior school curriculum. Instead, it tests you on the first four weeks of coursework provided by the IITM BS program itself. These four weeks cover:\n\nMathematics for Data Science\n\nStatistics for Data Science\n\nComputational Thinking\n\nEnglish\n\nAs long as you thoroughly learn and understand the content provided during these four weeks of preparatory classes, you will have all the tools necessary to clear the Qualifier Exam, regardless of your previous mathematical background.",
+            "ae": "Yes. For the BS in Aeronautics and Space Technology programme, students must have passed Class 12 or equivalent with Physics and Mathematics. If they passed Class 12 without Physics and Mathematics but passed Physics and Mathematics separately through NIOS or another equivalent organization, they may be permitted to apply after committee approval.",
+            "mg": "Yes. For the BS in Management and Data Science programme, students should have studied Maths and English in Class 10.",
+            "es": "Yes. For the BS in Electronic Systems programme, students must have passed Class 12 or equivalent with Physics and Mathematics. If they passed Class 12 without Physics and Mathematics but passed Physics and Mathematics separately through NIOS or another equivalent organization, they may be permitted to apply after committee approval."
+        }
+    },
+    {
+        "question": "How many courses are part of the qualifier preparation?",
+        "answers": {
+            "ds": "The Qualifier preparation includes four Foundation level courses. These courses are: \n\nFor BS in Data Science and Applications (DS): \n\nEnglish 1 \nMaths-1 \nStatistics-1 \nComputational Thinking",
+            "ae": "The Qualifier preparation includes four Foundation level courses for AE: English 1, Mathematics-1, Electronic Systems Thinking and Circuits, and Introduction to C Programming.",
+            "mg": "The Qualifier preparation includes four Foundation level courses for MG: English 1, Maths-1, Statistics-1, and Computational Thinking.",
+            "es": "The Qualifier preparation includes four Foundation level courses for ES: English 1, Maths for Electronics - 1, Electronic Systems Thinking and Circuits, and Introduction to C Programming."
+        }
+    },
+    {
+        "question": "What are the courses that need OPPE in Data science and Applications?",
+        "answers": {
+            "ds": "For BS in Data Science and Applications, OPPE is listed for these courses: Foundation Level - Python / Intro to Python Programming; Diploma Level - DBMS, PDSA (Programming Data Structures and Algorithms), Java, System Commands/Linux, and Machine Learning Practice; Degree Level - C Programming and Introduction to Big Data.",
+            "ae": "You will have OPPE in C programming in foundation level.",
+            "mg": "No courses have OPPE in BS in Management and Data Science programme.",
+            "es": "You will have OPPE in C programming in foundation level."
+        }
+    },
+    {
+        "question": "Certificate template/format for degree?",
+        "answers": {
+            "ds": "For sample certificate formats, please refer to https://study.iitm.ac.in/ds/academics.html#AC17",
+            "ae": "For sample certificate formats, please refer to https://study.iitm.ac.in/ae/academics.html#AC17",
+            "mg": "For sample certificate formats, please refer to https://study.iitm.ac.in/mg/academics.html#AC17",
+            "es": "For sample certificate formats, please refer to https://study.iitm.ac.in/es/academics.html#AC17"
+        }
+    },
+    {
+        "question": "What is the overall structure of the program? What are Levels?",
+        "answers": {
+            "ds": "The program is split into three levels that have to be done strictly in sequence:\n1: Foundational Level (8 courses)\n2: Diploma Level (6 Programming courses + 6 Data Science courses)\n3: Degree Level (11 courses)\n\nCheck [Overall Structure] in Academics page.",
+            "ae": "The BS in Aeronautics and Space Technology programme has multiple levels and exit options. Depending on the courses completed and credits earned, learners can receive a Foundation Certificate from IITM CODE, a Diploma from IIT Madras, or a BS Degree from IIT Madras.",
+            "mg": "The program is split into three levels that have to be done strictly in sequence:\n1: Foundation Level (8 courses)\n2: Diploma Level (14 courses + 2 Projects)\n3: Degree Level (6 Core courses + electives)\n\nCheck [Overall Structure] in Academics page.",
+            "es": "The program is split into three levels that have to be done strictly in sequence:\n1: Foundation Level: 43 credits | 9 Theory courses + 5 Labs\n2: Diploma Level: 43 credits | 8 Theory + 3 Labs + 2 Project courses\n3: BS Degree Level: 56 credits | 12 courses + 1 Lab + Electives\nCheck Overall Structure in [Academics] page."
+        }
+    },
+    {
+        "question": "What is the qualifier process?",
+        "answers": {
+            "ds": "All applicants will have to go through a Qualifier Process, wherein they will get access to 4 weeks of content for the four foundational level courses - English I, Mathematics for Data Science I, Statistics for Data Science I and Computational Thinking. Check [Qualifier Process] in Admissions page",
+            "ae": "The qualifier process includes 4 weeks of coursework and assignments for the four Foundation level courses: English 1, Mathematics-1, Electronic Systems Thinking and Circuits, and Introduction to C Programming. Regular entry applicants study the qualifier content, submit weekly graded assignments, and eligible applicants receive a hall ticket",
+            "mg": "All applicants who apply through the regular entry have to go through a Qualifier Process wherein they will get access to 4 weeks of content for the four Foundation level courses - English I, Mathematics for Data Science I, Statistics for Data Science I and Computational Thinking. Check [Qualifier Process] in Admissions page",
+            "es": "The qualifier process includes 4 weeks of coursework and assignments for the four Foundation level courses: English 1, Maths for Electronics - 1, Electronic Systems Thinking and Circuits, and Introduction to C Programming. Regular entry applicants study the qualifier content, submit weekly graded assignments, and eligible applicants receive a hall ticket."
+        }
+    },
+    {
+        "question": "Do I get placement opportunities after I complete the BS Degree?",
+        "answers": {
+            "ds": "The demand for data analysts / scientists and full stack developers is very high. Through our program, we do our best to equip our learners with required subject expertise. We are also planning to give soft skills training as part of the program. It is all about enabling IITM BSc graduates with the right job opportunities. IIT Madras will actively reach out to the recruiters in the context of placement opportunities for the graduates of the non campus BS Degree Program.",
+            "ae": "Through our program, we do our best to equip our learners with required subject expertise. We are also planning to give soft skills training as part of the program. It is all about enabling IITM BS graduates with the right job opportunities. IIT Madras will actively reach out to the recruiters in the context of placement opportunities for the graduates of the non campus BS Degree Program.",
+            "mg": "Through our program, we do our best to equip our learners with required subject expertise. We are also planning to give soft skills training as part of the program. It is all about enabling IITM BS graduates with the right job opportunities. IIT Madras will actively reach out to the recruiters in the context of placement opportunities for the graduates of the non campus BS Degree Program.",
+            "es": "The demand for skilled individuals in Electronic Systesm is high. Through our program, we do our best to equip our learners with required subject expertise. We are also planning to give soft skills training as part of the program. It is all about enabling IITM BS graduates with the right job opportunities. IIT Madras will actively reach out to the recruiters in the context of placement opportunities for the graduates of the BS Degree Program."
+        }
+    },
+    {
+        "question": "I heard there were physical practical classes. Where is the physical lab?",
+        "answers": {
+            "ds": "The BS in data science and application being a online degree there is no physical practical classess held. All the sessions are accessible by the students only ONLINE.",
+            "ae": "For now, there are no planned labs for the BS in Aeronautics and Space Technology course. Please check the official website for any updates on this.",
+            "mg": "The BS in data science and application being a online degree there is no physical practical classess held. All the sessions are accessible by the students only ONLINE.",
+            "es": "For ES lab courses, students must travel to the IIT Madras campus to demonstrate the specified lab experiments and complete the lab exams in person at the campus."
+        }
+    },
+    {
+        "question": "Can I pursue only a Diploma instead of Degree?",
+        "answers": {
+            "ds": "Learners who join the IIT Madras Online Degree Program have the option of exiting the program earlier with a Diploma in Programming AND / OR Diploma in Data Science.\n\nLearners who wish to exclusively pursue a Diploma in Programming OR Data Science alone and already have a basic understanding of the foundations can check out [IIT Madras Diploma Program website].",
+            "ae": "Learners can exit with a Diploma depending on the courses completed and credits earned. However, fast-track or direct diploma entry is not currently available.",
+            "mg": "Learners who join the IIT Madras BS in Management and Data Science program have the option of exiting the program earlier with a Diploma in Data Analytics for Business at Diploma level",
+            "es": "You can exit with Diploma in Electronic Systems. However, please note that there is no direct entry to Diploma. You will have to do Foundation level courses also, before taking up Diploma."
+        }
+    },
+    {
+        "question": "I am a CA / B.Com Graduate / Lawyer / B.Sc Graduate / Mechanical engineer / MBBS student and do not have any knowledge of coding. Does this course cover the basics of coding before progressing to advanced levels?",
+        "answers": {
+            "ds": "It is not necessary to have a prior knowledge of coding to learn from our program. Our program is structured in such a way that once a learner starts from the Foundational level and progresses towards the Degree level, in sequence, he / she will obtain sufficient proficiency in Programming and Data Science.",
+            "ae": "It is not necessary to have a prior knowledge of coding to learn from our program. Our program is structured in such a way that once a learner starts from the Foundational level and progresses towards the Degree level, in sequence, he / she will obtain sufficient proficiency in Programming.",
+            "mg": "It is not necessary to have a prior knowledge of coding to learn from our program. Our program is structured in such a way that once a learner starts from the Foundation level and progresses towards the Degree level, in sequence, he / she will obtain sufficient proficiency in relevant skills.",
+            "es": "It is not necessary to have a prior knowledge of coding to learn from our program. Our program is structured in such a way that once a learner starts from the Foundational level and progresses towards the Degree level, in sequence, he / she will obtain sufficient proficiency in Programming"
+        }
+    },
+    {
+        "question": "How / where do I ask questions or doubts related to the course content of the program?",
+        "answers": {
+            "ds": "Each course includes a dedicated discussion forum where learners can post course-related questions and interact with the course instructor or the course support team.\n\nStudents can also attend the live interaction sessions to get their queries addressed by the instructors.\n\nFor all questions not related to the course, you may write to support@study.iitm.ac.in",
+            "ae": "Each course will have a dedicated discussion forum where learners can post course-related questions and interact with the course instructor or the course support team.\n\nStudents can also attend the live interaction sessions to get their queries addressed by the instructors.\n\nFor queries not related to a specific course, please write to support-ae@study.iitm.ac.in",
+            "mg": "Each course will have a dedicated discussion forum where learners can post course-related questions and interact with the course instructor or the course support team.\n\nStudents can also attend the live interaction sessions to get their queries addressed by the instructors.\n\nFor queries not related to a specific course, please write to support-mg@study.iitm.ac.in",
+            "es": "Each course page will have a discussion forum where learners can raise their course-related questions and interact with the course instructor or course support team.\nFor all questions not related to the course, you may write to support-es@study.iitm.ac.in"
+        }
+    },
+    {
+        "question": "I ran into an error or issue in the application form. What do I do?",
+        "answers": {
+            "ds": "Please send us your registered email ID and a screenshot of the error / issue with relevant description to support@study.iitm.ac.in\n\nIf the error is after payment has been made, please forward the confirmation email from Razorpay along with email ID, application number and screenshot with description.",
+            "ae": "Please send us your registered email ID and a screenshot of the error / issue with relevant description to support-ae@study.iitm.ac.in\nIf the error is after payment has been made, please forward the confirmation email from Razorpay along with email ID, application number and screenshot with description.",
+            "mg": "Please send us your registered email ID and a screenshot of the error / issue with relevant description to support-mg@study.iitm.ac.in\n\nIf the error is after payment has been made, please forward the confirmation email from Razorpay along with email ID, application number and screenshot with description.",
+            "es": "Please send us your registered email ID and a screenshot of the error / issue with relevant description to support-es@study.iitm.ac.in\nIf the error is after payment has been made, please forward the confirmation email from Razorpay along with email ID, application number and screenshot with description."
+        }
+    },
+    {
+        "question": "Does IIT Madras offer BS degree on-campus?",
+        "answers": {
+            "ds": "No. IIT Madras does not offer the BS in Data Science and Applications on-campus. This is a non-campus programme only.",
+            "ae": "The BS in Aeronautics and Space Technology is a non-campus BS degree from IIT Madras. The content is delivered online, while quizzes and exams are conducted in person at designated centres. Some lab components must be completed at the IIT Madras campus.",
+            "mg": "No. IIT Madras does not offer BS in Management and Data Science on-campus. This is a non-campus programme only.",
+            "es": "No. IIT Madras does not offer BS in Electronic Systems on-campus. This is a non-campus programme only."
+        }
+    },
+    {
+        "question": "How long will it take to complete the online degree program if I am working?",
+        "answers": {
+            "ds": "We expect full time students (students who are pursuing BS Degree as Sole Degree) to complete the BS degree within 4 years while those pursuing the BS degree in parallel with another physical college degree program or while working can comfortably complete the BS degree in 5-6 years.\n\nWhile this is the estimated time till BS degree, a diploma can potentially be obtained around 2 years. Check [Academics] page to better understand the program structure.",
+            "ae": "The programme is flexible and allows students to progress at their own pace. The minimum duration to complete the degree is 4 years, and the maximum permitted duration is 8 years.",
+            "mg": "Full-time students are expected to complete the BS degree within 4 years, while learners pursuing it alongside another physical college degree or while working can comfortably complete it in 5-8 years. A diploma can potentially be obtained around 2 years.",
+            "es": "This BS degree is a 4 year program. On an average, we anticipate that a learner studying part time will finish the degree in 4 to 8 years. Check [Acadmics] page to better understand the program structure."
+        }
+    },
+    {
+        "question": "How and where can I apply for the program?",
+        "answers": {
+            "ds": "Anyone who is eligible may apply by visiting our website https://study.iitm.ac.in/ds/ and clicking \"APPLY NOW\" and filling in the application form, paying the application fee and uploading required documents.\nWe recommend that you go through the Academics page and Admissions page to better understand the program and the admission process before applying.",
+            "ae": "Anyone who is eligible may apply by visiting our website https://study.iitm.ac.in/ae/ and clicking \"APPLY NOW\" and filling in the application form, paying the application fee and uploading required documents.\nWe recommend that you go through the Academics page and Admissions page to better understand the program and the admission process before applying.",
+            "mg": "Anyone who is eligible may apply when the application form is open by visiting our website https://study.iitm.ac.in/mg/ and clicking \"\"APPLY NOW\"\" in the banner and filling in the application form, paying the application fee and uploading required documents.\nWe recommend that you go through the Academics page and Admissions page to better understand the program and the admission process before applying.",
+            "es": "Anyone who is eligible may apply by visiting our website https://study.iitm.ac.in/es/ and clicking \"APPLY NOW\" and filling in the application form, paying the application fee and uploading required documents.\nWe recommend that you go through the Academics page and Admissions page to better understand the program and the admission process before applying."
+        }
+    },
+    {
+        "question": "What is the eligibility criteria?",
+        "answers": {
+            "ds": "For DS, to apply for the Qualifier Exam, students should have studied Maths and English in Class 10. School students who have appeared for and passed their Class 11 final exams can also apply irrespective of age, group, stream, or board. To proceed from Qualifier level to Foundation level after passing the qualifier, the student should have studied Maths and English in Class 10 and passed Class 12 or an equivalent examination.",
+            "ae": "Class 12 (or equivalent) with Physics and Mathematics. Class 11 students who have appeared for final exams, having Maths and Physics in their class XI,may apply for the qualifier.",
+            "mg": "For MG, students should have studied Maths and English in Class 10. School students who have appeared for and passed their Class 11 final exams can also apply irrespective of age, group, stream, or board.",
+            "es": "For ES, students should have passed Class 12 or equivalent with Physics and Mathematics, irrespective of age, group, stream, or board. School students who have appeared for and passed their Class 11 final exams can also apply. If students passed Class 12 without Physics and Mathematics but passed Physics and Mathematics separately through NIOS or another equivalent organization, they may be permitted to apply after committee approval."
+        }
+    },
+    {
+        "question": "What is the Qualifier Exam?",
+        "answers": {
+            "ds": "The Qualifier Exam is part of the regular entry route into the Foundation Level. Applicants go through a 4-week qualifier process with content from four Foundation level courses for DS: English 1, Maths-1, Statistics-1, and Computational Thinking. At the end of the 4 weeks, eligible candidates take a qualifier exam based on that content; passing it makes them eligible to proceed with Foundation level registration",
+            "ae": "The Qualifier Exam is part of the admission process. It includes four weeks of preparatory coursework delivered through the online portal. The coursework consists of lecture videos, weekly graded assignments, and live sessions from the following Foundation-level courses: English I, Mathematics I, ESTC, and C Programming.\n\nStudents must submit weekly graded assignments for each course. In each course, the average of the best 2 out of the first 3 assignment scores will be calculated. Only students who achieve the minimum required average in all four courses will be eligible to appear for the Qualifier Exam, which will be conducted at the end of the four-week preparatory period.",
+            "mg": "The Qualifier Exam is part of the regular entry route into the BS in Management and Data Science programme. Applicants go through a 4-week qualifier process with content from four Foundation level courses: English 1, Maths-1, Statistics-1, and Computational Thinking. At the end of the 4 weeks, eligible candidates take a qualifier exam based on that content.",
+            "es": "The Qualifier Exam is part of the regular entry route into the BS in Electronic Systems programme. Applicants go through a 4-week qualifier process with content from four Foundation level courses: English 1, Maths for Electronics - 1, Electronic Systems Thinking and Circuits, and Introduction to C Programming. At the end of the 4 weeks, eligible candidates take a qualifier exam based on that content."
+        }
+    },
+    {
+        "question": "What is the fee structure?",
+        "answers": {
+            "ds": "Fees are charged per course/term. Please check this link : https://study.iitm.ac.in/ds/academics.html#fee-structure",
+            "ae": "Fees are charged per course/term. Please check this link : https://study.iitm.ac.in/ae/academics.html#fee-structure",
+            "mg": "Fees are charged per course/term. Please check this link : https://study.iitm.ac.in/mg/academics.html#fee-structure",
+            "es": "Fees are charged per course/term. Please check this link : https://study.iitm.ac.in/es/academics.html#fee-structure"
+        }
+    },
+    {
+        "question": "Where can I find official updates and recordings?",
+        "answers": {
+            "ds": "All updates and recordings (if available) are shared via official email and website: https://study.iitm.ac.in/ds/",
+            "ae": "All updates and recordings (if available) are shared via official email and website: https://study.iitm.ac.in/ae/",
+            "mg": "All updates and recordings (if available) are shared via official email and website: https://study.iitm.ac.in/mg/",
+            "es": "All updates and recordings (if available) are shared via official email and website: https://study.iitm.ac.in/es/"
+        }
+    },
+    {
+        "question": "What if I want to request for a city not listed in the current list of exam cities?",
+        "answers": {
+            "ds": "If the city of your choice is not in our current exam cities list, please send an email to support@study.iitm.ac.in. We will consider your request, but there is no guarantee that we will add it.",
+            "ae": "If the city of your choice is not in our current exam cities list, please send an email to support-ae@study.iitm.ac.in. We will consider your request, but there is no guarantee that we will add it.",
+            "mg": "If the city of your choice is not in our current exam cities list, please send an email to support-mg@study.iitm.ac.in. We will consider your request, but there is no guarantee that we will add it.",
+            "es": "If the city of your choice is not in our current exam cities list, please send an email to support-es@study.iitm.ac.in. We will consider your request, but there is no guarantee that we will add it."
+        }
+    },
+    {
+        "question": "I took a break year after class 12 to prepare for JEE / NEET. Can I Apply for the Program?",
+        "answers": {
+            "ds": "Yes, you may apply for the Program if you have studied Mathematics & English in class 10 and have cleared class 12 or equivalent.",
+            "ae": "Yes, you can apply if you have passed Class 12 or equivalent with Physics and Mathematics.",
+            "mg": "Yes, you may apply for the Program if you have studied Mathematics & English in class 10 and have cleared class 12 or equivalent.",
+            "es": "Yes, you can apply for the program if you have cleared class 12 or equivalent with Physics and Mathematics."
+        }
+    },
+    {
+        "question": "Which subjects need to be completed by me in class 10/12 to become eligible for this BS degree program?",
+        "answers": {
+            "ds": "For the BS in Data Science and Applications, students should have studied Maths and English in Class 10.",
+            "ae": "For the BS in Aeronautics and Space Technology, students should have studied Physics and Mathematics in Class 12 or equivalent. If they passed Class 12 without Physics and Mathematics but passed Physics and Mathematics separately through NIOS or another equivalent organization, they may be permitted to apply after committee approval.",
+            "mg": "For the BS in Management and Data Science programme, students should have studied Maths and English in Class 10.",
+            "es": "You need to have cleared class 12 or equivalent with Physics and Mathematics to become eligible to join this program"
+        }
+    },
+    {
+        "question": "I have not done 12th Class. But I have done 3-year Diploma. Can I join?",
+        "answers": {
+            "ds": "Yes, Diploma holders may be able to attempt the Qualifier Exam. Diploma recognised by AICTE or a state board of technical education of at least 3 year duration is considered equivalent to Class 12. \n\nFor specific eligibility regarding diploma holders, it is advisable to check the official IIT Madras BS programme website https://study.iitm.ac.in/ds/ and search for \"View list of accepted class 12 equivalents\"",
+            "ae": "Yes. You can join as long as you have studied Physics and Maths in your 3-year diploma.",
+            "mg": "Yes, Diploma holders may be able to attempt the Qualifier Exam. Diploma recognised by AICTE or a state board of technical education of at least 3 year duration is considered equivalent to Class 12. \n\nFor specific eligibility regarding diploma holders, it is advisable to check the official IIT Madras BS programme website https://study.iitm.ac.in/mg/ and search for \"View list of accepted class 12 equivalents\"",
+            "es": "Yes. You can join as long as you have studied Physics and Maths in your 3-year Diploma"
+        }
+    },
+    {
+        "question": "What is the procedure to change exam city from UAE to India / India to UAE?",
+        "answers": {
+            "ds": "Please send an email to support@study.iitm.ac.in",
+            "ae": "Please send an email to support-ae@study.iitm.ac.in and ge-ae@study.iitm.ac.in",
+            "mg": "Please send an email to support-mg@study.iitm.ac.in and ge-mg@study.iitm.ac.in",
+            "es": "Please send an email to support-es@study.iitm.ac.in and ge-es@study.iitm.ac.in"
+        }
+    }
+]

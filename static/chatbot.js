@@ -239,9 +239,23 @@ function getPositionOffsets() {
   };
 }
 
-export function getChatbotHTML(baseUrl, parentOrigin) {
+/**
+ * Which of the four programmes this embed is for.
+ * The host page picks it on the script tag:
+ *   <script src=".../chatbot.js" data-program-id="es"></script>
+ * Missing means "ds", so existing embeds keep working unchanged.
+ */
+function getProgramId() {
+  const script = getChatbotScript();
+  return script?.dataset.programId || "ds";
+}
+
+export function getChatbotHTML(baseUrl, parentOrigin, programId = "ds") {
   // Pass parent origin to iframe so it can use explicit targetOrigin in postMessage
-  const iframeSrc = `${baseUrl}qa.html${parentOrigin ? `?parentOrigin=${encodeURIComponent(parentOrigin)}` : ''}`;
+  const params = new URLSearchParams();
+  if (parentOrigin) params.set("parentOrigin", parentOrigin);
+  params.set("program_id", programId);
+  const iframeSrc = `${baseUrl}qa.html?${params.toString()}`;
   return /* html */ `
   <button class="chatbot-toggler">
     <span class="chatbot-toggler-open">
@@ -273,7 +287,8 @@ export function initChatbot() {
 
   const baseUrl = getChatbotBaseUrl();
   const parentOrigin = window.location.origin;
-  document.body.insertAdjacentHTML("beforeend", getChatbotHTML(baseUrl, parentOrigin));
+  const programId = getProgramId();
+  document.body.insertAdjacentHTML("beforeend", getChatbotHTML(baseUrl, parentOrigin, programId));
 
   const chatbotToggler = document.querySelector(".chatbot-toggler");
 

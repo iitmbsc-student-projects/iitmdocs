@@ -22,11 +22,14 @@ def sse_document_records(documents, repo_url: str = DEFAULT_REPO_URL) -> str:
     parts = []
     for doc in documents:
         filename = doc["filename"]
+        # Documents live in src/<program_id>/, so link with the stored path. The
+        # fallback covers objects embedded before the per-programme folders existed.
+        filepath = doc.get("filepath") or f"src/{filename}"
         arguments = _dumps(
             {
                 "relevance": doc.get("relevance"),
                 "name": re.sub(r"\.md$", "", filename),
-                "link": f"{repo_url}/blob/main/src/{filename}",
+                "link": f"{repo_url}/blob/main/{filepath}",
             }
         )
         record = {

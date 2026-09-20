@@ -26,14 +26,18 @@ import socket
 import time
 import urllib.error
 import urllib.request
+from collections import Counter
+from pathlib import Path
+
 import weaviate
 from dotenv import load_dotenv
-from pathlib import Path
+from sqlalchemy import inspect
 from weaviate.classes.config import Configure, Property, DataType
 from weaviate.classes.init import AdditionalConfig, Timeout
 from weaviate.classes.query import Filter
 
-from pg.faq_api.orm import create_pg_engine, create_session_factory, session_scope
+from programs import REAL_PROGRAM_IDS, validate_program_id
+from pg.faq_api.orm import Base, Faq, create_pg_engine, create_session_factory, session_scope
 from pg.faq_api.repository import (
     count_faqs,
     count_faqs_missing_embeddings,
@@ -46,6 +50,25 @@ from pg.faq_api.repository import (
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 OLLAMA_TIMEOUT_SECONDS = 60
+
+# Source documents live in src/<program_id>/*.md, one folder per programme. The folder
+# name is what tags each document, so a file directly in src/ is skipped.
+SRC_DIRECTORY = "src"
+
+# Seed files that must all be present under FAQ_SEED_PATH.
+SHARED_SEED_FILES = ("common.json", "timeline_based.json")
+DIFF_ANSWERS_SEED_FILE = "diff_answers.json"
+PROGRAM_SEED_DIRECTORY = "program_specific"
+
+
+def _collection_has_program_id(collection) -> bool:
+    """Return True if an existing Document collection already has a program_id property.
+
+    Used to spot a collection created before the four-programme change, which has to be
+    recreated because document search filters on program_id.
+    """
+    properties = getattr(collection.config.get(), "properties", []) or []
+    return any(getattr(prop, "name", None) == "program_id" for prop in properties)
 
 
 def clear_collection(weaviate_client):
@@ -98,6 +121,15 @@ def create_schema(weaviate_client, deployment_mode="local", embedding_model=None
                     f"ALL EXISTING EMBEDDINGS WILL BE LOST."
                 )
                 weaviate_client.collections.delete("Document")
+            elif not _collection_has_program_id(collection):
+                # A collection created before the four-programme change has no
+                # program_id, so document search could not be filtered by programme.
+                logger.warning(
+                    "Existing Document collection has no program_id property. "
+                    "Deleting and recreating it for multi-programme support. "
+                    "ALL EXISTING EMBEDDINGS WILL BE LOST."
+                )
+                weaviate_client.collections.delete("Document")
             else:
                 logger.info(f"Collection exists with correct vectorizer ({expected_vectorizer}). Reusing existing collection.")
                 return collection
@@ -106,6 +138,7 @@ def create_schema(weaviate_client, deployment_mode="local", embedding_model=None
             weaviate_client.collections.delete("Document")
 
     properties = [
+        Property(name="program_id", data_type=DataType.TEXT, description="Programme this document belongs to"),
         Property(name="filename", data_type=DataType.TEXT, description="Name of the source file"),
         Property(name="filepath", data_type=DataType.TEXT, description="Full path to the source"),
         Property(name="content", data_type=DataType.TEXT, description="Content of the document"),
@@ -131,103 +164,6 @@ EXCLUDED_FILES = [
 def _is_true(value: str | None) -> bool:
     """Return True if the string represents a truthy value (env-var friendly)."""
     return (value or "").strip().lower() in {"1", "true", "yes", "y", "on"}
-
-
-def _split_sql_statements(sql_text: str) -> list[str]:
-    """
-    Split SQL text into executable statements.
-
-    We cannot naively split on ';' because PL/pgSQL functions contain semicolons
-    inside dollar-quoted blocks (e.g. `$$ ... $$`).
-    """
-
-    statements: list[str] = []
-    buf: list[str] = []
-
-    in_single = False
-    in_double = False
-    dollar_tag: str | None = None
-
-    i = 0
-    n = len(sql_text)
-
-    def flush() -> None:
-        s = "".join(buf).strip()
-        if s:
-            statements.append(s)
-        buf.clear()
-
-    while i < n:
-        ch = sql_text[i]
-        nxt = sql_text[i + 1] if i + 1 < n else ""
-
-        if dollar_tag is None and not in_single and not in_double:
-            if ch == "-" and nxt == "-":
-                # Line comment: consume until newline.
-                while i < n and sql_text[i] != "\n":
-                    i += 1
-                continue
-            if ch == "/" and nxt == "*":
-                # Block comment: consume until closing */.
-                i += 2
-                while i + 1 < n and not (sql_text[i] == "*" and sql_text[i + 1] == "/"):
-                    i += 1
-                i += 2
-                continue
-
-        if dollar_tag is None and not in_double and ch == "'" and not in_single:
-            in_single = True
-            buf.append(ch)
-            i += 1
-            continue
-        if dollar_tag is None and in_single:
-            buf.append(ch)
-            if ch == "'" and nxt == "'":
-                buf.append(nxt)
-                i += 2
-                continue
-            if ch == "'":
-                in_single = False
-            i += 1
-            continue
-
-        if dollar_tag is None and not in_single and ch == '"':
-            in_double = not in_double
-            buf.append(ch)
-            i += 1
-            continue
-
-        if dollar_tag is None and not in_single and not in_double and ch == "$":
-            # Dollar-quote: $tag$ ... $tag$
-            j = i + 1
-            while j < n and (sql_text[j].isalnum() or sql_text[j] == "_"):
-                j += 1
-            if j < n and sql_text[j] == "$":
-                dollar_tag = sql_text[i : j + 1]
-                buf.append(dollar_tag)
-                i = j + 1
-                continue
-
-        if dollar_tag is not None:
-            if sql_text.startswith(dollar_tag, i):
-                buf.append(dollar_tag)
-                i += len(dollar_tag)
-                dollar_tag = None
-                continue
-            buf.append(ch)
-            i += 1
-            continue
-
-        if not in_single and not in_double and dollar_tag is None and ch == ";":
-            flush()
-            i += 1
-            continue
-
-        buf.append(ch)
-        i += 1
-
-    flush()
-    return statements
 
 
 def _log_pg_env_summary() -> None:
@@ -280,68 +216,195 @@ def _create_pg_bootstrap_engine():
     return engine
 
 
-def _pg_apply_sql_file(engine, path: str) -> None:
-    """Execute a SQL file by splitting it into statements safely."""
+def _ensure_faq_schema(engine) -> None:
+    """Create the `faqs` table from the Faq model, recreating it if it predates program_id.
 
-    t0 = time.monotonic()
-    with open(path, "r", encoding="utf-8") as f:
-        sql_text = f.read()
+    The model in pg/faq_api/orm.py is the only definition of the table, so this is what
+    creates it - there is no hand-written CREATE TABLE anywhere.
 
-    statements = _split_sql_statements(sql_text)
-    if not statements:
-        logger.info(f"[pg-bootstrap] SQL file is empty, skipping: {path}")
-        return
+    A database seeded before the four-programme change has a `faqs` table with no
+    `program_id` column. SQLAlchemy has no ALTER TABLE, and create_all() would leave the
+    old table in place and then fail on insert. So we detect that case and stop, unless
+    the operator opts in to dropping it.
 
-    logger.info(f"[pg-bootstrap] Applying SQL: {path} (statements={len(statements)})")
-    with engine.begin() as conn:
-        for idx, stmt in enumerate(statements, 1):
-            try:
-                conn.exec_driver_sql(stmt)
-            except Exception:
-                snippet = stmt.strip().replace("\n", " ")
-                if len(snippet) > 220:
-                    snippet = snippet[:220] + "…"
-                logger.exception(f"[pg-bootstrap] SQL failed in {path} at statement {idx}/{len(statements)}: {snippet}")
-                raise
-    logger.info(f"[pg-bootstrap] Applied SQL OK: {path} (elapsed_ms={int((time.monotonic() - t0) * 1000)})")
+    ASSUMPTION: pg/seed IS THE SOURCE OF TRUTH FOR FAQ ROWS. The drop is only safe
+    because every row is reloaded from pg/seed immediately afterwards, and the
+    embeddings are regenerated by the backfill in the same run.
+    """
+    inspector = inspect(engine)
+    if inspector.has_table(Faq.__tablename__):
+        columns = {column["name"] for column in inspector.get_columns(Faq.__tablename__)}
+        if "program_id" not in columns:
+            if not _is_true(os.getenv("FAQ_ALLOW_DESTRUCTIVE_MIGRATION")):
+                raise RuntimeError(
+                    "The faqs table predates program_id and cannot be used as-is. "
+                    "Set FAQ_ALLOW_DESTRUCTIVE_MIGRATION=true to drop and recreate it "
+                    "from pg/seed, or add the column manually first."
+                )
+            logger.warning(
+                "[pg-bootstrap] Dropping legacy faqs table (no program_id) and recreating it."
+            )
+            Faq.__table__.drop(engine)
+
+    Base.metadata.create_all(engine, tables=[Faq.__table__])
+    logger.info("[pg-bootstrap] FAQ schema ready (created from the Faq model).")
+
+def _clean_seed_text(value, field_name: str, file_path: str, row_index: int) -> str:
+    """Return a stripped seed field, or raise ValueError naming exactly what is wrong.
+
+    Example: _clean_seed_text("  Fees?  ", "Question", "pg/seed/common.json", 3)
+    returns "Fees?".
+    """
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{file_path} row {row_index}: missing or empty {field_name}")
+    return value.strip()
+
+
+def _append_seed_row(rows: list[dict], program_id: str, question: str, answer: str) -> None:
+    """Add one validated FAQ row to the list being built for the database."""
+    rows.append(
+        {
+            "program_id": validate_program_id(program_id, allow_common=True),
+            "question": question,
+            "answer": answer,
+        }
+    )
+
+
+def _load_question_answer_seed_file(file_path: Path, program_id: str) -> list[dict]:
+    """Load one seed file of [{"Question": ..., "Answer": ...}] rows for one programme.
+
+    The capitalised keys are intentional - they match the spreadsheets the FAQs are
+    exported from, and a lowercase key is treated as a mistake rather than accepted
+    silently.
+
+    A row where BOTH fields are blank is a spreadsheet gap: it is skipped with a
+    warning. A row where only one field is blank is a real mistake and raises.
+    """
+    data = json.loads(file_path.read_text(encoding="utf-8"))
+    if not isinstance(data, list):
+        raise ValueError(f"{file_path}: seed file must be a JSON array")
+
+    rows: list[dict] = []
+    for index, row in enumerate(data):
+        if not isinstance(row, dict):
+            raise ValueError(f"{file_path} row {index}: must be an object")
+
+        question = row.get("Question")
+        answer = row.get("Answer")
+        blank_question = not isinstance(question, str) or not question.strip()
+        blank_answer = not isinstance(answer, str) or not answer.strip()
+        if blank_question and blank_answer:
+            logger.warning(f"Skipping blank FAQ seed row {index} in {file_path}")
+            continue
+
+        _append_seed_row(
+            rows,
+            program_id,
+            _clean_seed_text(question, "Question", str(file_path), index),
+            _clean_seed_text(answer, "Answer", str(file_path), index),
+        )
+    return rows
+
+
+def _load_diff_answers_seed_file(file_path: Path) -> list[dict]:
+    """Load the file of questions that have a different answer in each programme.
+
+    Shape is [{"question": ..., "answers": {"ds": ..., "es": ..., "mg": ..., "ae": ...}}]
+    with lowercase keys, and it expands to one database row per programme. Every
+    programme must have an answer, otherwise that bot would silently lose the question.
+    """
+    data = json.loads(file_path.read_text(encoding="utf-8"))
+    if not isinstance(data, list):
+        raise ValueError(f"{file_path}: seed file must be a JSON array")
+
+    rows: list[dict] = []
+    for index, row in enumerate(data):
+        if not isinstance(row, dict):
+            raise ValueError(f"{file_path} row {index}: must be an object")
+
+        question = _clean_seed_text(row.get("question"), "question", str(file_path), index)
+        answers = row.get("answers")
+        if not isinstance(answers, dict):
+            raise ValueError(f"{file_path} row {index}: missing 'answers' object")
+
+        for program_id in REAL_PROGRAM_IDS:
+            answer = _clean_seed_text(
+                answers.get(program_id), f"answers.{program_id}", str(file_path), index
+            )
+            _append_seed_row(rows, program_id, question, answer)
+    return rows
+
+
+def _required_seed_files(seed_directory: Path) -> list[Path]:
+    """Return every seed file that must exist, in the order they are loaded."""
+    files = [seed_directory / name for name in SHARED_SEED_FILES]
+    files.append(seed_directory / DIFF_ANSWERS_SEED_FILE)
+    files.extend(
+        seed_directory / PROGRAM_SEED_DIRECTORY / f"{program_id}.json"
+        for program_id in REAL_PROGRAM_IDS
+    )
+    return files
 
 
 def _load_seed_faqs(path: str) -> list[dict]:
-    """Load `pg/seed/faqs.json` and validate minimal shape."""
+    """Load every FAQ seed file under `path` into rows ready for the database.
 
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    if not isinstance(data, list):
-        raise ValueError(f"Seed file must be a JSON array: {path}")
+    `path` is the seed DIRECTORY (FAQ_SEED_PATH, normally "pg/seed"), not a single file.
+    Expected layout:
 
-    for i, row in enumerate(data):
-        if not isinstance(row, dict):
-            raise ValueError(f"Seed row {i} must be an object")
-        for key in ("question", "answer"):
-            if not (row.get(key) or "").strip():
-                raise ValueError(f"Seed row {i} missing/empty {key}")
+        pg/seed/common.json                  -> program_id "common"
+        pg/seed/timeline_based.json          -> program_id "common"
+        pg/seed/diff_answers.json            -> one row per real programme
+        pg/seed/program_specific/<id>.json   -> program_id "<id>"
 
-    seen_questions: dict[str, int] = {}
+    Example return value:
+        [{"program_id": "common", "question": "What are the fees?", "answer": "..."}, ...]
+
+    The same question may appear under different programmes with different answers.
+    It may not appear twice under the SAME programme - that would break the
+    (program_id, question) unique constraint on the faqs table, so it fails here first
+    with a message naming both rows.
+    """
+    seed_directory = Path(path)
+    if not seed_directory.is_dir():
+        raise ValueError(
+            f"FAQ_SEED_PATH must be a directory containing the seed files, got: {path}"
+        )
+
+    missing = [str(f) for f in _required_seed_files(seed_directory) if not f.is_file()]
+    if missing:
+        raise ValueError("Missing required FAQ seed files: " + ", ".join(missing))
+
+    rows: list[dict] = []
+    for name in SHARED_SEED_FILES:
+        rows.extend(_load_question_answer_seed_file(seed_directory / name, "common"))
+    rows.extend(_load_diff_answers_seed_file(seed_directory / DIFF_ANSWERS_SEED_FILE))
+    for program_id in REAL_PROGRAM_IDS:
+        rows.extend(
+            _load_question_answer_seed_file(
+                seed_directory / PROGRAM_SEED_DIRECTORY / f"{program_id}.json", program_id
+            )
+        )
+
+    seen: dict[tuple[str, str], int] = {}
     duplicates: list[str] = []
-    for i, row in enumerate(data):
-        question = row["question"].strip()
-        key = " ".join(question.lower().split())
-        if key in seen_questions:
-            duplicates.append(f"rows {seen_questions[key]} and {i}: {question}")
+    for index, row in enumerate(rows):
+        key = (row["program_id"], " ".join(row["question"].lower().split()))
+        if key in seen:
+            duplicates.append(f"{row['program_id']} rows {seen[key]} and {index}: {row['question']}")
         else:
-            seen_questions[key] = i
+            seen[key] = index
 
     if duplicates:
         preview = "; ".join(duplicates[:10])
         suffix = "" if len(duplicates) <= 10 else f"; ... and {len(duplicates) - 10} more"
         raise ValueError(
-            "Duplicate FAQ questions found in seed file. "
-            "Each question must be unique because pg/seed/faqs.json is the FAQ source of truth. "
+            "Duplicate FAQ questions within the same programme. "
             f"Duplicates: {preview}{suffix}"
         )
 
-    return data
-
+    return rows
 
 def _request_ollama_embedding(text: str, ollama_url: str, model: str) -> list[float]:
     """
@@ -452,8 +515,7 @@ def maybe_bootstrap_cloudsql_faq_db(deployment_mode: str) -> None:
         logger.info("PG FAQ bootstrap disabled (ENABLE_PG_FAQ_BOOTSTRAP not set to true).")
         return
 
-    seed_path = os.getenv("FAQ_SEED_PATH", "pg/seed/faqs.json")
-    schema_dir = os.getenv("FAQ_SQL_DIR", "pg/init")
+    seed_path = os.getenv("FAQ_SEED_PATH", "pg/seed")
 
     model = os.getenv("OLLAMA_MODEL", "bge-m3")
     dimension = int(os.getenv("FAQ_EMBEDDING_DIMENSION", os.getenv("EMBEDDING_DIMENSION", "1024")))
@@ -469,7 +531,6 @@ def maybe_bootstrap_cloudsql_faq_db(deployment_mode: str) -> None:
 
     logger.info("[pg-bootstrap] Starting Cloud SQL FAQ bootstrap...")
     logger.info(f"[pg-bootstrap] Seed: {seed_path}")
-    logger.info(f"[pg-bootstrap] SQL dir: {schema_dir}")
     logger.info(f"[pg-bootstrap] Embedding: model={model}, dim={dimension}, batch={batch_size}, ollama_url={ollama_url}")
 
     t_all = time.monotonic()
@@ -497,8 +558,7 @@ def maybe_bootstrap_cloudsql_faq_db(deployment_mode: str) -> None:
     # Step 3: connect + migrate + replace seed rows + backfill.
     engine = _create_pg_bootstrap_engine()
     try:
-        # Existing schema SQL in the repo (idempotent; safe to re-run).
-        _pg_apply_sql_file(engine, os.path.join(schema_dir, "001_faq_schema.sql"))
+        _ensure_faq_schema(engine)
 
         session_factory = create_session_factory(engine)
 
@@ -512,7 +572,9 @@ def maybe_bootstrap_cloudsql_faq_db(deployment_mode: str) -> None:
 
         with session_scope(session_factory) as session:
             inserted = replace_seed_faqs(session, rows)
-        logger.info(f"[pg-bootstrap] Replaced FAQ table with {inserted} seed rows.")
+        per_program = Counter(row["program_id"] for row in rows)
+        counts = ", ".join(f"{pid}={per_program[pid]}" for pid in sorted(per_program))
+        logger.info(f"[pg-bootstrap] Replaced FAQ table with {inserted} seed rows ({counts}).")
 
         try:
             with session_scope(session_factory) as session:
@@ -543,13 +605,29 @@ def maybe_bootstrap_cloudsql_faq_db(deployment_mode: str) -> None:
     logger.info(f"[pg-bootstrap] Cloud SQL FAQ bootstrap finished OK (elapsed_ms={int((time.monotonic() - t_all) * 1000)})")
 
 
+def _program_id_for_document(file_path: Path, src_path: Path):
+    """Return the programme a source file belongs to, or None if it is not in one.
+
+    The programme is the first folder under src/, so src/es/fees.md belongs to "es".
+    A file directly in src/, or in a folder that is not a known programme, returns None
+    and is skipped rather than being embedded without a programme.
+    """
+    relative_path = file_path.relative_to(src_path)
+    if len(relative_path.parts) < 2:
+        return None
+    try:
+        return validate_program_id(relative_path.parts[0])
+    except ValueError:
+        return None
+
+
 def embed_documents(weaviate_client, src_directory: str, deployment_mode="local", embedding_model=None, ollama_endpoint=None) -> bool:
-    """Embed all documents from the src directory into Weaviate"""
+    """Embed all documents from src/<program_id>/ into Weaviate, tagged by programme."""
     collection = create_schema(weaviate_client, deployment_mode, embedding_model, ollama_endpoint)
     src_path = Path(src_directory)
 
     # Exclude internal files that shouldn't be in vector search
-    files = [f for f in src_path.glob("**/*") if f.is_file() and f.name not in EXCLUDED_FILES]
+    files = [f for f in src_path.glob("**/*.md") if f.is_file() and f.name not in EXCLUDED_FILES]
     total_files = len(files)
     logger.info(f"Processing {total_files} files from {src_path.absolute()}")
 
@@ -558,6 +636,14 @@ def embed_documents(weaviate_client, src_directory: str, deployment_mode="local"
     failed = 0
 
     for idx, file_path in enumerate(files, 1):
+        program_id = _program_id_for_document(file_path, src_path)
+        if program_id is None:
+            logger.warning(
+                f"[{idx}/{total_files}] Skipping {file_path}: expected src/<program_id>/<file>.md"
+            )
+            skipped += 1
+            continue
+
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
@@ -568,8 +654,10 @@ def embed_documents(weaviate_client, src_directory: str, deployment_mode="local"
 
         try:
             doc_data = {
+                "program_id": program_id,
                 "filename": file_path.name,
-                "filepath": str(file_path),
+                # Posix form so the stored path also works as a GitHub link suffix.
+                "filepath": file_path.as_posix(),
                 "content": content,
                 "file_size": file_path.stat().st_size,
                 "content_hash": hashlib.sha256(content.encode("utf-8")).hexdigest(),
@@ -652,7 +740,7 @@ def main():
         )
         if clear_db:
             clear_collection(client)
-        embed_documents(client, "src", deployment_mode, embedding_model)
+        embed_documents(client, SRC_DIRECTORY, deployment_mode, embedding_model)
         client.close()
     elif deployment_mode == "gce":
         # GCE mode: connect to remote Weaviate on GCE VM (no auth needed)
@@ -686,7 +774,7 @@ def main():
         )
         if clear_db:
             clear_collection(client)
-        embed_documents(client, "src", deployment_mode, embedding_model, ollama_url)
+        embed_documents(client, SRC_DIRECTORY, deployment_mode, embedding_model, ollama_url)
         client.close()
 
 

@@ -13,8 +13,10 @@ COPY backend/requirements.txt /app/backend/requirements.txt
 RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
 # Django app + reused FAQ data layer (pg.faq_api, shared with embed.py) + static frontend.
+# programs.py is the shared programme registry, also copied into the embed image.
 COPY backend /app/backend
 COPY pg /app/pg
+COPY programs.py /app/programs.py
 COPY static /app/static
 
 # /app       -> makes `pg.faq_api.*` importable

@@ -9,11 +9,13 @@ do we open safe ORM sessions against Postgres?"
 It intentionally does not contain product operations like "search FAQs" or
 "replace seed rows". Those actions live in `repository.py`.
 
-Keep this file in sync with `pg/init/001_faq_schema.sql`:
-- the `Faq` model describes the same columns as the `faqs` table
-- `embedding` must stay `Vector(1024)` while the schema uses `vector(1024)`
-- connection settings come from the same `PG*` environment variables used by
-  the PG FAQ API and bootstrap job
+The `Faq` model below is the ONLY definition of the `faqs` table. `embed.py`
+creates the table from it with `Base.metadata.create_all`, so there is no separate
+hand-written schema to keep in sync. `pg/init/001_vector_extension.sql` only enables
+the pgvector extension, which SQLAlchemy cannot express.
+
+Connection settings come from the same `PG*` environment variables used by the
+Django service and the bootstrap job.
 """
 
 import os
@@ -21,7 +23,7 @@ from contextlib import contextmanager
 from typing import Iterator, Optional
 
 from pgvector.sqlalchemy import Vector
-from sqlalchemy import BigInteger, Text, create_engine
+from sqlalchemy import BigInteger, Index, Text, UniqueConstraint, create_engine
 from sqlalchemy.engine import URL, Engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
@@ -34,14 +36,25 @@ class Base(DeclarativeBase):
 
 
 class Faq(Base):
-    """ORM model for the Postgres `faqs` table."""
+    """ORM model for the Postgres `faqs` table.
+
+    One row is one question/answer pair belonging to one programme. `program_id` is
+    "ds", "es", "mg", "ae", or "common" for the pool shared by all four - see
+    programs.py. A programme reads its own rows plus the common ones.
+    """
 
     __tablename__ = "faqs"
+    __table_args__ = (
+        # The same question may exist for several programmes with different answers,
+        # so uniqueness is per programme rather than per question.
+        UniqueConstraint("program_id", "question", name="faqs_program_question_unique"),
+        Index("idx_faqs_program_id", "program_id"),
+    )
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    program_id: Mapped[str] = mapped_column(Text, nullable=False)
     question: Mapped[str] = mapped_column(Text, nullable=False)
     answer: Mapped[str] = mapped_column(Text, nullable=False)
-    # Must stay in sync with `embedding vector(1024)` in pg/init/001_faq_schema.sql.
     embedding: Mapped[Optional[list[float]]] = mapped_column(Vector(1024), nullable=True)
 
 
