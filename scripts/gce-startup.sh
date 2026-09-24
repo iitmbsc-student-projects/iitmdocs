@@ -44,11 +44,6 @@ services:
       - ./weaviate_data:/var/lib/weaviate
     depends_on:
       - ollama
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/v1/.well-known/ready"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   ollama:
     image: ollama/ollama:latest
@@ -57,11 +52,6 @@ services:
       - "11434:11434"
     volumes:
       - ./ollama_data:/root/.ollama
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11434/"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 EOF
 
 # Start services
