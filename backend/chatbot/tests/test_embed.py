@@ -34,6 +34,8 @@ def _stub_weaviate():
 
 _stub_weaviate()
 import embed  # noqa: E402  (must follow the stub above)
+from pg.faq_api.orm import Faq
+from pg.faq_api.repository import replace_seed_faqs
 
 
 REPO_ROOT = Path(embed.__file__).parent
@@ -96,6 +98,19 @@ class SeedDirectoryTests(SimpleTestCase):
         self.assertEqual({row["program_id"] for row in fees}, {"ds", "es", "mg", "ae"})
         self.assertEqual({row["answer"] for row in fees}, {"ds fees", "es fees", "mg fees", "ae fees"})
 
+    def test_rows_remember_which_seed_category_created_them(self):
+        rows = self.load()
+
+        categories = {
+            (row["program_id"], row["question"]): row["question_category"]
+            for row in rows
+        }
+
+        self.assertEqual(categories[("common", "Shared question?")], "common")
+        self.assertEqual(categories[("common", "When is the exam?")], "timeline_based")
+        self.assertEqual(categories[("ds", "ds question?")], "program_specific")
+        self.assertEqual(categories[("ae", "What are the fees?")], "diff_answers")
+
     def test_a_file_that_is_not_a_directory_is_rejected(self):
         seed_file = Path(self._tmp.name) / "faqs.json"
         seed_file.write_text("[]", encoding="utf-8")
@@ -142,6 +157,37 @@ class SeedDirectoryTests(SimpleTestCase):
         ]
         with self.assertRaisesRegex(ValueError, "Duplicate FAQ questions"):
             self.load()
+
+
+class FaqSchemaTests(SimpleTestCase):
+    def test_faq_model_has_question_category_column(self):
+        """The database must retain source type after JSON stops being live data."""
+        self.assertIn("question_category", Faq.__table__.columns)
+
+    def test_seed_replace_keeps_question_category(self):
+        """A new database created from seed must retain each row's category."""
+
+        class FakeSession:
+            def execute(self, statement):
+                self.delete_statement = statement
+
+            def add_all(self, faqs):
+                self.faqs = list(faqs)
+
+        session = FakeSession()
+        replace_seed_faqs(
+            session,
+            [
+                {
+                    "program_id": "common",
+                    "question": "Shared question?",
+                    "answer": "Shared answer",
+                    "question_category": "common",
+                }
+            ],
+        )
+
+        self.assertEqual(session.faqs[0].question_category, "common")
 
 
 class RealSeedTests(SimpleTestCase):

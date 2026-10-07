@@ -37,7 +37,14 @@ from weaviate.classes.init import AdditionalConfig, Timeout
 from weaviate.classes.query import Filter
 
 from programs import REAL_PROGRAM_IDS, validate_program_id
-from pg.faq_api.orm import Base, Faq, create_pg_engine, create_session_factory, session_scope
+from pg.faq_api.orm import (
+    Base,
+    FAQ_QUESTION_CATEGORIES,
+    Faq,
+    create_pg_engine,
+    create_session_factory,
+    session_scope,
+)
 from pg.faq_api.repository import (
     count_faqs,
     count_faqs_missing_embeddings,
@@ -260,18 +267,30 @@ def _clean_seed_text(value, field_name: str, file_path: str, row_index: int) -> 
     return value.strip()
 
 
-def _append_seed_row(rows: list[dict], program_id: str, question: str, answer: str) -> None:
-    """Add one validated FAQ row to the list being built for the database."""
+def _append_seed_row(
+    rows: list[dict], program_id: str, question: str, answer: str, question_category: str
+) -> None:
+    """Add one validated FAQ row and its source category.
+
+    Example: a row from `common.json` uses `question_category="common"`.
+    The category lets Postgres preserve the seed-file meaning after JSON stops
+    being the live source of truth.
+    """
+    if question_category not in FAQ_QUESTION_CATEGORIES:
+        raise ValueError(f"Unknown FAQ question category: {question_category}")
     rows.append(
         {
             "program_id": validate_program_id(program_id, allow_common=True),
             "question": question,
             "answer": answer,
+            "question_category": question_category,
         }
     )
 
 
-def _load_question_answer_seed_file(file_path: Path, program_id: str) -> list[dict]:
+def _load_question_answer_seed_file(
+    file_path: Path, program_id: str, question_category: str
+) -> list[dict]:
     """Load one seed file of [{"Question": ..., "Answer": ...}] rows for one programme.
 
     The capitalised keys are intentional - they match the spreadsheets the FAQs are
@@ -303,6 +322,7 @@ def _load_question_answer_seed_file(file_path: Path, program_id: str) -> list[di
             program_id,
             _clean_seed_text(question, "Question", str(file_path), index),
             _clean_seed_text(answer, "Answer", str(file_path), index),
+            question_category,
         )
     return rows
 
@@ -332,7 +352,7 @@ def _load_diff_answers_seed_file(file_path: Path) -> list[dict]:
             answer = _clean_seed_text(
                 answers.get(program_id), f"answers.{program_id}", str(file_path), index
             )
-            _append_seed_row(rows, program_id, question, answer)
+            _append_seed_row(rows, program_id, question, answer, "diff_answers")
     return rows
 
 
@@ -378,12 +398,19 @@ def _load_seed_faqs(path: str) -> list[dict]:
 
     rows: list[dict] = []
     for name in SHARED_SEED_FILES:
-        rows.extend(_load_question_answer_seed_file(seed_directory / name, "common"))
+        question_category = "common" if name == "common.json" else "timeline_based"
+        rows.extend(
+            _load_question_answer_seed_file(
+                seed_directory / name, "common", question_category
+            )
+        )
     rows.extend(_load_diff_answers_seed_file(seed_directory / DIFF_ANSWERS_SEED_FILE))
     for program_id in REAL_PROGRAM_IDS:
         rows.extend(
             _load_question_answer_seed_file(
-                seed_directory / PROGRAM_SEED_DIRECTORY / f"{program_id}.json", program_id
+                seed_directory / PROGRAM_SEED_DIRECTORY / f"{program_id}.json",
+                program_id,
+                "program_specific",
             )
         )
 

@@ -143,6 +143,7 @@ def replace_seed_faqs(session: Session, rows: Sequence[dict]) -> int:
             program_id=row["program_id"],
             question=row["question"],
             answer=row["answer"],
+            question_category=row["question_category"],
         )
         for row in rows
     )
