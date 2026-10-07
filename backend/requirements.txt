@@ -8,6 +8,6 @@ python-dotenv>=1.0.0
 
 # Django's async FAQ reader reuses the model and pgvector query from pg/faq_api;
 # the synchronous bootstrap path remains unchanged and uses the same DB stack.
-SQLAlchemy>=2.0.0
+SQLAlchemy[asyncio]>=2.0.0
 psycopg[binary]>=3.2.0
 pgvector>=0.3.0
