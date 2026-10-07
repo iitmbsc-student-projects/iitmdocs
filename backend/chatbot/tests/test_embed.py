@@ -333,6 +333,40 @@ class FaqBootstrapControlTests(SimpleTestCase):
         replace_seed.assert_not_called()
         engine.dispose.assert_called_once()
 
+    @mock.patch.dict(
+        os.environ,
+        {"FAQ_IMPORT_QUESTION_CATEGORIES_FROM_SEED": "true"},
+        clear=True,
+    )
+    @mock.patch("embed.replace_seed_faqs")
+    @mock.patch("embed.assign_seed_question_categories", return_value=2)
+    @mock.patch("embed._load_seed_faqs", return_value=[{"question": "ignored"}])
+    @mock.patch("embed.count_faqs", return_value=2)
+    @mock.patch("embed.session_scope")
+    @mock.patch("embed.create_session_factory")
+    @mock.patch("embed._ensure_faq_schema")
+    @mock.patch("embed._create_pg_bootstrap_engine")
+    def test_explicit_category_import_never_replaces_existing_faqs(
+        self,
+        create_engine,
+        ensure_schema,
+        create_session_factory,
+        session_scope,
+        count_faqs,
+        load_seed,
+        assign_categories,
+        replace_seed,
+    ):
+        engine = mock.Mock()
+        create_engine.return_value = engine
+
+        embed.maybe_prepare_cloudsql_faq_db("gce")
+
+        load_seed.assert_called_once_with("pg/seed")
+        assign_categories.assert_called_once()
+        replace_seed.assert_not_called()
+        engine.dispose.assert_called_once()
+
 
 class RealSeedTests(SimpleTestCase):
     """Guards the committed pg/seed against an accidental bad edit."""
