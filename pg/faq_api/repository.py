@@ -28,7 +28,7 @@ not depend on SQLAlchemy session-bound model instances.
 from dataclasses import dataclass
 from typing import Optional, Sequence
 
-from sqlalchemy import delete, func, select
+from sqlalchemy import delete, func, select, update
 from sqlalchemy.orm import Session
 
 from programs import faq_program_scope
@@ -148,6 +148,44 @@ def replace_seed_faqs(session: Session, rows: Sequence[dict]) -> int:
         for row in rows
     )
     return len(rows)
+
+
+def assign_seed_question_categories(session: Session, rows: Sequence[dict]) -> int:
+    """Label existing FAQ rows from one checked seed snapshot, without replacing them.
+
+    This runs once when Postgres becomes the source of truth. It compares the
+    existing `(program_id, question)` pairs with the committed seed rows before
+    writing categories, so it cannot silently label a different FAQ dataset.
+
+    Example: a matching row from `timeline_based.json` receives
+    `question_category="timeline_based"`.
+    """
+    seed_categories = {
+        (row["program_id"], row["question"]): row["question_category"] for row in rows
+    }
+    if len(seed_categories) != len(rows):
+        raise ValueError("Committed seed contains duplicate program/question rows")
+
+    database_rows = session.execute(select(Faq.id, Faq.program_id, Faq.question)).all()
+    database_categories = {
+        (program_id, question): int(faq_id)
+        for faq_id, program_id, question in database_rows
+    }
+
+    if set(database_categories) != set(seed_categories):
+        raise ValueError(
+            "Postgres FAQ rows do not match the committed seed; "
+            "question categories were not changed."
+        )
+
+    for key, faq_id in database_categories.items():
+        session.execute(
+            update(Faq)
+            .where(Faq.id == faq_id)
+            .values(question_category=seed_categories[key])
+        )
+
+    return len(database_categories)
 
 
 def get_faqs_missing_embeddings(session: Session, limit: int) -> list[FaqEmbeddingInput]:
