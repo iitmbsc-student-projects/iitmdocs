@@ -251,6 +251,21 @@ def _ensure_faq_schema(engine) -> None:
             connection.execute(text("ALTER TABLE faqs ADD COLUMN question_category TEXT"))
         logger.info("[pg-bootstrap] Added faqs.question_category without changing FAQ rows.")
 
+    check_constraints = {
+        constraint.get("name")
+        for constraint in inspect(engine).get_check_constraints(Faq.__tablename__)
+    }
+    if "faqs_question_category_check" not in check_constraints:
+        with engine.begin() as connection:
+            connection.execute(
+                text(
+                    "ALTER TABLE faqs ADD CONSTRAINT faqs_question_category_check "
+                    "CHECK (question_category IS NULL OR question_category IN "
+                    "('common', 'timeline_based', 'program_specific', 'diff_answers'))"
+                )
+            )
+        logger.info("[pg-bootstrap] Added allowed-value check for faqs.question_category.")
+
     logger.info("[pg-bootstrap] FAQ schema ready.")
 
 def _clean_seed_text(value, field_name: str, file_path: str, row_index: int) -> str:

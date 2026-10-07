@@ -251,6 +251,37 @@ class FaqSchemaTests(SimpleTestCase):
                 ],
             )
 
+    @mock.patch("embed.Base.metadata.create_all")
+    @mock.patch("embed.inspect")
+    def test_schema_migration_adds_category_column_and_allowed_value_check(
+        self, inspect_database, create_all
+    ):
+        """Existing FAQ tables need the same category rule as a new table."""
+
+        inspector = mock.Mock()
+        inspector.has_table.return_value = True
+        inspector.get_columns.return_value = [
+            {"name": "id"},
+            {"name": "program_id"},
+            {"name": "question"},
+            {"name": "answer"},
+            {"name": "embedding"},
+        ]
+        inspector.get_check_constraints.return_value = []
+        inspect_database.return_value = inspector
+        engine = mock.MagicMock()
+
+        embed._ensure_faq_schema(engine)
+
+        statements = [
+            str(call.args[0])
+            for call in engine.begin.return_value.__enter__.return_value.execute.call_args_list
+        ]
+        self.assertTrue(any("ADD COLUMN question_category" in statement for statement in statements))
+        self.assertTrue(
+            any("ADD CONSTRAINT faqs_question_category_check" in statement for statement in statements)
+        )
+
 
 class FaqBootstrapControlTests(SimpleTestCase):
     @mock.patch.dict(os.environ, {"ENABLE_PG_FAQ_SCHEMA_MIGRATION": "true"}, clear=True)
