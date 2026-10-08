@@ -30,6 +30,16 @@
               <option value="diff_answers">Same question, four different answers</option>
             </select>
 
+            <div id="program-field">
+              <label for="program-id">Programme</label>
+              <select id="program-id" name="program_id">
+                <option value="ds">Data Science (DS)</option>
+                <option value="ae">Aerospace Engineering (AE)</option>
+                <option value="es">Electronic Systems (ES)</option>
+                <option value="mg">Management (MG)</option>
+              </select>
+            </div>
+
             <label for="question">Question</label>
             <textarea id="question" name="question" rows="3" placeholder="Write the question as a student might ask it"></textarea>
 
@@ -42,5 +52,6 @@
         </form>
       </section>
     </main>
+    <script src="/faq-admin.js" type="module"></script>
   </body>
 </html>

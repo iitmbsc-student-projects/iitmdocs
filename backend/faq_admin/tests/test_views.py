@@ -8,3 +8,5 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "FAQ Admin")
         self.assertContains(response, "Check similar FAQs")
+        self.assertContains(response, 'id="program-id"')
+        self.assertContains(response, "/faq-admin.js")
