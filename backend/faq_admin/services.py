@@ -9,6 +9,7 @@ uses one row, and a different-answer FAQ uses four programme rows.
 """
 from programs import REAL_PROGRAM_IDS, validate_program_id
 from pg.faq_api.orm import FAQ_QUESTION_CATEGORIES
+from sqlalchemy import select
 
 
 class FaqAdminValidationError(ValueError):
@@ -67,3 +68,44 @@ def build_new_faq_rows(data):
         "answer": _required_text(data, "answer"),
         "question_category": category,
     }]
+
+
+def find_similar_faqs(question):
+    """Return up to five close FAQ questions from every stored programme.
+
+    Example: an AE draft can return a close shared or DS FAQ, because this is
+    an admin review rather than a chatbot answer request.
+    """
+    import httpx
+    from chatbot import appconfig
+    from pg.faq_api.orm import Faq, create_pg_engine, create_session_factory, session_scope
+
+    question = _required_text({"question": question}, "question")
+    response = httpx.post(
+        f"{appconfig.faq_ollama_url().rstrip('/')}/api/embeddings",
+        json={"model": appconfig.ollama_model(), "prompt": question},
+        timeout=60,
+    )
+    response.raise_for_status()
+    embedding = response.json().get("embedding")
+    if not isinstance(embedding, list) or len(embedding) != appconfig.embedding_dimension():
+        raise RuntimeError("Embedding service returned an invalid vector")
+
+    distance = Faq.embedding.cosine_distance(embedding)
+    similarity = (1 - distance).label("similarity")
+    engine = create_pg_engine()
+    try:
+        with session_scope(create_session_factory(engine)) as session:
+            rows = session.execute(
+                select(Faq, similarity)
+                .where(Faq.embedding.is_not(None))
+                .order_by(distance)
+                .limit(5)
+            ).all()
+    finally:
+        engine.dispose()
+    return [
+        {"id": int(row.id), "question": row.question, "program_id": row.program_id,
+         "question_category": row.question_category, "similarity": float(score)}
+        for row, score in rows if float(score) >= 0.65
+    ]

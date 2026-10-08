@@ -16,6 +16,7 @@ from faq_admin import views as faq_admin_views
 
 urlpatterns = [
     path("faq-admin", faq_admin_views.page, name="faq-admin"),
+    path("faq-admin/check-similar", faq_admin_views.check_similar, name="faq-admin-check-similar"),
     path("answer", views.AnswerView.as_view(), name="answer"),
     path("feedback", views.FeedbackView.as_view(), name="feedback"),
     path("faq/<int:faq_id>", views.FaqDetailView.as_view(), name="faq-detail"),
