@@ -6,6 +6,7 @@ const checkButton = document.querySelector("#check-similar");
 const status = document.querySelector("#form-status");
 const results = document.querySelector("#similar-results");
 const program = document.querySelector("#program-id");
+const addButton = document.querySelector("#add-faq");
 
 function showFieldsForCategory() {
   const needsProgram = category.value === "program_specific";
@@ -30,7 +31,21 @@ checkButton.addEventListener("click", async () => {
       row.textContent = `${item.question} (${Math.round(item.similarity * 100)}% matched; ${item.question_category}, ${item.program_id})${item.is_exact ? " — exact duplicate" : ""}`;
       results.append(row);
     }
+    addButton.disabled = false;
   } catch (error) {
     status.textContent = error.message || "Could not check similar FAQs. Try again.";
   } finally { checkButton.disabled = false; }
+});
+
+addButton.addEventListener("click", async () => {
+  if (!window.confirm("Add this FAQ to the current database?")) return;
+  addButton.disabled = true;
+  const payload = {question_category: category.value, program_id: program.value, question: question.value, answer: document.querySelector("#answer").value};
+  try {
+    const response = await fetch("/faq-admin/add", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)});
+    const body = await response.json();
+    if (!response.ok) throw new Error(body.error);
+    status.textContent = `FAQ added. Saved row: ${body.saved_ids.join(", ")}.`;
+    results.replaceChildren();
+  } catch (error) { status.textContent = error.message || "Could not save the FAQ. Try again."; }
 });

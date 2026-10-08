@@ -120,3 +120,32 @@ def find_similar_faqs(question, selected_program):
          )}
         for row, score in rows if float(score) >= 0.65
     ]
+
+
+def add_new_faq(data):
+    """Create validated FAQ rows with one Ollama embedding for their question."""
+    import httpx
+    from chatbot import appconfig
+    from pg.faq_api.orm import Faq, create_pg_engine, create_session_factory, session_scope
+
+    rows = build_new_faq_rows(data)
+    response = httpx.post(f"{appconfig.faq_ollama_url().rstrip('/')}/api/embeddings", json={"model": appconfig.ollama_model(), "prompt": rows[0]["question"]}, timeout=60)
+    response.raise_for_status()
+    embedding = response.json().get("embedding")
+    if not isinstance(embedding, list) or len(embedding) != appconfig.embedding_dimension():
+        raise RuntimeError("Embedding service returned an invalid vector")
+    engine = create_pg_engine()
+    try:
+        with session_scope(create_session_factory(engine)) as session:
+            saved = []
+            for row in rows:
+                existing = session.scalar(select(Faq.id).where(Faq.program_id == row["program_id"], Faq.question == row["question"]))
+                if existing is not None:
+                    raise FaqAdminValidationError("An exact FAQ already exists in this programme")
+                faq = Faq(**row, embedding=embedding)
+                session.add(faq)
+                session.flush()
+                saved.append(int(faq.id))
+            return saved
+    finally:
+        engine.dispose()

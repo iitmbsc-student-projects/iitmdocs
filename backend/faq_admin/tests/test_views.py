@@ -21,3 +21,12 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["matches"][0]["id"], 8)
         find_similar_faqs.assert_called_once_with("fee payment procedure", "ds")
+
+    @mock.patch("faq_admin.views.add_new_faq")
+    def test_add_endpoint_returns_saved_row_ids(self, add_new_faq):
+        add_new_faq.return_value = [31]
+
+        response = self.client.post("/faq-admin/add", data='{"question_category":"program_specific","program_id":"ds","question":"New FAQ?","answer":"New answer"}', content_type="application/json")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {"saved_ids": [31]})

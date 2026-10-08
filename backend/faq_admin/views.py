@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .services import FaqAdminValidationError, find_similar_faqs
+from .services import FaqAdminValidationError, add_new_faq, find_similar_faqs
 
 
 @ensure_csrf_cookie
@@ -31,3 +31,14 @@ def check_similar(request):
         return JsonResponse({"error": "Enter a question first."}, status=400)
     except Exception:
         return JsonResponse({"error": "Could not check similar FAQs. Try again."}, status=502)
+
+
+@require_POST
+def add(request):
+    """Add a reviewed FAQ to Postgres and return its new row ids."""
+    try:
+        return JsonResponse({"saved_ids": add_new_faq(json.loads(request.body))})
+    except (json.JSONDecodeError, FaqAdminValidationError) as exc:
+        return JsonResponse({"error": str(exc)}, status=400)
+    except Exception:
+        return JsonResponse({"error": "Could not save the FAQ. Try again."}, status=502)
