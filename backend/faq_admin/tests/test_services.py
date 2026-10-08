@@ -1,9 +1,11 @@
 from django.test import SimpleTestCase
 
-from faq_admin.services import build_new_faq_rows
+from faq_admin.services import build_new_faq_rows, normalize_question
 
 
 class NewFaqRowTests(SimpleTestCase):
+    def test_normalize_question_ignores_case_and_extra_spaces(self):
+        self.assertEqual(normalize_question("  Fee   Payment? "), "fee payment?")
     def test_different_answers_create_one_row_for_each_programme(self):
         rows = build_new_faq_rows(
             {

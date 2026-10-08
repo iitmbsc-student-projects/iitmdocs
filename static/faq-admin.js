@@ -22,10 +22,11 @@ checkButton.addEventListener("click", async () => {
     const response = await fetch("/faq-admin/check-similar", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({question: question.value})});
     const body = await response.json();
     if (!response.ok) throw new Error(body.error);
-    status.textContent = body.matches.length ? "Similar FAQs found:" : "No close FAQ found. You may add this question.";
+    const exact = body.matches.filter((item) => item.is_exact);
+    status.textContent = exact.length ? "Exact duplicate found. Review it before adding a new FAQ." : body.matches.length ? "Similar FAQs found:" : "No close FAQ found. You may add this question.";
     for (const item of body.matches) {
       const row = document.createElement("p");
-      row.textContent = `${item.question} (${Math.round(item.similarity * 100)}% matched; ${item.question_category}, ${item.program_id})`;
+      row.textContent = `${item.question} (${Math.round(item.similarity * 100)}% matched; ${item.question_category}, ${item.program_id})${item.is_exact ? " — exact duplicate" : ""}`;
       results.append(row);
     }
   } catch (error) {

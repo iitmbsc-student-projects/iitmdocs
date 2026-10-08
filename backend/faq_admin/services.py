@@ -16,6 +16,11 @@ class FaqAdminValidationError(ValueError):
     """Raised when an admin form cannot safely become FAQ database rows."""
 
 
+def normalize_question(value):
+    """Normalize a question for exact duplicate comparison."""
+    return " ".join(str(value).lower().split())
+
+
 def _required_text(data, key):
     """Return one trimmed required string from form data.
 
@@ -104,8 +109,10 @@ def find_similar_faqs(question):
             ).all()
     finally:
         engine.dispose()
+    normalized_question = normalize_question(question)
     return [
         {"id": int(row.id), "question": row.question, "program_id": row.program_id,
-         "question_category": row.question_category, "similarity": float(score)}
+         "question_category": row.question_category or "uncategorised",
+         "similarity": float(score), "is_exact": normalize_question(row.question) == normalized_question}
         for row, score in rows if float(score) >= 0.65
     ]
