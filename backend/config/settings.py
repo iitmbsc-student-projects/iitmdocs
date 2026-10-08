@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "chatbot.apps.ChatbotConfig",
+    "faq_admin.apps.FaqAdminConfig",
 ]
 
 # Every middleware below declares both sync and async support. Static files are

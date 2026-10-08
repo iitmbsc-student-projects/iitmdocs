@@ -44,6 +44,7 @@ _DJANGO_PATHS = {
     "/answer",
     "/feedback",
     "/faq",
+    "/faq-admin",
     "/health",
     "/github-config",
     "/qa",
@@ -52,7 +53,7 @@ _DJANGO_PATHS = {
 
 def _is_django_path(path):
     """Return whether one public path belongs to Django instead of static files."""
-    return path in _DJANGO_PATHS or path.startswith("/faq/")
+    return path in _DJANGO_PATHS or path.startswith("/faq/") or path.startswith("/faq-admin/")
 
 
 def _static_cors_headers(scope):

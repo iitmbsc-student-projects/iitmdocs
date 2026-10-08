@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FAQ Admin · IIT Madras BS</title>
+    <link rel="stylesheet" href="/faq-admin.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="admin-card" aria-labelledby="page-title">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">IIT Madras BS chatbot</p>
+            <h1 id="page-title">FAQ Admin</h1>
+            <p class="subtitle">Review a question before adding it to the FAQ database.</p>
+          </div>
+          <span class="environment-badge">FAQ workspace</span>
+        </header>
+
+        <form id="faq-form" novalidate>
+          {% csrf_token %}
+          <fieldset>
+            <legend>New or updated FAQ</legend>
+            <label for="question-category">FAQ type</label>
+            <select id="question-category" name="question_category">
+              <option value="program_specific">Programme-specific</option>
+              <option value="common">Common to all programmes</option>
+              <option value="timeline_based">Timeline-based for all programmes</option>
+              <option value="diff_answers">Same question, four different answers</option>
+            </select>
+
+            <label for="question">Question</label>
+            <textarea id="question" name="question" rows="3" placeholder="Write the question as a student might ask it"></textarea>
+
+            <label for="answer">Answer</label>
+            <textarea id="answer" name="answer" rows="6" placeholder="Write a clear, complete answer"></textarea>
+          </fieldset>
+
+          <p id="form-status" class="form-status" aria-live="polite"></p>
+          <button id="check-similar" class="primary-button" type="button">Check similar FAQs</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
