@@ -26,7 +26,7 @@ def check_similar(request):
     """Embed one drafted question and return its close stored FAQ matches."""
     try:
         body = json.loads(request.body)
-        return JsonResponse({"matches": find_similar_faqs(body.get("question"))})
+        return JsonResponse({"matches": find_similar_faqs(body.get("question"), body.get("program_id"))})
     except (json.JSONDecodeError, FaqAdminValidationError):
         return JsonResponse({"error": "Enter a question first."}, status=400)
     except Exception:

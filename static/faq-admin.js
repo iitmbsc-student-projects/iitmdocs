@@ -5,6 +5,7 @@ const question = document.querySelector("#question");
 const checkButton = document.querySelector("#check-similar");
 const status = document.querySelector("#form-status");
 const results = document.querySelector("#similar-results");
+const program = document.querySelector("#program-id");
 
 function showFieldsForCategory() {
   const needsProgram = category.value === "program_specific";
@@ -19,7 +20,7 @@ checkButton.addEventListener("click", async () => {
   status.textContent = "Checking similar FAQs…";
   results.replaceChildren();
   try {
-    const response = await fetch("/faq-admin/check-similar", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({question: question.value})});
+    const response = await fetch("/faq-admin/check-similar", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({question: question.value, program_id: program.value})});
     const body = await response.json();
     if (!response.ok) throw new Error(body.error);
     const exact = body.matches.filter((item) => item.is_exact);

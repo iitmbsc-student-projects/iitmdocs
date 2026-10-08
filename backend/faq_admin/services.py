@@ -75,7 +75,7 @@ def build_new_faq_rows(data):
     }]
 
 
-def find_similar_faqs(question):
+def find_similar_faqs(question, selected_program):
     """Return up to five close FAQ questions from every stored programme.
 
     Example: an AE draft can return a close shared or DS FAQ, because this is
@@ -86,6 +86,7 @@ def find_similar_faqs(question):
     from pg.faq_api.orm import Faq, create_pg_engine, create_session_factory, session_scope
 
     question = _required_text({"question": question}, "question")
+    selected_program = validate_program_id(selected_program)
     response = httpx.post(
         f"{appconfig.faq_ollama_url().rstrip('/')}/api/embeddings",
         json={"model": appconfig.ollama_model(), "prompt": question},
@@ -113,6 +114,9 @@ def find_similar_faqs(question):
     return [
         {"id": int(row.id), "question": row.question, "program_id": row.program_id,
          "question_category": row.question_category or "uncategorised",
-         "similarity": float(score), "is_exact": normalize_question(row.question) == normalized_question}
+         "similarity": float(score), "is_exact": (
+             normalize_question(row.question) == normalized_question
+             and row.program_id in (selected_program, "common")
+         )}
         for row, score in rows if float(score) >= 0.65
     ]
