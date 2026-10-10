@@ -24,6 +24,7 @@
             <legend>New or updated FAQ</legend>
             <label for="question-category">FAQ type</label>
             <select id="question-category" name="question_category">
+              <option value="" selected disabled>Select an FAQ type</option>
               <option value="program_specific">Programme-specific</option>
               <option value="common">Common to all programmes</option>
               <option value="timeline_based">Timeline-based for all programmes</option>
@@ -32,7 +33,7 @@
 
             <div id="program-field">
               <label for="program-id">Programme</label>
-              <select id="program-id" name="program_id">
+              <select id="program-id" name="program_id" disabled>
                 <option value="ds">Data Science (DS)</option>
                 <option value="ae">Aerospace Engineering (AE)</option>
                 <option value="es">Electronic Systems (ES)</option>
@@ -41,7 +42,7 @@
             </div>
 
             <label for="question">Question</label>
-            <textarea id="question" name="question" rows="3" placeholder="Write the question as a student might ask it"></textarea>
+            <textarea id="question" name="question" rows="3" disabled placeholder="Write the question as a student might ask it"></textarea>
 
             <div id="answer-entry" hidden>
               <div id="single-answer-field">
@@ -82,7 +83,7 @@
           </fieldset>
 
           <p id="form-status" class="form-status" aria-live="polite"></p>
-          <button id="check-similar" class="primary-button" type="button">Check similar FAQs</button>
+          <button id="check-similar" class="primary-button" type="button" disabled>Check similar FAQs</button>
           <button id="add-faq" class="secondary-button" type="button" disabled>Add anyway</button>
           <button id="update-faq" class="secondary-button" type="button" disabled>Update selected FAQ</button>
           <button id="save-faq" class="primary-button" type="button" hidden>Save FAQ</button>

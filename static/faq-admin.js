@@ -30,11 +30,21 @@ const csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value;
 let selectedFaqId = null;
 let reviewComplete = false;
 let actionMode = null;
+let formBusy = false;
+
+function syncInputAvailability() {
+  const needsFaqType = category.value === "";
+  for (const control of form.querySelectorAll("select, textarea")) {
+    control.disabled = formBusy || (needsFaqType && control !== category);
+  }
+  checkButton.disabled = formBusy || needsFaqType;
+}
 
 function showFieldsForCategory() {
+  const hasFaqType = category.value !== "";
   const needsProgram = category.value === "program_specific";
   const needsDifferentAnswers = category.value === "diff_answers";
-  programField.hidden = !needsProgram;
+  programField.hidden = !hasFaqType || !needsProgram;
   answerEntry.hidden = actionMode === null;
   singleAnswerField.hidden = actionMode === null || needsDifferentAnswers;
   differentAnswerFields.hidden = actionMode === null || !needsDifferentAnswers;
@@ -42,6 +52,7 @@ function showFieldsForCategory() {
   for (const field of programAnswerFields) {
     field.hidden = needsDifferentAnswers && answerProgram.value !== "all" && field.dataset.programId !== answerProgram.value;
   }
+  syncInputAvailability();
 }
 
 function resetActionButtons() {
@@ -79,8 +90,8 @@ function answerPayload() {
 }
 
 function setFormBusy(isBusy) {
-  for (const control of form.querySelectorAll("select, textarea")) control.disabled = isBusy;
-  checkButton.disabled = isBusy;
+  formBusy = isBusy;
+  syncInputAvailability();
   addButton.disabled = isBusy || !reviewComplete;
   updateButton.disabled = isBusy || !reviewComplete || selectedFaqId === null;
   saveButton.disabled = isBusy;
@@ -182,7 +193,11 @@ function addResultCard(item) {
   results.append(card);
 }
 
-category.addEventListener("change", clearReviewedState);
+category.addEventListener("change", () => {
+  if (category.value === "") return;
+  category.querySelector('option[value=""]')?.remove();
+  clearReviewedState();
+});
 question.addEventListener("input", clearReviewedState);
 program.addEventListener("change", clearReviewedState);
 answerProgram.addEventListener("change", showFieldsForCategory);
