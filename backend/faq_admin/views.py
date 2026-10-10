@@ -7,9 +7,9 @@ import json
 
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import ensure_csrf_cookie
-from .services import FaqAdminValidationError, add_new_faq, find_similar_faqs
+from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
+from .services import FaqAdminValidationError, add_new_faq, find_similar_faqs, get_faq_answer, update_existing_faq
 
 
 @ensure_csrf_cookie
@@ -33,7 +33,19 @@ def check_similar(request):
         return JsonResponse({"error": "Could not check similar FAQs. Try again."}, status=502)
 
 
+@require_GET
+def answer(request, faq_id):
+    """Return one selected FAQ answer for the collapsed review card."""
+    try:
+        return JsonResponse(get_faq_answer(faq_id))
+    except FaqAdminValidationError as exc:
+        return JsonResponse({"error": str(exc)}, status=404)
+    except Exception:
+        return JsonResponse({"error": "Could not load the FAQ answer. Try again."}, status=502)
+
+
 @require_POST
+@csrf_protect
 def add(request):
     """Add a reviewed FAQ to Postgres and return its new row ids."""
     try:
@@ -42,3 +54,15 @@ def add(request):
         return JsonResponse({"error": str(exc)}, status=400)
     except Exception:
         return JsonResponse({"error": "Could not save the FAQ. Try again."}, status=502)
+
+
+@require_POST
+@csrf_protect
+def update(request):
+    """Update the server-identified FAQ row or different-answer group."""
+    try:
+        return JsonResponse(update_existing_faq(json.loads(request.body)))
+    except (json.JSONDecodeError, FaqAdminValidationError) as exc:
+        return JsonResponse({"error": str(exc)}, status=400)
+    except Exception:
+        return JsonResponse({"error": "Could not update the FAQ. Try again."}, status=502)
