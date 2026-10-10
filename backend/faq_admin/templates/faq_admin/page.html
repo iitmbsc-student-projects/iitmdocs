@@ -13,7 +13,7 @@
           <div>
             <p class="eyebrow">IIT Madras BS chatbot</p>
             <h1 id="page-title">FAQ Admin</h1>
-            <p class="subtitle">Review a question before adding it to the FAQ database.</p>
+            <p class="subtitle">Review a question before adding or updating it in the FAQ database.</p>
           </div>
           <span class="environment-badge">FAQ workspace</span>
         </header>
@@ -43,13 +43,50 @@
             <label for="question">Question</label>
             <textarea id="question" name="question" rows="3" placeholder="Write the question as a student might ask it"></textarea>
 
-            <label for="answer">Answer</label>
-            <textarea id="answer" name="answer" rows="6" placeholder="Write a clear, complete answer"></textarea>
+            <div id="answer-entry" hidden>
+              <div id="single-answer-field">
+                <label for="answer">Answer</label>
+                <textarea id="answer" name="answer" rows="6" placeholder="Write a clear, complete answer"></textarea>
+              </div>
+
+              <div id="different-answer-fields" hidden>
+                <p class="field-help">Provide one answer for each programme. When updating, choose whether to save one answer or all four.</p>
+                <div id="answer-program-field">
+                  <label for="answer-program-id">Answers to update</label>
+                  <select id="answer-program-id" name="answer_program_id">
+                    <option value="all">All four programmes</option>
+                    <option value="ds">Data Science (DS) only</option>
+                    <option value="ae">Aerospace Engineering (AE) only</option>
+                    <option value="es">Electronic Systems (ES) only</option>
+                    <option value="mg">Management (MG) only</option>
+                  </select>
+                </div>
+                <div class="program-answer-field" data-program-id="ds">
+                  <label for="answer-ds">Data Science answer</label>
+                  <textarea id="answer-ds" name="answer_ds" rows="4"></textarea>
+                </div>
+                <div class="program-answer-field" data-program-id="ae">
+                  <label for="answer-ae">Aerospace Engineering answer</label>
+                  <textarea id="answer-ae" name="answer_ae" rows="4"></textarea>
+                </div>
+                <div class="program-answer-field" data-program-id="es">
+                  <label for="answer-es">Electronic Systems answer</label>
+                  <textarea id="answer-es" name="answer_es" rows="4"></textarea>
+                </div>
+                <div class="program-answer-field" data-program-id="mg">
+                  <label for="answer-mg">Management answer</label>
+                  <textarea id="answer-mg" name="answer_mg" rows="4"></textarea>
+                </div>
+              </div>
+            </div>
           </fieldset>
 
           <p id="form-status" class="form-status" aria-live="polite"></p>
           <button id="check-similar" class="primary-button" type="button">Check similar FAQs</button>
           <button id="add-faq" class="secondary-button" type="button" disabled>Add anyway</button>
+          <button id="update-faq" class="secondary-button" type="button" disabled>Update selected FAQ</button>
+          <button id="save-faq" class="primary-button" type="button" hidden>Save FAQ</button>
+          <button id="cancel-answer-entry" class="secondary-button" type="button" hidden>Back to results</button>
           <div id="similar-results" class="similar-results" aria-live="polite"></div>
         </form>
       </section>
