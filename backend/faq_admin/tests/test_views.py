@@ -15,6 +15,8 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertContains(response, 'id="program-id" name="program_id" disabled')
         self.assertContains(response, 'id="question" name="question" rows="3" disabled')
         self.assertContains(response, 'id="check-similar" class="primary-button" type="button" disabled')
+        self.assertContains(response, 'id="question-lock-info"')
+        self.assertContains(response, 'id="add-flow-notice" class="add-flow-notice" hidden')
         self.assertContains(response, 'id="answer-program-field"')
         self.assertContains(response, 'id="answer-entry" hidden')
         self.assertContains(response, "/faq-admin.js")

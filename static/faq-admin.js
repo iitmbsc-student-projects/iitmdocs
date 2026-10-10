@@ -19,6 +19,8 @@ const updateButton = document.querySelector("#update-faq");
 const saveButton = document.querySelector("#save-faq");
 const cancelAnswerEntryButton = document.querySelector("#cancel-answer-entry");
 const answerEntry = document.querySelector("#answer-entry");
+const addFlowNotice = document.querySelector("#add-flow-notice");
+const questionLockInfoButton = document.querySelector("#question-lock-info");
 const singleAnswerField = document.querySelector("#single-answer-field");
 const differentAnswerFields = document.querySelector("#different-answer-fields");
 const answerProgramField = document.querySelector("#answer-program-field");
@@ -31,13 +33,19 @@ let selectedFaqId = null;
 let reviewComplete = false;
 let actionMode = null;
 let formBusy = false;
+let addFlowNoticeExpanded = false;
 
 function syncInputAvailability() {
   const needsFaqType = category.value === "";
+  const locksQuestionDetails = actionMode === "add";
   for (const control of form.querySelectorAll("select, textarea")) {
-    control.disabled = formBusy || (needsFaqType && control !== category);
+    const isQuestionDetail = control === category || control === program || control === question;
+    control.disabled = formBusy || (needsFaqType && control !== category) || (locksQuestionDetails && isQuestionDetail);
   }
-  checkButton.disabled = formBusy || needsFaqType;
+  checkButton.disabled = formBusy || needsFaqType || locksQuestionDetails;
+  questionLockInfoButton.hidden = !locksQuestionDetails;
+  addFlowNotice.hidden = !locksQuestionDetails || !addFlowNoticeExpanded;
+  questionLockInfoButton.setAttribute("aria-expanded", String(locksQuestionDetails && addFlowNoticeExpanded));
 }
 
 function showFieldsForCategory() {
@@ -75,6 +83,7 @@ function clearReviewedState() {
   selectedFaqId = null;
   reviewComplete = false;
   actionMode = null;
+  addFlowNoticeExpanded = false;
   clearAnswerFields();
   resetActionButtons();
   results.replaceChildren();
@@ -100,6 +109,7 @@ function setFormBusy(isBusy) {
 
 async function startAnswerEntry(mode) {
   actionMode = mode;
+  addFlowNoticeExpanded = false;
   resetActionButtons();
   showFieldsForCategory();
 
@@ -201,6 +211,10 @@ category.addEventListener("change", () => {
 question.addEventListener("input", clearReviewedState);
 program.addEventListener("change", clearReviewedState);
 answerProgram.addEventListener("change", showFieldsForCategory);
+questionLockInfoButton.addEventListener("click", () => {
+  addFlowNoticeExpanded = !addFlowNoticeExpanded;
+  syncInputAvailability();
+});
 showFieldsForCategory();
 
 checkButton.addEventListener("click", async () => {

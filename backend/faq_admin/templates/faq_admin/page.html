@@ -41,8 +41,15 @@
               </select>
             </div>
 
-            <label for="question">Question</label>
+            <div class="question-label-row">
+              <label for="question">Question</label>
+              <button id="question-lock-info" class="question-lock-info" type="button" hidden aria-expanded="false" aria-controls="add-flow-notice">i</button>
+            </div>
             <textarea id="question" name="question" rows="3" disabled placeholder="Write the question as a student might ask it"></textarea>
+
+            <p id="add-flow-notice" class="add-flow-notice" hidden>
+              Your question is locked while you write the answer. To change it, choose <strong>Back to results</strong>, check similar FAQs again, and re-enter the answer.
+            </p>
 
             <div id="answer-entry" hidden>
               <div id="single-answer-field">
