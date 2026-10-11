@@ -43,8 +43,8 @@ textarea { resize: vertical; }
 select:focus, textarea:focus, button:focus-visible { outline: 3px solid #8cc6ff; outline-offset: 2px; border-color: #1769aa; }
 .form-status { min-height: 1.4em; margin: 22px 0 12px; color: #43536a; }
 .field-help { margin: 20px 0 -5px; color: #596a80; font-size: .92rem; line-height: 1.45; }
-.question-label-row { display: flex; align-items: center; gap: 4px; }
-.question-label-row label { margin-bottom: 0; }
+.question-label-row { display: flex; align-items: center; gap: 4px; margin: 20px 0 7px; }
+.question-label-row label { margin: 0; }
 .question-lock-info { display: inline-grid; place-items: center; width: 18px; height: 18px; margin-top: 0; padding: 0; border: 0; border-radius: 50%; color: #fff; background: #0b9fc2; cursor: pointer; font: 700 .85rem/1 Georgia, serif; }
 .question-lock-info[hidden] { display: none; }
 .question-lock-info:hover { background: #087f9b; }
