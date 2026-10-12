@@ -44,6 +44,11 @@ def _bool_env(name: str, default: bool) -> bool:
 DEBUG = _bool_env("DJANGO_DEBUG", False)
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(",")
 
+# The Test FAQ-admin page sends CSRF-protected saves from this HTTPS Cloud Run URL.
+CSRF_TRUSTED_ORIGINS = [
+    "https://iitm-chatbot-worker-140256174016.asia-south1.run.app",
+]
+
 INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",

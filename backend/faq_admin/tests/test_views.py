@@ -74,6 +74,30 @@ class FaqAdminPageTests(SimpleTestCase):
 
         self.assertEqual(response.status_code, 403)
 
+    @mock.patch("faq_admin.views.add_new_faq")
+    def test_add_endpoint_accepts_the_test_cloud_run_origin(self, add_new_faq):
+        """The Test FAQ-admin page must be allowed to save back to its own URL."""
+        add_new_faq.return_value = [31]
+        csrf_client = Client(enforce_csrf_checks=True)
+        origin = "https://iitm-chatbot-worker-140256174016.asia-south1.run.app"
+
+        csrf_client.get("/faq-admin", secure=True)
+        csrf_token = csrf_client.cookies["csrftoken"].value
+        response = csrf_client.post(
+            "/faq-admin/add",
+            data=(
+                '{"question_category":"program_specific","program_id":"ds",'
+                '"question":"New FAQ?","answer":"New answer"}'
+            ),
+            content_type="application/json",
+            secure=True,
+            HTTP_ORIGIN=origin,
+            HTTP_X_CSRFTOKEN=csrf_token,
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {"saved_ids": [31]})
+
     @mock.patch("faq_admin.views.get_faq_answer")
     def test_answer_endpoint_returns_one_selected_faq_answer(self, get_faq_answer):
         get_faq_answer.return_value = {
