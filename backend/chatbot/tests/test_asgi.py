@@ -55,11 +55,24 @@ class AsgiBoundaryTests(IsolatedAsyncioTestCase):
             headers=[(b"origin", b"https://example.test")],
         )
 
-        expected_start = Path("../static/index.html").read_bytes()[:80]
+        repo_root = Path(__file__).resolve().parents[3]
+        expected_start = (repo_root / "static/index.html").read_bytes()[:80]
         self.assertEqual(status, 200)
         self.assertTrue(body.startswith(expected_start))
         self.assertEqual(headers[b"access-control-allow-origin"], b"*")
         self.assertEqual(headers[b"x-content-type-options"], b"nosniff")
+
+    async def test_faq_admin_static_assets_are_served_by_asgi(self):
+        """The deployed FAQ Admin page needs both browser assets from /static."""
+        css_status, css_headers, css_body = await request_asgi("/faq-admin.css")
+        js_status, js_headers, js_body = await request_asgi("/faq-admin.js")
+
+        self.assertEqual(css_status, 200)
+        self.assertEqual(css_headers[b"content-type"], b"text/css")
+        self.assertIn(b".page-shell", css_body)
+        self.assertEqual(js_status, 200)
+        self.assertEqual(js_headers[b"content-type"], b"text/javascript")
+        self.assertIn(b"const checkButton", js_body)
 
     async def test_async_data_routes_keep_contract_through_asgi(self):
         """The real router and middleware must preserve both async API shapes."""
