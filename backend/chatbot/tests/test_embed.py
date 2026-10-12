@@ -5,9 +5,11 @@ Nothing here talks to Weaviate, so we stub that import before importing embed - 
 alternative is installing the weaviate client just to test file parsing.
 """
 import json
+import os
 import sys
 import tempfile
 import types
+from unittest import mock
 from pathlib import Path
 
 from django.test import SimpleTestCase
@@ -34,6 +36,8 @@ def _stub_weaviate():
 
 _stub_weaviate()
 import embed  # noqa: E402  (must follow the stub above)
+from pg.faq_api.orm import Faq
+from pg.faq_api.repository import assign_seed_question_categories, replace_seed_faqs
 
 
 REPO_ROOT = Path(embed.__file__).parent
@@ -96,6 +100,19 @@ class SeedDirectoryTests(SimpleTestCase):
         self.assertEqual({row["program_id"] for row in fees}, {"ds", "es", "mg", "ae"})
         self.assertEqual({row["answer"] for row in fees}, {"ds fees", "es fees", "mg fees", "ae fees"})
 
+    def test_rows_remember_which_seed_category_created_them(self):
+        rows = self.load()
+
+        categories = {
+            (row["program_id"], row["question"]): row["question_category"]
+            for row in rows
+        }
+
+        self.assertEqual(categories[("common", "Shared question?")], "common")
+        self.assertEqual(categories[("common", "When is the exam?")], "timeline_based")
+        self.assertEqual(categories[("ds", "ds question?")], "program_specific")
+        self.assertEqual(categories[("ae", "What are the fees?")], "diff_answers")
+
     def test_a_file_that_is_not_a_directory_is_rejected(self):
         seed_file = Path(self._tmp.name) / "faqs.json"
         seed_file.write_text("[]", encoding="utf-8")
@@ -142,6 +159,213 @@ class SeedDirectoryTests(SimpleTestCase):
         ]
         with self.assertRaisesRegex(ValueError, "Duplicate FAQ questions"):
             self.load()
+
+
+class FaqSchemaTests(SimpleTestCase):
+    def test_faq_model_has_question_category_column(self):
+        """The database must retain source type after JSON stops being live data."""
+        self.assertIn("question_category", Faq.__table__.columns)
+
+    def test_seed_replace_keeps_question_category(self):
+        """A new database created from seed must retain each row's category."""
+
+        class FakeSession:
+            def execute(self, statement):
+                self.delete_statement = statement
+
+            def add_all(self, faqs):
+                self.faqs = list(faqs)
+
+        session = FakeSession()
+        replace_seed_faqs(
+            session,
+            [
+                {
+                    "program_id": "common",
+                    "question": "Shared question?",
+                    "answer": "Shared answer",
+                    "question_category": "common",
+                }
+            ],
+        )
+
+        self.assertEqual(session.faqs[0].question_category, "common")
+
+    def test_category_import_labels_existing_rows_without_replacing_them(self):
+        """The one-time import must update metadata, not delete FAQ rows."""
+
+        class FakeResult:
+            def all(self):
+                return [
+                    (10, "common", "Shared question?"),
+                    (11, "ds", "DS-only question?"),
+                ]
+
+        class FakeSession:
+            def __init__(self):
+                self.statements = []
+
+            def execute(self, statement):
+                self.statements.append(statement)
+                if len(self.statements) == 1:
+                    return FakeResult()
+
+        session = FakeSession()
+        updated = assign_seed_question_categories(
+            session,
+            [
+                {
+                    "program_id": "common",
+                    "question": "Shared question?",
+                    "question_category": "common",
+                },
+                {
+                    "program_id": "ds",
+                    "question": "DS-only question?",
+                    "question_category": "program_specific",
+                },
+            ],
+        )
+
+        self.assertEqual(updated, 2)
+        self.assertEqual(len(session.statements), 3)
+
+    def test_category_import_rejects_a_database_row_missing_from_seed(self):
+        class FakeResult:
+            def all(self):
+                return [(10, "common", "Database-only question?")]
+
+        class FakeSession:
+            def execute(self, statement):
+                return FakeResult()
+
+        with self.assertRaisesRegex(ValueError, "do not match the committed seed"):
+            assign_seed_question_categories(
+                FakeSession(),
+                [
+                    {
+                        "program_id": "common",
+                        "question": "Seed-only question?",
+                        "question_category": "common",
+                    }
+                ],
+            )
+
+    @mock.patch("embed.Base.metadata.create_all")
+    @mock.patch("embed.inspect")
+    def test_schema_migration_adds_category_column_and_allowed_value_check(
+        self, inspect_database, create_all
+    ):
+        """Existing FAQ tables need the same category rule as a new table."""
+
+        inspector = mock.Mock()
+        inspector.has_table.return_value = True
+        inspector.get_columns.return_value = [
+            {"name": "id"},
+            {"name": "program_id"},
+            {"name": "question"},
+            {"name": "answer"},
+            {"name": "embedding"},
+        ]
+        inspector.get_check_constraints.return_value = []
+        inspect_database.return_value = inspector
+        engine = mock.MagicMock()
+
+        embed._ensure_faq_schema(engine)
+
+        statements = [
+            str(call.args[0])
+            for call in engine.begin.return_value.__enter__.return_value.execute.call_args_list
+        ]
+        self.assertTrue(any("ADD COLUMN question_category" in statement for statement in statements))
+        self.assertTrue(
+            any("ADD CONSTRAINT faqs_question_category_check" in statement for statement in statements)
+        )
+
+
+class FaqBootstrapControlTests(SimpleTestCase):
+    @mock.patch.dict(os.environ, {"ENABLE_PG_FAQ_SCHEMA_MIGRATION": "true"}, clear=True)
+    @mock.patch("embed._load_seed_faqs")
+    @mock.patch("embed._ensure_faq_schema")
+    @mock.patch("embed._create_pg_bootstrap_engine")
+    def test_normal_schema_migration_does_not_load_or_replace_seed_faqs(
+        self, create_engine, ensure_schema, load_seed
+    ):
+        """A normal deployment may migrate schema but must preserve live FAQs."""
+        engine = mock.Mock()
+        create_engine.return_value = engine
+
+        embed.maybe_prepare_cloudsql_faq_db("gce")
+
+        ensure_schema.assert_called_once_with(engine)
+        load_seed.assert_not_called()
+        engine.dispose.assert_called_once()
+
+    @mock.patch.dict(
+        os.environ,
+        {"FAQ_BOOTSTRAP_EMPTY_DATABASE_FROM_SEED": "true"},
+        clear=True,
+    )
+    @mock.patch("embed.replace_seed_faqs")
+    @mock.patch("embed._load_seed_faqs")
+    @mock.patch("embed.count_faqs", return_value=1)
+    @mock.patch("embed.session_scope")
+    @mock.patch("embed.create_session_factory")
+    @mock.patch("embed._ensure_faq_schema")
+    @mock.patch("embed._create_pg_bootstrap_engine")
+    def test_empty_database_bootstrap_refuses_to_read_or_replace_a_live_database(
+        self,
+        create_engine,
+        ensure_schema,
+        create_session_factory,
+        session_scope,
+        count_faqs,
+        load_seed,
+        replace_seed,
+    ):
+        engine = mock.Mock()
+        create_engine.return_value = engine
+
+        with self.assertRaisesRegex(RuntimeError, "only for an empty database"):
+            embed.maybe_prepare_cloudsql_faq_db("gce")
+
+        load_seed.assert_not_called()
+        replace_seed.assert_not_called()
+        engine.dispose.assert_called_once()
+
+    @mock.patch.dict(
+        os.environ,
+        {"FAQ_IMPORT_QUESTION_CATEGORIES_FROM_SEED": "true"},
+        clear=True,
+    )
+    @mock.patch("embed.replace_seed_faqs")
+    @mock.patch("embed.assign_seed_question_categories", return_value=2)
+    @mock.patch("embed._load_seed_faqs", return_value=[{"question": "ignored"}])
+    @mock.patch("embed.count_faqs", return_value=2)
+    @mock.patch("embed.session_scope")
+    @mock.patch("embed.create_session_factory")
+    @mock.patch("embed._ensure_faq_schema")
+    @mock.patch("embed._create_pg_bootstrap_engine")
+    def test_explicit_category_import_never_replaces_existing_faqs(
+        self,
+        create_engine,
+        ensure_schema,
+        create_session_factory,
+        session_scope,
+        count_faqs,
+        load_seed,
+        assign_categories,
+        replace_seed,
+    ):
+        engine = mock.Mock()
+        create_engine.return_value = engine
+
+        embed.maybe_prepare_cloudsql_faq_db("gce")
+
+        load_seed.assert_called_once_with("pg/seed")
+        assign_categories.assert_called_once()
+        replace_seed.assert_not_called()
+        engine.dispose.assert_called_once()
 
 
 class RealSeedTests(SimpleTestCase):

@@ -23,12 +23,18 @@ from contextlib import contextmanager
 from typing import Iterator, Optional
 
 from pgvector.sqlalchemy import Vector
-from sqlalchemy import BigInteger, Index, Text, UniqueConstraint, create_engine
+from sqlalchemy import BigInteger, CheckConstraint, Index, Text, UniqueConstraint, create_engine
 from sqlalchemy.engine import URL, Engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
 
 REQUIRED_PG_ENV_VARS = ("PGHOST", "PGDATABASE", "PGUSER", "PGPASSWORD")
+FAQ_QUESTION_CATEGORIES = (
+    "common",
+    "timeline_based",
+    "program_specific",
+    "diff_answers",
+)
 
 
 class Base(DeclarativeBase):
@@ -49,12 +55,20 @@ class Faq(Base):
         # so uniqueness is per programme rather than per question.
         UniqueConstraint("program_id", "question", name="faqs_program_question_unique"),
         Index("idx_faqs_program_id", "program_id"),
+        CheckConstraint(
+            "question_category IS NULL OR question_category IN "
+            "('common', 'timeline_based', 'program_specific', 'diff_answers')",
+            name="faqs_question_category_check",
+        ),
     )
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     program_id: Mapped[str] = mapped_column(Text, nullable=False)
     question: Mapped[str] = mapped_column(Text, nullable=False)
     answer: Mapped[str] = mapped_column(Text, nullable=False)
+    # Existing databases receive this column through an additive migration, so it
+    # starts nullable until the one-time seed-category import has completed.
+    question_category: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     embedding: Mapped[Optional[list[float]]] = mapped_column(Vector(1024), nullable=True)
 
 
