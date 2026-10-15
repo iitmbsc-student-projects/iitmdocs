@@ -30,6 +30,8 @@ const answers = Object.fromEntries(["ds", "ae", "es", "mg"].map((programId) => [
 const programAnswerFields = document.querySelectorAll(".program-answer-field");
 const answerSafetyButton = document.querySelector("#check-answer-safety");
 const answerSafetyResults = document.querySelector("#answer-safety-results");
+const answerSafetyInfoButton = document.querySelector("#answer-safety-info");
+const answerSafetyNotice = document.querySelector("#answer-safety-notice");
 const form = document.querySelector("#faq-form");
 const csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value;
 let selectedFaqId = null;
@@ -37,6 +39,7 @@ let reviewComplete = false;
 let actionMode = null;
 let formBusy = false;
 let addFlowNoticeExpanded = false;
+let answerSafetyNoticeExpanded = false;
 const safeAnswerValues = new Map();
 
 function answerFieldsToCheck() {
@@ -78,6 +81,8 @@ function syncInputAvailability() {
     actionMode,
     answerSafetyApproved: isAnswerSafetyApproved(),
   });
+  answerSafetyNotice.hidden = !answerSafetyNoticeExpanded;
+  answerSafetyInfoButton.setAttribute("aria-expanded", String(answerSafetyNoticeExpanded));
   questionLockInfoButton.hidden = !locksQuestionDetails;
   addFlowNotice.hidden = !locksQuestionDetails || !addFlowNoticeExpanded;
   questionLockInfoButton.setAttribute("aria-expanded", String(locksQuestionDetails && addFlowNoticeExpanded));
@@ -119,6 +124,7 @@ function clearReviewedState() {
   reviewComplete = false;
   actionMode = null;
   addFlowNoticeExpanded = false;
+  answerSafetyNoticeExpanded = false;
   clearAnswerSafetyReview();
   clearAnswerFields();
   resetActionButtons();
@@ -146,6 +152,7 @@ function setFormBusy(isBusy) {
 async function startAnswerEntry(mode) {
   actionMode = mode;
   addFlowNoticeExpanded = false;
+  answerSafetyNoticeExpanded = false;
   resetActionButtons();
   showFieldsForCategory();
 
@@ -256,6 +263,10 @@ questionLockInfoButton.addEventListener("click", () => {
   addFlowNoticeExpanded = !addFlowNoticeExpanded;
   syncInputAvailability();
 });
+answerSafetyInfoButton.addEventListener("click", () => {
+  answerSafetyNoticeExpanded = !answerSafetyNoticeExpanded;
+  syncInputAvailability();
+});
 showFieldsForCategory();
 
 checkButton.addEventListener("click", async () => {
@@ -284,6 +295,7 @@ updateButton.addEventListener("click", () => {
 
 cancelAnswerEntryButton.addEventListener("click", () => {
   actionMode = null;
+  answerSafetyNoticeExpanded = false;
   clearAnswerFields();
   resetActionButtons();
   showFieldsForCategory();

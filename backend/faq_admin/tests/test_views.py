@@ -21,6 +21,8 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertContains(response, 'id="answer-entry" hidden')
         self.assertContains(response, 'id="check-answer-safety"')
         self.assertContains(response, 'id="answer-safety-results"')
+        self.assertContains(response, 'id="answer-safety-info"')
+        self.assertContains(response, 'id="answer-safety-notice"')
         self.assertContains(response, "/faq-admin.js")
 
     @mock.patch("faq_admin.views.find_similar_faqs")
