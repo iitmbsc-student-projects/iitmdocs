@@ -18,6 +18,7 @@ urlpatterns = [
     path("faq-admin", faq_admin_views.page, name="faq-admin"),
     path("faq-admin/check-similar", faq_admin_views.check_similar, name="faq-admin-check-similar"),
     path("faq-admin/answer/<int:faq_id>", faq_admin_views.answer, name="faq-admin-answer"),
+    path("faq-admin/check-answer-safety", faq_admin_views.check_answer_safety, name="faq-admin-check-answer-safety"),
     path("faq-admin/add", faq_admin_views.add, name="faq-admin-add"),
     path("faq-admin/update", faq_admin_views.update, name="faq-admin-update"),
     path("answer", views.AnswerView.as_view(), name="answer"),

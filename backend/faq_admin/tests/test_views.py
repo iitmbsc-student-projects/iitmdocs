@@ -19,6 +19,8 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertContains(response, 'id="add-flow-notice" class="add-flow-notice" hidden')
         self.assertContains(response, 'id="answer-program-field"')
         self.assertContains(response, 'id="answer-entry" hidden')
+        self.assertContains(response, 'id="check-answer-safety"')
+        self.assertContains(response, 'id="answer-safety-results"')
         self.assertContains(response, "/faq-admin.js")
 
     @mock.patch("faq_admin.views.find_similar_faqs")
@@ -39,6 +41,42 @@ class FaqAdminPageTests(SimpleTestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"saved_ids": [31]})
+
+    @mock.patch("faq_admin.views.review_answer_safety", new_callable=mock.AsyncMock)
+    def test_answer_safety_endpoint_checks_the_validated_new_answer(self, check_answer_safety):
+        check_answer_safety.return_value = {
+            "likely_to_be_rejected_by_fact_checker": "no",
+            "exact_line_from_fact_checker_prompt_because_of_which_rejection_is_possible": "NA",
+            "suggested_answer_likely_to_pass_fact_checker": "NA",
+        }
+
+        response = self.client.post(
+            "/faq-admin/check-answer-safety",
+            data=(
+                '{"action":"add","question_category":"program_specific",'
+                '"program_id":"ds","question":"New FAQ?","answer":"New answer"}'
+            ),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["results"][0]["program_id"], "ds")
+        self.assertEqual(response.json()["results"][0]["likely_to_be_rejected_by_fact_checker"], "no")
+        check_answer_safety.assert_awaited_once_with("New answer")
+
+    def test_answer_safety_endpoint_rejects_a_request_without_a_csrf_token(self):
+        csrf_client = Client(enforce_csrf_checks=True)
+
+        response = csrf_client.post(
+            "/faq-admin/check-answer-safety",
+            data=(
+                '{"action":"add","question_category":"program_specific",'
+                '"program_id":"ds","question":"New FAQ?","answer":"New answer"}'
+            ),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 403)
 
     @mock.patch("faq_admin.views.update_existing_faq")
     def test_update_endpoint_returns_the_rows_changed(self, update_existing_faq):

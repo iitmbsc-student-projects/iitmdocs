@@ -1,7 +1,8 @@
 """Browser entry point for the internal FAQ-admin workflow.
 
 Flow: an admin opens ``/faq-admin`` -> Django sends the page and CSRF cookie ->
-the page will later call its same-origin review and save endpoints.
+the page checks similar questions and answer safety through same-origin routes ->
+the page can call its server-validated save endpoint.
 """
 import json
 
@@ -9,7 +10,15 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
-from .services import FaqAdminValidationError, add_new_faq, find_similar_faqs, get_faq_answer, update_existing_faq
+from .safety import FaqAnswerSafetyError, check_answer_safety as review_answer_safety
+from .services import (
+    FaqAdminValidationError,
+    add_new_faq,
+    build_answers_for_safety_check,
+    find_similar_faqs,
+    get_faq_answer,
+    update_existing_faq,
+)
 
 
 @ensure_csrf_cookie
@@ -42,6 +51,25 @@ def answer(request, faq_id):
         return JsonResponse({"error": str(exc)}, status=404)
     except Exception:
         return JsonResponse({"error": "Could not load the FAQ answer. Try again."}, status=502)
+
+
+@require_POST
+@csrf_protect
+async def check_answer_safety(request):
+    """Review validated pending answers before the browser can enable Save."""
+    try:
+        pending_answers = build_answers_for_safety_check(json.loads(request.body))
+        results = []
+        for item in pending_answers:
+            result = await review_answer_safety(item["answer"])
+            results.append({"program_id": item["program_id"], **result})
+        return JsonResponse({"results": results})
+    except (json.JSONDecodeError, FaqAdminValidationError) as exc:
+        return JsonResponse({"error": str(exc)}, status=400)
+    except FaqAnswerSafetyError:
+        return JsonResponse({"error": "Could not check answer safety. Try again."}, status=502)
+    except Exception:
+        return JsonResponse({"error": "Could not check answer safety. Try again."}, status=502)
 
 
 @require_POST

@@ -49,6 +49,14 @@ select:focus, textarea:focus, button:focus-visible { outline: 3px solid #8cc6ff;
 .question-lock-info[hidden] { display: none; }
 .question-lock-info:hover { background: #087f9b; }
 .add-flow-notice { margin: 9px 0 0; padding: 9px 12px; border-left: 3px solid #0b9fc2; color: #31536f; background: #f0f8ff; font-size: .9rem; line-height: 1.45; }
+.answer-safety-review { margin-top: 22px; }
+.answer-safety-review .secondary-button { margin: 0; }
+.answer-safety-results { display: grid; gap: 10px; margin-top: 12px; }
+.answer-safety-result { padding: 11px 12px; border-radius: 8px; line-height: 1.45; }
+.answer-safety-result.safe { border: 1px solid #a7d9bb; color: #215d39; background: #f0fbf4; }
+.answer-safety-result.warning { border: 1px solid #efc36e; color: #704a08; background: #fff8e7; }
+.answer-safety-result p { margin: 7px 0 0; }
+.answer-safety-result .secondary-button { margin: 10px 0 0; }
 .primary-button { padding: 11px 17px; border: 0; border-radius: 8px; color: #fff; background: #075ea8; cursor: pointer; font: inherit; font-weight: 700; }
 .primary-button:hover { background: #034e8d; }
 .secondary-button { margin-left: 8px; padding: 11px 17px; border: 1px solid #1769aa; border-radius: 8px; color: #075ea8; background: #fff; cursor: pointer; font: inherit; font-weight: 700; }

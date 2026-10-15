@@ -75,6 +75,55 @@ def build_new_faq_rows(data):
     }]
 
 
+def build_answers_for_safety_check(data):
+    """Return exactly the answers a pending add or update would write.
+
+    Example: adding a different-answer FAQ returns four programme-labelled
+    answers; updating only AE returns just the new AE answer. This lets the
+    safety check use the same server-side validation as the eventual save.
+    """
+    action = _required_text(data, "action")
+    if action == "add":
+        return [
+            {"program_id": row["program_id"], "answer": row["answer"]}
+            for row in build_new_faq_rows(data)
+        ]
+    if action != "update":
+        raise FaqAdminValidationError("Choose whether to add or update the FAQ")
+
+    from pg.faq_api.orm import Faq, create_pg_engine, create_session_factory, session_scope
+
+    selected_faq_id = data.get("selected_faq_id")
+    if not isinstance(selected_faq_id, int) or selected_faq_id < 1:
+        raise FaqAdminValidationError("Choose an FAQ to update")
+
+    engine = create_pg_engine()
+    try:
+        with session_scope(create_session_factory(engine)) as session:
+            selected_faq = session.get(Faq, selected_faq_id)
+            if selected_faq is None:
+                raise FaqAdminValidationError("The selected FAQ no longer exists")
+            category = selected_faq.question_category
+            if category not in FAQ_QUESTION_CATEGORIES:
+                raise FaqAdminValidationError("The selected FAQ has no recognised category")
+            update = build_faq_update_data(data, category, selected_faq.program_id)
+            if category == "diff_answers":
+                rows = session.execute(
+                    select(Faq).where(
+                        Faq.question_category == "diff_answers",
+                        Faq.question == selected_faq.question,
+                    )
+                ).scalars().all()
+                if {row.program_id for row in rows} != set(REAL_PROGRAM_IDS) or len(rows) != len(REAL_PROGRAM_IDS):
+                    raise FaqAdminValidationError("The selected different-answer FAQ is incomplete")
+            return [
+                {"program_id": program_id, "answer": answer}
+                for program_id, answer in update["answers"].items()
+            ]
+    finally:
+        engine.dispose()
+
+
 def build_faq_update_data(data, selected_category, selected_program_id):
     """Validate the values that will replace one selected FAQ.
 

@@ -5,6 +5,7 @@ from django.test import SimpleTestCase
 
 from faq_admin.services import (
     FaqAdminValidationError,
+    build_answers_for_safety_check,
     build_faq_update_data,
     build_new_faq_rows,
     get_faq_answer,
@@ -41,6 +42,26 @@ class NewFaqRowTests(SimpleTestCase):
 
         self.assertEqual(rows, [{"program_id": "common", "question": "When do applications open?", "answer": "See the website.", "question_category": "common"}])
 
+    def test_new_different_answer_safety_check_includes_each_answer_that_will_be_saved(self):
+        answers = build_answers_for_safety_check(
+            {
+                "action": "add",
+                "question_category": "diff_answers",
+                "question": "What are the fees?",
+                "answers": {"ds": "DS", "ae": "AE", "es": "ES", "mg": "MG"},
+            }
+        )
+
+        self.assertEqual(
+            answers,
+            [
+                {"program_id": "ds", "answer": "DS"},
+                {"program_id": "es", "answer": "ES"},
+                {"program_id": "mg", "answer": "MG"},
+                {"program_id": "ae", "answer": "AE"},
+            ],
+        )
+
 
 class ExistingFaqUpdateTests(SimpleTestCase):
     def test_different_answer_update_can_change_one_programme_only(self):
@@ -72,6 +93,32 @@ class ExistingFaqUpdateTests(SimpleTestCase):
                 },
                 "diff_answers",
                 "ds",
+            )
+
+    @mock.patch("pg.faq_api.orm.session_scope")
+    @mock.patch("pg.faq_api.orm.create_session_factory")
+    @mock.patch("pg.faq_api.orm.create_pg_engine")
+    def test_safety_check_rejects_an_incomplete_different_answer_group(self, create_pg_engine, create_session_factory, session_scope):
+        session = session_scope.return_value.__enter__.return_value
+        session.get.return_value = SimpleNamespace(
+            id=8,
+            question="When are fees due?",
+            program_id="ds",
+            question_category="diff_answers",
+        )
+        session.execute.return_value.scalars.return_value.all.return_value = [
+            SimpleNamespace(program_id="ds"),
+        ]
+
+        with self.assertRaisesMessage(FaqAdminValidationError, "incomplete"):
+            build_answers_for_safety_check(
+                {
+                    "action": "update",
+                    "selected_faq_id": 8,
+                    "question": "When are fees due?",
+                    "answer_program_id": "ds",
+                    "answers": {"ds": "Pay before the deadline."},
+                }
             )
 
 
