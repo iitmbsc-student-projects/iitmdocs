@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All FAQ rows · IIT Madras BS</title>
+    <link rel="stylesheet" href="/faq-admin.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="admin-card all-faqs-card" aria-labelledby="page-title">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">IIT Madras BS chatbot</p>
+            <h1 id="page-title">All FAQ rows</h1>
+            <p class="subtitle">Every row currently stored in the FAQ database.</p>
+          </div>
+          <span class="environment-badge">FAQ workspace</span>
+        </header>
+
+        <div class="all-faqs-content">
+          {% if error %}
+            <p class="management-notice">{{ error }}</p>
+          {% endif %}
+          <p><a class="page-link" href="/faq-admin">Add or find an FAQ</a></p>
+          {% for section in faq_sections %}
+            <details class="faq-category-section">
+              <summary>
+                <span>Question category: {{ section.label }}</span>
+                <span class="category-count">{{ section.faqs|length }} FAQ row{{ section.faqs|length|pluralize }}</span>
+              </summary>
+              <div class="all-faqs-table-wrap">
+                <table class="all-faqs-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Primary key</th>
+                      <th scope="col">Programme</th>
+                      <th scope="col">Question</th>
+                      <th scope="col">Answer</th>
+                      <th scope="col">Question category</th>
+                      <!-- <th scope="col">Embedding</th> -->
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for faq in section.faqs %}
+                      <tr>
+                        <td>{{ faq.id }}</td>
+                        <td>{{ faq.program_id }}</td>
+                        <td><div class="cell-content">{{ faq.question }}</div></td>
+                        <td><div class="cell-content">{{ faq.answer }}</div></td>
+                        <td>{{ faq.question_category|default:"—" }}</td>
+                        <!-- <td>
+                          {% if faq.embedding is None %}
+                            —
+                          {% else %}
+                            <details>
+                              <summary>View {{ faq.embedding|length }} values</summary>
+                              <pre>{{ faq.embedding|join:", " }}</pre>
+                            </details>
+                          {% endif %}
+                        </td> -->
+                        <td>
+                          <div class="row-actions">
+                            <a class="secondary-button" href="/faq-admin/all-faqs/{{ faq.id }}/edit">Update</a>
+                            <form method="post" action="/faq-admin/all-faqs/{{ faq.id }}/delete" onsubmit="return confirm('Delete this FAQ permanently?');">
+                              {% csrf_token %}
+                              <button class="danger-button" type="submit">Delete</button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    {% empty %}
+                      <tr><td colspan="6">No FAQ rows in this category.</td></tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

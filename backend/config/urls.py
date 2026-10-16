@@ -16,6 +16,9 @@ from faq_admin import views as faq_admin_views
 
 urlpatterns = [
     path("faq-admin", faq_admin_views.page, name="faq-admin"),
+    path("faq-admin/all-faqs", faq_admin_views.all_faqs, name="faq-admin-all-faqs"),
+    path("faq-admin/all-faqs/<int:faq_id>/edit", faq_admin_views.edit_all_faq, name="faq-admin-edit-all-faq"),
+    path("faq-admin/all-faqs/<int:faq_id>/delete", faq_admin_views.delete_all_faq, name="faq-admin-delete-all-faq"),
     path("faq-admin/check-similar", faq_admin_views.check_similar, name="faq-admin-check-similar"),
     path("faq-admin/answer/<int:faq_id>", faq_admin_views.answer, name="faq-admin-answer"),
     path("faq-admin/check-answer-safety", faq_admin_views.check_answer_safety, name="faq-admin-check-answer-safety"),

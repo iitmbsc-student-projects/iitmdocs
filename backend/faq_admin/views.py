@@ -3,12 +3,15 @@
 Flow: an admin opens ``/faq-admin`` -> Django sends the page and CSRF cookie ->
 the page checks similar questions and answer safety through same-origin routes ->
 the page can call its server-validated save endpoint.
+
+The separate ``/faq-admin/all-faqs`` page lists those stored rows inside one
+collapsible section per question category.
 """
 import json
 
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.views.decorators.http import require_GET, require_POST
+from django.http import Http404, JsonResponse
+from django.shortcuts import redirect, render
+from django.views.decorators.http import require_GET, require_http_methods, require_POST
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from .safety import FaqAnswerSafetyError, check_answer_safety as review_answer_safety
 from .services import (
@@ -16,9 +19,46 @@ from .services import (
     add_new_faq,
     build_answers_for_safety_check,
     find_similar_faqs,
+    delete_faq_from_management,
     get_faq_answer,
+    get_faq_for_management,
+    list_all_faqs,
+    update_faq_from_management,
     update_existing_faq,
 )
+
+
+FAQ_CATEGORY_LABELS = (
+    ("common", "Common to all programmes"),
+    ("timeline_based", "Timeline-based for all programmes"),
+    ("program_specific", "Programme-specific"),
+    ("diff_answers", "Same question, four different answers"),
+)
+
+
+def _faq_sections(faqs):
+    """Put listed FAQ rows into their fixed category sections.
+
+    Example: a row with ``question_category='common'`` appears in the Common
+    section. Rows without a category remain visible in a final Uncategorised
+    section, rather than disappearing from the admin page.
+    """
+    rows_by_category = {category: [] for category, _label in FAQ_CATEGORY_LABELS}
+    uncategorised_rows = []
+    for faq in faqs:
+        category = faq["question_category"]
+        if category in rows_by_category:
+            rows_by_category[category].append(faq)
+        else:
+            uncategorised_rows.append(faq)
+
+    sections = [
+        {"category": category, "label": label, "faqs": rows_by_category[category]}
+        for category, label in FAQ_CATEGORY_LABELS
+    ]
+    if uncategorised_rows:
+        sections.append({"category": "uncategorised", "label": "Uncategorised", "faqs": uncategorised_rows})
+    return sections
 
 
 @ensure_csrf_cookie
@@ -28,6 +68,62 @@ def page(request):
     Example: ``GET /faq-admin`` returns the form before any database request.
     """
     return render(request, "faq_admin/page.html")
+
+
+@require_GET
+@ensure_csrf_cookie
+def all_faqs(request):
+    """Render every FAQ table row with separate edit and delete actions."""
+    try:
+        return render(request, "faq_admin/all_faqs.html", {"faq_sections": _faq_sections(list_all_faqs())})
+    except Exception:
+        return render(
+            request,
+            "faq_admin/all_faqs.html",
+            {"faq_sections": [], "error": "Could not load FAQ rows. Try again."},
+            status=502,
+        )
+
+
+@require_http_methods(["GET", "POST"])
+@csrf_protect
+def edit_all_faq(request, faq_id):
+    """Show and save one row from the separate all-FAQs management page."""
+    if request.method == "POST":
+        try:
+            update_faq_from_management(faq_id, request.POST.get("question"), request.POST.get("answer"))
+            return redirect("faq-admin-all-faqs")
+        except FaqAdminValidationError as exc:
+            faq = get_faq_for_management(faq_id)
+            return render(request, "faq_admin/edit_faq.html", {"faq": faq, "error": str(exc)}, status=400)
+        except Exception:
+            faq = get_faq_for_management(faq_id)
+            return render(request, "faq_admin/edit_faq.html", {"faq": faq, "error": "Could not update the FAQ. Try again."}, status=502)
+
+    try:
+        return render(request, "faq_admin/edit_faq.html", {"faq": get_faq_for_management(faq_id)})
+    except FaqAdminValidationError as exc:
+        raise Http404(str(exc)) from exc
+    except Exception:
+        return render(request, "faq_admin/edit_faq.html", {"error": "Could not load the FAQ. Try again."}, status=502)
+
+
+@require_POST
+@csrf_protect
+def delete_all_faq(request, faq_id):
+    """Delete one listed row after the browser confirmation prompt."""
+    try:
+        delete_faq_from_management(faq_id)
+        return redirect("faq-admin-all-faqs")
+    except FaqAdminValidationError as exc:
+        raise Http404(str(exc)) from exc
+    except Exception:
+        return render(
+            request,
+            "faq_admin/all_faqs.html",
+            {"faq_sections": [], "error": "Could not delete the FAQ. Try again."},
+            status=502,
+        )
 
 
 @require_POST

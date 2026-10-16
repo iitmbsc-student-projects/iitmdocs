@@ -275,6 +275,147 @@ def get_faq_answer(faq_id):
         engine.dispose()
 
 
+def _faq_management_row(faq):
+    """Return every stored FAQ column in a template-safe plain dictionary.
+
+    Example: an FAQ with id ``8`` becomes a dictionary containing ``id``, its
+    programme, question, answer, category, and embedding. The all-FAQs page
+    uses this shape so it does not need to know about SQLAlchemy objects.
+    """
+    embedding = list(faq.embedding) if faq.embedding is not None else None
+    return {
+        "id": int(faq.id),
+        "program_id": faq.program_id,
+        "question": faq.question,
+        "answer": faq.answer,
+        "question_category": faq.question_category,
+        "embedding": embedding,
+    }
+
+
+def list_all_faqs():
+    """Return every FAQ table row in primary-key order for the admin list.
+
+    Example: the row with primary key ``8`` appears before row ``9``. This is
+    intentionally an admin-only full-table view, not a chatbot retrieval path.
+    """
+    from pg.faq_api.orm import Faq, create_pg_engine, create_session_factory, session_scope
+
+    engine = create_pg_engine()
+    try:
+        with session_scope(create_session_factory(engine)) as session:
+            faqs = session.execute(select(Faq).order_by(Faq.id)).scalars().all()
+            return [_faq_management_row(faq) for faq in faqs]
+    finally:
+        engine.dispose()
+
+
+def get_faq_for_management(faq_id):
+    """Return every stored column for one row being edited in the admin list.
+
+    Example: ``get_faq_for_management(8)`` returns row 8 including its primary
+    key and embedding, while the edit form only makes question and answer editable.
+    """
+    from pg.faq_api.orm import Faq, create_pg_engine, create_session_factory, session_scope
+
+    engine = create_pg_engine()
+    try:
+        with session_scope(create_session_factory(engine)) as session:
+            faq = session.get(Faq, faq_id)
+            if faq is None:
+                raise FaqAdminValidationError("The selected FAQ no longer exists")
+            return _faq_management_row(faq)
+    finally:
+        engine.dispose()
+
+
+def _management_rows_for_selected_faq(session, selected_faq):
+    """Return one row, or all four rows when a different-answer group is edited.
+
+    Example: selecting an AE row in a different-answer group returns the DS,
+    AE, ES, and MG rows. Keeping them together prevents a changed question from
+    splitting one shared question into four inconsistent questions.
+    """
+    if selected_faq.question_category != "diff_answers":
+        return [selected_faq]
+    from pg.faq_api.orm import Faq
+
+    return session.execute(
+        select(Faq).where(
+            Faq.question_category == "diff_answers",
+            Faq.question == selected_faq.question,
+        )
+    ).scalars().all()
+
+
+def update_faq_from_management(faq_id, question, answer):
+    """Update a listed FAQ row and return the primary keys changed.
+
+    Example: editing row 8 changes that row's answer. For a different-answer
+    group, its selected programme answer changes while a changed question and
+    embedding are applied to the complete group.
+    """
+    from pg.faq_api.orm import Faq, create_pg_engine, create_session_factory, session_scope
+
+    question = _required_text({"question": question}, "question")
+    answer = _required_text({"answer": answer}, "answer")
+    engine = create_pg_engine()
+    try:
+        with session_scope(create_session_factory(engine)) as session:
+            selected_faq = session.get(Faq, faq_id)
+            if selected_faq is None:
+                raise FaqAdminValidationError("The selected FAQ no longer exists")
+
+            rows = _management_rows_for_selected_faq(session, selected_faq)
+            question_changed = question != selected_faq.question
+            embedding = _question_embedding(question) if question_changed else None
+            changed_rows = []
+            for row in rows:
+                if question_changed:
+                    row.question = question
+                    row.embedding = embedding
+                    changed_rows.append(row)
+                if row.id == selected_faq.id:
+                    row.answer = answer
+                    if row not in changed_rows:
+                        changed_rows.append(row)
+            session.flush()
+            return {
+                "updated_ids": [int(row.id) for row in changed_rows],
+                "question_category": selected_faq.question_category,
+            }
+    finally:
+        engine.dispose()
+
+
+def delete_faq_from_management(faq_id):
+    """Delete one listed FAQ, or its complete different-answer group.
+
+    Example: deleting row 8 normally removes only row 8. If row 8 belongs to
+    ``diff_answers``, every stored programme answer for that question is removed
+    together so the database cannot retain a partial group.
+    """
+    from pg.faq_api.orm import Faq, create_pg_engine, create_session_factory, session_scope
+
+    engine = create_pg_engine()
+    try:
+        with session_scope(create_session_factory(engine)) as session:
+            selected_faq = session.get(Faq, faq_id)
+            if selected_faq is None:
+                raise FaqAdminValidationError("The selected FAQ no longer exists")
+            rows = _management_rows_for_selected_faq(session, selected_faq)
+            deleted_ids = [int(row.id) for row in rows]
+            for row in rows:
+                session.delete(row)
+            session.flush()
+            return {
+                "deleted_ids": deleted_ids,
+                "question_category": selected_faq.question_category,
+            }
+    finally:
+        engine.dispose()
+
+
 def update_existing_faq(data):
     """Update the FAQ identified by ``selected_faq_id`` and return changed rows.
 

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit FAQ row · IIT Madras BS</title>
+    <link rel="stylesheet" href="/faq-admin.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="admin-card" aria-labelledby="page-title">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">IIT Madras BS chatbot</p>
+            <h1 id="page-title">{% if faq %}Edit FAQ row #{{ faq.id }}{% else %}Edit FAQ row{% endif %}</h1>
+            <p class="subtitle">Change the stored wording or answer for this database row.</p>
+          </div>
+          <span class="environment-badge">FAQ workspace</span>
+        </header>
+
+        <div class="edit-faq-content">
+          <p><a class="page-link" href="/faq-admin/all-faqs">← Back to all FAQ rows</a></p>
+          {% if error %}
+            <p class="management-notice">{{ error }}</p>
+          {% endif %}
+          {% if faq %}
+            <dl class="faq-details">
+              <dt>Primary key</dt><dd>{{ faq.id }}</dd>
+              <dt>Programme</dt><dd>{{ faq.program_id }}</dd>
+              <dt>Question category</dt><dd>{{ faq.question_category|default:"—" }}</dd>
+              <dt>Embedding</dt>
+              <dd>{% if faq.embedding is None %}—{% else %}<pre>{{ faq.embedding|join:", " }}</pre>{% endif %}</dd>
+            </dl>
+            {% if faq.question_category == "diff_answers" %}
+              <p class="management-notice">This row belongs to a four-programme answer group. Changing the question updates the question and embedding for the whole group; changing the answer updates only {{ faq.program_id }}.</p>
+            {% endif %}
+            <form method="post">
+              {% csrf_token %}
+              <label for="question">Question</label>
+              <textarea id="question" name="question" rows="3" required>{{ faq.question }}</textarea>
+              <label for="answer">Answer</label>
+              <textarea id="answer" name="answer" rows="8" required>{{ faq.answer }}</textarea>
+              <p class="management-notice">Changing the question automatically creates a new embedding.</p>
+              <button class="primary-button" type="submit">Save changes</button>
+            </form>
+          {% endif %}
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
