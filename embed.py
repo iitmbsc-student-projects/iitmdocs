@@ -40,6 +40,7 @@ from pg.faq_api.orm import (
     Base,
     FAQ_QUESTION_CATEGORIES,
     Faq,
+    UnansweredQuestion,
     create_pg_engine,
     create_session_factory,
     session_scope,
@@ -243,7 +244,7 @@ def _ensure_faq_schema(engine) -> None:
                 "This job will not drop existing FAQ rows."
             )
 
-    Base.metadata.create_all(engine, tables=[Faq.__table__])
+    Base.metadata.create_all(engine, tables=[Faq.__table__, UnansweredQuestion.__table__])
     inspector = inspect(engine)
     columns = {column["name"] for column in inspector.get_columns(Faq.__tablename__)}
     if "question_category" not in columns:

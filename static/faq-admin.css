@@ -44,6 +44,12 @@ body { margin: 0; min-width: 320px; }
 .faq-details pre { max-width: 100%; max-height: 160px; overflow: auto; margin: 0; padding: 8px; border-radius: 6px; background: #f2f5f9; font-size: .8rem; white-space: pre-wrap; }
 .management-notice { margin: 0 0 18px; padding: 10px 12px; border-left: 3px solid #0b9fc2; color: #31536f; background: #f0f8ff; line-height: 1.45; }
 .page-link { color: #075ea8; font-weight: 700; }
+.header-page-link { color: #fff; }
+.review-action-form { display: inline-block; margin: 0.75rem 0.5rem 0 0; padding: 0; }
+.unanswered-question-card { margin-top: 1rem; padding: 1rem; border: 1px solid #cbd9e9; border-radius: 0.7rem; }
+.unanswered-question-card h2 { margin: 0.65rem 0; font-size: 1.1rem; }
+.unanswered-question-heading { display: flex; align-items: center; gap: 0.65rem; }
+.unanswered-question-heading .environment-badge { color: #31536f; border-color: #91b7dc; }
 
 .page-header {
   display: flex;

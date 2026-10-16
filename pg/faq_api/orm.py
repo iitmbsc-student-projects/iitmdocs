@@ -23,7 +23,7 @@ from contextlib import contextmanager
 from typing import Iterator, Optional
 
 from pgvector.sqlalchemy import Vector
-from sqlalchemy import BigInteger, CheckConstraint, Index, Text, UniqueConstraint, create_engine
+from sqlalchemy import BigInteger, Boolean, CheckConstraint, Index, Text, UniqueConstraint, create_engine
 from sqlalchemy.engine import URL, Engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
@@ -70,6 +70,47 @@ class Faq(Base):
     # starts nullable until the one-time seed-category import has completed.
     question_category: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     embedding: Mapped[Optional[list[float]]] = mapped_column(Vector(1024), nullable=True)
+
+
+class UnansweredQuestion(Base):
+    """One Test-log question awaiting an FAQ-admin decision.
+
+    Flow: a manual log refresh creates this row -> the admin may reject it or
+    ask the temporary AI-help stub -> a later feature may turn an accepted row
+    into an FAQ. Example: the same question can be stored once for DS and once
+    for AE because the unique rule includes ``program_id``.
+    """
+
+    __tablename__ = "unanswered_questions"
+    __table_args__ = (
+        UniqueConstraint(
+            "program_id",
+            "original_question",
+            name="unanswered_questions_program_question_unique",
+        ),
+        CheckConstraint(
+            "accepted_or_rejected_by_admin IN ('accepted', 'rejected')",
+            name="unanswered_questions_admin_decision_check",
+        ),
+        CheckConstraint(
+            "ai_suggestion IS NULL OR ai_suggestion IN "
+            "('should_be_added', 'should_not_be_added', 'answer_already_present')",
+            name="unanswered_questions_ai_suggestion_check",
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    program_id: Mapped[str] = mapped_column(Text, nullable=False)
+    original_question: Mapped[str] = mapped_column(Text, nullable=False)
+    rewritten_question: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    rejection_reason: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    original_answer: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    fact_check_passed: Mapped[Optional[bool]] = mapped_column(Boolean, nullable=True)
+    fact_check_rejection_reason: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    accepted_or_rejected_by_admin: Mapped[str] = mapped_column(
+        Text, nullable=False, default="accepted", server_default="accepted"
+    )
+    ai_suggestion: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
 
 def required_pg_env() -> dict[str, str]:

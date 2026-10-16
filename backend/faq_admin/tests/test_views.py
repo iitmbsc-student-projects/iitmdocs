@@ -3,6 +3,70 @@ from unittest import mock
 
 
 class FaqAdminPageTests(SimpleTestCase):
+    @mock.patch("faq_admin.views.list_accepted_unanswered_questions")
+    def test_unanswered_questions_page_shows_pending_admin_review_rows(self, list_questions):
+        list_questions.return_value = [{
+            "id": 7,
+            "program_id": "ds",
+            "original_question": "Can I use headphones during an exam?",
+            "rewritten_question": "headphones exam rules",
+            "rejection_reason": "fact_check_failed",
+            "original_answer": "Yes.",
+            "fact_check_passed": False,
+            "fact_check_rejection_reason": "Unsupported.",
+            "accepted_or_rejected_by_admin": "accepted",
+            "ai_suggestion": None,
+        }]
+
+        response = self.client.get("/faq-admin/unanswered-questions")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Unanswered question review")
+        self.assertContains(response, "Can I use headphones during an exam?")
+        self.assertContains(response, "Refresh last 7 days")
+        self.assertContains(response, "Get AI help for this question")
+        self.assertContains(response, "Reject this question")
+
+    @mock.patch("faq_admin.views.refresh_unanswered_questions")
+    def test_refresh_endpoint_runs_the_manual_log_import(self, refresh_questions):
+        refresh_questions.return_value = {"log_count": 3, "candidate_count": 2, "inserted_count": 1}
+
+        response = self.client.post("/faq-admin/unanswered-questions/refresh")
+
+        self.assertRedirects(
+            response,
+            "/faq-admin/unanswered-questions?notice=Reviewed+3+logs%3B+added+1+new+question.",
+            fetch_redirect_response=False,
+        )
+        refresh_questions.assert_called_once_with()
+
+    @mock.patch("faq_admin.views.reject_unanswered_question")
+    def test_reject_endpoint_hides_the_selected_question(self, reject_question):
+        response = self.client.post("/faq-admin/unanswered-questions/7/reject")
+
+        self.assertRedirects(response, "/faq-admin/unanswered-questions", fetch_redirect_response=False)
+        reject_question.assert_called_once_with(7)
+
+    @mock.patch("faq_admin.views.save_temporary_ai_suggestion")
+    def test_ai_help_endpoint_saves_and_shows_the_temporary_result(self, save_suggestion):
+        save_suggestion.return_value = {"ai_suggestion": "should_be_added"}
+
+        response = self.client.post("/faq-admin/unanswered-questions/7/ai-help")
+
+        self.assertRedirects(
+            response,
+            "/faq-admin/unanswered-questions?notice=Temporary+AI+help+saved.",
+            fetch_redirect_response=False,
+        )
+        save_suggestion.assert_called_once_with(7)
+
+    def test_unanswered_question_actions_require_csrf(self):
+        csrf_client = Client(enforce_csrf_checks=True)
+
+        response = csrf_client.post("/faq-admin/unanswered-questions/7/reject")
+
+        self.assertEqual(response.status_code, 403)
+
     @mock.patch("faq_admin.views.list_all_faqs")
     def test_all_faqs_page_shows_every_database_column_and_row_actions(self, list_all_faqs):
         list_all_faqs.return_value = [{
@@ -118,6 +182,7 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertContains(response, 'id="answer-safety-results"')
         self.assertContains(response, 'id="answer-safety-info"')
         self.assertContains(response, 'id="answer-safety-notice"')
+        self.assertContains(response, "/faq-admin/unanswered-questions")
         self.assertContains(response, "/faq-admin.js")
 
     @mock.patch("faq_admin.views.find_similar_faqs")

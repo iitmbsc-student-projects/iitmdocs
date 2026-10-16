@@ -36,7 +36,7 @@ def _stub_weaviate():
 
 _stub_weaviate()
 import embed  # noqa: E402  (must follow the stub above)
-from pg.faq_api.orm import Faq
+from pg.faq_api.orm import Faq, UnansweredQuestion
 from pg.faq_api.repository import assign_seed_question_categories, replace_seed_faqs
 
 
@@ -166,6 +166,24 @@ class FaqSchemaTests(SimpleTestCase):
         """The database must retain source type after JSON stops being live data."""
         self.assertIn("question_category", Faq.__table__.columns)
 
+    def test_unanswered_question_model_has_the_admin_decision_columns(self):
+        """The review workflow needs both the admin decision and AI result."""
+        self.assertEqual(
+            set(UnansweredQuestion.__table__.columns.keys()),
+            {
+                "id",
+                "program_id",
+                "original_question",
+                "rewritten_question",
+                "rejection_reason",
+                "original_answer",
+                "fact_check_passed",
+                "fact_check_rejection_reason",
+                "accepted_or_rejected_by_admin",
+                "ai_suggestion",
+            },
+        )
+
     def test_seed_replace_keeps_question_category(self):
         """A new database created from seed must retain each row's category."""
 
@@ -281,6 +299,24 @@ class FaqSchemaTests(SimpleTestCase):
         self.assertTrue(
             any("ADD CONSTRAINT faqs_question_category_check" in statement for statement in statements)
         )
+
+    @mock.patch("embed.Base.metadata.create_all")
+    @mock.patch("embed.inspect")
+    def test_schema_migration_creates_the_unanswered_question_table(
+        self, inspect_database, create_all
+    ):
+        """Normal bootstrap adds the review table without replacing live FAQs."""
+        inspector = mock.Mock()
+        inspector.has_table.return_value = False
+        inspector.get_columns.return_value = [{"name": "question_category"}]
+        inspector.get_check_constraints.return_value = [
+            {"name": "faqs_question_category_check"}
+        ]
+        inspect_database.return_value = inspector
+
+        embed._ensure_faq_schema(mock.MagicMock())
+
+        self.assertIn(UnansweredQuestion.__table__, create_all.call_args.kwargs["tables"])
 
 
 class FaqBootstrapControlTests(SimpleTestCase):

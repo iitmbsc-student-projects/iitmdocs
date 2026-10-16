@@ -17,6 +17,10 @@ from faq_admin import views as faq_admin_views
 urlpatterns = [
     path("faq-admin", faq_admin_views.page, name="faq-admin"),
     path("faq-admin/all-faqs", faq_admin_views.all_faqs, name="faq-admin-all-faqs"),
+    path("faq-admin/unanswered-questions", faq_admin_views.unanswered_questions, name="faq-admin-unanswered-questions"),
+    path("faq-admin/unanswered-questions/refresh", faq_admin_views.refresh_unanswered_questions_page, name="faq-admin-unanswered-questions-refresh"),
+    path("faq-admin/unanswered-questions/<int:question_id>/reject", faq_admin_views.reject_unanswered_question_page, name="faq-admin-unanswered-questions-reject"),
+    path("faq-admin/unanswered-questions/<int:question_id>/ai-help", faq_admin_views.temporary_ai_help_page, name="faq-admin-unanswered-questions-ai-help"),
     path("faq-admin/all-faqs/<int:faq_id>/edit", faq_admin_views.edit_all_faq, name="faq-admin-edit-all-faq"),
     path("faq-admin/all-faqs/<int:faq_id>/delete", faq_admin_views.delete_all_faq, name="faq-admin-delete-all-faq"),
     path("faq-admin/check-similar", faq_admin_views.check_similar, name="faq-admin-check-similar"),

@@ -8,12 +8,20 @@ The separate ``/faq-admin/all-faqs`` page lists those stored rows inside one
 collapsible section per question category.
 """
 import json
+from urllib.parse import urlencode
 
 from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from .safety import FaqAnswerSafetyError, check_answer_safety as review_answer_safety
+from .unanswered_questions import (
+    UnansweredQuestionError,
+    list_accepted_unanswered_questions,
+    refresh_unanswered_questions,
+    reject_unanswered_question,
+    save_temporary_ai_suggestion,
+)
 from .services import (
     FaqAdminValidationError,
     add_new_faq,
@@ -83,6 +91,82 @@ def all_faqs(request):
             {"faq_sections": [], "error": "Could not load FAQ rows. Try again."},
             status=502,
         )
+
+
+def _unanswered_questions_redirect(**params):
+    """Build a safe redirect back to the unanswered-question review page."""
+    url = "/faq-admin/unanswered-questions"
+    return redirect(f"{url}?{urlencode(params)}" if params else url)
+
+
+@require_GET
+@ensure_csrf_cookie
+def unanswered_questions(request):
+    """Render Test-log questions the admin has not rejected.
+
+    Example: ``GET /faq-admin/unanswered-questions`` shows pending rows and a
+    manual Refresh button. It never reads BigQuery until that button is used.
+    """
+    try:
+        return render(
+            request,
+            "faq_admin/unanswered_questions.html",
+            {
+                "questions": list_accepted_unanswered_questions(),
+                "notice": request.GET.get("notice"),
+                "error": request.GET.get("error"),
+            },
+        )
+    except Exception:
+        return render(
+            request,
+            "faq_admin/unanswered_questions.html",
+            {"questions": [], "error": "Could not load unanswered questions. Try again."},
+            status=502,
+        )
+
+
+@require_POST
+@csrf_protect
+def refresh_unanswered_questions_page(request):
+    """Run the explicit Test-log refresh, then return to the review list."""
+    try:
+        result = refresh_unanswered_questions()
+        inserted = result["inserted_count"]
+        noun = "question" if inserted == 1 else "questions"
+        return _unanswered_questions_redirect(
+            notice=f"Reviewed {result['log_count']} logs; added {inserted} new {noun}."
+        )
+    except Exception:
+        return _unanswered_questions_redirect(
+            error="Could not refresh Test logs. Try again."
+        )
+
+
+@require_POST
+@csrf_protect
+def reject_unanswered_question_page(request, question_id):
+    """Hide a selected candidate after the admin confirms rejection in the browser."""
+    try:
+        reject_unanswered_question(question_id)
+        return _unanswered_questions_redirect()
+    except UnansweredQuestionError as exc:
+        return _unanswered_questions_redirect(error=str(exc))
+    except Exception:
+        return _unanswered_questions_redirect(error="Could not reject this question. Try again.")
+
+
+@require_POST
+@csrf_protect
+def temporary_ai_help_page(request, question_id):
+    """Save the temporary random AI-help label for one accepted row."""
+    try:
+        save_temporary_ai_suggestion(question_id)
+        return _unanswered_questions_redirect(notice="Temporary AI help saved.")
+    except UnansweredQuestionError as exc:
+        return _unanswered_questions_redirect(error=str(exc))
+    except Exception:
+        return _unanswered_questions_redirect(error="Could not get AI help. Try again.")
 
 
 @require_http_methods(["GET", "POST"])
