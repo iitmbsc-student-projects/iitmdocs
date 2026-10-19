@@ -6,16 +6,9 @@ returns only the fields the FAQ-admin table needs. For example, a completed DS
 fact-check rejection becomes a DS candidate; a prompt injection returns
 ``None``.
 """
-import random
+import json
 
 from programs import REAL_PROGRAM_IDS
-
-
-AI_SUGGESTIONS = (
-    "should_be_added",
-    "should_not_be_added",
-    "answer_already_present",
-)
 
 
 class UnansweredQuestionError(ValueError):
@@ -129,6 +122,9 @@ def _row_as_dict(row):
         "fact_check_rejection_reason": row.fact_check_rejection_reason,
         "accepted_or_rejected_by_admin": row.accepted_or_rejected_by_admin,
         "ai_suggestion": row.ai_suggestion,
+        "ai_reason": getattr(row, "ai_reason", None),
+        "matching_faq_ids": json.loads(getattr(row, "matching_faq_ids", None) or "[]"),
+        "suggested_clean_question": getattr(row, "suggested_clean_question", None),
     }
 
 
@@ -205,28 +201,6 @@ def reject_unanswered_question(question_id):
             row = _get_row_for_admin_action(session, question_id)
             row.accepted_or_rejected_by_admin = "rejected"
             session.flush()
-            return _row_as_dict(row)
-    finally:
-        engine.dispose()
-
-
-def save_temporary_ai_suggestion(question_id):
-    """Save one random temporary AI label, without rerunning a saved result.
-
-    Example: calling this for a new row may save ``should_be_added``. This is
-    intentionally a test stub and does not inspect FAQ content or invent IDs.
-    """
-    from pg.faq_api.orm import create_pg_engine, create_session_factory, session_scope
-
-    engine = create_pg_engine()
-    try:
-        with session_scope(create_session_factory(engine)) as session:
-            row = _get_row_for_admin_action(session, question_id)
-            if row.accepted_or_rejected_by_admin != "accepted":
-                raise UnansweredQuestionError("Rejected questions cannot receive AI help")
-            if row.ai_suggestion is None:
-                row.ai_suggestion = random.choice(AI_SUGGESTIONS)
-                session.flush()
             return _row_as_dict(row)
     finally:
         engine.dispose()

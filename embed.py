@@ -267,6 +267,29 @@ def _ensure_faq_schema(engine) -> None:
             )
         logger.info("[pg-bootstrap] Added allowed-value check for faqs.question_category.")
 
+    unanswered_columns = {
+        column["name"]
+        for column in inspect(engine).get_columns(UnansweredQuestion.__tablename__)
+    }
+    review_columns = (
+        ("ai_reason", "TEXT"),
+        ("matching_faq_ids", "TEXT"),
+        ("suggested_clean_question", "TEXT"),
+    )
+    for column_name, column_type in review_columns:
+        if column_name not in unanswered_columns:
+            with engine.begin() as connection:
+                connection.execute(
+                    text(
+                        f"ALTER TABLE unanswered_questions "
+                        f"ADD COLUMN {column_name} {column_type}"
+                    )
+                )
+            logger.info(
+                "[pg-bootstrap] Added unanswered_questions.%s without changing existing rows.",
+                column_name,
+            )
+
     logger.info("[pg-bootstrap] FAQ schema ready.")
 
 def _clean_seed_text(value, field_name: str, file_path: str, row_index: int) -> str:

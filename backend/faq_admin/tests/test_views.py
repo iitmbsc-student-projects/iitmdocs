@@ -17,6 +17,9 @@ class FaqAdminPageTests(SimpleTestCase):
                 "fact_check_rejection_reason": "Unsupported.",
                 "accepted_or_rejected_by_admin": "accepted",
                 "ai_suggestion": "should_be_added",
+                "ai_reason": "No available FAQ covers this.",
+                "matching_faq_ids": [],
+                "suggested_clean_question": "Can I use headphones during an exam?",
             },
             {
                 "id": 8,
@@ -41,6 +44,8 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertContains(response, "accepted")
         self.assertContains(response, "rejected")
         self.assertContains(response, "should_be_added")
+        self.assertContains(response, "No available FAQ covers this.")
+        self.assertContains(response, "Clean question")
         list_questions.assert_called_once_with()
 
     @mock.patch("faq_admin.views.list_accepted_unanswered_questions")
@@ -56,6 +61,9 @@ class FaqAdminPageTests(SimpleTestCase):
             "fact_check_rejection_reason": "Unsupported.",
             "accepted_or_rejected_by_admin": "accepted",
             "ai_suggestion": None,
+            "ai_reason": None,
+            "matching_faq_ids": [],
+            "suggested_clean_question": None,
         }]
 
         response = self.client.get("/faq-admin/unanswered-questions")
@@ -87,18 +95,18 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertRedirects(response, "/faq-admin/unanswered-questions", fetch_redirect_response=False)
         reject_question.assert_called_once_with(7)
 
-    @mock.patch("faq_admin.views.save_temporary_ai_suggestion")
-    def test_ai_help_endpoint_saves_and_shows_the_temporary_result(self, save_suggestion):
-        save_suggestion.return_value = {"ai_suggestion": "should_be_added"}
+    @mock.patch("faq_admin.views.review_unanswered_question")
+    def test_ai_help_endpoint_saves_the_real_review_result(self, review_question):
+        review_question.return_value = {"ai_suggestion": "should_be_added"}
 
         response = self.client.post("/faq-admin/unanswered-questions/7/ai-help")
 
         self.assertRedirects(
             response,
-            "/faq-admin/unanswered-questions?notice=Temporary+AI+help+saved.",
+            "/faq-admin/unanswered-questions?notice=AI+review+saved.",
             fetch_redirect_response=False,
         )
-        save_suggestion.assert_called_once_with(7)
+        review_question.assert_called_once_with(7)
 
     def test_unanswered_question_actions_require_csrf(self):
         csrf_client = Client(enforce_csrf_checks=True)

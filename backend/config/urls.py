@@ -27,8 +27,8 @@ urlpatterns = [
     path("faq-admin/unanswered-questions/refresh", faq_admin_views.refresh_unanswered_questions_page, name="faq-admin-unanswered-questions-refresh"),
     # Hide one unanswered-question row after the admin rejects it.
     path("faq-admin/unanswered-questions/<int:question_id>/reject", faq_admin_views.reject_unanswered_question_page, name="faq-admin-unanswered-questions-reject"),
-    # Save the temporary AI-help classification for one unanswered-question row.
-    path("faq-admin/unanswered-questions/<int:question_id>/ai-help", faq_admin_views.temporary_ai_help_page, name="faq-admin-unanswered-questions-ai-help"),
+    # Ask AI whether one unanswered question needs an FAQ, then save its review.
+    path("faq-admin/unanswered-questions/<int:question_id>/ai-help", faq_admin_views.ai_help_page, name="faq-admin-unanswered-questions-ai-help"),
     # Display and save edits to a selected FAQ database row.
     path("faq-admin/all-faqs/<int:faq_id>/edit", faq_admin_views.edit_all_faq, name="faq-admin-edit-all-faq"),
     # Permanently delete a selected FAQ database row.

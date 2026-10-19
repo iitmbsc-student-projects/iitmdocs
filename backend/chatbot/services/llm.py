@@ -34,7 +34,7 @@ def token_usage(payload):
     }
 
 
-async def chat_completion_async(client, messages, *, model, temperature, max_tokens=None, response_format=None, timeout=60, operation="chat_api"):
+async def chat_completion_async(client, messages, *, model, temperature, max_tokens=None, response_format=None, reasoning_effort=None, timeout=60, operation="chat_api"):
     """Send one non-streaming chat request without blocking the event loop.
 
     The caller owns the long-lived ``httpx.AsyncClient``. This helper keeps the
@@ -48,6 +48,8 @@ async def chat_completion_async(client, messages, *, model, temperature, max_tok
         body["max_tokens"] = max_tokens
     if response_format is not None:
         body["response_format"] = response_format
+    if reasoning_effort is not None:
+        body["reasoning_effort"] = reasoning_effort
     request_timeout = httpx.Timeout(
         connect=timeout, pool=timeout, write=timeout, read=timeout,
     )

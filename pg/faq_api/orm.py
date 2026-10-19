@@ -76,7 +76,7 @@ class UnansweredQuestion(Base):
     """One Test-log question awaiting an FAQ-admin decision.
 
     Flow: a manual log refresh creates this row -> the admin may reject it or
-    ask the temporary AI-help stub -> a later feature may turn an accepted row
+    ask AI for FAQ-gap evidence -> a later feature may turn an accepted row
     into an FAQ. Example: the same question can be stored once for DS and once
     for AE because the unique rule includes ``program_id``.
     """
@@ -111,6 +111,12 @@ class UnansweredQuestion(Base):
         Text, nullable=False, default="accepted", server_default="accepted"
     )
     ai_suggestion: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    # These three fields preserve the model's evidence for later admin review.
+    # matching_faq_ids is JSON text because it is a small ordered list, not data
+    # we need to search with SQL in this first version.
+    ai_reason: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    matching_faq_ids: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    suggested_clean_question: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
 
 def required_pg_env() -> dict[str, str]:

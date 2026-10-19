@@ -9,6 +9,20 @@ from chatbot.services import llm, logs
 
 
 class TransportDiagnosticsTests(SimpleTestCase):
+    async def test_reasoning_effort_is_sent_only_when_requested(self):
+        """FAQ review can request Luna's medium reasoning without changing chat calls."""
+        client = mock.AsyncMock()
+
+        await llm.chat_completion_async(
+            client,
+            [],
+            model="gpt-5.6-luna",
+            temperature=0,
+            reasoning_effort="medium",
+        )
+
+        self.assertEqual(client.post.call_args.kwargs["json"]["reasoning_effort"], "medium")
+
     async def test_explicit_timeouts_preserve_normal_and_answer_limits(self):
         for seconds in (60, 120):
             client = mock.AsyncMock()

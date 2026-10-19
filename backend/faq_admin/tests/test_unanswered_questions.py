@@ -1,6 +1,5 @@
 from types import SimpleNamespace
 from unittest import mock
-
 from django.test import SimpleTestCase
 
 from faq_admin.unanswered_questions import (
@@ -10,7 +9,6 @@ from faq_admin.unanswered_questions import (
     save_new_candidates,
     reject_unanswered_question,
     refresh_unanswered_questions,
-    save_temporary_ai_suggestion,
 )
 
 
@@ -129,6 +127,9 @@ class UnansweredQuestionAdminDecisionTests(SimpleTestCase):
                 fact_check_rejection_reason="Unsupported.",
                 accepted_or_rejected_by_admin="accepted",
                 ai_suggestion=None,
+                ai_reason=None,
+                matching_faq_ids=None,
+                suggested_clean_question=None,
             )
         ]
 
@@ -232,32 +233,3 @@ class UnansweredQuestionAdminDecisionTests(SimpleTestCase):
         self.assertEqual(row.accepted_or_rejected_by_admin, "rejected")
         self.assertEqual(result["accepted_or_rejected_by_admin"], "rejected")
         session.flush.assert_called_once_with()
-
-    @mock.patch("faq_admin.unanswered_questions.random.choice", return_value="should_not_be_added")
-    @mock.patch("pg.faq_api.orm.session_scope")
-    @mock.patch("pg.faq_api.orm.create_session_factory")
-    @mock.patch("pg.faq_api.orm.create_pg_engine")
-    def test_ai_stub_saves_one_result_and_does_not_replace_it(
-        self, create_pg_engine, create_session_factory, session_scope, random_choice
-    ):
-        """A saved stub result must not change on a later button click."""
-        session = session_scope.return_value.__enter__.return_value
-        row = SimpleNamespace(
-            id=7,
-            program_id="ds",
-            original_question="Can I use headphones?",
-            rewritten_question=None,
-            rejection_reason="no_search_results",
-            original_answer=None,
-            fact_check_passed=None,
-            fact_check_rejection_reason=None,
-            accepted_or_rejected_by_admin="accepted",
-            ai_suggestion="should_be_added",
-        )
-        session.get.return_value = row
-
-        result = save_temporary_ai_suggestion(7)
-
-        self.assertEqual(result["ai_suggestion"], "should_be_added")
-        random_choice.assert_not_called()
-        session.flush.assert_not_called()

@@ -16,13 +16,13 @@ from django.shortcuts import redirect, render
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from .safety import FaqAnswerSafetyError, check_answer_safety as review_answer_safety
+from .ai_review import FaqReviewError, review_unanswered_question
 from .unanswered_questions import (
     UnansweredQuestionError,
     list_accepted_unanswered_questions,
     list_all_unanswered_questions,
     refresh_unanswered_questions,
     reject_unanswered_question,
-    save_temporary_ai_suggestion,
 )
 from .services import (
     FaqAdminValidationError,
@@ -183,12 +183,12 @@ def reject_unanswered_question_page(request, question_id):
 
 @require_POST
 @csrf_protect
-def temporary_ai_help_page(request, question_id):
-    """Save the temporary random AI-help label for one accepted row."""
+async def ai_help_page(request, question_id):
+    """Run one real AI review and save its evidence for the selected row."""
     try:
-        save_temporary_ai_suggestion(question_id)
-        return _unanswered_questions_redirect(notice="Temporary AI help saved.")
-    except UnansweredQuestionError as exc:
+        await review_unanswered_question(question_id)
+        return _unanswered_questions_redirect(notice="AI review saved.")
+    except (UnansweredQuestionError, FaqReviewError) as exc:
         return _unanswered_questions_redirect(error=str(exc))
     except Exception:
         return _unanswered_questions_redirect(error="Could not get AI help. Try again.")

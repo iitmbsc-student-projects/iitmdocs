@@ -181,6 +181,9 @@ class FaqSchemaTests(SimpleTestCase):
                 "fact_check_rejection_reason",
                 "accepted_or_rejected_by_admin",
                 "ai_suggestion",
+                "ai_reason",
+                "matching_faq_ids",
+                "suggested_clean_question",
             },
         )
 
@@ -317,6 +320,37 @@ class FaqSchemaTests(SimpleTestCase):
         embed._ensure_faq_schema(mock.MagicMock())
 
         self.assertIn(UnansweredQuestion.__table__, create_all.call_args.kwargs["tables"])
+
+    @mock.patch("embed.Base.metadata.create_all")
+    @mock.patch("embed.inspect")
+    def test_schema_migration_adds_ai_review_columns_to_an_existing_table(
+        self, inspect_database, create_all
+    ):
+        """Test's existing review table receives fields without being recreated."""
+        inspector = mock.Mock()
+        inspector.has_table.return_value = True
+        inspector.get_columns.side_effect = [
+            [{"name": "program_id"}, {"name": "question_category"}],
+            [{"name": "program_id"}, {"name": "question_category"}],
+            [{"name": "id"}, {"name": "ai_suggestion"}],
+        ]
+        inspector.get_check_constraints.return_value = [
+            {"name": "faqs_question_category_check"}
+        ]
+        inspect_database.return_value = inspector
+        engine = mock.MagicMock()
+
+        embed._ensure_faq_schema(engine)
+
+        statements = [
+            str(call.args[0])
+            for call in engine.begin.return_value.__enter__.return_value.execute.call_args_list
+        ]
+        self.assertTrue(any("ADD COLUMN ai_reason TEXT" in statement for statement in statements))
+        self.assertTrue(any("ADD COLUMN matching_faq_ids TEXT" in statement for statement in statements))
+        self.assertTrue(
+            any("ADD COLUMN suggested_clean_question TEXT" in statement for statement in statements)
+        )
 
 
 class FaqBootstrapControlTests(SimpleTestCase):

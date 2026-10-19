@@ -65,8 +65,15 @@
 
               {% if question.ai_suggestion %}
                 <p class="management-notice">
-                  <strong>Temporary AI-help result:</strong> {{ question.ai_suggestion }}
+                  <strong>AI review:</strong> {{ question.ai_suggestion }}
                 </p>
+                <p><strong>Reason:</strong> {{ question.ai_reason }}</p>
+                {% if question.matching_faq_ids %}
+                  <p><strong>Matching FAQ IDs:</strong> {{ question.matching_faq_ids|join:", " }}</p>
+                {% endif %}
+                {% if question.suggested_clean_question and question.suggested_clean_question != "NA" %}
+                  <p><strong>Suggested clean question:</strong> {{ question.suggested_clean_question }}</p>
+                {% endif %}
               {% else %}
                 <form method="post" action="/faq-admin/unanswered-questions/{{ question.id }}/ai-help" class="review-action-form">
                   {% csrf_token %}
