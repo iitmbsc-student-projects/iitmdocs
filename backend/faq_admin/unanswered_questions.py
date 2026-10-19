@@ -56,9 +56,9 @@ def _fact_check_rejection_reason(fact_checks):
 def build_candidate_from_log(log):
     """Return one eligible Test-log candidate, or ``None`` when it is excluded.
 
-    A candidate must be a completed normal bot turn that either found no search
-    results or failed fact checking. Prompt injection, Raahat, direct-FAQ,
-    failed/disconnected, malformed, and technical-error logs are excluded.
+    A candidate must be a completed normal bot turn that failed fact checking.
+    Prompt injection, Raahat, direct-FAQ, no-search-result, failed/disconnected,
+    malformed, and technical-error logs are excluded.
     """
     if not isinstance(log, dict):
         return None
@@ -78,9 +78,8 @@ def build_candidate_from_log(log):
 
     rejection_reason = _text_or_none(log.get("rejection_reason"))
     fact_check_passed = log.get("fact_check_passed")
-    is_no_search_result = rejection_reason == "no_search_results"
     is_fact_check_failure = fact_check_passed is False
-    if not is_no_search_result and not is_fact_check_failure:
+    if not is_fact_check_failure:
         return None
 
     return {

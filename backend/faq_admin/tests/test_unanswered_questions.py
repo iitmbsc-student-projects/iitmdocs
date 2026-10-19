@@ -63,13 +63,30 @@ class UnansweredQuestionCandidateTests(SimpleTestCase):
 
         self.assertIsNone(candidate)
 
+    def test_no_search_results_is_not_an_unanswered_question_candidate(self):
+        """An empty search is not enough; this page reviews fact-check failures only."""
+        candidate = build_candidate_from_log(
+            {
+                "program_id": "ae",
+                "question": "Can I use headphones during an exam?",
+                "rejection_reason": "no_search_results",
+                "fact_check_passed": None,
+                "stream_status": "completed",
+                "query_source": "original",
+                "contains_raahat": False,
+            }
+        )
+
+        self.assertIsNone(candidate)
+
     def test_duplicate_log_questions_are_imported_once_without_tracking_counts(self):
         """The first version intentionally keeps only one exact row per programme."""
         logs = [
             {
                 "program_id": "ae",
                 "question": "Can I use headphones during an exam?",
-                "rejection_reason": "no_search_results",
+                "rejection_reason": "fact_check_failed",
+                "fact_check_passed": False,
                 "stream_status": "completed",
                 "query_source": "original",
                 "contains_raahat": False,
@@ -77,7 +94,8 @@ class UnansweredQuestionCandidateTests(SimpleTestCase):
             {
                 "program_id": "ae",
                 "question": "Can I use headphones during an exam?",
-                "rejection_reason": "no_search_results",
+                "rejection_reason": "fact_check_failed",
+                "fact_check_passed": False,
                 "stream_status": "completed",
                 "query_source": "original",
                 "contains_raahat": False,
@@ -130,7 +148,8 @@ class UnansweredQuestionAdminDecisionTests(SimpleTestCase):
             {
                 "program_id": "ds",
                 "question": "Can I use headphones during an exam?",
-                "rejection_reason": "no_search_results",
+                "rejection_reason": "fact_check_failed",
+                "fact_check_passed": False,
                 "stream_status": "completed",
                 "query_source": "original",
                 "contains_raahat": False,
