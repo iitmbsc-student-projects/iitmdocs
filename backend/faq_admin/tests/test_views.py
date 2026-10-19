@@ -3,6 +3,46 @@ from unittest import mock
 
 
 class FaqAdminPageTests(SimpleTestCase):
+    @mock.patch("faq_admin.views.list_all_unanswered_questions")
+    def test_all_unanswered_questions_page_shows_accepted_and_rejected_rows(self, list_questions):
+        list_questions.return_value = [
+            {
+                "id": 7,
+                "program_id": "ds",
+                "original_question": "Can I use headphones during an exam?",
+                "rewritten_question": "headphones exam rules",
+                "rejection_reason": "fact_check_failed",
+                "original_answer": "Yes.",
+                "fact_check_passed": False,
+                "fact_check_rejection_reason": "Unsupported.",
+                "accepted_or_rejected_by_admin": "accepted",
+                "ai_suggestion": "should_be_added",
+            },
+            {
+                "id": 8,
+                "program_id": "ae",
+                "original_question": "Can I bring a drone to class?",
+                "rewritten_question": None,
+                "rejection_reason": "fact_check_failed",
+                "original_answer": None,
+                "fact_check_passed": False,
+                "fact_check_rejection_reason": None,
+                "accepted_or_rejected_by_admin": "rejected",
+                "ai_suggestion": None,
+            },
+        ]
+
+        response = self.client.get("/faq-admin/all-unanswered-questions")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "All unanswered-question rows")
+        self.assertContains(response, "Can I use headphones during an exam?")
+        self.assertContains(response, "Can I bring a drone to class?")
+        self.assertContains(response, "accepted")
+        self.assertContains(response, "rejected")
+        self.assertContains(response, "should_be_added")
+        list_questions.assert_called_once_with()
+
     @mock.patch("faq_admin.views.list_accepted_unanswered_questions")
     def test_unanswered_questions_page_shows_pending_admin_review_rows(self, list_questions):
         list_questions.return_value = [{

@@ -4,8 +4,9 @@ Flow: an admin opens ``/faq-admin`` -> Django sends the page and CSRF cookie ->
 the page checks similar questions and answer safety through same-origin routes ->
 the page can call its server-validated save endpoint.
 
-The separate ``/faq-admin/all-faqs`` page lists those stored rows inside one
-collapsible section per question category.
+The separate ``/faq-admin/all-faqs`` page lists stored FAQ rows, while
+``/faq-admin/all-unanswered-questions`` is a read-only audit of every
+unanswered-question row, including rejected rows.
 """
 import json
 from urllib.parse import urlencode
@@ -18,6 +19,7 @@ from .safety import FaqAnswerSafetyError, check_answer_safety as review_answer_s
 from .unanswered_questions import (
     UnansweredQuestionError,
     list_accepted_unanswered_questions,
+    list_all_unanswered_questions,
     refresh_unanswered_questions,
     reject_unanswered_question,
     save_temporary_ai_suggestion,
@@ -122,6 +124,29 @@ def unanswered_questions(request):
             request,
             "faq_admin/unanswered_questions.html",
             {"questions": [], "error": "Could not load unanswered questions. Try again."},
+            status=502,
+        )
+
+
+@require_GET
+@ensure_csrf_cookie
+def all_unanswered_questions(request):
+    """Render every review row so saved actions can be checked later.
+
+    Example: ``GET /faq-admin/all-unanswered-questions`` shows a rejected row
+    that is deliberately hidden from the normal review page.
+    """
+    try:
+        return render(
+            request,
+            "faq_admin/all_unanswered_questions.html",
+            {"questions": list_all_unanswered_questions()},
+        )
+    except Exception:
+        return render(
+            request,
+            "faq_admin/all_unanswered_questions.html",
+            {"questions": [], "error": "Could not load unanswered-question rows. Try again."},
             status=502,
         )
 

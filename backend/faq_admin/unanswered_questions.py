@@ -144,11 +144,11 @@ def _get_row_for_admin_action(session, question_id):
     return row
 
 
-def list_accepted_unanswered_questions():
-    """Return the pending admin-review rows in primary-key order.
+def _list_unanswered_questions(admin_decision=None):
+    """Return review rows, optionally limited to one admin decision.
 
-    Example: an accepted DS row is returned for the review page, while a
-    rejected row remains stored but is intentionally not shown again.
+    Example: ``_list_unanswered_questions("accepted")`` powers the review
+    page, while no decision returns both accepted and rejected audit rows.
     """
     from sqlalchemy import select
 
@@ -162,14 +162,33 @@ def list_accepted_unanswered_questions():
     engine = create_pg_engine()
     try:
         with session_scope(create_session_factory(engine)) as session:
-            rows = session.execute(
-                select(UnansweredQuestion)
-                .where(UnansweredQuestion.accepted_or_rejected_by_admin == "accepted")
-                .order_by(UnansweredQuestion.id)
-            ).scalars().all()
+            statement = select(UnansweredQuestion).order_by(UnansweredQuestion.id)
+            if admin_decision is not None:
+                statement = statement.where(
+                    UnansweredQuestion.accepted_or_rejected_by_admin == admin_decision
+                )
+            rows = session.execute(statement).scalars().all()
             return [_row_as_dict(row) for row in rows]
     finally:
         engine.dispose()
+
+
+def list_accepted_unanswered_questions():
+    """Return pending rows for the action-focused admin review page.
+
+    Example: an accepted DS row is returned, while a rejected row remains
+    stored but is intentionally not shown again on that page.
+    """
+    return _list_unanswered_questions("accepted")
+
+
+def list_all_unanswered_questions():
+    """Return every row for the read-only unanswered-question audit page.
+
+    Example: a rejected AE row remains visible here so an admin can verify
+    that the Reject action saved its decision.
+    """
+    return _list_unanswered_questions()
 
 
 def reject_unanswered_question(question_id):
