@@ -22,6 +22,7 @@ from .unanswered_questions import (
     list_accepted_unanswered_questions,
     list_all_unanswered_questions,
     refresh_unanswered_questions,
+    complete_unanswered_question,
     reject_unanswered_question,
 )
 from .services import (
@@ -179,6 +180,19 @@ def reject_unanswered_question_page(request, question_id):
         return _unanswered_questions_redirect(error=str(exc))
     except Exception:
         return _unanswered_questions_redirect(error="Could not reject this question. Try again.")
+
+
+@require_POST
+@csrf_protect
+def complete_unanswered_question_page(request, question_id):
+    """Hide one handled question after the admin marks its review complete."""
+    try:
+        complete_unanswered_question(question_id)
+        return _unanswered_questions_redirect()
+    except UnansweredQuestionError as exc:
+        return _unanswered_questions_redirect(error=str(exc))
+    except Exception:
+        return _unanswered_questions_redirect(error="Could not mark this question as completed. Try again.")
 
 
 @require_POST

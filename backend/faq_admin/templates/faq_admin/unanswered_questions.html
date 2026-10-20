@@ -85,6 +85,10 @@
                 {% csrf_token %}
                 <button class="danger-button" type="submit">Reject this question</button>
               </form>
+              <form method="post" action="/faq-admin/unanswered-questions/{{ question.id }}/complete" class="review-action-form" onsubmit="return confirm('Mark this question as completed? It will not appear in this review list again.');">
+                {% csrf_token %}
+                <button class="secondary-button" type="submit">Mark as completed</button>
+              </form>
             </article>
           {% empty %}
             <p class="management-notice">No accepted unanswered questions are waiting for review.</p>

@@ -89,7 +89,7 @@ class UnansweredQuestion(Base):
             name="unanswered_questions_program_question_unique",
         ),
         CheckConstraint(
-            "accepted_or_rejected_by_admin IN ('accepted', 'rejected')",
+            "accepted_or_rejected_by_admin IN ('accepted', 'rejected', 'completed')",
             name="unanswered_questions_admin_decision_check",
         ),
         CheckConstraint(

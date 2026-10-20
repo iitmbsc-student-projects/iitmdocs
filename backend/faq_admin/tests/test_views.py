@@ -4,7 +4,7 @@ from unittest import mock
 
 class FaqAdminPageTests(SimpleTestCase):
     @mock.patch("faq_admin.views.list_all_unanswered_questions")
-    def test_all_unanswered_questions_page_shows_accepted_and_rejected_rows(self, list_questions):
+    def test_all_unanswered_questions_page_shows_every_admin_decision(self, list_questions):
         list_questions.return_value = [
             {
                 "id": 7,
@@ -33,6 +33,18 @@ class FaqAdminPageTests(SimpleTestCase):
                 "accepted_or_rejected_by_admin": "rejected",
                 "ai_suggestion": None,
             },
+            {
+                "id": 9,
+                "program_id": "mg",
+                "original_question": "How is a project assessed?",
+                "rewritten_question": None,
+                "rejection_reason": "fact_check_failed",
+                "original_answer": None,
+                "fact_check_passed": False,
+                "fact_check_rejection_reason": None,
+                "accepted_or_rejected_by_admin": "completed",
+                "ai_suggestion": None,
+            },
         ]
 
         response = self.client.get("/faq-admin/all-unanswered-questions")
@@ -43,6 +55,7 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertContains(response, "Can I bring a drone to class?")
         self.assertContains(response, "accepted")
         self.assertContains(response, "rejected")
+        self.assertContains(response, "completed")
         self.assertContains(response, "should_be_added")
         self.assertContains(response, "No available FAQ covers this.")
         self.assertContains(response, "Clean question")
@@ -74,6 +87,7 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertContains(response, "Refresh last 7 days")
         self.assertContains(response, "Get AI help for this question")
         self.assertContains(response, "Reject this question")
+        self.assertContains(response, "Mark as completed")
 
     @mock.patch("faq_admin.views.refresh_unanswered_questions")
     def test_refresh_endpoint_runs_the_manual_log_import(self, refresh_questions):
@@ -95,6 +109,13 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertRedirects(response, "/faq-admin/unanswered-questions", fetch_redirect_response=False)
         reject_question.assert_called_once_with(7)
 
+    @mock.patch("faq_admin.views.complete_unanswered_question")
+    def test_complete_endpoint_hides_the_selected_question(self, complete_question):
+        response = self.client.post("/faq-admin/unanswered-questions/7/complete")
+
+        self.assertRedirects(response, "/faq-admin/unanswered-questions", fetch_redirect_response=False)
+        complete_question.assert_called_once_with(7)
+
     @mock.patch("faq_admin.views.review_unanswered_question")
     def test_ai_help_endpoint_saves_the_real_review_result(self, review_question):
         review_question.return_value = {"ai_suggestion": "should_be_added"}
@@ -112,6 +133,10 @@ class FaqAdminPageTests(SimpleTestCase):
         csrf_client = Client(enforce_csrf_checks=True)
 
         response = csrf_client.post("/faq-admin/unanswered-questions/7/reject")
+
+        self.assertEqual(response.status_code, 403)
+
+        response = csrf_client.post("/faq-admin/unanswered-questions/7/complete")
 
         self.assertEqual(response.status_code, 403)
 

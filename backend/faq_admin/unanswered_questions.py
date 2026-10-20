@@ -193,13 +193,33 @@ def reject_unanswered_question(question_id):
     Example: ``reject_unanswered_question(7)`` changes row 7 to ``rejected``.
     The first version has no restore action, so later imports leave it hidden.
     """
+    return _finish_unanswered_question(question_id, "rejected")
+
+
+def complete_unanswered_question(question_id):
+    """Mark one accepted review row as completed after the admin handles it.
+
+    Example: ``complete_unanswered_question(7)`` changes row 7 to
+    ``completed``. It records review completion only; it does not add an FAQ.
+    """
+    return _finish_unanswered_question(question_id, "completed")
+
+
+def _finish_unanswered_question(question_id, decision):
+    """Store a final admin decision only for a pending accepted row.
+
+    Example: ``_finish_unanswered_question(7, "rejected")`` keeps an already
+    rejected or completed row unchanged by refusing the repeated action.
+    """
     from pg.faq_api.orm import create_pg_engine, create_session_factory, session_scope
 
     engine = create_pg_engine()
     try:
         with session_scope(create_session_factory(engine)) as session:
             row = _get_row_for_admin_action(session, question_id)
-            row.accepted_or_rejected_by_admin = "rejected"
+            if row.accepted_or_rejected_by_admin != "accepted":
+                raise UnansweredQuestionError("This question is no longer pending review")
+            row.accepted_or_rejected_by_admin = decision
             session.flush()
             return _row_as_dict(row)
     finally:

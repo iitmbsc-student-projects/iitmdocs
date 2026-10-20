@@ -7,6 +7,7 @@ from faq_admin.unanswered_questions import (
     build_candidates_from_logs,
     list_accepted_unanswered_questions,
     save_new_candidates,
+    complete_unanswered_question,
     reject_unanswered_question,
     refresh_unanswered_questions,
 )
@@ -205,6 +206,34 @@ class UnansweredQuestionAdminDecisionTests(SimpleTestCase):
         self.assertEqual(inserted, 1)
         self.assertEqual(session.add.call_count, 1)
         self.assertEqual(session.add.call_args.args[0].original_question, "New question?")
+
+    @mock.patch("pg.faq_api.orm.session_scope")
+    @mock.patch("pg.faq_api.orm.create_session_factory")
+    @mock.patch("pg.faq_api.orm.create_pg_engine")
+    def test_complete_hides_an_accepted_question_after_admin_finishes_review(
+        self, create_pg_engine, create_session_factory, session_scope
+    ):
+        """Completed means handled, not rejected or automatically added as an FAQ."""
+        session = session_scope.return_value.__enter__.return_value
+        row = SimpleNamespace(
+            id=7,
+            program_id="ds",
+            original_question="Can I use headphones?",
+            rewritten_question=None,
+            rejection_reason="fact_check_failed",
+            original_answer=None,
+            fact_check_passed=False,
+            fact_check_rejection_reason=None,
+            accepted_or_rejected_by_admin="accepted",
+            ai_suggestion=None,
+        )
+        session.get.return_value = row
+
+        result = complete_unanswered_question(7)
+
+        self.assertEqual(row.accepted_or_rejected_by_admin, "completed")
+        self.assertEqual(result["accepted_or_rejected_by_admin"], "completed")
+        session.flush.assert_called_once_with()
 
     @mock.patch("pg.faq_api.orm.session_scope")
     @mock.patch("pg.faq_api.orm.create_session_factory")

@@ -180,7 +180,7 @@ def _save_review_result(question_id, result):
             if row is None:
                 raise FaqReviewError("The unanswered question no longer exists")
             if row.accepted_or_rejected_by_admin != "accepted":
-                raise FaqReviewError("Rejected questions cannot receive AI help")
+                raise FaqReviewError("Only pending questions can receive AI help")
             if row.ai_suggestion is not None:
                 return _row_as_dict(row)
             row.ai_suggestion = result["ai_suggestion"]
@@ -203,7 +203,7 @@ async def review_unanswered_question(question_id):
     # need Django's thread-sensitive executor while the async view awaits OpenAI.
     row = await sync_to_async(_load_unanswered_question, thread_sensitive=False)(question_id)
     if row.accepted_or_rejected_by_admin != "accepted":
-        raise FaqReviewError("Rejected questions cannot receive AI help")
+        raise FaqReviewError("Only pending questions can receive AI help")
     if row.ai_suggestion is not None:
         from .unanswered_questions import _row_as_dict
 

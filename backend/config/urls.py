@@ -19,7 +19,7 @@ urlpatterns = [
     path("faq-admin", faq_admin_views.page, name="faq-admin"),
     # Read-only list of every FAQ row, grouped by question category.
     path("faq-admin/all-faqs", faq_admin_views.all_faqs, name="faq-admin-all-faqs"),
-    # Read-only audit list of accepted and rejected unanswered-question rows.
+    # Read-only audit list of all unanswered-question rows and their decisions.
     path("faq-admin/all-unanswered-questions", faq_admin_views.all_unanswered_questions, name="faq-admin-all-unanswered-questions"),
     # Action page for pending unanswered questions imported from Test logs.
     path("faq-admin/unanswered-questions", faq_admin_views.unanswered_questions, name="faq-admin-unanswered-questions"),
@@ -27,6 +27,8 @@ urlpatterns = [
     path("faq-admin/unanswered-questions/refresh", faq_admin_views.refresh_unanswered_questions_page, name="faq-admin-unanswered-questions-refresh"),
     # Hide one unanswered-question row after the admin rejects it.
     path("faq-admin/unanswered-questions/<int:question_id>/reject", faq_admin_views.reject_unanswered_question_page, name="faq-admin-unanswered-questions-reject"),
+    # Hide one handled unanswered-question row after the admin marks it completed.
+    path("faq-admin/unanswered-questions/<int:question_id>/complete", faq_admin_views.complete_unanswered_question_page, name="faq-admin-unanswered-questions-complete"),
     # Ask AI whether one unanswered question needs an FAQ, then save its review.
     path("faq-admin/unanswered-questions/<int:question_id>/ai-help", faq_admin_views.ai_help_page, name="faq-admin-unanswered-questions-ai-help"),
     # Display and save edits to a selected FAQ database row.

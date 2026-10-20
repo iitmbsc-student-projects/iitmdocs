@@ -352,6 +352,45 @@ class FaqSchemaTests(SimpleTestCase):
             any("ADD COLUMN suggested_clean_question TEXT" in statement for statement in statements)
         )
 
+    @mock.patch("embed.Base.metadata.create_all")
+    @mock.patch("embed.inspect")
+    def test_schema_migration_replaces_the_old_two_decision_check(self, inspect_database, create_all):
+        """Existing review rows stay intact while their allowed decision values expand."""
+        inspector = mock.Mock()
+        inspector.has_table.return_value = True
+        inspector.get_columns.side_effect = [
+            [{"name": "program_id"}, {"name": "question_category"}],
+            [{"name": "program_id"}, {"name": "question_category"}],
+            [
+                {"name": "id"},
+                {"name": "ai_reason"},
+                {"name": "matching_faq_ids"},
+                {"name": "suggested_clean_question"},
+            ],
+        ]
+        inspector.get_check_constraints.side_effect = [
+            [{"name": "faqs_question_category_check"}],
+            [
+                {
+                    "name": "unanswered_questions_admin_decision_check",
+                    "sqltext": "accepted_or_rejected_by_admin IN ('accepted', 'rejected')",
+                }
+            ],
+        ]
+        inspect_database.return_value = inspector
+        engine = mock.MagicMock()
+
+        embed._ensure_faq_schema(engine)
+
+        statements = [
+            str(call.args[0])
+            for call in engine.begin.return_value.__enter__.return_value.execute.call_args_list
+        ]
+        self.assertTrue(any("DROP CONSTRAINT unanswered_questions_admin_decision_check" in statement for statement in statements))
+        self.assertTrue(
+            any("'accepted', 'rejected', 'completed'" in statement for statement in statements)
+        )
+
 
 class FaqBootstrapControlTests(SimpleTestCase):
     @mock.patch.dict(os.environ, {"ENABLE_PG_FAQ_SCHEMA_MIGRATION": "true"}, clear=True)

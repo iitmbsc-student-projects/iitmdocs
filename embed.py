@@ -290,6 +290,34 @@ def _ensure_faq_schema(engine) -> None:
                 column_name,
             )
 
+    unanswered_constraints = {
+        constraint.get("name"): constraint
+        for constraint in inspect(engine).get_check_constraints(UnansweredQuestion.__tablename__)
+    }
+    decision_constraint = unanswered_constraints.get("unanswered_questions_admin_decision_check")
+    current_rule = (decision_constraint or {}).get("sqltext", "").lower()
+    if decision_constraint is not None and "completed" not in current_rule:
+        with engine.begin() as connection:
+            connection.execute(
+                text(
+                    "ALTER TABLE unanswered_questions DROP CONSTRAINT "
+                    "unanswered_questions_admin_decision_check"
+                )
+            )
+        logger.info("[pg-bootstrap] Replaced unanswered-question decision check to allow completed rows.")
+        decision_constraint = None
+    if decision_constraint is None:
+        with engine.begin() as connection:
+            connection.execute(
+                text(
+                    "ALTER TABLE unanswered_questions ADD CONSTRAINT "
+                    "unanswered_questions_admin_decision_check "
+                    "CHECK (accepted_or_rejected_by_admin IN "
+                    "('accepted', 'rejected', 'completed'))"
+                )
+            )
+        logger.info("[pg-bootstrap] Added allowed-value check for unanswered-question decisions.")
+
     logger.info("[pg-bootstrap] FAQ schema ready.")
 
 def _clean_seed_text(value, field_name: str, file_path: str, row_index: int) -> str:
