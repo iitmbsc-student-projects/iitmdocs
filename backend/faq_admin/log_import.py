@@ -34,7 +34,16 @@ def _payload_from_row(row):
         decoded = json.loads(payload)
     except (TypeError, json.JSONDecodeError):
         return None
-    return decoded if isinstance(decoded, dict) else None
+    if not isinstance(decoded, dict):
+        return None
+
+    # This is the Cloud Logging event timestamp, not an application-provided
+    # field in jsonPayload. It is retained only for the FAQ admin's date display.
+    try:
+        decoded["asked_at"] = row["asked_at"]
+    except (KeyError, TypeError):
+        decoded["asked_at"] = None
+    return decoded
 
 
 def read_last_seven_days_test_logs(client=None, today=None):
@@ -49,7 +58,7 @@ def read_last_seven_days_test_logs(client=None, today=None):
     start_suffix, end_suffix = _daily_table_range(today)
     table = f"{TEST_LOG_PROJECT}.{TEST_LOG_DATASET}.{TEST_LOG_TABLE_PREFIX}*"
     query = f"""
-        SELECT TO_JSON_STRING(jsonPayload) AS payload
+        SELECT timestamp AS asked_at, TO_JSON_STRING(jsonPayload) AS payload
         FROM `{table}`
         WHERE _TABLE_SUFFIX BETWEEN '{start_suffix}' AND '{end_suffix}'
           AND JSON_VALUE(TO_JSON_STRING(jsonPayload), '$.message') = 'conversation_turn'

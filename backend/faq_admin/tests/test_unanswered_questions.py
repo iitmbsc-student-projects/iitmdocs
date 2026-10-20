@@ -1,3 +1,4 @@
+import datetime
 from types import SimpleNamespace
 from unittest import mock
 from django.test import SimpleTestCase
@@ -27,6 +28,7 @@ class UnansweredQuestionCandidateTests(SimpleTestCase):
                 "fact_checks": [
                     {"approved": False, "incorrect": ["The answer is unsupported."]}
                 ],
+                "asked_at": datetime.datetime(2026, 10, 20, 9, 30, tzinfo=datetime.timezone.utc),
                 "stream_status": "completed",
                 "query_source": "llm",
                 "contains_raahat": False,
@@ -43,6 +45,7 @@ class UnansweredQuestionCandidateTests(SimpleTestCase):
                 "original_answer": "Yes, use them freely.",
                 "fact_check_passed": False,
                 "fact_check_rejection_reason": "The answer is unsupported.",
+                "asked_at": datetime.datetime(2026, 10, 20, 9, 30, tzinfo=datetime.timezone.utc),
             },
         )
 
@@ -124,6 +127,7 @@ class UnansweredQuestionAdminDecisionTests(SimpleTestCase):
                 rewritten_question="headphones exam rules",
                 rejection_reason="fact_check_failed",
                 original_answer="Yes.",
+                asked_at=None,
                 fact_check_passed=False,
                 fact_check_rejection_reason="Unsupported.",
                 accepted_or_rejected_by_admin="accepted",
@@ -222,6 +226,7 @@ class UnansweredQuestionAdminDecisionTests(SimpleTestCase):
             rewritten_question=None,
             rejection_reason="fact_check_failed",
             original_answer=None,
+            asked_at=None,
             fact_check_passed=False,
             fact_check_rejection_reason=None,
             accepted_or_rejected_by_admin="accepted",
@@ -250,6 +255,7 @@ class UnansweredQuestionAdminDecisionTests(SimpleTestCase):
             rewritten_question=None,
             rejection_reason="no_search_results",
             original_answer=None,
+            asked_at=None,
             fact_check_passed=None,
             fact_check_rejection_reason=None,
             accepted_or_rejected_by_admin="accepted",

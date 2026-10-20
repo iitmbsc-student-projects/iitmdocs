@@ -32,6 +32,7 @@
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">Programme</th>
+                  <th scope="col">Asked on</th>
                   <th scope="col">Original question</th>
                   <th scope="col">Rewritten question</th>
                   <th scope="col">Admin decision</th>
@@ -46,6 +47,7 @@
                   <tr>
                     <td>{{ question.id }}</td>
                     <td>{{ question.program_id|upper }}</td>
+                    <td>{{ question.asked_at|date:"d M Y"|default:"—" }}</td>
                     <td><div class="cell-content">{{ question.original_question }}</div></td>
                     <td><div class="cell-content">{{ question.rewritten_question|default:"—" }}</div></td>
                     <td>{{ question.accepted_or_rejected_by_admin }}</td>
@@ -76,7 +78,7 @@
                     </td>
                   </tr>
                 {% empty %}
-                  <tr><td colspan="9">No unanswered-question rows have been imported yet.</td></tr>
+                  <tr><td colspan="10">No unanswered-question rows have been imported yet.</td></tr>
                 {% endfor %}
               </tbody>
             </table>

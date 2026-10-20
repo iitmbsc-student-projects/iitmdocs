@@ -177,6 +177,7 @@ class FaqSchemaTests(SimpleTestCase):
                 "rewritten_question",
                 "rejection_reason",
                 "original_answer",
+                "asked_at",
                 "fact_check_passed",
                 "fact_check_rejection_reason",
                 "accepted_or_rejected_by_admin",

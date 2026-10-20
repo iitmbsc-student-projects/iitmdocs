@@ -19,6 +19,7 @@ Django service and the bootstrap job.
 """
 
 import os
+from datetime import datetime
 from contextlib import contextmanager
 from typing import Iterator, Optional
 
@@ -105,6 +106,9 @@ class UnansweredQuestion(Base):
     rewritten_question: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     rejection_reason: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     original_answer: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    # The original Cloud Logging timestamp tells the admin when this question
+    # was asked. Older rows remain valid because this is intentionally nullable.
+    asked_at: Mapped[Optional[datetime]] = mapped_column(nullable=True)
     fact_check_passed: Mapped[Optional[bool]] = mapped_column(Boolean, nullable=True)
     fact_check_rejection_reason: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     accepted_or_rejected_by_admin: Mapped[str] = mapped_column(

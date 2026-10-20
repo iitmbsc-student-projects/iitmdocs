@@ -44,6 +44,9 @@
                 <span>Row #{{ question.id }}</span>
               </div>
               <h2>{{ question.original_question }}</h2>
+              {% if question.asked_at %}
+                <p><strong>Asked on:</strong> {{ question.asked_at|date:"d M Y" }}</p>
+              {% endif %}
               {% if question.rewritten_question %}
                 <p><strong>Rewritten query:</strong> {{ question.rewritten_question }}</p>
               {% endif %}

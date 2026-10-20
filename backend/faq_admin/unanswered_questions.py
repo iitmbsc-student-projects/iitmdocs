@@ -81,6 +81,7 @@ def build_candidate_from_log(log):
         "rewritten_question": _text_or_none(log.get("rewritten_query")),
         "rejection_reason": rejection_reason,
         "original_answer": _text_or_none(log.get("original_answer")),
+        "asked_at": log.get("asked_at"),
         "fact_check_passed": fact_check_passed if isinstance(fact_check_passed, bool) else None,
         "fact_check_rejection_reason": _fact_check_rejection_reason(log.get("fact_checks")),
     }
@@ -118,6 +119,7 @@ def _row_as_dict(row):
         "rewritten_question": row.rewritten_question,
         "rejection_reason": row.rejection_reason,
         "original_answer": row.original_answer,
+        "asked_at": row.asked_at,
         "fact_check_passed": row.fact_check_passed,
         "fact_check_rejection_reason": row.fact_check_rejection_reason,
         "accepted_or_rejected_by_admin": row.accepted_or_rejected_by_admin,

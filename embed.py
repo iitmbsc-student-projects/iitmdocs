@@ -275,6 +275,7 @@ def _ensure_faq_schema(engine) -> None:
         ("ai_reason", "TEXT"),
         ("matching_faq_ids", "TEXT"),
         ("suggested_clean_question", "TEXT"),
+        ("asked_at", "TIMESTAMP WITH TIME ZONE"),
     )
     for column_name, column_type in review_columns:
         if column_name not in unanswered_columns:

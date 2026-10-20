@@ -104,6 +104,7 @@ class FaqReviewServiceTests(SimpleTestCase):
             rewritten_question=None,
             rejection_reason=None,
             original_answer=None,
+            asked_at=None,
             fact_check_passed=False,
             fact_check_rejection_reason=None,
         )
