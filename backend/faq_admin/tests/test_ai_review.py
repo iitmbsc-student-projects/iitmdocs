@@ -165,5 +165,8 @@ class FaqReviewServiceTests(SimpleTestCase):
         self.assertNotIn("original_answer", messages[1]["content"])
         self.assertEqual(chat_completion.call_args.kwargs["model"], "gpt-5.6-luna")
         self.assertEqual(chat_completion.call_args.kwargs["reasoning_effort"], "medium")
+        self.assertEqual(chat_completion.call_args.kwargs["max_completion_tokens"], 1200)
+        self.assertNotIn("max_tokens", chat_completion.call_args.kwargs)
+        self.assertNotIn("temperature", chat_completion.call_args.kwargs)
         self.assertEqual(save_result.call_args.args[0], 7)
 
