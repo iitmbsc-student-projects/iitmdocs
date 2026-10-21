@@ -95,9 +95,6 @@ def _validate_review(payload):
     if decision != "yes" or rule == "NA" or suggestion == "NA":
         raise FaqAnswerSafetyError("The answer-safety review returned invalid data")
 
-    for line in rule.splitlines():
-        if line.strip() and line.strip() not in FACTCHECK_SYSTEM_PROMPT:
-            raise FaqAnswerSafetyError("The answer-safety review returned an invalid rule")
     return {
         "likely_to_be_rejected_by_fact_checker": decision,
         "exact_line_from_fact_checker_prompt_because_of_which_rejection_is_possible": rule,

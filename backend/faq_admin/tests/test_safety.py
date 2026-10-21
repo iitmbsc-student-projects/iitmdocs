@@ -61,6 +61,24 @@ class AnswerSafetyReviewTests(SimpleTestCase):
 
     @mock.patch("faq_admin.safety.get_openai_http_client")
     @mock.patch("faq_admin.safety.chat_completion_async")
+    async def test_rejected_answer_accepts_a_paraphrased_fact_checker_rule(self, completion, get_client):
+        completion.return_value = _FakeResponse(_completion(json.dumps({
+            "likely_to_be_rejected_by_fact_checker": "yes",
+            "exact_line_from_fact_checker_prompt_because_of_which_rejection_is_possible": "The answer contains dating advice.",
+            "suggested_answer_likely_to_pass_fact_checker": "Please contact support@study.iitm.ac.in for programme-related help.",
+        })))
+
+        result = await safety.check_answer_safety("You should date your classmate.")
+
+        self.assertEqual(result["likely_to_be_rejected_by_fact_checker"], "yes")
+        self.assertEqual(
+            result["exact_line_from_fact_checker_prompt_because_of_which_rejection_is_possible"],
+            "The answer contains dating advice.",
+        )
+        get_client.assert_called_once()
+
+    @mock.patch("faq_admin.safety.get_openai_http_client")
+    @mock.patch("faq_admin.safety.chat_completion_async")
     async def test_invalid_model_output_blocks_the_save_flow(self, completion, get_client):
         completion.return_value = _FakeResponse(_completion("not JSON"))
 
