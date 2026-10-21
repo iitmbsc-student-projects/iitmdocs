@@ -50,14 +50,8 @@
               {% if question.rewritten_question %}
                 <p><strong>Rewritten query:</strong> {{ question.rewritten_question }}</p>
               {% endif %}
-              <p><strong>Rejection reason:</strong> {{ question.rejection_reason|default:"—" }}</p>
-              {% if question.fact_check_passed is False %}
-                <p><strong>Fact checker:</strong> Rejected</p>
-              {% elif question.fact_check_passed is True %}
-                <p><strong>Fact checker:</strong> Passed</p>
-              {% endif %}
               {% if question.fact_check_rejection_reason %}
-                <p><strong>Fact-check detail:</strong> {{ question.fact_check_rejection_reason }}</p>
+                <p><strong>Fact-check rejection reason:</strong> {{ question.fact_check_rejection_reason }}</p>
               {% endif %}
               {% if question.original_answer %}
                 <details>

@@ -88,6 +88,9 @@ class FaqAdminPageTests(SimpleTestCase):
         self.assertContains(response, "Get AI help for this question")
         self.assertContains(response, "Reject this question")
         self.assertContains(response, "Mark as completed")
+        self.assertContains(response, "Fact-check rejection reason:")
+        self.assertNotContains(response, "Rejection reason:")
+        self.assertNotContains(response, "Fact checker:")
 
     @mock.patch("faq_admin.views.refresh_unanswered_questions")
     def test_refresh_endpoint_runs_the_manual_log_import(self, refresh_questions):
