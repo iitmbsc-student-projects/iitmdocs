@@ -201,7 +201,7 @@ async def ai_help_page(request, question_id):
     """Run one real AI review and save its evidence for the selected row."""
     try:
         await review_unanswered_question(question_id)
-        return _unanswered_questions_redirect(notice="AI review saved.")
+        return _unanswered_questions_redirect()
     except (UnansweredQuestionError, FaqReviewError) as exc:
         return _unanswered_questions_redirect(error=str(exc))
     except Exception:

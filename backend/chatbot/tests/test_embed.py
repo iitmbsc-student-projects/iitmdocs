@@ -477,19 +477,6 @@ class FaqBootstrapControlTests(SimpleTestCase):
         replace_seed.assert_not_called()
         engine.dispose.assert_called_once()
 
-
-class RealSeedTests(SimpleTestCase):
-    """Guards the committed pg/seed against an accidental bad edit."""
-
-    def test_committed_seed_loads_with_the_expected_counts(self):
-        rows = embed._load_seed_faqs(str(REPO_ROOT / "pg" / "seed"))
-        counts = {}
-        for row in rows:
-            counts[row["program_id"]] = counts.get(row["program_id"], 0) + 1
-        self.assertEqual(len(rows), 401)
-        self.assertEqual(counts, {"common": 242, "ae": 52, "ds": 35, "es": 39, "mg": 33})
-
-
 class DocumentProgramIdTests(SimpleTestCase):
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()

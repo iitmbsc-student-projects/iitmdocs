@@ -124,7 +124,7 @@ class FaqAdminPageTests(SimpleTestCase):
 
         self.assertRedirects(
             response,
-            "/faq-admin/unanswered-questions?notice=AI+review+saved.",
+            "/faq-admin/unanswered-questions",
             fetch_redirect_response=False,
         )
         review_question.assert_called_once_with(7)
