@@ -14,6 +14,7 @@
             <p class="eyebrow">IIT Madras BS chatbot</p>
             <h1 id="page-title">FAQ Admin</h1>
             <p class="subtitle">Review a question before adding or updating it in the FAQ database.</p>
+            <p><a class="page-link header-page-link" href="/faq-admin/unanswered-questions">Review unanswered questions</a></p>
           </div>
           <span class="environment-badge">FAQ workspace</span>
         </header>
@@ -85,6 +86,17 @@
                   <label for="answer-mg">Management answer</label>
                   <textarea id="answer-mg" name="answer_mg" rows="4"></textarea>
                 </div>
+              </div>
+
+              <div id="answer-safety-review" class="answer-safety-review">
+                <div class="answer-safety-controls">
+                  <button id="check-answer-safety" class="secondary-button" type="button">Check answer safety</button>
+                  <button id="answer-safety-info" class="question-lock-info" type="button" aria-expanded="false" aria-controls="answer-safety-notice">i</button>
+                </div>
+                <p id="answer-safety-notice" class="add-flow-notice" hidden>
+                  Check whether the answer is likely to be rejected by the chatbot fact-checker before saving.
+                </p>
+                <div id="answer-safety-results" class="answer-safety-results" aria-live="polite" hidden></div>
               </div>
             </div>
           </fieldset>

@@ -1,6 +1,7 @@
 import { readFileSync } from "fs";
 import { describe, expect, it } from "vitest";
 import { JSDOM } from "jsdom";
+import { shouldDisableAnswerSafetyCheck } from "./static/faq-admin-state.js";
 
 const faqAdminCss = readFileSync("static/faq-admin.css", "utf8");
 
@@ -24,5 +25,23 @@ describe("FAQ admin add-flow information button", () => {
 
     expect(dom.window.getComputedStyle(button).marginTop).toBe("0px");
     expect(dom.window.getComputedStyle(label).marginTop).toBe("0px");
+  });
+});
+
+describe("FAQ admin answer-safety button", () => {
+  it("stays disabled after an admin accepts a suggested answer", () => {
+    expect(shouldDisableAnswerSafetyCheck({
+      formBusy: false,
+      actionMode: "add",
+      answerSafetyApproved: true,
+    })).toBe(true);
+  });
+
+  it("becomes available again after an explicit answer edit clears approval", () => {
+    expect(shouldDisableAnswerSafetyCheck({
+      formBusy: false,
+      actionMode: "add",
+      answerSafetyApproved: false,
+    })).toBe(false);
   });
 });

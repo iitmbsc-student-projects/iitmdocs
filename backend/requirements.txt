@@ -5,6 +5,7 @@ django-cors-headers>=4.4
 uvicorn>=0.30,<0.31
 httpx>=0.27,<0.28
 python-dotenv>=1.0.0
+google-cloud-bigquery>=3.25,<4
 
 # Django's async FAQ reader reuses the model and pgvector query from pg/faq_api;
 # the synchronous bootstrap path remains unchanged and uses the same DB stack.

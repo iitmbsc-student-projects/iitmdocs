@@ -47,6 +47,11 @@ def chat_model() -> str:
     return os.getenv("CHAT_MODEL", "gpt-4o-mini")
 
 
+def faq_review_model() -> str:
+    """Return the model used only for internal unanswered-question review."""
+    return os.getenv("FAQ_REVIEW_MODEL", "gpt-5.6-luna")
+
+
 def chat_api_key():
     """Return the API key used to authenticate chat-model requests."""
     return os.getenv("CHAT_API_KEY") or os.getenv("OPENAI_API_KEY")

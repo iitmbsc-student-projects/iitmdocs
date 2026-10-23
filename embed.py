@@ -40,6 +40,7 @@ from pg.faq_api.orm import (
     Base,
     FAQ_QUESTION_CATEGORIES,
     Faq,
+    UnansweredQuestion,
     create_pg_engine,
     create_session_factory,
     session_scope,
@@ -243,7 +244,7 @@ def _ensure_faq_schema(engine) -> None:
                 "This job will not drop existing FAQ rows."
             )
 
-    Base.metadata.create_all(engine, tables=[Faq.__table__])
+    Base.metadata.create_all(engine, tables=[Faq.__table__, UnansweredQuestion.__table__])
     inspector = inspect(engine)
     columns = {column["name"] for column in inspector.get_columns(Faq.__tablename__)}
     if "question_category" not in columns:
@@ -265,6 +266,58 @@ def _ensure_faq_schema(engine) -> None:
                 )
             )
         logger.info("[pg-bootstrap] Added allowed-value check for faqs.question_category.")
+
+    unanswered_columns = {
+        column["name"]
+        for column in inspect(engine).get_columns(UnansweredQuestion.__tablename__)
+    }
+    review_columns = (
+        ("ai_reason", "TEXT"),
+        ("matching_faq_ids", "TEXT"),
+        ("suggested_clean_question", "TEXT"),
+        ("asked_at", "TIMESTAMP WITH TIME ZONE"),
+    )
+    for column_name, column_type in review_columns:
+        if column_name not in unanswered_columns:
+            with engine.begin() as connection:
+                connection.execute(
+                    text(
+                        f"ALTER TABLE unanswered_questions "
+                        f"ADD COLUMN {column_name} {column_type}"
+                    )
+                )
+            logger.info(
+                "[pg-bootstrap] Added unanswered_questions.%s without changing existing rows.",
+                column_name,
+            )
+
+    unanswered_constraints = {
+        constraint.get("name"): constraint
+        for constraint in inspect(engine).get_check_constraints(UnansweredQuestion.__tablename__)
+    }
+    decision_constraint = unanswered_constraints.get("unanswered_questions_admin_decision_check")
+    current_rule = (decision_constraint or {}).get("sqltext", "").lower()
+    if decision_constraint is not None and "completed" not in current_rule:
+        with engine.begin() as connection:
+            connection.execute(
+                text(
+                    "ALTER TABLE unanswered_questions DROP CONSTRAINT "
+                    "unanswered_questions_admin_decision_check"
+                )
+            )
+        logger.info("[pg-bootstrap] Replaced unanswered-question decision check to allow completed rows.")
+        decision_constraint = None
+    if decision_constraint is None:
+        with engine.begin() as connection:
+            connection.execute(
+                text(
+                    "ALTER TABLE unanswered_questions ADD CONSTRAINT "
+                    "unanswered_questions_admin_decision_check "
+                    "CHECK (accepted_or_rejected_by_admin IN "
+                    "('accepted', 'rejected', 'completed'))"
+                )
+            )
+        logger.info("[pg-bootstrap] Added allowed-value check for unanswered-question decisions.")
 
     logger.info("[pg-bootstrap] FAQ schema ready.")
 

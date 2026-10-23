@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All unanswered-question rows · IIT Madras BS</title>
+    <link rel="stylesheet" href="/faq-admin.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="admin-card all-faqs-card" aria-labelledby="page-title">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">IIT Madras BS chatbot</p>
+            <h1 id="page-title">All unanswered-question rows</h1>
+            <p class="subtitle">A read-only record of every question imported for FAQ review.</p>
+          </div>
+          <span class="environment-badge">Test workflow</span>
+        </header>
+
+        <div class="all-faqs-content">
+          {% if error %}
+            <p class="management-notice">{{ error }}</p>
+          {% endif %}
+          <p>
+            <a class="page-link" href="/faq-admin/unanswered-questions">← Back to unanswered-question review</a>
+            · <a class="page-link" href="/faq-admin/all-faqs">View all FAQ rows</a>
+          </p>
+          <div class="all-faqs-table-wrap">
+            <table class="all-faqs-table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Programme</th>
+                  <th scope="col">Asked on</th>
+                  <th scope="col">Original question</th>
+                  <th scope="col">Rewritten question</th>
+                  <th scope="col">Admin decision</th>
+                  <th scope="col">AI help</th>
+                  <th scope="col">AI review detail</th>
+                  <th scope="col">Fact-check detail</th>
+                  <th scope="col">Generated answer</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for question in questions %}
+                  <tr>
+                    <td>{{ question.id }}</td>
+                    <td>{{ question.program_id|upper }}</td>
+                    <td>{{ question.asked_at|date:"d M Y"|default:"—" }}</td>
+                    <td><div class="cell-content">{{ question.original_question }}</div></td>
+                    <td><div class="cell-content">{{ question.rewritten_question|default:"—" }}</div></td>
+                    <td>{{ question.accepted_or_rejected_by_admin }}</td>
+                    <td>{{ question.ai_suggestion|default:"—" }}</td>
+                    <td>
+                      {% if question.ai_suggestion %}
+                        <div class="cell-content"><strong>Reason:</strong> {{ question.ai_reason }}</div>
+                        {% if question.matching_faq_ids %}
+                          <div class="cell-content"><strong>FAQ IDs:</strong> {{ question.matching_faq_ids|join:", " }}</div>
+                        {% endif %}
+                        {% if question.suggested_clean_question and question.suggested_clean_question != "NA" %}
+                          <div class="cell-content"><strong>Clean question:</strong> {{ question.suggested_clean_question }}</div>
+                        {% endif %}
+                      {% else %}
+                        —
+                      {% endif %}
+                    </td>
+                    <td><div class="cell-content">{{ question.fact_check_rejection_reason|default:"—" }}</div></td>
+                    <td>
+                      {% if question.original_answer %}
+                        <details>
+                          <summary>View answer</summary>
+                          <div class="cell-content">{{ question.original_answer }}</div>
+                        </details>
+                      {% else %}
+                        —
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% empty %}
+                  <tr><td colspan="10">No unanswered-question rows have been imported yet.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

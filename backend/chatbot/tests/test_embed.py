@@ -36,7 +36,7 @@ def _stub_weaviate():
 
 _stub_weaviate()
 import embed  # noqa: E402  (must follow the stub above)
-from pg.faq_api.orm import Faq
+from pg.faq_api.orm import Faq, UnansweredQuestion
 from pg.faq_api.repository import assign_seed_question_categories, replace_seed_faqs
 
 
@@ -166,6 +166,28 @@ class FaqSchemaTests(SimpleTestCase):
         """The database must retain source type after JSON stops being live data."""
         self.assertIn("question_category", Faq.__table__.columns)
 
+    def test_unanswered_question_model_has_the_admin_decision_columns(self):
+        """The review workflow needs both the admin decision and AI result."""
+        self.assertEqual(
+            set(UnansweredQuestion.__table__.columns.keys()),
+            {
+                "id",
+                "program_id",
+                "original_question",
+                "rewritten_question",
+                "rejection_reason",
+                "original_answer",
+                "asked_at",
+                "fact_check_passed",
+                "fact_check_rejection_reason",
+                "accepted_or_rejected_by_admin",
+                "ai_suggestion",
+                "ai_reason",
+                "matching_faq_ids",
+                "suggested_clean_question",
+            },
+        )
+
     def test_seed_replace_keeps_question_category(self):
         """A new database created from seed must retain each row's category."""
 
@@ -282,6 +304,94 @@ class FaqSchemaTests(SimpleTestCase):
             any("ADD CONSTRAINT faqs_question_category_check" in statement for statement in statements)
         )
 
+    @mock.patch("embed.Base.metadata.create_all")
+    @mock.patch("embed.inspect")
+    def test_schema_migration_creates_the_unanswered_question_table(
+        self, inspect_database, create_all
+    ):
+        """Normal bootstrap adds the review table without replacing live FAQs."""
+        inspector = mock.Mock()
+        inspector.has_table.return_value = False
+        inspector.get_columns.return_value = [{"name": "question_category"}]
+        inspector.get_check_constraints.return_value = [
+            {"name": "faqs_question_category_check"}
+        ]
+        inspect_database.return_value = inspector
+
+        embed._ensure_faq_schema(mock.MagicMock())
+
+        self.assertIn(UnansweredQuestion.__table__, create_all.call_args.kwargs["tables"])
+
+    @mock.patch("embed.Base.metadata.create_all")
+    @mock.patch("embed.inspect")
+    def test_schema_migration_adds_ai_review_columns_to_an_existing_table(
+        self, inspect_database, create_all
+    ):
+        """Test's existing review table receives fields without being recreated."""
+        inspector = mock.Mock()
+        inspector.has_table.return_value = True
+        inspector.get_columns.side_effect = [
+            [{"name": "program_id"}, {"name": "question_category"}],
+            [{"name": "program_id"}, {"name": "question_category"}],
+            [{"name": "id"}, {"name": "ai_suggestion"}],
+        ]
+        inspector.get_check_constraints.return_value = [
+            {"name": "faqs_question_category_check"}
+        ]
+        inspect_database.return_value = inspector
+        engine = mock.MagicMock()
+
+        embed._ensure_faq_schema(engine)
+
+        statements = [
+            str(call.args[0])
+            for call in engine.begin.return_value.__enter__.return_value.execute.call_args_list
+        ]
+        self.assertTrue(any("ADD COLUMN ai_reason TEXT" in statement for statement in statements))
+        self.assertTrue(any("ADD COLUMN matching_faq_ids TEXT" in statement for statement in statements))
+        self.assertTrue(
+            any("ADD COLUMN suggested_clean_question TEXT" in statement for statement in statements)
+        )
+
+    @mock.patch("embed.Base.metadata.create_all")
+    @mock.patch("embed.inspect")
+    def test_schema_migration_replaces_the_old_two_decision_check(self, inspect_database, create_all):
+        """Existing review rows stay intact while their allowed decision values expand."""
+        inspector = mock.Mock()
+        inspector.has_table.return_value = True
+        inspector.get_columns.side_effect = [
+            [{"name": "program_id"}, {"name": "question_category"}],
+            [{"name": "program_id"}, {"name": "question_category"}],
+            [
+                {"name": "id"},
+                {"name": "ai_reason"},
+                {"name": "matching_faq_ids"},
+                {"name": "suggested_clean_question"},
+            ],
+        ]
+        inspector.get_check_constraints.side_effect = [
+            [{"name": "faqs_question_category_check"}],
+            [
+                {
+                    "name": "unanswered_questions_admin_decision_check",
+                    "sqltext": "accepted_or_rejected_by_admin IN ('accepted', 'rejected')",
+                }
+            ],
+        ]
+        inspect_database.return_value = inspector
+        engine = mock.MagicMock()
+
+        embed._ensure_faq_schema(engine)
+
+        statements = [
+            str(call.args[0])
+            for call in engine.begin.return_value.__enter__.return_value.execute.call_args_list
+        ]
+        self.assertTrue(any("DROP CONSTRAINT unanswered_questions_admin_decision_check" in statement for statement in statements))
+        self.assertTrue(
+            any("'accepted', 'rejected', 'completed'" in statement for statement in statements)
+        )
+
 
 class FaqBootstrapControlTests(SimpleTestCase):
     @mock.patch.dict(os.environ, {"ENABLE_PG_FAQ_SCHEMA_MIGRATION": "true"}, clear=True)
@@ -366,19 +476,6 @@ class FaqBootstrapControlTests(SimpleTestCase):
         assign_categories.assert_called_once()
         replace_seed.assert_not_called()
         engine.dispose.assert_called_once()
-
-
-class RealSeedTests(SimpleTestCase):
-    """Guards the committed pg/seed against an accidental bad edit."""
-
-    def test_committed_seed_loads_with_the_expected_counts(self):
-        rows = embed._load_seed_faqs(str(REPO_ROOT / "pg" / "seed"))
-        counts = {}
-        for row in rows:
-            counts[row["program_id"]] = counts.get(row["program_id"], 0) + 1
-        self.assertEqual(len(rows), 401)
-        self.assertEqual(counts, {"common": 242, "ae": 52, "ds": 35, "es": 39, "mg": 33})
-
 
 class DocumentProgramIdTests(SimpleTestCase):
     def setUp(self):

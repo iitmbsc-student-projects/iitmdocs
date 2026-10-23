@@ -20,6 +20,37 @@ body { margin: 0; min-width: 320px; }
   box-shadow: 0 18px 48px rgba(18, 50, 88, 0.10);
 }
 
+.all-faqs-card { max-width: 1480px; }
+.all-faqs-content { padding: 30px 34px 34px; }
+.faq-category-section { margin-top: 14px; border: 1px solid #d2ddea; border-radius: 9px; overflow: hidden; background: #fff; }
+.faq-category-section summary { display: flex; justify-content: space-between; gap: 18px; padding: 14px 16px; color: #123b5d; background: #f5f8fc; cursor: pointer; font-weight: 700; }
+.faq-category-section[open] summary { border-bottom: 1px solid #d2ddea; }
+.category-count { color: #596a80; font-size: .9rem; font-weight: 500; white-space: nowrap; }
+.all-faqs-table-wrap { overflow-x: auto; }
+.all-faqs-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.all-faqs-table th, .all-faqs-table td { padding: 11px 12px; border-bottom: 1px solid #dbe3ee; text-align: left; vertical-align: top; }
+.all-faqs-table th { color: #31536f; background: #f5f8fc; font-size: .8rem; letter-spacing: .03em; text-transform: uppercase; }
+.all-faqs-table .cell-content { min-width: 180px; max-width: 360px; overflow-wrap: anywhere; white-space: pre-wrap; }
+.all-faqs-table details { min-width: 170px; cursor: pointer; }
+.all-faqs-table pre { max-width: 460px; max-height: 180px; overflow: auto; padding: 9px; border-radius: 6px; background: #f2f5f9; font-size: .78rem; white-space: pre-wrap; }
+.row-actions { display: grid; gap: 8px; min-width: 112px; }
+.row-actions .secondary-button, .row-actions .danger-button { margin: 0; text-align: center; text-decoration: none; }
+.danger-button { padding: 9px 12px; border: 1px solid #b42318; border-radius: 8px; color: #b42318; background: #fff; cursor: pointer; font: inherit; font-weight: 700; }
+.danger-button:hover { color: #fff; background: #b42318; }
+.edit-faq-content { padding: 30px 34px 34px; }
+.faq-details { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 0 0 24px; }
+.faq-details dt { font-weight: 700; color: #31536f; }
+.faq-details dd { margin: 0; overflow-wrap: anywhere; }
+.faq-details pre { max-width: 100%; max-height: 160px; overflow: auto; margin: 0; padding: 8px; border-radius: 6px; background: #f2f5f9; font-size: .8rem; white-space: pre-wrap; }
+.management-notice { margin: 0 0 18px; padding: 10px 12px; border-left: 3px solid #0b9fc2; color: #31536f; background: #f0f8ff; line-height: 1.45; }
+.page-link { color: #075ea8; font-weight: 700; }
+.header-page-link { color: #fff; }
+.review-action-form { display: inline-block; margin: 0.75rem 0.5rem 0 0; padding: 0; }
+.unanswered-question-card { margin-top: 1rem; padding: 1rem; border: 1px solid #cbd9e9; border-radius: 0.7rem; }
+.unanswered-question-card h2 { margin: 0.65rem 0; font-size: 1.1rem; }
+.unanswered-question-heading { display: flex; align-items: center; gap: 0.65rem; }
+.unanswered-question-heading .environment-badge { color: #31536f; border-color: #91b7dc; }
+
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -49,6 +80,15 @@ select:focus, textarea:focus, button:focus-visible { outline: 3px solid #8cc6ff;
 .question-lock-info[hidden] { display: none; }
 .question-lock-info:hover { background: #087f9b; }
 .add-flow-notice { margin: 9px 0 0; padding: 9px 12px; border-left: 3px solid #0b9fc2; color: #31536f; background: #f0f8ff; font-size: .9rem; line-height: 1.45; }
+.answer-safety-review { margin-top: 22px; }
+.answer-safety-controls { display: flex; align-items: center; gap: 6px; }
+.answer-safety-review .secondary-button { margin: 0; }
+.answer-safety-results { display: grid; gap: 10px; margin-top: 12px; }
+.answer-safety-result { padding: 11px 12px; border-radius: 8px; line-height: 1.45; }
+.answer-safety-result.safe { border: 1px solid #a7d9bb; color: #215d39; background: #f0fbf4; }
+.answer-safety-result.warning { border: 1px solid #efc36e; color: #704a08; background: #fff8e7; }
+.answer-safety-result p { margin: 7px 0 0; }
+.answer-safety-result .secondary-button { margin: 10px 0 0; }
 .primary-button { padding: 11px 17px; border: 0; border-radius: 8px; color: #fff; background: #075ea8; cursor: pointer; font: inherit; font-weight: 700; }
 .primary-button:hover { background: #034e8d; }
 .secondary-button { margin-left: 8px; padding: 11px 17px; border: 1px solid #1769aa; border-radius: 8px; color: #075ea8; background: #fff; cursor: pointer; font: inherit; font-weight: 700; }
@@ -66,5 +106,7 @@ button:disabled { cursor: not-allowed; opacity: .55; }
   .page-header { display: block; padding: 25px; }
   .environment-badge { display: inline-block; margin-top: 18px; }
   form { padding: 25px; }
+  .all-faqs-content, .edit-faq-content { padding: 25px; }
+  .faq-details { grid-template-columns: 1fr; gap: 3px; }
   .secondary-button { margin: 10px 8px 0 0; }
 }

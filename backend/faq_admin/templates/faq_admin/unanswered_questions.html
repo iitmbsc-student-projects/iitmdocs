@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unanswered questions · IIT Madras BS</title>
+    <link rel="stylesheet" href="/faq-admin.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="admin-card all-faqs-card" aria-labelledby="page-title">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">IIT Madras BS chatbot</p>
+            <h1 id="page-title">Unanswered question review</h1>
+            <p class="subtitle">Review Test-log questions before deciding whether they deserve an FAQ.</p>
+          </div>
+          <span class="environment-badge">Test workflow</span>
+        </header>
+
+        <div class="all-faqs-content">
+          <p>
+            <a class="page-link" href="/faq-admin">Add or find an FAQ</a>
+            · <a class="page-link" href="/faq-admin/all-faqs">View all FAQ rows</a>
+            · <a class="page-link" href="/faq-admin/all-unanswered-questions">View all unanswered-question rows</a>
+          </p>
+
+          {% if notice %}
+            <p class="management-notice">{{ notice }}</p>
+          {% endif %}
+          {% if error %}
+            <p class="management-notice">{{ error }}</p>
+          {% endif %}
+
+          <form method="post" action="/faq-admin/unanswered-questions/refresh" class="review-action-form">
+            {% csrf_token %}
+            <button class="primary-button" type="submit">Refresh last 7 days</button>
+          </form>
+
+          {% for question in questions %}
+            <article class="unanswered-question-card">
+              <div class="unanswered-question-heading">
+                <span class="environment-badge">{{ question.program_id|upper }}</span>
+                <span>Row #{{ question.id }}</span>
+              </div>
+              <h2>{{ question.original_question }}</h2>
+              {% if question.asked_at %}
+                <p><strong>Asked on:</strong> {{ question.asked_at|date:"d M Y" }}</p>
+              {% endif %}
+              {% if question.rewritten_question %}
+                <p><strong>Rewritten query:</strong> {{ question.rewritten_question }}</p>
+              {% endif %}
+              {% if question.fact_check_rejection_reason %}
+                <p><strong>Fact-check rejection reason:</strong> {{ question.fact_check_rejection_reason }}</p>
+              {% endif %}
+              {% if question.original_answer %}
+                <details>
+                  <summary>View generated answer before fact checking</summary>
+                  <div class="cell-content">{{ question.original_answer }}</div>
+                </details>
+              {% endif %}
+
+              {% if question.ai_suggestion %}
+                <p class="management-notice">
+                  <strong>AI review:</strong> {{ question.ai_suggestion }}
+                </p>
+                <p><strong>Reason:</strong> {{ question.ai_reason }}</p>
+                {% if question.matching_faq_ids %}
+                  <p><strong>Matching FAQ IDs:</strong> {{ question.matching_faq_ids|join:", " }}</p>
+                {% endif %}
+                {% if question.suggested_clean_question and question.suggested_clean_question != "NA" %}
+                  <p><strong>Suggested clean question:</strong> {{ question.suggested_clean_question }}</p>
+                {% endif %}
+              {% else %}
+                <form method="post" action="/faq-admin/unanswered-questions/{{ question.id }}/ai-help" class="review-action-form">
+                  {% csrf_token %}
+                  <button class="secondary-button" type="submit">Get AI help for this question</button>
+                </form>
+              {% endif %}
+
+              <form method="post" action="/faq-admin/unanswered-questions/{{ question.id }}/reject" class="review-action-form" onsubmit="return confirm('Reject this question? It will not appear in this review list again.');">
+                {% csrf_token %}
+                <button class="danger-button" type="submit">Reject this question</button>
+              </form>
+              <form method="post" action="/faq-admin/unanswered-questions/{{ question.id }}/complete" class="review-action-form" onsubmit="return confirm('Mark this question as completed? It will not appear in this review list again.');">
+                {% csrf_token %}
+                <button class="secondary-button" type="submit">Mark as completed</button>
+              </form>
+            </article>
+          {% empty %}
+            <p class="management-notice">No accepted unanswered questions are waiting for review.</p>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
