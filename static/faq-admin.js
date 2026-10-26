@@ -6,6 +6,7 @@
 import { Marked } from "https://cdn.jsdelivr.net/npm/marked@13/+esm";
 import DOMPurify from "https://cdn.jsdelivr.net/npm/dompurify@3.2.6/+esm";
 import { shouldDisableAnswerSafetyCheck } from "./faq-admin-state.js";
+import { similarFaqLabel } from "./faq-admin-labels.js";
 
 const marked = new Marked();
 const category = document.querySelector("#question-category");
@@ -205,7 +206,7 @@ function addResultCard(item) {
     status.textContent = `Selected FAQ ${item.id} for update. The form now shows its FAQ type; the server will verify it again before saving.`;
   });
   const detail = document.createElement("span");
-  detail.textContent = `${item.question} (${Math.round(item.similarity * 100)}% matched; ${item.question_category}, ${item.program_id})${item.is_exact ? " — exact duplicate" : ""}`;
+  detail.textContent = similarFaqLabel(item);
   const answerButton = document.createElement("button");
   answerButton.type = "button";
   answerButton.className = "answer-toggle";

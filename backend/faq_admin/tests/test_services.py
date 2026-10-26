@@ -10,6 +10,7 @@ from faq_admin.services import (
     build_new_faq_rows,
     delete_faq_from_management,
     get_faq_answer,
+    group_similar_faqs,
     list_all_faqs,
     normalize_question,
     update_faq_from_management,
@@ -123,6 +124,41 @@ class ExistingFaqUpdateTests(SimpleTestCase):
                     "answers": {"ds": "Pay before the deadline."},
                 }
             )
+
+
+class SimilarFaqGroupingTests(SimpleTestCase):
+    def test_different_answer_rows_with_one_question_become_one_grouped_result(self):
+        grouped = group_similar_faqs(
+            [
+                {"id": 21, "question": "What is the Qualifier Exam?", "program_id": "ds", "question_category": "diff_answers", "similarity": 0.84, "is_exact": False},
+                {"id": 22, "question": "What is the Qualifier Exam?", "program_id": "ae", "question_category": "diff_answers", "similarity": 0.84, "is_exact": False},
+                {"id": 23, "question": "What is the Qualifier Exam?", "program_id": "es", "question_category": "diff_answers", "similarity": 0.84, "is_exact": False},
+                {"id": 24, "question": "What is the Qualifier Exam?", "program_id": "mg", "question_category": "diff_answers", "similarity": 0.84, "is_exact": False},
+                {"id": 25, "question": "What is the fee?", "program_id": "common", "question_category": "common", "similarity": 0.76, "is_exact": False},
+            ],
+            "ae",
+        )
+
+        self.assertEqual(grouped, [
+            {
+                "id": 22,
+                "question": "What is the Qualifier Exam?",
+                "program_id": "ae",
+                "question_category": "diff_answers",
+                "similarity": 0.84,
+                "is_exact": False,
+                "has_program_specific_answers": True,
+            },
+            {
+                "id": 25,
+                "question": "What is the fee?",
+                "program_id": "common",
+                "question_category": "common",
+                "similarity": 0.76,
+                "is_exact": False,
+                "has_program_specific_answers": False,
+            },
+        ])
 
 
 class SelectedFaqDetailsTests(SimpleTestCase):

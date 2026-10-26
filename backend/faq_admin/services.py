@@ -179,6 +179,44 @@ def _question_embedding(question):
     return embedding
 
 
+def group_similar_faqs(matches, selected_program):
+    """Combine four different-answer rows into one selectable FAQ result.
+
+    Example: the DS, AE, ES, and MG rows for ``What is the Qualifier Exam?``
+    become one card. The selected programme's row is used when available, so
+    the existing update screen starts with the most relevant programme answer.
+    """
+    grouped_matches = []
+    different_answer_groups = {}
+    for match in matches:
+        if match["question_category"] != "diff_answers":
+            match["has_program_specific_answers"] = False
+            grouped_matches.append(match)
+            continue
+
+        group = different_answer_groups.setdefault(match["question"], [])
+        group.append(match)
+        if len(group) != 1:
+            continue
+
+        grouped_matches.append(group)
+
+    results = []
+    for match in grouped_matches:
+        if isinstance(match, dict):
+            results.append(match)
+            continue
+
+        representative = next(
+            (item for item in match if item["program_id"] == selected_program),
+            match[0],
+        ).copy()
+        representative["has_program_specific_answers"] = True
+        representative["is_exact"] = any(item["is_exact"] for item in match)
+        results.append(representative)
+    return results
+
+
 def find_similar_faqs(question, selected_program):
     """Return up to five close FAQ questions from every stored programme.
 
@@ -210,12 +248,12 @@ def find_similar_faqs(question, selected_program):
                 select(Faq, similarity)
                 .where(Faq.embedding.is_not(None))
                 .order_by(distance)
-                .limit(5)
+                .limit(20)
             ).all()
     finally:
         engine.dispose()
     normalized_question = normalize_question(question)
-    return [
+    matches = [
         {"id": int(row.id), "question": row.question, "program_id": row.program_id,
          "question_category": row.question_category or "uncategorised",
          "similarity": float(score), "is_exact": (
@@ -224,6 +262,7 @@ def find_similar_faqs(question, selected_program):
          )}
         for row, score in rows if float(score) >= 0.65
     ]
+    return group_similar_faqs(matches, selected_program)[:5]
 
 
 def add_new_faq(data):

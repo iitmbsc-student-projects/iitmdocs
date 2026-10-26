@@ -2,6 +2,7 @@ import { readFileSync } from "fs";
 import { describe, expect, it } from "vitest";
 import { JSDOM } from "jsdom";
 import { shouldDisableAnswerSafetyCheck } from "./static/faq-admin-state.js";
+import { similarFaqLabel } from "./static/faq-admin-labels.js";
 
 const faqAdminCss = readFileSync("static/faq-admin.css", "utf8");
 
@@ -43,5 +44,19 @@ describe("FAQ admin answer-safety button", () => {
       actionMode: "add",
       answerSafetyApproved: false,
     })).toBe(false);
+  });
+});
+
+describe("FAQ admin similar-result labels", () => {
+  it("labels a grouped different-answer FAQ without repeating one programme", () => {
+    expect(
+      similarFaqLabel({
+        question: "What is the Qualifier Exam?",
+        similarity: 0.84,
+        question_category: "diff_answers",
+        has_program_specific_answers: true,
+        is_exact: false,
+      }),
+    ).toBe("What is the Qualifier Exam? (84% matched; different answers, four programme-specific answers)");
   });
 });
