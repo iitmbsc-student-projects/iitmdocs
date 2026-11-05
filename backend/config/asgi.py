@@ -4,6 +4,8 @@ Flow: Uvicorn sends lifespan events here -> API paths go to native async
 Django -> other paths use preloaded static bytes -> shutdown closes shared
 HTTP and PostgreSQL connection pools.
 """
+import gzip
+import hashlib
 import mimetypes
 import os
 import sys
@@ -20,11 +22,23 @@ from django.core.asgi import get_asgi_application  # noqa: E402
 from chatbot.services.faq import close_async_faq_engine  # noqa: E402
 from chatbot.services.http_client import close_async_http_client  # noqa: E402
 
+# Short TTL plus revalidation: the asset filenames are unversioned, so a long
+# max-age would pin stale JS in browsers after a deploy. The ETag does the work.
+_STATIC_CACHE_CONTROL = b"public, max-age=300, must-revalidate"
+
+
+def _make_etag(body):
+    """Return a strong ETag for one asset body."""
+    return '"%s"' % hashlib.sha256(body).hexdigest()[:32]
+
 
 def _load_static_files(root):
     """Load browser assets once so serving them never blocks the event loop.
 
     Example: ``static/qa.js`` becomes the preloaded ``/qa.js`` response.
+
+    Each entry is ``(content_type, body, etag, gzipped_or_None)``. The gzip form
+    is computed here, at preload time, so a request never pays for compression.
     """
     files = {}
     for path in root.rglob("*"):
@@ -32,7 +46,12 @@ def _load_static_files(root):
             continue
         relative_path = path.relative_to(root).as_posix()
         content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
-        files[f"/{relative_path}"] = (content_type, path.read_bytes())
+        body = path.read_bytes()
+        compressed = gzip.compress(body, 9)
+        # Only keep the compressed copy when it actually helps; already
+        # compressed types (images, fonts) and tiny files can get bigger.
+        gzipped = compressed if len(compressed) < len(body) else None
+        files[f"/{relative_path}"] = (content_type, body, _make_etag(body), gzipped)
     if "/index.html" in files:
         files["/"] = files["/index.html"]
     return files
@@ -78,6 +97,42 @@ def _static_cors_headers(scope):
     return headers
 
 
+def _merged_vary(cors_headers):
+    """Return one Vary value covering origin (from CORS) and accept-encoding."""
+    tokens = ["accept-encoding"]
+    for name, value in cors_headers:
+        if name.lower() != b"vary":
+            continue
+        for token in value.decode("latin-1").split(","):
+            token = token.strip()
+            if token and token.lower() not in {t.lower() for t in tokens}:
+                tokens.append(token)
+    return ", ".join(tokens).encode()
+
+
+def _if_none_match_matches(header, etag):
+    """Return whether an If-None-Match header matches etag (weak comparison)."""
+    if not header:
+        return False
+    for candidate in header.decode("latin-1").split(","):
+        candidate = candidate.strip()
+        if candidate == "*":
+            return True
+        if candidate.startswith("W/"):
+            candidate = candidate[2:].strip()
+        if candidate == etag:
+            return True
+    return False
+
+
+def _accepts_gzip(request_headers):
+    """Return whether the client accepts a gzip encoded response."""
+    encoding = request_headers.get(b"accept-encoding")
+    if not encoding:
+        return False
+    return "gzip" in encoding.decode("latin-1").lower()
+
+
 async def serve_static(scope, receive, send):
     """Serve one preloaded browser asset through the native ASGI interface."""
     method = scope.get("method", "GET")
@@ -101,18 +156,38 @@ async def serve_static(scope, receive, send):
 
     item = STATIC_FILES.get(scope.get("path", "/"))
     if item is None:
-        content_type = "text/plain; charset=utf-8"
         body = b"Not Found"
-        status = 404
-    else:
-        content_type, body = item
-        status = 200
-    headers = cors_headers + [
+        headers = cors_headers + [
+            (b"content-type", b"text/plain; charset=utf-8"),
+            (b"content-length", str(len(body)).encode()),
+        ]
+        await send({"type": "http.response.start", "status": 404, "headers": headers})
+        await send({"type": "http.response.body", "body": body})
+        return
+
+    content_type, body, etag, gzipped = item
+    # One Vary header only: _static_cors_headers already contributes `origin`.
+    headers = [header for header in cors_headers if header[0].lower() != b"vary"]
+    headers += [
         (b"content-type", content_type.encode()),
-        (b"content-length", str(len(body)).encode()),
+        (b"cache-control", _STATIC_CACHE_CONTROL),
+        (b"etag", etag.encode()),
+        (b"vary", _merged_vary(cors_headers)),
     ]
-    await send({"type": "http.response.start", "status": status, "headers": headers})
-    await send({"type": "http.response.body", "body": b"" if method == "HEAD" else body})
+
+    if _if_none_match_matches(request_headers.get(b"if-none-match"), etag):
+        # A 304 carries the validators and CORS headers, but no body and no
+        # content-length for a body that is not being sent.
+        await send({"type": "http.response.start", "status": 304, "headers": headers})
+        await send({"type": "http.response.body", "body": b""})
+        return
+
+    payload = gzipped if (gzipped is not None and _accepts_gzip(request_headers)) else body
+    if payload is gzipped:
+        headers.append((b"content-encoding", b"gzip"))
+    headers.append((b"content-length", str(len(payload)).encode()))
+    await send({"type": "http.response.start", "status": 200, "headers": headers})
+    await send({"type": "http.response.body", "body": b"" if method == "HEAD" else payload})
 
 
 async def _lifespan(receive, send):
@@ -141,6 +216,7 @@ async def route_application(scope, receive, send):
 
 async def application(scope, receive, send):
     """Add the response headers previously supplied by SecurityMiddleware."""
+
     async def send_with_security_headers(event):
         if event["type"] == "http.response.start":
             headers = list(event.get("headers", []))
@@ -155,3 +231,4 @@ async def application(scope, receive, send):
         await send(event)
 
     await route_application(scope, receive, send_with_security_headers)
+            
