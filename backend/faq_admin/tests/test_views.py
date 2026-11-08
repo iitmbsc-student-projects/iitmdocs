@@ -265,11 +265,27 @@ class FaqAdminPageTests(SimpleTestCase):
     def test_similarity_endpoint_returns_matching_faqs(self, find_similar_faqs):
         find_similar_faqs.return_value = [{"id": 8, "question": "How do I pay fees?", "program_id": "ds", "question_category": "program_specific", "similarity": 0.82}]
 
-        response = self.client.post("/faq-admin/check-similar", data='{"question": "fee payment procedure", "program_id": "ds"}', content_type="application/json")
+        response = self.client.post("/faq-admin/check-similar", data='{"question": "what is the fee payment procedure", "program_id": "ds"}', content_type="application/json")
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["matches"][0]["id"], 8)
-        find_similar_faqs.assert_called_once_with("fee payment procedure", "ds")
+        find_similar_faqs.assert_called_once_with("what is the fee payment procedure", "ds")
+
+    @mock.patch("faq_admin.views.find_similar_faqs")
+    def test_similarity_endpoint_rejects_unsupported_characters_before_embedding(self, find_similar_faqs):
+        response = self.client.post("/faq-admin/check-similar", data='{"question": "\u2705", "program_id": "ds"}', content_type="application/json")
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("plain English", response.json()["error"])
+        find_similar_faqs.assert_not_called()
+
+    @mock.patch("faq_admin.views.find_similar_faqs")
+    def test_similarity_endpoint_rejects_a_too_short_question(self, find_similar_faqs):
+        response = self.client.post("/faq-admin/check-similar", data='{"question": "fee payment procedure", "program_id": "ds"}', content_type="application/json")
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("too short", response.json()["error"])
+        find_similar_faqs.assert_not_called()
 
     @mock.patch("faq_admin.views.add_new_faq")
     def test_add_endpoint_returns_saved_row_ids(self, add_new_faq):

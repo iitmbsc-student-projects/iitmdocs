@@ -43,6 +43,31 @@ let addFlowNoticeExpanded = false;
 let answerSafetyNoticeExpanded = false;
 const safeAnswerValues = new Map();
 
+// Mirrors backend/faq_admin/question_validation.py; the server re-checks every
+// draft, this copy only keeps the buttons disabled while the draft is invalid.
+const QUESTION_MIN_WORDS = 5;
+const QUESTION_MAX_WORDS = 30;
+const QUESTION_ALLOWED = /^[\x20-\x7E]+$/;
+let questionProblem = null;
+
+function questionValidationMessage(value) {
+  const text = value.split(/\s+/).join(" ").trim();
+  if (!text) return "Enter a question first.";
+  if (!QUESTION_ALLOWED.test(text)) return "Use plain English text only. Emoji, symbols, accented letters and non-Latin or right-to-left text are not supported.";
+  const words = text.split(" ").length;
+  if (words < QUESTION_MIN_WORDS) return `The question is too short. Use at least ${QUESTION_MIN_WORDS} words.`;
+  if (words > QUESTION_MAX_WORDS) return `The question is too long. Keep it to ${QUESTION_MAX_WORDS} words or fewer.`;
+  return null;
+}
+
+function syncQuestionValidity() {
+  questionProblem = questionValidationMessage(question.value);
+  if (question.value.trim()) status.textContent = questionProblem || "";
+  else status.textContent = "";
+  syncInputAvailability();
+  resetActionButtons();
+}
+
 function answerFieldsToCheck() {
   if (category.value !== "diff_answers") return [{key: "single", field: document.querySelector("#answer")}];
   const programIds = answerProgram.value === "all" ? Object.keys(answers) : [answerProgram.value];
@@ -75,7 +100,7 @@ function syncInputAvailability() {
     const isQuestionDetail = control === category || control === program || control === question;
     control.disabled = formBusy || (needsFaqType && control !== category) || (locksQuestionDetails && isQuestionDetail);
   }
-  checkButton.disabled = formBusy || needsFaqType || locksQuestionDetails;
+  checkButton.disabled = formBusy || needsFaqType || locksQuestionDetails || Boolean(questionProblem);
   answerSafetyButton.hidden = actionMode === null;
   answerSafetyButton.disabled = shouldDisableAnswerSafetyCheck({
     formBusy,
@@ -110,7 +135,7 @@ function resetActionButtons() {
   updateButton.hidden = !choosingAction;
   saveButton.hidden = choosingAction;
   cancelAnswerEntryButton.hidden = choosingAction;
-  addButton.disabled = !reviewComplete;
+  addButton.disabled = !reviewComplete || Boolean(questionProblem);
   updateButton.disabled = !reviewComplete || selectedFaqId === null;
 }
 
@@ -144,7 +169,7 @@ function answerPayload() {
 function setFormBusy(isBusy) {
   formBusy = isBusy;
   syncInputAvailability();
-  addButton.disabled = isBusy || !reviewComplete;
+  addButton.disabled = isBusy || !reviewComplete || Boolean(questionProblem);
   updateButton.disabled = isBusy || !reviewComplete || selectedFaqId === null;
   saveButton.disabled = isBusy || !isAnswerSafetyApproved();
   cancelAnswerEntryButton.disabled = isBusy;
@@ -252,7 +277,10 @@ category.addEventListener("change", () => {
   category.querySelector('option[value=""]')?.remove();
   clearReviewedState();
 });
-question.addEventListener("input", clearReviewedState);
+question.addEventListener("input", () => {
+  clearReviewedState();
+  syncQuestionValidity();
+});
 program.addEventListener("change", clearReviewedState);
 answerProgram.addEventListener("change", () => {
   showFieldsForCategory();
@@ -269,8 +297,13 @@ answerSafetyInfoButton.addEventListener("click", () => {
   syncInputAvailability();
 });
 showFieldsForCategory();
+syncQuestionValidity();
 
 checkButton.addEventListener("click", async () => {
+  if (questionProblem) {
+    status.textContent = questionProblem;
+    return;
+  }
   setFormBusy(true);
   status.textContent = "Checking similar FAQs…";
   clearReviewedState();
