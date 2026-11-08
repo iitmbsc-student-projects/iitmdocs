@@ -17,6 +17,7 @@ from django.views.decorators.http import require_GET, require_http_methods, requ
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from .safety import FaqAnswerSafetyError, check_answer_safety as review_answer_safety
 from .ai_review import FaqReviewError, review_unanswered_question
+from .question_validation import validate_question
 from .unanswered_questions import (
     UnansweredQuestionError,
     list_accepted_unanswered_questions,
@@ -254,6 +255,9 @@ def check_similar(request):
     """Embed one drafted question and return its close stored FAQ matches."""
     try:
         body = json.loads(request.body)
+        problem = validate_question(body.get("question"))
+        if problem:
+            return JsonResponse({"error": problem}, status=400)
         return JsonResponse({"matches": find_similar_faqs(body.get("question"), body.get("program_id"))})
     except (json.JSONDecodeError, FaqAdminValidationError):
         return JsonResponse({"error": "Enter a question first."}, status=400)
